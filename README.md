@@ -1,4 +1,5 @@
-**_ Sim-Plicity _**
+# Sim-Plicity
+## Kelompok 6 K2
 18221164 Damian Marvel
 18221118 Ardhan Nur Urfan
 18221068 Oncar Awwalu Rozaqy
