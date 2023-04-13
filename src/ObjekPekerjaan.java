@@ -1,14 +1,9 @@
-public class ObjekPekerjaan {
-    String nama_pekerjaan;
+public class ObjekPekerjaan extends Objek {
     int gaji;
 
     public ObjekPekerjaan(String nama_pekerjaan, int gaji){
-        this.nama_pekerjaan = nama_pekerjaan;
+        super(nama_pekerjaan);
         this.gaji = gaji;
-    }
-
-    public String getNama_pekerjaan() {
-        return nama_pekerjaan;
     }
 
     public int getGaji(){
@@ -19,7 +14,7 @@ public class ObjekPekerjaan {
 
     //print 
     public void print(){
-        System.out.println("\t" + nama_pekerjaan + "\t" + gaji);
+        System.out.println("\t" + getNamaObjek() + "\t" + gaji);
 
     }
 

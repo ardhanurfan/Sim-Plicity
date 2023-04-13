@@ -1,12 +1,11 @@
-public class ObjekNonMakanan {
-    String nama_barang;
+public class ObjekNonMakanan extends Objek{
     int panjang;
     int lebar;
     int harga;
     String aksi;
 
     public ObjekNonMakanan(String nama_barang, int panjang, int lebar, int harga, String aksi){
-        this.nama_barang = nama_barang;
+        super(nama_barang);
         this.panjang = panjang;
         this.lebar = lebar;
         this.harga = harga;
@@ -14,11 +13,6 @@ public class ObjekNonMakanan {
     }
     
     // getter
-
-    public String getNama_barang() {
-        return nama_barang;
-    }
-
     public int getPanjang() {
         return panjang;
     }
@@ -39,11 +33,11 @@ public class ObjekNonMakanan {
 
     // print 
     public void print(){
-        System.out.printf("\t%S \t%d \t%d \t%d \t%S\n", nama_barang, panjang, lebar, harga, aksi);
+        System.out.printf("\t%S \t%d \t%d \t%d \t%S\n", getNamaObjek(), panjang, lebar, harga, aksi);
     }
 
-    // print array of daftar barang 
-    public static void printArray(ObjekNonMakanan[] daftar_barang){
+    // semua print array nanti dipindah dan nama nya jadi spesifik 
+    public void printArray(ObjekNonMakanan[] daftar_barang){
         System.out.println("Berikut adalah daftar barang yang tersedia.");
         System.out.println("No \tNama Barang \t\tPanjang Lebar \tHarga \tAksi");
         for (int i = 0; i < daftar_barang.length; i++){
@@ -70,6 +64,6 @@ public class ObjekNonMakanan {
         daftar_barang[7] = new ObjekNonMakanan("Jam\t\t", 1, 1, 10, "Melihat Waktu");
 
         // print array of daftar barang
-        printArray(daftar_barang);
+        daftar_barang[6].printArray(daftar_barang);
     }
 }

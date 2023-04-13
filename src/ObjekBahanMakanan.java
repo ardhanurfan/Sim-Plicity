@@ -1,16 +1,11 @@
-public class ObjekBahanMakanan {
-    String nama_bahan;
+public class ObjekBahanMakanan extends Objek {
     int harga;
     int kekenyangan;
     
     public ObjekBahanMakanan(String nama_bahan, int harga, int kekenyangan){
-        this.nama_bahan = nama_bahan;
+        super(nama_bahan);
         this.harga = harga;
         this.kekenyangan = kekenyangan;
-    }
-
-    public String getNama_bahan() {
-        return nama_bahan;
     }
 
     public int getHarga() {
@@ -24,7 +19,7 @@ public class ObjekBahanMakanan {
     // tidak ada setter karena tidak dibutuhkan
 
     public void print(){
-        System.out.printf("\t%S \t%d \t%d\n", nama_bahan, harga, kekenyangan);
+        System.out.printf("\t%S \t%d \t%d\n", getNamaObjek(), harga, kekenyangan);
     }
 
     // print array of bahan_makanan
@@ -39,7 +34,8 @@ public class ObjekBahanMakanan {
     }
 
     // testing
-    public static void main(String[] args){
+    public static void main(String[] args){ // nanti dihapus
+        
         ObjekBahanMakanan[] daftar_bahan = new ObjekBahanMakanan[8];
         daftar_bahan[0] = new ObjekBahanMakanan("Nasi\t", 5, 5);
         daftar_bahan[1] = new ObjekBahanMakanan("Kentang", 3, 4);
@@ -50,7 +46,5 @@ public class ObjekBahanMakanan {
         daftar_bahan[6] = new ObjekBahanMakanan("Kacang\t", 2, 2);
         daftar_bahan[7] = new ObjekBahanMakanan("Susu\t", 2, 1);
         printArray(daftar_bahan);
-
-    }
-    
+    }    
 }

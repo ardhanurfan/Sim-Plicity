@@ -1,21 +1,16 @@
 import java.util.Arrays;
 
-public class ObjekMakanan {
-    String nama_makanan;
+public class ObjekMakanan extends Objek {
     String[] bahan;
     int kekenyangan;
 
     public ObjekMakanan(String nama_makanan, String[] bahan, int kekenyangan){
-        this.nama_makanan = nama_makanan;
+        super(nama_makanan);
         this.bahan = bahan;
         this.kekenyangan = kekenyangan;
     }
 
     // getter
-    public String getNamaMakanan(){
-        return nama_makanan;
-    }
-
     public String[] getBahan(){
         
         return bahan;
@@ -36,7 +31,7 @@ public class ObjekMakanan {
     }
 
     public void print(){
-        System.out.print("\t"+ nama_makanan + "\t");
+        System.out.print("\t"+ getNamaObjek() + "\t");
         printBahan();
         if (kekenyangan < 30){
             System.out.printf("\t\t\t%d\n", kekenyangan);
