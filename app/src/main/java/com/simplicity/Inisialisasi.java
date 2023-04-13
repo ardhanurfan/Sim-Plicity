@@ -1,5 +1,7 @@
 package com.simplicity;
 
+import java.util.ArrayList;
+
 import com.simplicity.Objek.ObjekBahanMakanan;
 import com.simplicity.Objek.ObjekMakanan;
 import com.simplicity.Objek.ObjekNonMakanan;
@@ -8,12 +10,12 @@ import com.simplicity.Objek.ObjekPekerjaan;
 public class Inisialisasi {
     Inisialisasi(){
         // List objek pekerjaan
-        ObjekPekerjaan[] daftar_pekerjaan = new ObjekPekerjaan[5];
-        daftar_pekerjaan[0] = new ObjekPekerjaan("Badut Sulap", 15);
-        daftar_pekerjaan[1] = new ObjekPekerjaan("Koki\t", 30);
-        daftar_pekerjaan[2] = new ObjekPekerjaan("Polisi\t", 35);
-        daftar_pekerjaan[3] = new ObjekPekerjaan("Programmer", 45);
-        daftar_pekerjaan[4] = new ObjekPekerjaan("Dokter\t", 50);
+        ArrayList<ObjekPekerjaan> daftarPekerjaan = new ArrayList<ObjekPekerjaan>();
+        daftarPekerjaan.add(new ObjekPekerjaan("Badut Sulap", 15));
+        daftarPekerjaan.add(new ObjekPekerjaan("Koki", 30));
+        daftarPekerjaan.add(new ObjekPekerjaan("Polisi", 35));
+        daftarPekerjaan.add(new ObjekPekerjaan("Programmer", 45));
+        daftarPekerjaan.add( new ObjekPekerjaan("Dokter", 50));
 
         ObjekBahanMakanan[] daftar_bahan = new ObjekBahanMakanan[8];
         daftar_bahan[0] = new ObjekBahanMakanan("Nasi\t", 5, 5);

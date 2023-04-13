@@ -1,4 +1,4 @@
-package com.simplicity.Ruangan;
+package com.simplicity;
 import java.util.ArrayList;
 import com.simplicity.Objek.ObjekNonMakanan;
 
