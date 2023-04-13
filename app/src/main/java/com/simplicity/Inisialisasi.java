@@ -1,3 +1,10 @@
+package com.simplicity;
+
+import com.simplicity.Objek.ObjekBahanMakanan;
+import com.simplicity.Objek.ObjekMakanan;
+import com.simplicity.Objek.ObjekNonMakanan;
+import com.simplicity.Objek.ObjekPekerjaan;
+
 public class Inisialisasi {
     Inisialisasi(){
         // List objek pekerjaan

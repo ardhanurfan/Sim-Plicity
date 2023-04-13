@@ -1,3 +1,5 @@
+package com.simplicity.Objek;
+
 import java.util.Arrays;
 
 public class ObjekMakanan extends Objek {

@@ -1,3 +1,5 @@
+package com.simplicity.Objek;
+
 public class ObjekPekerjaan extends Objek {
     int gaji;
 

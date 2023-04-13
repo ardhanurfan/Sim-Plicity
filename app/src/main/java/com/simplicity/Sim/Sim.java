@@ -1,3 +1,5 @@
+package com.simplicity.Sim;
+
 public class Sim {
     private String namaLengkap;
     private String pekerjaan;

@@ -1,3 +1,5 @@
+package com.simplicity.Objek;
+
 public abstract class Objek {
     private String namaObjek;
 

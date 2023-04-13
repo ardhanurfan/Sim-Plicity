@@ -1,3 +1,5 @@
+package com.simplicity.Objek;
+
 public class ObjekBahanMakanan extends Objek {
     int harga;
     int kekenyangan;
