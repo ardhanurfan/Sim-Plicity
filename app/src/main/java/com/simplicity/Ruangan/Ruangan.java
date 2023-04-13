@@ -1,4 +1,7 @@
+package com.simplicity.Ruangan;
 import java.util.ArrayList;
+import com.simplicity.Objek.ObjekNonMakanan;
+
 
 
 public class Ruangan {
@@ -54,7 +57,7 @@ public class Ruangan {
         int i =1;
         for (ObjekNonMakanan objek : daftarObjek) {
             System.out.print(i+"\t");
-            System.out.println(objek.getNama_barang());
+            System.out.println(objek.getNamaObjek());
             i++;
         }
     }
