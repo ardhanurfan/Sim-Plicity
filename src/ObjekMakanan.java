@@ -1,11 +1,11 @@
 import java.util.Arrays;
 
-public class objek_makanan {
+public class ObjekMakanan {
     String nama_makanan;
     String[] bahan;
     int kekenyangan;
 
-    public objek_makanan(String nama_makanan, String[] bahan, int kekenyangan){
+    public ObjekMakanan(String nama_makanan, String[] bahan, int kekenyangan){
         this.nama_makanan = nama_makanan;
         this.bahan = bahan;
         this.kekenyangan = kekenyangan;
@@ -46,7 +46,7 @@ public class objek_makanan {
     }
 
     // print array
-    public static void printArray(objek_makanan[] daftar_makanan){
+    public static void printArray(ObjekMakanan[] daftar_makanan){
         System.out.println("Berikut adalah daftar masakan yang tersedia.");
         System.out.println("No \tNama Masakan \tBahan yang Diperlukan \t\tKekenyangan");
         for (int i = 0; i < daftar_makanan.length; i++) {
@@ -60,12 +60,12 @@ public class objek_makanan {
         // inisialisasi di bawah ini di letakan di MAIN
 
         // Inisiasi array daftar makanan dengan tipe objek_makanan
-        objek_makanan[] daftar_makanan = new objek_makanan[5];
-        daftar_makanan[0] = new objek_makanan("Nasi Ayam", new String[]{"Nasi", "Ayam"}, 16);
-        daftar_makanan[1] = new objek_makanan("Nasi Kari", new String[]{"Nasi", "Kentang", "Wortel", "Sapi"}, 30);
-        daftar_makanan[2] = new objek_makanan("Susu Kacang", new String[]{"Susu", "Kacang"}, 5);
-        daftar_makanan[3] = new objek_makanan("Tumis Sayur", new String[]{"Wortel", "Bayam"}, 5);
-        daftar_makanan[4] = new objek_makanan("Bistik\t", new String[]{"Kentang","Sapi"}, 22);
+        ObjekMakanan[] daftar_makanan = new ObjekMakanan[5];
+        daftar_makanan[0] = new ObjekMakanan("Nasi Ayam", new String[]{"Nasi", "Ayam"}, 16);
+        daftar_makanan[1] = new ObjekMakanan("Nasi Kari", new String[]{"Nasi", "Kentang", "Wortel", "Sapi"}, 30);
+        daftar_makanan[2] = new ObjekMakanan("Susu Kacang", new String[]{"Susu", "Kacang"}, 5);
+        daftar_makanan[3] = new ObjekMakanan("Tumis Sayur", new String[]{"Wortel", "Bayam"}, 5);
+        daftar_makanan[4] = new ObjekMakanan("Bistik\t", new String[]{"Kentang","Sapi"}, 22);
         // print daftar makanan
         //printArray(daftar_makanan); 
 
