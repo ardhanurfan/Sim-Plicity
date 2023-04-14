@@ -8,6 +8,10 @@ public class Ruangan {
     private String nama;
     private ArrayList<ObjekNonMakanan> daftarObjek;
     private int luasSisa;
+    private Ruangan atas = null;
+    private Ruangan bawah = null;
+    private Ruangan kiri = null;
+    private Ruangan kanan = null;
 
     public Ruangan(String nama) {
         this.nama = nama;
@@ -28,7 +32,39 @@ public class Ruangan {
     }
 
     public void addLuasSisa(int kurang) {
-            luasSisa+=kurang;
+        luasSisa+=kurang;
+    }
+
+    public Ruangan getAtas(){
+        return atas;
+    }
+
+    public void setAtas(Ruangan ruangan){
+        this.atas = ruangan;
+    }
+
+    public Ruangan getBawah(){
+        return bawah;
+    }
+
+    public void setBawah(Ruangan ruangan){
+        this.bawah = ruangan;
+    }
+
+    public Ruangan getKanan(){
+        return kanan;
+    }
+
+    public void setKanan(Ruangan ruangan){
+        this.kanan = ruangan;
+    }
+
+    public Ruangan getKiri(){
+        return kiri;
+    }
+
+    public void setKiri(Ruangan ruangan){
+        this.kiri = ruangan;
     }
 
     public ObjekNonMakanan getObjek(int index) {

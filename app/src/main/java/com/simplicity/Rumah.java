@@ -4,15 +4,13 @@ import java.util.List;
 
 public class Rumah {
     //Atribute
-    private int x;
-    private int y;
+    private Point loc;
     private List<Ruangan> daftarRuangan;
     private String nama;
 
     //Constructor
-    public Rumah(int x, int y, String nama) {
-        this.x = x;
-        this.y = y;
+    public Rumah(Point loc, String nama) {
+        this.loc = loc;
         this.nama = nama;
         this.daftarRuangan = new ArrayList<Ruangan>();
         // Inisialisasi ruangan pertama saat rumah pertama kali dibuat
@@ -20,20 +18,12 @@ public class Rumah {
     }
 
     // Getters and setters
-    public int getX() {
-        return x;
+    public Point getLocRumah() {
+        return loc;
     }
     
-    public void setX(int x) {
-        this.x = x;
-    }
-    
-    public int getY() {
-        return y;
-    }
-    
-    public void setY(int y) {
-        this.y = y;
+    public void setLocRumah(Point p) {
+        this.loc = loc;
     }
 
     public String getNama(){
@@ -53,5 +43,23 @@ public class Rumah {
     }
 
     //Methods
+    public void upgradeRumah(Ruangan ruanganacuan, String arah, String namaruangan){
+        Ruangan newRuangan = new Ruangan(namaruangan);
+        daftarRuangan.add(newRuangan);
+        
+        if (arah.equals("atas")){
+            ruanganacuan.setAtas(newRuangan);
+            newRuangan.setBawah(ruanganacuan);  
+        } else if (arah.equals("bawah")){
+            ruanganacuan.setBawah(newRuangan);
+            newRuangan.setAtas(ruanganacuan);
+        } else if (arah.equals("kanan")){
+            ruanganacuan.setKanan(newRuangan);
+            newRuangan.setKiri(ruanganacuan);
+        } else if (arah.equals("kiri")){
+            ruanganacuan.setKiri(newRuangan);
+            newRuangan.setKanan(ruanganacuan);
+        }
+    }
     
 }
