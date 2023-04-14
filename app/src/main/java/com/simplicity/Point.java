@@ -1,4 +1,8 @@
 package com.simplicity;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5a8a882228b761b3adf051adc353e19b8d333e43
 public class Point {
     private int x = 0;
     private int y = 0;
