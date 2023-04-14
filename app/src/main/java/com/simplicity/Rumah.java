@@ -7,11 +7,13 @@ public class Rumah {
     private int x;
     private int y;
     private List<Ruangan> daftarRuangan;
+    private String nama;
 
     //Constructor
-    public Rumah(int x, int y) {
+    public Rumah(int x, int y, String nama) {
         this.x = x;
         this.y = y;
+        this.nama = nama;
         this.daftarRuangan = new ArrayList<Ruangan>();
         // Inisialisasi ruangan pertama saat rumah pertama kali dibuat
         this.daftarRuangan.add(new Ruangan("Kamar"));
@@ -32,6 +34,14 @@ public class Rumah {
     
     public void setY(int y) {
         this.y = y;
+    }
+
+    public String getNama(){
+        return nama;
+    }
+
+    public void setNama(){
+        this.nama = nama;
     }
     
     public List<Ruangan> getDaftarRuangan() {
