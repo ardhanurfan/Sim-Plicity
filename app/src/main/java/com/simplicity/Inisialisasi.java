@@ -17,15 +17,24 @@ public class Inisialisasi {
         daftarPekerjaan.add(new ObjekPekerjaan("Programmer", 45));
         daftarPekerjaan.add( new ObjekPekerjaan("Dokter", 50));
 
+        ObjekBahanMakanan nasi = new ObjekBahanMakanan("Nasi\t", 5, 5);
+        ObjekBahanMakanan kentang = new ObjekBahanMakanan("Kentang", 3, 4);
+        ObjekBahanMakanan ayam = new ObjekBahanMakanan("Ayam\t", 10, 8);
+        ObjekBahanMakanan sapi = new ObjekBahanMakanan("Sapi\t", 12, 15);
+        ObjekBahanMakanan wortel = new ObjekBahanMakanan("Wortel\t", 3, 2);
+        ObjekBahanMakanan bayam = new ObjekBahanMakanan("Bayam\t", 3, 2);
+        ObjekBahanMakanan kacang = new ObjekBahanMakanan("Kacang\t", 2, 2);
+        ObjekBahanMakanan susu = new ObjekBahanMakanan("Susu\t", 2, 1);
+        
         ObjekBahanMakanan[] daftar_bahan = new ObjekBahanMakanan[8];
-        daftar_bahan[0] = new ObjekBahanMakanan("Nasi\t", 5, 5);
-        daftar_bahan[1] = new ObjekBahanMakanan("Kentang", 3, 4);
-        daftar_bahan[2] = new ObjekBahanMakanan("Ayam\t", 10, 8);
-        daftar_bahan[3] = new ObjekBahanMakanan("Sapi\t", 12, 15);
-        daftar_bahan[4] = new ObjekBahanMakanan("Wortel\t", 3, 2);
-        daftar_bahan[5] = new ObjekBahanMakanan("Bayam\t", 3, 2);
-        daftar_bahan[6] = new ObjekBahanMakanan("Kacang\t", 2, 2);
-        daftar_bahan[7] = new ObjekBahanMakanan("Susu\t", 2, 1);
+        daftar_bahan[0] = nasi;
+        daftar_bahan[1] = kentang;
+        daftar_bahan[2] = ayam;
+        daftar_bahan[3] = sapi;
+        daftar_bahan[4] = wortel;
+        daftar_bahan[5] = bayam;
+        daftar_bahan[6] = kacang;
+        daftar_bahan[7] = susu;
         ObjekBahanMakanan.printArray(daftar_bahan);
 
         
@@ -43,11 +52,11 @@ public class Inisialisasi {
 
         // List objek makanan
         ObjekMakanan[] daftar_makanan = new ObjekMakanan[5];
-        daftar_makanan[0] = new ObjekMakanan("Nasi Ayam", new String[]{"Nasi", "Ayam"}, 16);
-        daftar_makanan[1] = new ObjekMakanan("Nasi Kari", new String[]{"Nasi", "Kentang", "Wortel", "Sapi"}, 30);
-        daftar_makanan[2] = new ObjekMakanan("Susu Kacang", new String[]{"Susu", "Kacang"}, 5);
-        daftar_makanan[3] = new ObjekMakanan("Tumis Sayur", new String[]{"Wortel", "Bayam"}, 5);
-        daftar_makanan[4] = new ObjekMakanan("Bistik\t", new String[]{"Kentang","Sapi"}, 22);    
 
+        daftar_makanan[0] = new ObjekMakanan("Nasi Ayam", new ObjekBahanMakanan[]{nasi, ayam}, 16);
+        daftar_makanan[1] = new ObjekMakanan("Nasi Kari", new ObjekBahanMakanan[]{nasi, kentang, wortel, sapi}, 30);
+        daftar_makanan[2] = new ObjekMakanan("Susu Kacang", new ObjekBahanMakanan[]{susu, kacang}, 5);
+        daftar_makanan[3] = new ObjekMakanan("Tumis Sayur", new ObjekBahanMakanan[]{wortel, bayam}, 5);
+        daftar_makanan[4] = new ObjekMakanan("Bistik\t", new ObjekBahanMakanan[]{kentang, sapi}, 22);    
     }
 }
