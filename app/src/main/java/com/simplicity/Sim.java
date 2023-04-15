@@ -252,6 +252,7 @@ public class Sim {
         }
         for (Inventory item : inventory) {
             System.out.println(" " + i + ". " + item.getNamaBarang() + item.getKategori() +  item.getJumlah());
+            i++;
         }
     }
 
