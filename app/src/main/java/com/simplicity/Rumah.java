@@ -22,7 +22,7 @@ public class Rumah {
         return loc;
     }
     
-    public void setLocRumah(Point p) {
+    public void setLocRumah(Point loc) {
         this.loc = loc;
     }
 
@@ -30,7 +30,7 @@ public class Rumah {
         return nama;
     }
 
-    public void setNama(){
+    public void setNama(String nama){
         this.nama = nama;
     }
     

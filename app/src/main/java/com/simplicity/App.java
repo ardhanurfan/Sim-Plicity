@@ -22,8 +22,6 @@ package com.simplicity;
 // }
 
 import com.simplicity.Objek.ObjekNonMakanan;
-import com.simplicity.Point;
-import com.simplicity.Ruangan;
 
 
 

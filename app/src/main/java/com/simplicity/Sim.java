@@ -1,6 +1,5 @@
 package com.simplicity;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -45,10 +44,10 @@ public class Sim {
        this.currLokasi = sim.currLokasi;
     }
 
-    public Sim(String namaLengkap, ObjekPekerjaan[] daftarPekerjaan) {
+    public Sim(String namaLengkap, List<ObjekPekerjaan> daftarPekerjaan) {
         this.namaLengkap = namaLengkap;
-        Collections.shuffle(Arrays.asList(daftarPekerjaan));
-        this.pekerjaan = daftarPekerjaan[0];
+        Collections.shuffle(daftarPekerjaan);
+        this.pekerjaan = daftarPekerjaan.get(0);
         this.uang = 100;
         this.kekenyangan = 80;
         this.mood = 80;
@@ -178,7 +177,7 @@ public class Sim {
     }
 
     public void kerja(int waktuKerja) {
-        if (jedaGantiKerja <= 0) {
+        if (jedaGantiKerja >= 720) {
             kekenyangan -= waktuKerja/30*10;
             mood -= waktuKerja/30*10;
             if (pekerjaan.getNamaObjek().equals("Badut Sulap")) {
