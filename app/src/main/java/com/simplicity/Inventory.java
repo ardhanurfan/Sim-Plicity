@@ -2,6 +2,7 @@ package com.simplicity;
 
 import java.util.ArrayList;
 
+import com.simplicity.Objek.Objek;
 import com.simplicity.Objek.ObjekBahanMakanan;
 import com.simplicity.Objek.ObjekMakanan;
 import com.simplicity.Objek.ObjekNonMakanan;
@@ -43,6 +44,18 @@ public class Inventory {
         public void setJumlah(int jumlah) {
             this.jumlah = jumlah;
         }
+    }
+
+    public boolean isContains(Objek objek) {
+        boolean isAda = false;
+        int i = 0;
+        while (isAda && i<data.size()) {
+            if (data.get(i).getNamaBarang().equals(objek.getNamaObjek())) {
+                isAda = true;
+            }
+            i++;
+        }
+        return isAda;
     }
 
     // Menambah item objek non makanan ke inventory

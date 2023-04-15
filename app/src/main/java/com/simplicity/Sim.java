@@ -232,48 +232,67 @@ public class Sim {
         }
     }
 
-    public void makan(ObjekMakanan makanan) {
+    public double makan(ObjekMakanan makanan) {
         // Cek apakah makanan ada di inventory
-        
-        kekenyangan += makanan.getKekenyangan();
+        if (inventory.isContains(makanan)) { 
+            kekenyangan += makanan.getKekenyangan();
+    
+            // kurangi stok makanan pada inventory
+            inventory.kurangiItem(makanan.getNamaObjek(), 1);
+    
+            if (!isTidakBuangAir) {
+                isTidakBuangAir = true;
+                waktuTidakBuangAir = 0;
+            }
+            return 30;
+        } else {
+            System.out.println("Makanan tidak tersedia pada inventory");
+            return 0;
+        }
+    }
 
-        // kurangi stok makanan pada inventory
-
-        if (!isTidakBuangAir) {
-            isTidakBuangAir = true;
-            waktuTidakBuangAir = 0;
+    public double masak(ObjekMakanan makanan) {
+        // validasi bahan-bahan dari inventory
+        boolean isBahanAda = true;
+        for (ObjekBahanMakanan bahan : makanan.getBahan()) {
+            if (!inventory.isContains(bahan)) {
+                isBahanAda = false;
+                System.out.println("Bahan " + bahan.getNamaObjek() + " tidak tersedia!");
+            }
         }
 
-        //waktu makan 30 detik
+        if (isBahanAda) {
+            ObjekMakanan newmakanan = new ObjekMakanan(makanan.getNamaObjek(), makanan.getBahan(), makanan.getKekenyangan());
+            // kurangi bahan di inventory
+            for (ObjekBahanMakanan bahan : makanan.getBahan()) {
+                inventory.kurangiItem(bahan.getNamaObjek(), 1);
+            }
+            // masukan makanan baru ke inventory
+            inventory.addItemMakanan(newmakanan, 1);
+            return newmakanan.getKekenyangan()*1.5;
+        } else {
+            return 0;
+        }
     }
 
-    public double masak() {
-        // Show menu
+    public double berkunjung(Rumah rumahDiKunjungi) {
+        Point currPoint = currLokasi.getRumah().getLocRumah();
+        Point toPoin = rumahDiKunjungi.getLocRumah();
+        int selisihX = currPoint.getX()-toPoin.getX();
+        int selisihY = currPoint.getY()-toPoin.getY();
 
-        // validasi bahan-bahan dari inventory
-        // Jika valid
-        ObjekBahanMakanan[] bahan = {};
-        // tambahkan bahan dari menu dan yang dari inventory bahan dikurangi stoknya
-        ObjekMakanan newmakanan = new ObjekMakanan(namaLengkap, bahan, kekenyangan);
-        return newmakanan.getKekenyangan()*1.5;
-        // Jika tidak valid kembali ke menu pilih masakan
-    }
-
-    public double berkunjung(Rumah yangAkandikunjungi) {
-        // POINT
-        double waktu = 0; // dari perhitungan point jarak pada rumah
+        double waktu = Math.sqrt( Math.pow(selisihX,2) + Math.pow(selisihY,2) );; // dari perhitungan point jarak pada rumah
         mood += waktu/30*10;
         kekenyangan -= waktu/30*10;
         return waktu;
     }
 
-    public void buangAir() {
-        // waktu 10 detik
-
+    public double buangAir() {
         kekenyangan -= 20;
         mood += 10;
         waktuTidakBuangAir = 0;
         isTidakBuangAir = false;
+        return 10;
     }
 
     public void efekTidakBuangAir() {
@@ -285,8 +304,8 @@ public class Sim {
     }
 
     public void pindahRuangan(Ruangan goingRuangan) {
-        // System.out.println("Anda sekarang berada di ruangan " + LokasiSim.getRuanga ...);
-        // System.out.println("Anda akan berpindah ke ruangan " + goingRungan ...);
+        System.out.println("Anda sekarang berada di ruangan " + currLokasi.getRuangan().getNama());
+        System.out.println("Anda akan berpindah ke ruangan " + goingRuangan.getNama());
         currLokasi.setRuangan(goingRuangan);
     }
 
