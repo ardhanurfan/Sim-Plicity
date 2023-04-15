@@ -8,6 +8,7 @@ import java.util.List;
 import com.simplicity.Objek.ObjekBahanMakanan;
 import com.simplicity.Objek.ObjekMakanan;
 import com.simplicity.Objek.ObjekPekerjaan;
+import com.simplicity.Objek.ObjekNonMakanan;
 
 public class Sim {
     private String namaLengkap;
@@ -18,6 +19,7 @@ public class Sim {
     private int kesehatan;
     private String status;
     private LokasiSim currLokasi;
+    private ArrayList<Inventory> inventory;
 
     // STATE VARIABLE
     // Reset saat ganti kerja
@@ -43,6 +45,7 @@ public class Sim {
        this.kesehatan = sim.kesehatan;
        this.status = sim.status;
        this.currLokasi = sim.currLokasi;
+       this.inventory = sim.inventory;
     }
 
     public Sim(String namaLengkap, ObjekPekerjaan[] daftarPekerjaan) {
@@ -53,6 +56,42 @@ public class Sim {
         this.kekenyangan = 80;
         this.mood = 80;
         this.kesehatan = 80;
+    }
+
+    public class Inventory{
+        private String namaBarang;
+        private String kategori;
+        private int jumlah;
+
+        public Inventory(String namaBarang, String kategori, int jumlah) {
+            this.namaBarang = namaBarang;
+            this.kategori = kategori;
+            this.jumlah = jumlah;
+        }
+
+        public String getNamaBarang() {
+            return namaBarang;
+        }
+
+        public String getKategori() {
+            return kategori;
+        }
+
+        public int getJumlah() {
+            return jumlah;
+        }
+
+        public void setNamaBarang(String namaBarang) {
+            this.namaBarang = namaBarang;
+        }
+
+        public void setKategori(String kategori) {
+            this.kategori = kategori;
+        }
+
+        public void setJumlah(int jumlah) {
+            this.jumlah = jumlah;
+        }
     }
 
     public class LokasiSim {
@@ -143,6 +182,77 @@ public class Sim {
 
     public void setCurrLokasi(LokasiSim currLokasi) {
         this.currLokasi = currLokasi;
+    }
+
+    // Menambah item objek non makanan ke inventory
+    public void addItemNonMakanan(ObjekNonMakanan objekNonMakanan, int banyak) {
+        boolean isAda = false; // cek barang udah ada di inventory ato belum. kalo ada tinggal tambahin jumlah
+        for (Inventory item : inventory) {
+            if (item.getNamaBarang().equals(objekNonMakanan.getNamaObjek())) {
+                item.setJumlah(item.getJumlah() + banyak);
+                isAda = true;
+            }
+        }
+        if (!isAda) { // kalo barangnya blum ada di inventory
+            inventory.add(new Inventory(objekNonMakanan.getNamaObjek(), "Peralatan", banyak));
+        }
+    }
+
+    // menambah item objek bahan makanan ke inventory
+    public void addItemBahanMakanan(ObjekBahanMakanan objekBahanMakanan, int banyak) {
+        boolean isAda = false; // cek barang udah ada di inventory ato belum. kalo ada tinggal tambahin jumlah
+        for (Inventory item : inventory) {
+            if (item.getNamaBarang().equals(objekBahanMakanan.getNamaObjek())) {
+                item.setJumlah(item.getJumlah() + banyak);
+                isAda = true;
+            }
+        }
+        if (!isAda) { // kalo barangnya blum ada di inventory
+            inventory.add(new Inventory(objekBahanMakanan.getNamaObjek(), "Makanan", banyak));
+        }
+    }
+
+    // menambah objek makanan jadi ke inventory
+    public void addItemMakanan(ObjekMakanan objekMakanan, int banyak) {
+        boolean isAda = false; // cek barang udah ada di inventory ato belum. kalo ada tinggal tambahin jumlah
+        for (Inventory item : inventory) {
+            if (item.getNamaBarang().equals(objekMakanan.getNamaObjek())) {
+                item.setJumlah(item.getJumlah() + banyak);
+                isAda = true;
+            }
+        }
+        if (!isAda) { // kalo barangnya blum ada di inventory
+            inventory.add(new Inventory(objekMakanan.getNamaObjek(), "Makanan", banyak));
+        }
+    }
+
+    // Mengurangi jumlah objek dalam inventory 
+    public void kurangiItem(String namaItem, int banyak) {
+        for (Inventory item : inventory) {
+            if (item.getNamaBarang().equals(namaItem)) {
+                if (item.getJumlah() - banyak <= 0) { // menghapus item
+                    inventory.remove(item);
+                } else {
+                    item.setJumlah(item.getJumlah() - banyak);
+                }
+            }
+        }
+    }
+
+    // print inventory
+    public void viewInventory() {
+        System.out.println("========== Inventory ==========");
+        int  i = 1;
+        if (inventory.isEmpty())
+        {
+            System.out.println(" Inventory Kosong");
+        }
+        else {
+            System.out.println("No \tNama Barang \tKategori \tJumlah");
+        }
+        for (Inventory item : inventory) {
+            System.out.println(" " + i + ". " + item.getNamaBarang() + item.getKategori() +  item.getJumlah());
+        }
     }
 
     // Waktu bertambah karena melakukan aksi
