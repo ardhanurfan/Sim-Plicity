@@ -43,12 +43,22 @@ public class World {
         return check;
     }
 
+    public boolean validPos(Point lokasi){
+        boolean check = false;
+        if(lokasi.getX()<=panjangMap && lokasi.getY()<=lebarMap){
+            check = true;
+        }
+        return check;
+    }
+
     public void addRumah(Point lokasi, String nama){
-        if(!checklahan(lokasi) && lokasi.getX()<=panjangMap && lokasi.getY()<=lebarMap){
+        if(!checklahan(lokasi) && validPos(lokasi)){
             Rumah rumah = new Rumah(lokasi, nama);
             listrumah.add(rumah);
-        } else {
+        } else if(checklahan(lokasi)){
             System.out.println("Lahan sudah ditempati");
+        } else if(!validPos(lokasi)){
+            System.out.println("Tidak bisa membangun rumah di luar map");
         }
     }
 }
