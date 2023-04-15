@@ -5,9 +5,11 @@ import java.util.List;
     
 import com.simplicity.Rumah;
 import com.simplicity.Point;
+import com.simplicity.Sim;
 
 public class World { 
-    private static List<Rumah> listrumah; 
+    private static List<Rumah> listrumah;
+    private static List<Sim> listsim;
     private static int time;
     private final int panjangMap = 64;
     private final int lebarMap = 64;
@@ -33,7 +35,7 @@ public class World {
         return listrumah;
     }
 
-    public boolean checklahan(Point lokasi){
+    public boolean checkLahan(Point lokasi){
         boolean check = false;
         for(Rumah home : listrumah){
             if(home.getLocRumah().getX()==lokasi.getX() && home.getLocRumah().getY()==lokasi.getY()){
@@ -52,13 +54,22 @@ public class World {
     }
 
     public void addRumah(Point lokasi, String nama){
-        if(!checklahan(lokasi) && validPos(lokasi)){
+        if(!checkLahan(lokasi) && validPos(lokasi)){
             Rumah rumah = new Rumah(lokasi, nama);
             listrumah.add(rumah);
-        } else if(checklahan(lokasi)){
+        } else if(checkLahan(lokasi)){
             System.out.println("Lahan sudah ditempati");
         } else if(!validPos(lokasi)){
             System.out.println("Tidak bisa membangun rumah di luar map");
         }
+    }
+
+    public List<Sim> getDaftarSim() {
+        return listsim;
+    }
+
+    public void addSim(Sim sim){
+        Sim newsim = new Sim(sim);
+        listsim.add(newsim);
     }
 }
