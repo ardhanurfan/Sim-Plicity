@@ -1,6 +1,5 @@
 package com.simplicity;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,6 +16,7 @@ public class Sim {
     private int kesehatan;
     private String status;
     private LokasiSim currLokasi;
+    private Inventory inventory;
 
     // STATE VARIABLE
     // Reset saat ganti kerja
@@ -42,6 +42,7 @@ public class Sim {
        this.kesehatan = sim.kesehatan;
        this.status = sim.status;
        this.currLokasi = sim.currLokasi;
+       this.inventory = sim.inventory;
     }
 
     public Sim(String namaLengkap, List<ObjekPekerjaan> daftarPekerjaan) {
@@ -52,6 +53,7 @@ public class Sim {
         this.kekenyangan = 80;
         this.mood = 80;
         this.kesehatan = 80;
+        this.inventory = new Inventory();
     }
 
     public class LokasiSim {
@@ -290,6 +292,7 @@ public class Sim {
 
     public void lihatInventory() {
         // Print inventory
+        inventory.viewInventory();
     }
 
     public void pasangBarang() {
