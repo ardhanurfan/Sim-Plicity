@@ -77,7 +77,7 @@ public class Ruangan {
         return daftarObjek.get(index);
     }
 
-    public void tambahObjek(ObjekNonMakanan objek, Point point,String posisi) {
+    public void tambahObjek(ObjekNonMakanan objek, Point point, String posisi) {
         daftarObjek.add(objek);
         int luas = objek.getPanjang()*objek.getLebar();
         addLuasSisa(-luas);

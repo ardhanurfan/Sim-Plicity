@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.simplicity.Objek.ObjekBahanMakanan;
 import com.simplicity.Objek.ObjekMakanan;
+import com.simplicity.Objek.ObjekNonMakanan;
 import com.simplicity.Objek.ObjekPekerjaan;
 
 public class Sim {
@@ -314,15 +315,13 @@ public class Sim {
         inventory.viewInventory();
     }
 
-    public void pasangBarang() {
+    public void pasangBarang(ObjekNonMakanan objek, Point point, String posisi) {
         Ruangan currRuangan = currLokasi.getRuangan();
-        currRuangan.addLuasSisa(uang);
         // tampilkan map ruangan
-
-        // tampilkan inventory untuk memilih barang yang akan dipasang
-
-        // pilih barang dari inventory, barang diinventory dikurangi stoknya
-
-        // currRuangan.tambahObjek(); pasang ke ruangan
+        currRuangan.tampilkanRuangan();
+        // pasang
+        currRuangan.tambahObjek(objek, point, posisi);
+        // barang diinventory dikurangi stoknya
+        inventory.kurangiItem(objek.getNamaObjek(), 1);
     }
 }
