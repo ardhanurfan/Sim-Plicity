@@ -69,8 +69,8 @@ public class Ruangan {
         this.kiri = ruangan;
     }
 
-    public String getRuangan(int x, int y) {
-        return ruang[x][y];
+    public String getRuangan(Point point) {
+        return ruang[point.getX()][point.getY()];
     }
 
     public ObjekNonMakanan getObjek(int index) {
