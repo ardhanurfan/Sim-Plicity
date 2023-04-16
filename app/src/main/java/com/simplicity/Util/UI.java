@@ -1,4 +1,4 @@
-package com.simplicity;
+package com.simplicity.Util;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -9,7 +9,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -17,14 +16,14 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 public class UI {
-    private GameManager gameManager;
+    private GameManager gm;
     private JFrame window;
     public JTextArea messagText;
     public JPanel bgPanel[] = new JPanel[10];
     public JLabel bgLabel[] = new JLabel[10];
 
-    public UI(GameManager gameManager) {
-        this.gameManager = gameManager;
+    public UI(GameManager gm) {
+        this.gm = gm;
         createMainField();
         generateScreen();
         window.setVisible(true);
@@ -60,6 +59,8 @@ public class UI {
         JMenuItem menuItem[] = new JMenuItem[actions.length];
         for (int i = 0; i < menuItem.length; i++) {
             menuItem[i] = new JMenuItem(actions[i]);
+            menuItem[i].addActionListener(gm.actionHandler);
+            menuItem[i].setActionCommand(actions[i]);
             popMenu.add(menuItem[i]);
         }
 
@@ -73,26 +74,17 @@ public class UI {
 
             @Override
             public void mouseClicked(MouseEvent e) {}
-
-            @Override
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isRightMouseButton(e)) {
                     popMenu.show(obj, e.getX(), e.getY());
                 }
             }
-          
-            @Override
             public void mouseReleased(MouseEvent e) {}
- 
-            @Override
             public void mouseEntered(MouseEvent e) {}
-             
-            @Override
             public void mouseExited(MouseEvent e) {}
         });
 
         bgPanel[bgNum].add(obj);
-        bgPanel[bgNum].add(bgLabel[bgNum]);
     }
 
     public void startButton(int bgNum, int x, int y, int width, int height, String text) {
@@ -104,8 +96,8 @@ public class UI {
         btn.setBackground(null);
         btn.setForeground(Color.white);
         btn.setFocusPainted(false);
-        // btn.addActionListener(gm.);
         btn.setContentAreaFilled(false);
+        btn.addActionListener(gm.actionHandler);
         btn.setActionCommand("start");
         btn.setFont(new Font("Helvetica", Font.BOLD, 30));
         btn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,14 +112,18 @@ public class UI {
         });
 
         bgPanel[bgNum].add(btn);
-        bgPanel[bgNum].add(bgLabel[bgNum]);
     }
-
-
-
+    
+    
+    
     public void generateScreen() {
         // Start
         createBackground(0, "start.png");
         startButton(0, 150, 500, 700, 40, "Click Here to Start");
+        createObjek(0, 200, 300, 50, 50, "start.png", new String[]{"halo"});
+        bgPanel[0].add(bgLabel[0]);
+        
+        createBackground(1, "start.png");
+        bgPanel[1].add(bgLabel[1]);
     }
 }
