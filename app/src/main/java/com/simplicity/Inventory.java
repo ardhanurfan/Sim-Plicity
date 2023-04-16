@@ -144,7 +144,7 @@ public class Inventory {
 
     // print inventory khusus peralatan
     public void viewInventoryPeralatan() { // melihat inventory peralatan
-        System.out.println("========== Inventory ==========");
+        System.out.println("========== Inventory Peralatan ==========");
         int  i = 1;
         if (data.isEmpty())
         {
@@ -163,7 +163,7 @@ public class Inventory {
 
     // print inventory khusus makanan dan bahan makanan
     public void viewInventoryMakanan() { // melihat inventory makanan
-        System.out.println("========== Inventory ==========");
+        System.out.println("========== Inventory Makanan ==========");
         int  i = 1;
         if (data.isEmpty())
         {
@@ -303,5 +303,12 @@ public class Inventory {
 
         // print inventory
         inventory2.viewInventory();
+        inventory2.viewInventoryPeralatan();
+
+        daftar_bahan[0].printDaftarBahanMakanan(daftar_bahan);
+        //printDaftarMakanan(daftar_makanan);
+        //printDaftarPeralatan(daftar_barang);
+        daftar_makanan[0].printDaftarMakanan(daftar_makanan);
+
     }
 }

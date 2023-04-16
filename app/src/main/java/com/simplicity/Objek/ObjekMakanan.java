@@ -26,7 +26,11 @@ public class ObjekMakanan extends Objek {
     public void printBahan(){
         System.out.print(bahan[0].getNamaObjek());
         for (int i = 1; i < bahan.length; i++){
-            System.out.print("+" + bahan[i].getNamaObjek());
+            if (bahan[i].getNamaObjek().equals("Kentang\t")){
+                System.out.print("+Kentang");
+            }else{
+                System.out.print("+" + bahan[i].getNamaObjek());
+            }
         }
     }
 
@@ -41,7 +45,7 @@ public class ObjekMakanan extends Objek {
     }
 
     // print array
-    public static void printArray(ObjekMakanan[] daftar_makanan){
+    public void printDaftarMakanan(ObjekMakanan[] daftar_makanan){
         System.out.println("Berikut adalah daftar masakan yang tersedia.");
         System.out.println("No \tNama Masakan \tBahan yang Diperlukan \t\tKekenyangan");
         for (int i = 0; i < daftar_makanan.length; i++) {
@@ -53,7 +57,7 @@ public class ObjekMakanan extends Objek {
     // testing
     public static void main (String[] args){
         ObjekBahanMakanan nasi = new ObjekBahanMakanan("Nasi\t", 5, 5);
-        ObjekBahanMakanan kentang = new ObjekBahanMakanan("Kentang", 3, 4);
+        ObjekBahanMakanan kentang = new ObjekBahanMakanan("Kentang\t", 3, 4);
         ObjekBahanMakanan ayam = new ObjekBahanMakanan("Ayam\t", 10, 8);
         ObjekBahanMakanan sapi = new ObjekBahanMakanan("Sapi\t", 12, 15);
         ObjekBahanMakanan wortel = new ObjekBahanMakanan("Wortel\t", 3, 2);
@@ -79,6 +83,6 @@ public class ObjekMakanan extends Objek {
         daftar_makanan[3] = new ObjekMakanan("Tumis Sayur", new ObjekBahanMakanan[]{wortel, bayam}, 5);
         daftar_makanan[4] = new ObjekMakanan("Bistik\t", new ObjekBahanMakanan[]{kentang, sapi}, 22);    
 
-        printArray(daftar_makanan);
+        daftar_makanan[0].printDaftarMakanan(daftar_makanan);
     }
 }

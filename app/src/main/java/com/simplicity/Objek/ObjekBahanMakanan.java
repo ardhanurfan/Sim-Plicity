@@ -26,7 +26,7 @@ public class ObjekBahanMakanan extends Objek {
 
     // print array of bahan_makanan
 
-    public static void printArray(ObjekBahanMakanan[] daftar_bahan){
+    public void printDaftarBahanMakanan(ObjekBahanMakanan[] daftar_bahan){
         System.out.println("Berikut adalah daftar bahan makanan yang tersedia.");
         System.out.println("No \tBahan Makanan \tHarga \tKekenyangan");
         for (int i = 0; i < daftar_bahan.length; i++) {
@@ -47,6 +47,6 @@ public class ObjekBahanMakanan extends Objek {
         daftar_bahan[5] = new ObjekBahanMakanan("Bayam\t", 3, 2);
         daftar_bahan[6] = new ObjekBahanMakanan("Kacang\t", 2, 2);
         daftar_bahan[7] = new ObjekBahanMakanan("Susu\t", 2, 1);
-        printArray(daftar_bahan);
+        daftar_bahan[0].printDaftarBahanMakanan(daftar_bahan);
     }    
 }

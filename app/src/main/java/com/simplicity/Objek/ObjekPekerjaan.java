@@ -21,7 +21,7 @@ public class ObjekPekerjaan extends Objek {
     }
 
     // print array of daftar_pekerjaan
-    public static void printArray(ObjekPekerjaan[] daftar_pekerjaan){
+    public void printDaftarPekerjaan(ObjekPekerjaan[] daftar_pekerjaan){
         System.out.println("Berikut adalah daftar pekerjaan yang tersedia.");
         System.out.println("No \tNama Pekerjaan \tGaji");
         for (int i = 0; i < daftar_pekerjaan.length; i++){
@@ -47,6 +47,6 @@ public class ObjekPekerjaan extends Objek {
         daftar_pekerjaan[4] = new ObjekPekerjaan("Dokter\t", 50);
 
         // print array of daftar pekerjaan
-        printArray(daftar_pekerjaan);
+        daftar_pekerjaan[0].printDaftarPekerjaan(daftar_pekerjaan);
     }
 }

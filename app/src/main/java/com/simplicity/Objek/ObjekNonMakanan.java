@@ -59,7 +59,7 @@ public class ObjekNonMakanan extends Objek{
     }
 
     // semua print array nanti dipindah dan nama nya jadi spesifik 
-    public void printArray(ObjekNonMakanan[] daftar_barang){
+    public void printDaftarBarang(ObjekNonMakanan[] daftar_barang){
         System.out.println("Berikut adalah daftar barang yang tersedia.");
         System.out.println("No \tNama Barang \t\tPanjang Lebar \tHarga \tAksi");
         for (int i = 0; i < daftar_barang.length; i++){
@@ -86,6 +86,7 @@ public class ObjekNonMakanan extends Objek{
         daftar_barang[7] = new ObjekNonMakanan("Jam\t\t", 1, 1, 10, "Melihat Waktu");
 
         // print array of daftar barang
-        daftar_barang[6].printArray(daftar_barang);
+        //daftar_barang[6].printArray(daftar_barang);
+        daftar_barang[0].printDaftarBarang(daftar_barang);
     }
 }
