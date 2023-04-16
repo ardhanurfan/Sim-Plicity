@@ -48,6 +48,9 @@ public class App {
         r1.tampilkanRuangan();
         r1.tampilkanDaftarObjek();
         r1.hapusObjek(r1.getObjek(1));
+        r1.tampilkanRuangan();
+        r1.tampilkanDaftarObjek();
+        r1.hapusObjek(r1.getObjek(0));
         //r1.hapusObjek(o2);
         r1.tampilkanRuangan();
         r1.tampilkanDaftarObjek();

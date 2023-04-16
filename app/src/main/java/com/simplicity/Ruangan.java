@@ -136,6 +136,8 @@ public class Ruangan {
                 ruang[objek.getTitik().getX()+i][objek.getTitik().getY()+j]=null;
             }
         }
+        objek.setPosisi(null);
+        objek.setTitik(null);
         daftarObjek.remove(objek);
     }
 
