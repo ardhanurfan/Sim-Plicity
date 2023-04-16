@@ -18,7 +18,7 @@ public class Inisialisasi {
         daftarPekerjaan.add( new ObjekPekerjaan("Dokter", 50));
 
         ObjekBahanMakanan nasi = new ObjekBahanMakanan("Nasi\t", 5, 5);
-        ObjekBahanMakanan kentang = new ObjekBahanMakanan("Kentang", 3, 4);
+        ObjekBahanMakanan kentang = new ObjekBahanMakanan("Kentang\t", 3, 4);
         ObjekBahanMakanan ayam = new ObjekBahanMakanan("Ayam\t", 10, 8);
         ObjekBahanMakanan sapi = new ObjekBahanMakanan("Sapi\t", 12, 15);
         ObjekBahanMakanan wortel = new ObjekBahanMakanan("Wortel\t", 3, 2);
@@ -35,7 +35,7 @@ public class Inisialisasi {
         daftar_bahan[5] = bayam;
         daftar_bahan[6] = kacang;
         daftar_bahan[7] = susu;
-        ObjekBahanMakanan.printArray(daftar_bahan);
+        //ObjekBahanMakanan.printArray(daftar_bahan);
 
         
         // List objek non makanan
@@ -43,7 +43,7 @@ public class Inisialisasi {
         // Menambahkan elemen ke dalam array daftar_barang
         daftar_barang[0] = new ObjekNonMakanan("Kasur Single\t", 4, 1, 50, "Tidur");
         daftar_barang[1] = new ObjekNonMakanan("Kasur Queen Size", 4, 2, 100, "Tidur");
-        daftar_barang[2] = new ObjekNonMakanan("Kasur King Size", 5, 2, 150, "Tidur");
+        daftar_barang[2] = new ObjekNonMakanan("Kasur King Size ", 5, 2, 150, "Tidur");
         daftar_barang[3] = new ObjekNonMakanan("Toilet\t\t", 1, 1, 50, "Buang air");
         daftar_barang[4] = new ObjekNonMakanan("Kompor Gas\t", 2, 1, 100, "Memasak");
         daftar_barang[5] = new ObjekNonMakanan("Kompor Listrik\t", 1, 1, 200, "Memasak");
