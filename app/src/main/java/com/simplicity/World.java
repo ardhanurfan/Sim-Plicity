@@ -2,10 +2,6 @@ package com.simplicity;
 
 import java.util.ArrayList;
 import java.util.List;
-    
-import com.simplicity.Rumah;
-import com.simplicity.Point;
-import com.simplicity.Sim;
 
 public class World { 
     private static List<Rumah> listrumah;

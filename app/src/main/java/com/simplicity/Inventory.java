@@ -230,7 +230,7 @@ public class Inventory {
         daftar_makanan[3] = new ObjekMakanan("Tumis Sayur", new ObjekBahanMakanan[]{wortel, bayam}, 5);
         daftar_makanan[4] = new ObjekMakanan("Bistik\t", new ObjekBahanMakanan[]{kentang, sapi}, 22);    
         
-        ArrayList<InventoryItem> Inventory = new ArrayList<InventoryItem>();
+        // ArrayList<InventoryItem> Inventory = new ArrayList<InventoryItem>();
 
         // print inventory
         //Inventory.viewInventory();

@@ -111,24 +111,33 @@ public class Sim {
         return kekenyangan;
     }
 
-    public void setKekenyangan(int kekenyangan) {
-        this.kekenyangan = kekenyangan;
+    public void setKekenyangan(int waktuKerja, int ratio, int value) {
+        this.kekenyangan += waktuKerja/ratio*value;
+        if (this.kekenyangan > 100) {
+            this.kekenyangan = 100;
+        }
     }
 
     public int getMood() {
         return mood;
     }
 
-    public void setMood(int mood) {
-        this.mood = mood;
+    public void setMood(int waktuKerja, int ratio, int value) {
+        this.mood += waktuKerja/ratio*value;
+        if (this.mood > 100) {
+            this.mood = 100;
+        }
     }
 
     public int getKesehatan() {
         return kesehatan;
     }
 
-    public void setKesehatan(int kesehatan) {
-        this.kesehatan = kesehatan;
+    public void setKesehatan(int waktuKerja, int ratio, int value) {
+        this.kesehatan += waktuKerja/ratio*value;
+        if (this.kesehatan > 100) {
+            this.kesehatan = 100;
+        }
     }
 
     public String getStatus() {
@@ -181,8 +190,8 @@ public class Sim {
 
     public void kerja(int waktuKerja) {
         if (jedaGantiKerja >= 720) {
-            kekenyangan -= waktuKerja/30*10;
-            mood -= waktuKerja/30*10;
+            setKekenyangan(waktuKerja, 30, -10);
+            setMood(waktuKerja, 30, -10);
             if (pekerjaan.getNamaObjek().equals("Badut Sulap")) {
                 uang += waktuKerja/240*15;
             } else if (pekerjaan.getNamaObjek().equals("Koki")) {
@@ -206,21 +215,25 @@ public class Sim {
     }
 
     public void olahraga(int waktuOlahraga) {
-        kesehatan += waktuOlahraga/20*5;
-        kekenyangan -= waktuOlahraga/20*5;
-        mood += waktuOlahraga/20*10;
+        setKesehatan(waktuOlahraga, 20, 5);
+        setKekenyangan(waktuOlahraga, 20, -5);
+        setMood(waktuOlahraga, 20, 10);
 
         System.out.println("Olahraga selesai selama " + (waktuOlahraga < 60 ? (waktuOlahraga + " detik") : (waktuOlahraga/60 + ":" + waktuOlahraga%60 + " menit")));
         System.out.println("Kesehatan Anda sekarang " + kesehatan);
         System.out.println("Kekenyangan Anda sekarang " + kekenyangan);
         System.out.println("Mood Anda sekarang " + mood);
     }
-
+    
     public void tidur(int waktuTidur) {
-        mood += waktuTidur/240*30;
-        kesehatan += waktuTidur/240*20;
+        setMood(waktuTidur, 240, 30);
+        setKesehatan(waktuTidur, 240, 20);
 
         totalWaktuTidur += waktuTidur;
+
+        System.out.println("Sim telah tidur selama " + waktuTidur + " detik");
+        System.out.println("Kesehatan Anda sekarang " + kesehatan);
+        System.out.println("Mood Anda sekarang " + mood);
     }
 
     public void efekTidakTidur() {
@@ -236,7 +249,7 @@ public class Sim {
     public double makan(ObjekMakanan makanan) {
         // Cek apakah makanan ada di inventory
         if (inventory.isContains(makanan)) { 
-            kekenyangan += makanan.getKekenyangan();
+            setKekenyangan(1, 1, makanan.getKekenyangan());
     
             // kurangi stok makanan pada inventory
             inventory.kurangiItem(makanan.getNamaObjek(), 1);
@@ -245,6 +258,8 @@ public class Sim {
                 isTidakBuangAir = true;
                 waktuTidakBuangAir = 0;
             }
+
+            System.out.println("Yammy! " + makanan.getNamaObjek() + " enak sekali...");
             return 30;
         } else {
             System.out.println("Makanan tidak tersedia pada inventory");
@@ -270,6 +285,10 @@ public class Sim {
             }
             // masukan makanan baru ke inventory
             inventory.addItemMakanan(newmakanan, 1);
+            
+            setMood(1, 1, 10);
+            System.out.println("Srenggg.... " + newmakanan.getNamaObjek() + " berhasil dibuat. Sudah dimasukkan ke inventory");
+            System.out.println("Selamat menikmati ...");
             return newmakanan.getKekenyangan()*1.5;
         } else {
             return 0;
@@ -283,31 +302,39 @@ public class Sim {
         int selisihY = currPoint.getY()-toPoin.getY();
 
         double waktu = Math.sqrt( Math.pow(selisihX,2) + Math.pow(selisihY,2) );; // dari perhitungan point jarak pada rumah
-        mood += waktu/30*10;
-        kekenyangan -= waktu/30*10;
+        setMood((int)waktu, 30, 10);
+        setKekenyangan((int)waktu, 30, -10);
+
+        System.out.println("Anda akan berkunjung ke " + rumahDiKunjungi.getNama());
+        System.out.println("Dengan lama perjalanan " + waktu + " detik");
+        System.out.println("========================================");
+        System.out.println("Anda sudah sampai di " + rumahDiKunjungi.getNama());
         return waktu;
     }
 
     public double buangAir() {
-        kekenyangan -= 20;
-        mood += 10;
+        setKekenyangan(1, 1, -20);
+        setMood(1, 1, 10);
         waktuTidakBuangAir = 0;
         isTidakBuangAir = false;
+        System.out.println("Uhhh lega... udah buang air");
         return 10;
     }
 
     public void efekTidakBuangAir() {
         if (waktuTidakBuangAir >= 240 && isTidakBuangAir) {
             waktuTidakBuangAir = waktuTidakBuangAir%240;
-            kesehatan -= 5;
-            mood -= 5;
+            setKesehatan(1, 1, -5);
+            setMood(1, 1, -5);
         }
     }
 
     public void pindahRuangan(Ruangan goingRuangan) {
         System.out.println("Anda sekarang berada di ruangan " + currLokasi.getRuangan().getNama());
         System.out.println("Anda akan berpindah ke ruangan " + goingRuangan.getNama());
+        System.out.println("========================================");
         currLokasi.setRuangan(goingRuangan);
+        System.out.println("Anda sudah berada di ruangan " + currLokasi.getRuangan().getNama() + " di rumah " + currLokasi.getRumah().getNama());
     }
 
     public void lihatInventory() {
