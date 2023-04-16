@@ -1,10 +1,14 @@
 package com.simplicity.Objek;
+import com.simplicity.Point;
+
 
 public class ObjekNonMakanan extends Objek{
     int panjang;
     int lebar;
     int harga;
     String aksi;
+    Point titik=null;
+    String posisi=null;
 
     public ObjekNonMakanan(String nama_barang, int panjang, int lebar, int harga, String aksi){
         super(nama_barang);
@@ -29,6 +33,22 @@ public class ObjekNonMakanan extends Objek{
 
     public String getAksi() {
         return aksi;
+    }
+
+    public Point getTitik() {
+        return titik;
+    }
+
+    public String getPosisi() {
+        return posisi;
+    }
+
+    public void setTitik(Point point){
+        titik = point;
+    }
+
+    public void setPosisi(String pos){
+        posisi= pos;
     }
 
     // tidak ada setter karena barang hanya diinisialisasi sebelum game dimulai

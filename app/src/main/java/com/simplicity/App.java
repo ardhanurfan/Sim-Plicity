@@ -28,14 +28,27 @@ import com.simplicity.Objek.ObjekNonMakanan;
 public class App {
     public static void main(String[] args) {
         ObjekNonMakanan o1 = new ObjekNonMakanan("Ayam", 1, 4, 50, null);
-        ObjekNonMakanan o2 = new ObjekNonMakanan("Kucin", 3, 3, 70, null);
+        ObjekNonMakanan o2 = new ObjekNonMakanan("Kucing", 2, 3, 70, null);
         Ruangan r1 = new Ruangan("Haha");
         Point point = new Point(0,0);
-        Point point2 = new Point(1,1);
-        r1.tambahObjek(o1, point,"v");
-        r1.tambahObjek(o2, point2,"v");
+        Point point2 = new Point(0,4);
+        if(r1.nabrakGa(o1,point,"h")){
+            r1.tambahObjek(o1, point,"h");
+        }
+        else{
+            System.out.println("Gabisa tambah bg");
+        }
+        if(r1.nabrakGa(o2,point2,"v")){
+            r1.tambahObjek(o2, point2,"v");
+        }
+        else{
+            System.out.println("Gabisa tambah bg");
+        }
+        
         r1.tampilkanRuangan();
-        r1.hapusObjek(o2, point2,"v");
+        r1.tampilkanDaftarObjek();
+        r1.hapusObjek(r1.getObjek(1));
+        //r1.hapusObjek(o2);
         r1.tampilkanRuangan();
         r1.tampilkanDaftarObjek();
     }
