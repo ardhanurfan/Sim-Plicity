@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class World { 
-    private static List<Rumah> listrumah;
-    private static List<Sim> listsim;
+    private static List<Rumah> listrumah = new ArrayList<Rumah>();;
+    private static List<Sim> listsim = new ArrayList<Sim>();
     private static int time;
     private final int panjangMap = 64;
     private final int lebarMap = 64;
    
-    public World(List<Rumah> listrumah){
-        World.listrumah = new ArrayList<Rumah>();
+    public World(){
         time = 0;
     }
     

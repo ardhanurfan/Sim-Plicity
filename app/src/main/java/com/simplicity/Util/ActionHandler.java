@@ -17,7 +17,7 @@ public class ActionHandler implements ActionListener {
 
         switch (command) {
             case "start" : gm.routing.showScreen(1); break;
-            case "halo" : System.out.println("ppp"); break;
+            case "halo" : gm.routing.showScreen(0); break;
         }
     }
     

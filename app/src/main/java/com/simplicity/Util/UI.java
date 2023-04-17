@@ -113,17 +113,39 @@ public class UI {
 
         bgPanel[bgNum].add(btn);
     }
+
+    public void customButton(int bgNum, int x, int y, int width, int height, String text, int fontSize, String command) {
+        JButton btn = new JButton();
+        btn.setBounds(x, y, width, height);
+        btn.setText(text);
+        btn.setForeground(new Color(7, 168, 104));
+        btn.setFocusPainted(false);
+        btn.addActionListener(gm.actionHandler);
+        btn.setActionCommand(command);
+        btn.setFont(new Font("Helvetica", Font.BOLD, fontSize));
+
+        bgPanel[bgNum].add(btn);
+    }
     
-    
+
     
     public void generateScreen() {
         // Start
         createBackground(0, "start.png");
         startButton(0, 150, 500, 700, 40, "Click Here to Start");
-        createObjek(0, 200, 300, 50, 50, "start.png", new String[]{"halo"});
         bgPanel[0].add(bgLabel[0]);
         
-        createBackground(1, "start.png");
+        // Main Menu
+        createBackground(1, "");
+        if (gm.world.getDaftarSim().size() == 0) {
+            customButton(1, 300, 300, 400, 50, "Create Sim", 32, "halo");
+            customButton(1, 300, 400, 400, 50, "Exit Game", 32, "halo");
+        } else {
+            customButton(1, 300, 250, 400, 50, "Choose Sim", 32, "halo");
+            customButton(1, 300, 350, 400, 50, "Create New Sim", 32, "halo");
+            customButton(1, 300, 450, 400, 50, "Exit Game", 32, "halo");
+        }
         bgPanel[1].add(bgLabel[1]);
+        bgPanel[1].setVisible(false);
     }
 }
