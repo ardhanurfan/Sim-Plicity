@@ -46,19 +46,38 @@ public class Rumah {
     public void upgradeRumah(Ruangan ruanganacuan, String arah, String namaruangan){
         Ruangan newRuangan = new Ruangan(namaruangan);
         daftarRuangan.add(newRuangan);
-        
         if (arah.equals("atas")){
-            ruanganacuan.setAtas(newRuangan);
-            newRuangan.setBawah(ruanganacuan);  
+            if (ruanganacuan.getAtas()==null){
+                ruanganacuan.setAtas(newRuangan);
+                newRuangan.setBawah(ruanganacuan);
+            }
+            else{
+                System.out.println("Ruangan tidak tersedia karena sudah terisi.");
+            }  
         } else if (arah.equals("bawah")){
-            ruanganacuan.setBawah(newRuangan);
-            newRuangan.setAtas(ruanganacuan);
+            if (ruanganacuan.getBawah()==null){
+                ruanganacuan.setBawah(newRuangan);
+                newRuangan.setAtas(ruanganacuan);
+            }
+            else{
+                System.out.println("Ruangan tidak tersedia karena sudah terisi.");
+            }
         } else if (arah.equals("kanan")){
-            ruanganacuan.setKanan(newRuangan);
-            newRuangan.setKiri(ruanganacuan);
+            if (ruanganacuan.getKanan()==null){
+                ruanganacuan.setKanan(newRuangan);
+                newRuangan.setKiri(ruanganacuan);
+            }
+            else{
+                System.out.println("Ruangan tidak tersedia karena sudah terisi.");
+            }
         } else if (arah.equals("kiri")){
-            ruanganacuan.setKiri(newRuangan);
-            newRuangan.setKanan(ruanganacuan);
+            if (ruanganacuan.getKiri()==null){
+                ruanganacuan.setKiri(newRuangan);
+                newRuangan.setKanan(ruanganacuan);
+            }
+            else{
+                System.out.println("Ruangan tidak tersedia karena sudah terisi.");
+            }
         }
     }
     
