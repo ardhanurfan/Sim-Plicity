@@ -99,7 +99,6 @@ public class Ruangan {
         objek.setTitik(point);
         daftarObjek.add(objek);
         int i,j, jmax, imax;
-        boolean nabrak=false;
 
         // posisi vertikal
         if(posisi.equals("v")){
