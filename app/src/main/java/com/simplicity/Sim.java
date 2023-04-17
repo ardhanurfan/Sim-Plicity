@@ -11,7 +11,7 @@ import com.simplicity.Objek.ObjekPekerjaan;
 public class Sim {
     private String namaLengkap;
     private ObjekPekerjaan pekerjaan;
-    private int uang;
+    private double uang;
     private int kekenyangan;
     private int mood;
     private int kesehatan;
@@ -23,11 +23,9 @@ public class Sim {
     // Reset saat ganti kerja
     private int totalWaktuKerja = 0;
     private int jedaGantiKerja = 0;
-
-    // Reset Harian
+    
+    // Reset jika ganti hari
     private int totalWaktuTidur = 0;
-
-    // Reset jika sudah tidur
     private int waktuTidakTidur = 0;
 
     // Reset jika sudah buang air
@@ -96,10 +94,15 @@ public class Sim {
     }
 
     public void setPekerjaan(ObjekPekerjaan pekerjaan) {
-        this.pekerjaan = pekerjaan;
+        if (totalWaktuKerja >= 720) {
+            this.pekerjaan = pekerjaan;
+            uang -= pekerjaan.getGaji()*0.5;
+            jedaGantiKerja = 0;
+            totalWaktuKerja = 0;
+        }
     }
 
-    public int getUang() {
+    public double getUang() {
         return uang;
     }
 
@@ -160,14 +163,18 @@ public class Sim {
     public void addOnAksi(int waktuAksi) {
         this.jedaGantiKerja += waktuAksi;
         this.waktuTidakTidur += waktuAksi;
+
         if (isTidakBuangAir) {
             waktuTidakBuangAir += waktuAksi;
+            efekTidakBuangAir();
         }
+        efekTidakTidur();
     }
 
     // reset tiap berganti hari
     public void resetWaktuKegiatanharian() {
         totalWaktuTidur = 0;
+        waktuTidakTidur = 0;
     }
 
     // AKSI YANG DAPAT DILAKUKAN
@@ -237,13 +244,10 @@ public class Sim {
     }
 
     public void efekTidakTidur() {
-        if (waktuTidakTidur >= 10) {
-            kesehatan -= 5;
-            mood -= 5;
-            waktuTidakTidur = waktuTidakTidur%10;
-        } else {
-            waktuTidakTidur++;
-        }
+        if (waktuTidakTidur >= 600 && totalWaktuTidur < 180) {
+            setKesehatan(1, 1, -5);
+            setMood(1, 1, -5);
+        } 
     }
 
     public double makan(ObjekMakanan makanan) {
@@ -254,6 +258,7 @@ public class Sim {
             // kurangi stok makanan pada inventory
             inventory.kurangiItem(makanan.getNamaObjek(), 1);
     
+            // menangani kalo belum 4 menit udah makan lagi, acuan 4 menit yang awal
             if (!isTidakBuangAir) {
                 isTidakBuangAir = true;
                 waktuTidakBuangAir = 0;
@@ -323,7 +328,8 @@ public class Sim {
 
     public void efekTidakBuangAir() {
         if (waktuTidakBuangAir >= 240 && isTidakBuangAir) {
-            waktuTidakBuangAir = waktuTidakBuangAir%240;
+            isTidakBuangAir = false;
+            waktuTidakBuangAir = 0;
             setKesehatan(1, 1, -5);
             setMood(1, 1, -5);
         }
