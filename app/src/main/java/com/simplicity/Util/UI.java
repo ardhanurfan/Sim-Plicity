@@ -1,6 +1,7 @@
 package com.simplicity.Util;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -21,6 +22,7 @@ public class UI {
     public JTextArea messagText;
     public JPanel bgPanel[] = new JPanel[10];
     public JLabel bgLabel[] = new JLabel[10];
+    public JPanel attributePanel;
 
     public UI(GameManager gm) {
         this.gm = gm;
@@ -38,7 +40,7 @@ public class UI {
         window.setResizable(false);
     }
 
-    public void createBackground(int bgNum, String bgPath) {
+    public void createBackgroundFull(int bgNum, String bgPath) {
         bgPanel[bgNum] = new JPanel();
         bgPanel[bgNum].setBounds(0, 0, 1000, 800);
         bgPanel[bgNum].setBackground(Color.black);
@@ -52,6 +54,44 @@ public class UI {
         bgLabel[bgNum].setIcon(bgIcon);
     }
 
+    public void createBackground(int bgNum, String bgPath) {
+        bgPanel[bgNum] = new JPanel();
+        bgPanel[bgNum].setBounds(0, 0, 700, 700);
+        bgPanel[bgNum].setBackground(Color.black);
+        bgPanel[bgNum].setLayout(null);
+        window.add(bgPanel[bgNum]);
+
+        bgLabel[bgNum] = new JLabel();
+        bgLabel[bgNum].setBounds(0, 0, 700, 700);
+        ImageIcon bgIcon = new ImageIcon( new ImageIcon(getClass().getClassLoader().getResource(bgPath)).getImage().getScaledInstance(700, 700, Image.SCALE_DEFAULT));
+        bgLabel[bgNum].setIcon(bgIcon);
+
+        messagText = new JTextArea();
+        messagText.setBounds(10, 710, 630, 90);
+        messagText.setBackground(null);
+        messagText.setForeground(Color.white);
+        messagText.setEditable(false);
+        messagText.setLineWrap(true);
+        messagText.setWrapStyleWord(true);
+        messagText.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        window.add(messagText);
+        attributeField();
+        
+    }
+
+    public void attributeField() {
+        attributePanel = new JPanel();
+        attributePanel.setBounds(720, 0, 280, 800);
+        attributePanel.setBackground(null);
+        attributePanel.setLayout(new GridLayout(10, 2));
+        window.add(attributePanel);
+
+        // add jam
+        ImageIcon jamImage = new ImageIcon( new ImageIcon(getClass().getClassLoader().getResource("jam.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        JLabel jamIcon = new JLabel();
+        jamIcon.setIcon(jamImage);
+        attributePanel.add(jamIcon);
+    }
 
     public void createObjek(int bgNum, int x, int y, int width, int height, String objPath, String[] actions) {
         // POP MENU
@@ -131,14 +171,14 @@ public class UI {
     
     public void generateScreen() {
         // Start
-        createBackground(0, "start.png");
+        createBackgroundFull(0, "start.png");
         startButton(0, 150, 500, 700, 40, "Click Here to Start");
         bgPanel[0].add(bgLabel[0]);
         
         // Main Menu
-        createBackground(1, "");
+        createBackgroundFull(1, "");
         if (gm.world.getDaftarSim().size() == 0) {
-            customButton(1, 300, 300, 400, 50, "Create Sim", 32, "halo");
+            customButton(1, 300, 300, 400, 50, "Create Sim", 32, "ruangan");
             customButton(1, 300, 400, 400, 50, "Exit Game", 32, "halo");
         } else {
             customButton(1, 300, 250, 400, 50, "Choose Sim", 32, "halo");
@@ -147,9 +187,12 @@ public class UI {
         }
         bgPanel[1].add(bgLabel[1]);
         bgPanel[1].setVisible(false);
-
+        
         // Ruangan
-        createBackground(2, "");
+        createBackground(2, "ruangan fix.png");
+        customButton(2, 300, 400, 400, 50, "Coba", 32, "aksi");
+        bgPanel[2].add(bgLabel[2]);
+        bgPanel[2].setVisible(false);;
     }
 
 }

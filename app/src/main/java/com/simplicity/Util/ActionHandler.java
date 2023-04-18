@@ -18,6 +18,8 @@ public class ActionHandler implements ActionListener {
         switch (command) {
             case "start" : gm.routing.showScreen(1); break;
             case "halo" : gm.routing.showScreen(0); break;
+            case "ruangan" : gm.routing.showScreen(2); break;
+            case "aksi" : gm.ui.messagText.setText("HALOO JOS");; break;
         }
     }
     
