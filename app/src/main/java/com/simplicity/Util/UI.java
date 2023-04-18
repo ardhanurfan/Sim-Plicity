@@ -147,5 +147,9 @@ public class UI {
         }
         bgPanel[1].add(bgLabel[1]);
         bgPanel[1].setVisible(false);
+
+        // Ruangan
+        createBackground(2, "");
     }
+
 }
