@@ -1,12 +1,12 @@
 package com.simplicity;
 import java.util.ArrayList;
+import java.util.List;
 import com.simplicity.Objek.ObjekNonMakanan;
-
 
 
 public class Ruangan {
     private String nama;
-    private ArrayList<ObjekNonMakanan> daftarObjek;
+    private List<ObjekNonMakanan> daftarObjek;
     private String[][] ruang;
     private Ruangan atas = null;
     private Ruangan bawah = null;
@@ -67,6 +67,29 @@ public class Ruangan {
         return daftarObjek.get(index);
     }
 
+    public ObjekNonMakanan getObjek(String nama){
+        ObjekNonMakanan objek =null;
+        for (ObjekNonMakanan o :daftarObjek){
+            if(o.getNamaObjek().equals(nama)){
+                objek = o;
+            }
+        }
+        return objek;
+    }
+
+    public List<ObjekNonMakanan> getDaftarObjek(){
+        return daftarObjek;
+    }
+
+    public List<String> getDaftarObjekString(){
+        List<String> list = new ArrayList<>();
+        for (ObjekNonMakanan o :daftarObjek){
+            list.add(o.getNamaObjek()+ " ("+o.getTitik().getX()+","+o.getTitik().getY() +") "+o.getPosisi());
+        }
+        return list;
+    }
+
+    // Return true kalau ga nabrak
     public boolean nabrakGa(ObjekNonMakanan objek, Point point, String posisi){
         int i,j, jmax, imax;
         boolean nabrak=false;
@@ -81,8 +104,9 @@ public class Ruangan {
             jmax = objek.getLebar();
             imax = objek.getPanjang(); 
         }
-        if(imax>5 || jmax>5){
+        if(point.getX()+imax>6 || point.getY()+jmax>6){
             nabrak=true;
+            return !nabrak;
         }
         for(i =0;i<imax;i++){
             for(j=0;j<jmax;j++){
