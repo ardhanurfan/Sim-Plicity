@@ -68,6 +68,35 @@ public class ObjekNonMakanan extends Objek{
         }
     }
 
+    public static ObjekNonMakanan returnObject(String nama){
+        ObjekNonMakanan o = null;
+        if(nama.equals("kasur single 4x1")){
+            o = new ObjekNonMakanan(nama, 4, 1, 50, "Tidur");
+        }
+        else if(nama.equals("kasur queen size 4x2")){
+            o = new ObjekNonMakanan(nama, 4, 2, 100, "Tidur");
+        }
+        else if(nama.equals("kasur king size 5x2")){
+            o = new ObjekNonMakanan(nama, 5, 2, 150, "Tidur");
+        }
+        else if(nama.equals("toilet 1x1")){
+            o = new ObjekNonMakanan(nama, 1, 1, 50, "Buang Air");
+        }
+        else if(nama.equals("kompor gas 2x1")){
+            o = new ObjekNonMakanan(nama, 2, 1, 100, "Memasak");
+        }
+        else if(nama.equals("kompor listrik 1x1")){
+            o = new ObjekNonMakanan(nama, 1, 1, 200, "Memasak");
+        }
+        else if(nama.equals("meja kursi 3x3")){
+            o = new ObjekNonMakanan(nama, 3, 3, 50, "Makan");
+        }
+        else if(nama.equals("jam 1x1")){
+            o = new ObjekNonMakanan(nama, 1, 1, 10, "Melihat Waktu");
+        }
+        return o;
+    }
+
     // testing
     public static void main(String[] args){
         // inisialisasi di bawah ini di letakan di MAIN
