@@ -4,6 +4,9 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 import com.simplicity.Point;
+import com.simplicity.Ruangan;
+import com.simplicity.Objek.ObjekNonMakanan;
 
 public class UI {
     private GameManager gm;
@@ -123,6 +128,76 @@ public class UI {
         attributePanel.add(jamText);
     }
 
+      public ImageIcon rotate(ImageIcon icon, double degrees) {
+        // Get the buffered image from the ImageIcon
+        BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = image.createGraphics();
+        icon.paintIcon(null, g2d, 0, 0);
+        g2d.dispose();
+    
+        // Calculate the new size of the image based on the angle of rotation
+        double radians = Math.toRadians(degrees);
+        double sin = Math.abs(Math.sin(radians));
+        double cos = Math.abs(Math.cos(radians));
+        int newWidth = (int) Math.round(icon.getIconWidth() * cos + icon.getIconHeight() * sin);
+        int newHeight = (int) Math.round(icon.getIconWidth() * sin + icon.getIconHeight() * cos);
+    
+        // Create a new image
+        BufferedImage rotatedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+        g2d = rotatedImage.createGraphics();
+        // Calculate the "anchor" point around which the image will be rotated
+        int x = (newWidth - icon.getIconWidth()) / 2;
+        int y = (newHeight - icon.getIconHeight()) / 2;
+        // Transform the origin point around the anchor point
+        AffineTransform at = new AffineTransform();
+        at.setToRotation(radians, x + (icon.getIconWidth() / 2), y + (icon.getIconHeight() / 2));
+        at.translate(x, y);
+        g2d.setTransform(at);
+        // Paint the original image
+        g2d.drawImage(image, 0, 0, null);
+        g2d.dispose();
+    
+        // Create a new ImageIcon from the rotated image
+        return new ImageIcon(rotatedImage);
+    }
+
+    public void createObjek(int bgNum, int x, int y, int width, int height, String objPath, String[] actions, String posisi) {
+        // POP MENU
+        JPopupMenu popMenu = new JPopupMenu();
+        JMenuItem menuItem[] = new JMenuItem[actions.length];
+        for (int i = 0; i < menuItem.length; i++) {
+            menuItem[i] = new JMenuItem(actions[i]);
+            menuItem[i].addActionListener(gm.actionHandler);
+            menuItem[i].setActionCommand(actions[i]);
+            popMenu.add(menuItem[i]);
+        }
+
+        JLabel obj = new JLabel();
+        obj.setBounds(x, y, width, height);
+        
+        ImageIcon objImage = new ImageIcon(getClass().getClassLoader().getResource(objPath));
+        if (posisi.equals("h")){
+            objImage = rotate(objImage, 90);
+        }
+        obj.setIcon(objImage);
+
+        obj.addMouseListener(new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {}
+            public void mousePressed(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    popMenu.show(obj, e.getX(), e.getY());
+                }
+            }
+            public void mouseReleased(MouseEvent e) {}
+            public void mouseEntered(MouseEvent e) {}
+            public void mouseExited(MouseEvent e) {}
+        });
+
+        bgPanel[bgNum].add(obj);
+    }
+
     public void createObjek(int bgNum, int x, int y, int width, int height, String objPath, String[] actions, int index) {
         // POP MENU
         JPopupMenu popMenu = new JPopupMenu();
@@ -159,6 +234,7 @@ public class UI {
         });
         bgPanel[bgNum].add(obj, 0);
     }
+
 
     public void startButton(int bgNum, int x, int y, int width, int height, String text) {
         JButton btn = new JButton();
@@ -197,6 +273,28 @@ public class UI {
         btn.setActionCommand(command);
         btn.setFont(new Font("Helvetica", Font.BOLD, fontSize));
         bgPanel[bgNum].add(btn, 0);
+    }
+
+    public void generateRoom(Ruangan r, int bgNum){
+        for(int i =1;i<=r.getDaftarObjek().size();i++){
+            ObjekNonMakanan o = r.getObjek(i-1);
+            int x = (int)Math.round(o.getTitik().getX()*116.67);
+            int y = (int)Math.round(o.getTitik().getY()*116.67);
+            int width,height;
+            if("v".equals(o.getPosisi())){
+                height = (int)Math.round(o.getPanjang()*116.67);
+                width = (int)Math.round(o.getLebar()*116.67);
+            }
+            else{
+                width = (int)Math.round(o.getPanjang()*116.67);
+                height = (int)Math.round(o.getLebar()*116.67);
+            }
+            String filename = o.getNamaObjek()+".png";
+            String [] action = new String[1]; 
+            action[0] = o.getAksi();
+
+            createObjek(bgNum,  x,  y,  width,  height, filename, action,o.getPosisi());
+        }
     }
     
     public void generateScreen() {
@@ -244,6 +342,8 @@ public class UI {
 
         // Ruangan
         createBackground(3, "ruangan fix.png", null);
+        //generateRoom(3)
+        createObjek(3, 650, 600, 40, 40, "back.png", new String[]{"Edit Room"}, -1);
         createObjek(3, 650, 650, 40, 40, "back.png", new String[]{"Back to Home", "Back to World"}, -1);
     }
 
