@@ -1,7 +1,6 @@
 package com.simplicity.Util;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -18,16 +17,20 @@ import javax.swing.SwingUtilities;
 
 public class UI {
     private GameManager gm;
-    private JFrame window;
+    public JFrame window;
     public JTextArea messagText;
     public JPanel bgPanel[] = new JPanel[10];
     public JLabel bgLabel[] = new JLabel[10];
     public JPanel attributePanel;
 
+    public JLabel nameText;
+    public JLabel jamText;
+
     public UI(GameManager gm) {
         this.gm = gm;
         createMainField();
         generateScreen();
+        attributeField();
         window.setVisible(true);
     }
 
@@ -50,22 +53,24 @@ public class UI {
         bgLabel[bgNum] = new JLabel();
         bgLabel[bgNum].setBounds(0, 0, 1000, 800);
         
-        ImageIcon bgIcon = new ImageIcon( new ImageIcon(getClass().getClassLoader().getResource(bgPath)).getImage().getScaledInstance(1000, 800, Image.SCALE_DEFAULT));
+        ImageIcon bgIcon = new ImageIcon( new ImageIcon(getClass().getClassLoader().getResource(bgPath)).getImage().getScaledInstance(1000, 800, Image.SCALE_SMOOTH));
         bgLabel[bgNum].setIcon(bgIcon);
     }
 
     public void createBackground(int bgNum, String bgPath) {
         bgPanel[bgNum] = new JPanel();
         bgPanel[bgNum].setBounds(0, 0, 700, 700);
-        bgPanel[bgNum].setBackground(Color.black);
+        bgPanel[bgNum].setBackground(Color.blue);
         bgPanel[bgNum].setLayout(null);
         window.add(bgPanel[bgNum]);
 
         bgLabel[bgNum] = new JLabel();
         bgLabel[bgNum].setBounds(0, 0, 700, 700);
-        ImageIcon bgIcon = new ImageIcon( new ImageIcon(getClass().getClassLoader().getResource(bgPath)).getImage().getScaledInstance(700, 700, Image.SCALE_DEFAULT));
+        ImageIcon bgIcon = new ImageIcon( new ImageIcon(getClass().getClassLoader().getResource(bgPath)).getImage().getScaledInstance(700, 700, Image.SCALE_SMOOTH));
         bgLabel[bgNum].setIcon(bgIcon);
+    }
 
+    public void attributeField() {
         messagText = new JTextArea();
         messagText.setBounds(10, 710, 630, 90);
         messagText.setBackground(null);
@@ -75,22 +80,33 @@ public class UI {
         messagText.setWrapStyleWord(true);
         messagText.setFont(new Font("Book Antique", Font.PLAIN, 24));
         window.add(messagText);
-        attributeField();
-        
-    }
 
-    public void attributeField() {
         attributePanel = new JPanel();
-        attributePanel.setBounds(720, 0, 280, 800);
+        attributePanel.setBounds(700, 0, 300, 750);
         attributePanel.setBackground(null);
-        attributePanel.setLayout(new GridLayout(10, 2));
+        attributePanel.setLayout(null);
         window.add(attributePanel);
+        
+        nameText = new JLabel();
+        nameText.setBounds(50, 50, 270, 50);
+        nameText.setBackground(Color.blue);
+        nameText.setForeground(Color.white);
+        nameText.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        attributePanel.add(nameText);
 
         // add jam
         ImageIcon jamImage = new ImageIcon( new ImageIcon(getClass().getClassLoader().getResource("jam.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         JLabel jamIcon = new JLabel();
+        jamIcon.setBounds(50, 100, 50, 50);
         jamIcon.setIcon(jamImage);
+        jamIcon.setBackground(null);
         attributePanel.add(jamIcon);
+        jamText = new JLabel(String.format("%d : %d", (720-gm.world.getTime())/60,  (720-gm.world.getTime())%60));
+        jamText.setBounds(120, 100, 200, 50);
+        jamText.setBackground(null);
+        jamText.setForeground(Color.white);
+        jamText.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        attributePanel.add(jamText);
     }
 
     public void createObjek(int bgNum, int x, int y, int width, int height, String objPath, String[] actions) {
@@ -167,8 +183,6 @@ public class UI {
         bgPanel[bgNum].add(btn);
     }
     
-
-    
     public void generateScreen() {
         // Start
         createBackgroundFull(0, "start.png");
@@ -176,23 +190,29 @@ public class UI {
         bgPanel[0].add(bgLabel[0]);
         
         // Main Menu
-        createBackgroundFull(1, "");
+        createBackgroundFull(1, "main_menu.png");
         if (gm.world.getDaftarSim().size() == 0) {
-            customButton(1, 300, 300, 400, 50, "Create Sim", 32, "ruangan");
-            customButton(1, 300, 400, 400, 50, "Exit Game", 32, "halo");
+            customButton(1, 300, 300, 400, 50, "Create New Sim", 32, "new-sim");
+            customButton(1, 300, 400, 400, 50, "Exit Game", 32, "exit");
         } else {
-            customButton(1, 300, 250, 400, 50, "Choose Sim", 32, "halo");
-            customButton(1, 300, 350, 400, 50, "Create New Sim", 32, "halo");
-            customButton(1, 300, 450, 400, 50, "Exit Game", 32, "halo");
+            customButton(1, 300, 250, 400, 50, "Choose Sim", 32, "choose-sim");
+            customButton(1, 300, 350, 400, 50, "Create New Sim", 32, "new-sim");
+            customButton(1, 300, 450, 400, 50, "Exit Game", 32, "exit");
         }
         bgPanel[1].add(bgLabel[1]);
         bgPanel[1].setVisible(false);
         
-        // Ruangan
-        createBackground(2, "ruangan fix.png");
+        // World
+        createBackground(2, "");
         customButton(2, 300, 400, 400, 50, "Coba", 32, "aksi");
         bgPanel[2].add(bgLabel[2]);
         bgPanel[2].setVisible(false);;
+        
+        // Ruangan
+        createBackground(3, "ruangan fix.png");
+        customButton(3, 300, 400, 400, 50, "Coba", 32, "aksi");
+        bgPanel[3].add(bgLabel[3]);
+        bgPanel[3].setVisible(false);;
     }
 
 }
