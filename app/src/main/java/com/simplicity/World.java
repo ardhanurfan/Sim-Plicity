@@ -26,6 +26,10 @@ public class World {
         addSim("Paijo0");
         addSim("Paijo1");
         addSim("Paijo2");
+        addRumah(new Point(3, 50), "Rumah A");
+        addRumah(new Point(9, 30), "Rumah B");
+        addRumah(new Point(2, 60), "Rumah C");
+        getDaftarSim().get(0).setRumah(getDaftarRumah().get(0));
     }
 
     public void Inisiasi() {
@@ -117,15 +121,27 @@ public class World {
         return check;
     }
 
-    public void addRumah(Point lokasi, String nama){
-        if(!checkLahan(lokasi) && validPos(lokasi)){
+    public boolean checkRumah(String namaRumah){
+        boolean check = false;
+        for (Rumah rumah : listrumah) {
+            if (rumah.getNama().equals(namaRumah)) {
+                check = true;
+            }
+        }
+        return check;
+    }
+
+    public boolean addRumah(Point lokasi, String nama){
+        if(!checkLahan(lokasi) && validPos(lokasi) && !checkRumah(nama)){
             Rumah rumah = new Rumah(lokasi, nama);
             listrumah.add(rumah);
+            return true;
         } else if(checkLahan(lokasi)){
             System.out.println("Lahan sudah ditempati");
         } else if(!validPos(lokasi)){
             System.out.println("Tidak bisa membangun rumah di luar map");
         }
+        return false;
     }
 
     public List<Sim> getDaftarSim() {

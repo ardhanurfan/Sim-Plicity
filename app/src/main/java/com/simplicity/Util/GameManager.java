@@ -11,6 +11,7 @@ public class GameManager {
 	Routing routing = new Routing(this);
 
 	public GameManager() {
+		routing.showScreen(0);
 	}
 	
 	public Sim getCurrentSim() {
