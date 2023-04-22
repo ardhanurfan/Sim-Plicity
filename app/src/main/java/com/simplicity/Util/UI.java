@@ -18,11 +18,10 @@ import javax.swing.SwingUtilities;
 public class UI {
     private GameManager gm;
     public JFrame window;
-    public JTextArea messagText;
     public JPanel bgPanel[] = new JPanel[10];
     public JLabel bgLabel[] = new JLabel[10];
-    public JPanel attributePanel;
-
+    
+    public JTextArea messagText;
     public JLabel nameText;
     public JLabel jamText;
 
@@ -60,7 +59,7 @@ public class UI {
     public void createBackground(int bgNum, String bgPath) {
         bgPanel[bgNum] = new JPanel();
         bgPanel[bgNum].setBounds(0, 0, 700, 700);
-        bgPanel[bgNum].setBackground(Color.blue);
+        bgPanel[bgNum].setBackground(null);
         bgPanel[bgNum].setLayout(null);
         window.add(bgPanel[bgNum]);
 
@@ -71,22 +70,26 @@ public class UI {
     }
 
     public void attributeField() {
-        messagText = new JTextArea();
-        messagText.setBounds(10, 710, 630, 90);
-        messagText.setBackground(null);
-        messagText.setForeground(Color.white);
-        messagText.setEditable(false);
-        messagText.setLineWrap(true);
-        messagText.setWrapStyleWord(true);
-        messagText.setFont(new Font("Book Antique", Font.PLAIN, 24));
-        window.add(messagText);
+        JPanel textPanel = new JPanel();
+        textPanel.setBounds(0, 700, 700, 100);
+        textPanel.setBackground(Color.white);
+        textPanel.setLayout(null);
+        window.add(textPanel);
 
-        attributePanel = new JPanel();
-        attributePanel.setBounds(700, 0, 300, 750);
-        attributePanel.setBackground(null);
+        messagText = new JTextArea();
+        messagText.setBounds(10, 10, 680, 90);
+        messagText.setBackground(null);
+        messagText.setForeground(Color.black);
+        messagText.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        textPanel.add(messagText);
+
+        JPanel attributePanel = new JPanel();
+        attributePanel.setBounds(700, 0, 300, 800);
+        attributePanel.setBackground(new Color(163, 115, 42, 255));
         attributePanel.setLayout(null);
         window.add(attributePanel);
         
+        // add nama
         nameText = new JLabel();
         nameText.setBounds(50, 50, 270, 50);
         nameText.setBackground(Color.blue);
@@ -203,7 +206,7 @@ public class UI {
         bgPanel[1].setVisible(false);
         
         // World
-        createBackground(2, "");
+        createBackground(2, "world.png");
         customButton(2, 300, 400, 400, 50, "Coba", 32, "aksi");
         bgPanel[2].add(bgLabel[2]);
         bgPanel[2].setVisible(false);;
