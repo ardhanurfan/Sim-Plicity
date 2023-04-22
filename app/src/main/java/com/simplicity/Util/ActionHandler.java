@@ -104,7 +104,10 @@ public class ActionHandler implements ActionListener {
                     gm.ui.messagText.setText("Saat ini Anda berkunjung ke " + currRumah.getNama());
                 }
                 currRuangan = currRumah.getDaftarRuangan().get(0);
+                gm.ui.bgPanel[3].removeAll();
                 gm.routing.showScreen(3); 
+                gm.ui.createObjek(3, 650, 600, 40, 40, "back.png", new String[]{"Edit Room"}, -1);
+                gm.ui.createObjek(3, 650, 650, 40, 40, "back.png", new String[]{"Back to Home", "Back to World"}, -1);
                 gm.ui.generateRoom(currRuangan,3);
                 gm.ui.bgPanel[3].add(gm.ui.bgLabel[3]);
 
