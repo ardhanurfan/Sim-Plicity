@@ -91,8 +91,8 @@ public class World {
 
     public boolean checkLahan(Point lokasi){
         boolean check = false;
-        for(Rumah home : listrumah){
-            if(home.getLocRumah().getX()==lokasi.getX() && home.getLocRumah().getY()==lokasi.getY()){
+        for (Rumah rumah : listrumah) {
+            if(rumah.getLocRumah().getX()==lokasi.getX() && rumah.getLocRumah().getY()==lokasi.getY()){
                 check = true;
             }
         }
@@ -103,6 +103,16 @@ public class World {
         boolean check = false;
         if(lokasi.getX()<=panjangMap && lokasi.getY()<=lebarMap){
             check = true;
+        }
+        return check;
+    }
+
+    public boolean checkSim(String namaSim){
+        boolean check = false;
+        for (Sim sim : listsim) {
+            if (sim.getNamaLengkap().equals(namaSim)) {
+                check = true;
+            }
         }
         return check;
     }
@@ -122,8 +132,12 @@ public class World {
         return listsim;
     }
 
-    public void addSim(String namaLengkap){
-        Sim newsim = new Sim(namaLengkap, daftarPekerjaan);
-        listsim.add(newsim);
+    public boolean addSim(String namaSim){
+        if (!checkSim(namaSim)) {
+            Sim newsim = new Sim(namaSim, daftarPekerjaan);
+            listsim.add(newsim);
+            return true;
+        }
+        return false;
     }
 }

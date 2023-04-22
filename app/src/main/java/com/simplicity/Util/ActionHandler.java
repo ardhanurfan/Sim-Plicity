@@ -29,13 +29,16 @@ public class ActionHandler implements ActionListener {
             case "new-sim" :
                 String name = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "What is your sim name?", "Input Full Name", JOptionPane.PLAIN_MESSAGE);
                 if (name!=null && name.replaceAll(" ", "").length() > 0) {
-                    gm.world.addSim(name);
-                    // set current sim terbaru
-                    gm.setCurrentSim(gm.world.getDaftarSim().get(gm.world.getDaftarSim().size()-1));
-                    gm.routing.showScreen(2);
-                    gm.ui.nameText.setText(gm.getCurrentSim().getNamaLengkap());
+                    if (gm.world.addSim(name)) {
+                        // set current sim terbaru
+                        gm.setCurrentSim(gm.world.getDaftarSim().get(gm.world.getDaftarSim().size()-1));
+                        gm.routing.showScreen(2);
+                        gm.ui.nameText.setText(gm.getCurrentSim().getNamaLengkap());
+                    } else {
+                        JOptionPane.showMessageDialog(null,  "Nama sudah digunakan!");
+                    }
                 } else if (name!=null) {
-                    JOptionPane.showMessageDialog(null,  "Name Required!");
+                    JOptionPane.showMessageDialog(null,  "Nama tidak boleh kosong");
                 }
                 break;
             case "choose-sim" :

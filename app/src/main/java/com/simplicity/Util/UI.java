@@ -191,7 +191,7 @@ public class UI {
         
         // Main Menu
         createBackgroundFull(1, "main_menu.png");
-        if (gm.world.getDaftarSim().size() == 0) {
+        if (gm.world.getDaftarSim().isEmpty()) {
             customButton(1, 300, 300, 400, 50, "Create New Sim", 32, "new-sim");
             customButton(1, 300, 400, 400, 50, "Exit Game", 32, "exit");
         } else {
