@@ -104,12 +104,7 @@ public class ActionHandler implements ActionListener {
                     gm.ui.messagText.setText("Saat ini Anda berkunjung ke " + currRumah.getNama());
                 }
                 currRuangan = currRumah.getDaftarRuangan().get(0);
-                gm.ui.bgPanel[3].removeAll();
-                gm.routing.showScreen(3); 
-                gm.ui.createObjek(3, 650, 600, 40, 40, "back.png", new String[]{"Edit Room"}, -1);
-                gm.ui.createObjek(3, 650, 650, 40, 40, "back.png", new String[]{"Back to Home", "Back to World"}, -1);
-                gm.ui.generateRoom(currRuangan,3);
-                gm.ui.bgPanel[3].add(gm.ui.bgLabel[3]);
+                gm.ui.refreshRoom(currRuangan);
 
                 break;
             case "aksi" : 
@@ -120,7 +115,7 @@ public class ActionHandler implements ActionListener {
 
             case "Edit Room":
                 // Opsi tombol edit room
-                List<String> option = Arrays.asList("Tambah Barang", "Hapus Barang","Pindah Barang");
+                List<String> option = Arrays.asList("Add Object", "Delete Object","Move Object");
                 Object selectedPane = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Your Action", "Edit Room", JOptionPane.PLAIN_MESSAGE, null, option.toArray(), option.get(0));
                 int index = option.indexOf(selectedPane);
     
@@ -142,7 +137,7 @@ public class ActionHandler implements ActionListener {
                         JComboBox<String> selectionY = new JComboBox<>(coordOptions);
                         JComboBox<String> selectionPosisi = new JComboBox<>(positionOptions);
     
-                        Object[] message = {"Dropdown 1:", selectionX, "Dropdown 2:", selectionY, "Dropdown 3:", selectionPosisi};
+                        Object[] message = {"Posisi X:", selectionX, "Posisi Y:", selectionY, "Horizontal/Vertikal (h/v):", selectionPosisi};
                         int optionPosisi1 = JOptionPane.showConfirmDialog(null, message, "Posisi Barang", JOptionPane.OK_CANCEL_OPTION);
     
                         if (optionPosisi1 == JOptionPane.OK_OPTION) {
@@ -161,14 +156,11 @@ public class ActionHandler implements ActionListener {
                             // Ngecek nabrak ato ga
                             if(currRuangan.nabrakGa(o, point, posisi)){
                                 currRuangan.tambahObjek(o,point,posisi);
-                                gm.ui.messagText.setText("Aman");
-                                gm.ui.generateRoom(currRuangan, 3);
-                                gm.ui.bgPanel[3].add(gm.ui.bgLabel[3]);
-                                gm.ui.bgPanel[3].revalidate();
-                                gm.ui.bgPanel[3].repaint();
+                                gm.ui.refreshRoom(currRuangan);
+                                gm.ui.messagText.setText("Barang berhasil ditambahkan ke ruangan");
                             }  
                             else{
-                                gm.ui.messagText.setText("Nabrak euyyy");
+                                gm.ui.messagText.setText("Barang tidak bisa ditambahkan karena nabrak");
                             }  
                         } else {
                             gm.ui.messagText.setText("Dialog ditutup.");
@@ -187,25 +179,21 @@ public class ActionHandler implements ActionListener {
                         currRuangan.hapusObjek(deleteObject);
     
                         // Refresh panel
-                        gm.ui.bgPanel[3].removeAll();
-                        gm.ui.generateRoom(currRuangan, 3);
-                        gm.ui.createObjek(3, 650, 600, 40, 40, "back.png", new String[]{"Edit Room"}, -1);
-                        gm.ui.createObjek(3, 650, 650, 40, 40, "back.png", new String[]{"Back to Home", "Back to World"}, -1);
-                        gm.ui.bgPanel[3].add(gm.ui.bgLabel[3]);
-                        gm.ui.bgPanel[3].revalidate();
-                        gm.ui.bgPanel[3].repaint();
-                        gm.ui.messagText.setText("Objek berhasil dihapus");
+                        gm.ui.refreshRoom(currRuangan);
+                        gm.ui.messagText.setText("Barang berhasil dihapus dari ruangan");
                     }
                 }
                 // Pindah barang
                 else{
                     // Opsi barang yang ada di currRuangan
                     List<String> optionObjek2 = currRuangan.getDaftarObjekString();
-                    Object selectedObjek = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Choose Object you want to delete", "Delete Object", JOptionPane.PLAIN_MESSAGE, null, optionObjek2.toArray(), optionObjek2.get(0));
+                    Object selectedObjek = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Choose Object you want to move", "Move Object", JOptionPane.PLAIN_MESSAGE, null, optionObjek2.toArray(), optionObjek2.get(0));
                     if(selectedObjek!=null){
                         // Hapus objek sesuai pilihan
                         int indexOptionObjek = optionObjek2.indexOf(selectedObjek);
                         ObjekNonMakanan moveObject = currRuangan.getObjek(indexOptionObjek);
+                        Point pointAwal = moveObject.getTitik();
+                        String posisiAwal = moveObject.getPosisi();
                         currRuangan.hapusObjek(moveObject);
                         // Bikin 3 dropdown buat milih titik dan posisi barang
                         String[] coord = {"0","1","2","3","4","5"};
@@ -215,7 +203,7 @@ public class ActionHandler implements ActionListener {
                         JComboBox<String> selectionY = new JComboBox<>(coord);
                         JComboBox<String> selectionPosisi = new JComboBox<>(position);
     
-                        Object[] message = {"Dropdown 1:", selectionX, "Dropdown 2:", selectionY, "Dropdown 3:", selectionPosisi};
+                        Object[] message = {"Posisi X:", selectionX, "Posisi Y:", selectionY, "Horizontal/Vertikal (h/v):", selectionPosisi};
                         int optionPosisi2 = JOptionPane.showConfirmDialog(null, message, "Posisi Barang", JOptionPane.OK_CANCEL_OPTION);
     
                         if (optionPosisi2 == JOptionPane.OK_OPTION) {
@@ -231,20 +219,14 @@ public class ActionHandler implements ActionListener {
                             Point point = new Point(x, y);
                             if(currRuangan.nabrakGa(moveObject, point, posisi)){
                                 currRuangan.tambahObjek(moveObject,point,posisi);
-                                gm.ui.messagText.setText("Aman");
+                                gm.ui.messagText.setText("Barang berhasil ditambahkan ke ruangan");
                             }  
                             else{
-                                currRuangan.tambahObjek(moveObject,moveObject.getTitik(),moveObject.getPosisi());
-                                gm.ui.messagText.setText("Nabrak euyyy");
+                                currRuangan.tambahObjek(moveObject,pointAwal,posisiAwal);
+                                gm.ui.messagText.setText("Barang tidak bisa ditambahkan karena nabrak");
                             }  
                             // Refresh panel
-                            gm.ui.bgPanel[3].removeAll();
-                            gm.ui.generateRoom(currRuangan, 3);
-                            gm.ui.createObjek(3, 650, 600, 40, 40, "back.png", new String[]{"Edit Room"}, -1);
-                            gm.ui.createObjek(3, 650, 650, 40, 40, "back.png", new String[]{"Back to Home", "Back to World"}, -1);
-                            gm.ui.bgPanel[3].add(gm.ui.bgLabel[3]);
-                            gm.ui.bgPanel[3].revalidate();
-                            gm.ui.bgPanel[3].repaint();
+                            gm.ui.refreshRoom(currRuangan);
                         } else {
                             gm.ui.messagText.setText("Dialog ditutup");
                         }        
