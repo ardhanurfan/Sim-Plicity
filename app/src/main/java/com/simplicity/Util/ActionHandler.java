@@ -63,7 +63,7 @@ public class ActionHandler implements ActionListener {
                 List<String> options = gm.world.getDaftarSim().stream()
                                    .map(Sim::getNamaLengkap)
                                    .collect(Collectors.toList());
-                Object selected = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Your Sim", "Choose Sim", JOptionPane.PLAIN_MESSAGE, null, options.toArray(new String[gm.world.getDaftarSim().size()]), options.get(0));
+                Object selected = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Your Sim", "Choose Sim", JOptionPane.PLAIN_MESSAGE, null, options.toArray(), options.get(0));
                 if (selected!=null) {
                     int index = options.indexOf(selected);
                     // set current sim by index choosen
@@ -93,30 +93,42 @@ public class ActionHandler implements ActionListener {
                 gm.routing.showScreen(2);
                 gm.ui.messagText.setText("Silakan berkunjung");
                 break;
-            case "ruangan" : 
+            case "Back to Home" :
+                Rumah currHome = gm.getCurrentSim().getCurrLokasi().getRumah();
+                gm.routing.showScreen(4);
+                if (currHome.getNama().equals(gm.getCurrentSim().getRumah().getNama())) {
+                    gm.ui.messagText.setText("Berada di rumah milik Anda, " + currHome.getNama());
+                } else {
+                    gm.ui.messagText.setText("Saat ini Anda berkunjung ke " + currHome.getNama());
+                }
+                break;
+
+            case "View Room" : 
+                currRuangan = gm.getCurrentSim().getCurrLokasi().getRumah().getDaftarRuangan().get(0);
+                gm.getCurrentSim().getCurrLokasi().setRuangan(currRuangan);
+                gm.ui.messagText.setText("Berada di ruang " + currRuangan.getNama() + " di dalam " + gm.getCurrentSim().getCurrLokasi().getRumah().getNama());
+                gm.ui.bgPanel[3].removeAll();
                 gm.routing.showScreen(3); 
+                gm.ui.createObjek(3, 650, 600, 40, 40, "edit.png", new String[]{"Edit Room"}, -1);
+                gm.ui.createObjek(3, 650, 650, 40, 40, "back.png", new String[]{"Back to Home", "Back to World"}, -1);
+                gm.ui.generateRoom(currRuangan,3);
+                gm.ui.bgPanel[3].add(gm.ui.bgLabel[3]);
                 break;
             case "View Home":
                 Rumah currRumah = gm.world.getDaftarRumah().get(indexObj);
+                gm.getCurrentSim().getCurrLokasi().setRumah(currRumah);
                 if (currRumah.getNama().equals(gm.getCurrentSim().getRumah().getNama())) {
                     gm.ui.messagText.setText("Berada di rumah milik Anda, " + currRumah.getNama());
                 } else {
                     gm.ui.messagText.setText("Saat ini Anda berkunjung ke " + currRumah.getNama());
                 }
-                currRuangan = currRumah.getDaftarRuangan().get(0);
-                gm.ui.bgPanel[3].removeAll();
-                gm.routing.showScreen(3); 
-                gm.ui.createObjek(3, 650, 600, 40, 40, "back.png", new String[]{"Edit Room"}, -1);
-                gm.ui.createObjek(3, 650, 650, 40, 40, "back.png", new String[]{"Back to Home", "Back to World"}, -1);
-                gm.ui.generateRoom(currRuangan,3);
-                gm.ui.bgPanel[3].add(gm.ui.bgLabel[3]);
-
+                gm.ui.bgPanel[4].removeAll();
+                gm.routing.showScreen(4); 
+                gm.ui.createObjek(4, 650, 600, 40, 40, "upgrade.png", new String[]{"Upgrade House"}, -1);
+                gm.ui.createObjek(4, 650, 650, 40, 40, "back.png", new String[]{"Back to World"}, -1);
+                gm.ui.createRoom(4, 325, 325, new Ruangan("Kamar"), -1);
+                gm.ui.bgPanel[4].add(gm.ui.bgLabel[4]);
                 break;
-            case "aksi" : 
-                gm.ui.messagText.setText("HALOO JOS");
-                break;
-
-
 
             case "Edit Room":
                 // Opsi tombol edit room
@@ -198,7 +210,7 @@ public class ActionHandler implements ActionListener {
                     }
                 }
                 // Pindah barang
-                else{
+                else if (index==2) {
                     // Opsi barang yang ada di currRuangan
                     List<String> optionObjek2 = currRuangan.getDaftarObjekString();
                     Object selectedObjek = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Choose Object you want to delete", "Delete Object", JOptionPane.PLAIN_MESSAGE, null, optionObjek2.toArray(), optionObjek2.get(0));

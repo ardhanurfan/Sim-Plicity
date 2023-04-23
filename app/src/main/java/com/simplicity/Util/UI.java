@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +22,7 @@ import javax.swing.SwingUtilities;
 
 import com.simplicity.Point;
 import com.simplicity.Ruangan;
+import com.simplicity.Rumah;
 import com.simplicity.Objek.ObjekNonMakanan;
 
 public class UI {
@@ -186,7 +188,7 @@ public class UI {
             @Override
             public void mouseClicked(MouseEvent e) {}
             public void mousePressed(MouseEvent e) {
-                if (SwingUtilities.isRightMouseButton(e)) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
                     popMenu.show(obj, e.getX(), e.getY());
                 }
             }
@@ -224,7 +226,7 @@ public class UI {
             @Override
             public void mouseClicked(MouseEvent e) {}
             public void mousePressed(MouseEvent e) {
-                if (SwingUtilities.isRightMouseButton(e)) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
                     popMenu.show(obj, e.getX(), e.getY());
                 }
             }
@@ -296,6 +298,42 @@ public class UI {
             createObjek(bgNum,  x,  y,  width,  height, filename, action,o.getPosisi());
         }
     }
+
+    public void createRoom(int bgNum, int x, int y, Ruangan ruangan, int index) {
+        // POP MENU
+        JPopupMenu popMenu = new JPopupMenu();
+        JMenuItem menuItem[] = new JMenuItem[2];
+        menuItem[1] = new JMenuItem("View Room");
+        menuItem[1].addActionListener(gm.actionHandler);
+        menuItem[1].setActionCommand(index+"%"+"View Room");
+        popMenu.add(menuItem[1]);
+
+        JLabel obj = new JLabel();
+        obj.setBounds(x, y,80, 80);
+        obj.setForeground(Color.white);
+        obj.setBackground(new Color(13, 161, 136)); 
+        obj.setOpaque(true);
+        obj.setBorder(BorderFactory.createLineBorder(Color.black));
+        obj.setText("<html><div style='text-align: center;'>Ruang " + ruangan.getNama() + "</div></html>");
+        obj.setFont(new Font("Helvetica", Font.BOLD, 16));
+        obj.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {}
+            public void mousePressed(MouseEvent e) {
+                if (SwingUtilities.isLeftMouseButton(e)) {
+                    popMenu.show(obj, e.getX(), e.getY());
+                }
+            }
+            public void mouseReleased(MouseEvent e) {}
+            public void mouseEntered(MouseEvent e) {}
+            public void mouseExited(MouseEvent e) {}
+        });
+        bgPanel[bgNum].add(obj, 0);
+    }
+
+    public void generateHome(Rumah rumah, int bgNum) {
+        
+    }
     
     public void generateScreen() {
         // Start
@@ -340,11 +378,11 @@ public class UI {
             }
         });
 
+        // Rumah
+        createBackground(4, "home.jpg", null);
+
         // Ruangan
         createBackground(3, "ruangan fix.png", null);
-        //generateRoom(3)
-        createObjek(3, 650, 600, 40, 40, "back.png", new String[]{"Edit Room"}, -1);
-        createObjek(3, 650, 650, 40, 40, "back.png", new String[]{"Back to Home", "Back to World"}, -1);
     }
 
 }
