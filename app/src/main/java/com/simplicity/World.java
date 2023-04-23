@@ -4,19 +4,77 @@ import java.util.Collection;
 // import java.util.ArrayList;
 // import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
+// import java.util.HashMap;
 
 public class World { 
     // private static List<Rumah> listrumah = new ArrayList<Rumah>();;
     // private static List<Sim> listsim = new ArrayList<Sim>();
     // private static List<Map<Sim, Rumah>> rumahsim;
-    private static Map<Sim, Rumah> kepemilikan = new HashMap<Sim, Rumah>();
+    private static Map<Sim, Rumah> kepemilikan;
     private static int time;
     private final int panjangMap = 64;
     private final int lebarMap = 64;
+
+    ArrayList<ObjekPekerjaan> daftarPekerjaan = new ArrayList<ObjekPekerjaan>();
+    ObjekBahanMakanan[] daftar_bahan = new ObjekBahanMakanan[8];
+    ObjekNonMakanan[] daftar_barang = new ObjekNonMakanan[8];
+    ObjekMakanan[] daftar_makanan = new ObjekMakanan[5];
    
     public World(){
+        Inisiasi();
         time = 0;
+        addSim("Paijo0");
+        addSim("Paijo1");
+        addSim("Paijo2");
+        addRumah(new Point(3, 50), "Rumah A");
+        addRumah(new Point(9, 30), "Rumah B");
+        addRumah(new Point(2, 60), "Rumah C");
+        getDaftarSim().get(0).setRumah(getDaftarRumah().get(0));
+    }
+
+    public void Inisiasi() {
+        // List objek pekerjaan
+        daftarPekerjaan.add(new ObjekPekerjaan("Badut Sulap", 15));
+        daftarPekerjaan.add(new ObjekPekerjaan("Koki", 30));
+        daftarPekerjaan.add(new ObjekPekerjaan("Polisi", 35));
+        daftarPekerjaan.add(new ObjekPekerjaan("Programmer", 45));
+        daftarPekerjaan.add( new ObjekPekerjaan("Dokter", 50));
+
+        ObjekBahanMakanan nasi = new ObjekBahanMakanan("Nasi\t", 5, 5);
+        ObjekBahanMakanan kentang = new ObjekBahanMakanan("Kentang\t", 3, 4);
+        ObjekBahanMakanan ayam = new ObjekBahanMakanan("Ayam\t", 10, 8);
+        ObjekBahanMakanan sapi = new ObjekBahanMakanan("Sapi\t", 12, 15);
+        ObjekBahanMakanan wortel = new ObjekBahanMakanan("Wortel\t", 3, 2);
+        ObjekBahanMakanan bayam = new ObjekBahanMakanan("Bayam\t", 3, 2);
+        ObjekBahanMakanan kacang = new ObjekBahanMakanan("Kacang\t", 2, 2);
+        ObjekBahanMakanan susu = new ObjekBahanMakanan("Susu\t", 2, 1);
+        
+        // Menambahkan daftar bahan makanan
+        daftar_bahan[0] = nasi;
+        daftar_bahan[1] = kentang;
+        daftar_bahan[2] = ayam;
+        daftar_bahan[3] = sapi;
+        daftar_bahan[4] = wortel;
+        daftar_bahan[5] = bayam;
+        daftar_bahan[6] = kacang;
+        daftar_bahan[7] = susu;
+        
+        // List objek non makanan
+        daftar_barang[0] = new ObjekNonMakanan("Kasur Single\t", 4, 1, 50, "Tidur");
+        daftar_barang[1] = new ObjekNonMakanan("Kasur Queen Size", 4, 2, 100, "Tidur");
+        daftar_barang[2] = new ObjekNonMakanan("Kasur King Size ", 5, 2, 150, "Tidur");
+        daftar_barang[3] = new ObjekNonMakanan("Toilet\t\t", 1, 1, 50, "Buang air");
+        daftar_barang[4] = new ObjekNonMakanan("Kompor Gas\t", 2, 1, 100, "Memasak");
+        daftar_barang[5] = new ObjekNonMakanan("Kompor Listrik\t", 1, 1, 200, "Memasak");
+        daftar_barang[6] = new ObjekNonMakanan("Meja dan Kursi\t", 3, 3, 50, "Makan");
+        daftar_barang[7] = new ObjekNonMakanan("Jam\t\t", 1, 1, 10, "Melihat Waktu");
+
+        // List objek makanan
+        daftar_makanan[0] = new ObjekMakanan("Nasi Ayam", new ObjekBahanMakanan[]{nasi, ayam}, 16);
+        daftar_makanan[1] = new ObjekMakanan("Nasi Kari", new ObjekBahanMakanan[]{nasi, kentang, wortel, sapi}, 30);
+        daftar_makanan[2] = new ObjekMakanan("Susu Kacang", new ObjekBahanMakanan[]{susu, kacang}, 5);
+        daftar_makanan[3] = new ObjekMakanan("Tumis Sayur", new ObjekBahanMakanan[]{wortel, bayam}, 5);
+        daftar_makanan[4] = new ObjekMakanan("Bistik\t", new ObjekBahanMakanan[]{kentang, sapi}, 22);   
     }
     
     public int getTime(){
@@ -31,14 +89,14 @@ public class World {
         }
     }
     
-    // public List<Rumah> getDaftarRumah() {
-    //     return listrumah;
-    // }
+    public List<Rumah> getDaftarRumah() {
+        return listrumah;
+    }
 
     public boolean checkLahan(Point lokasi){
         boolean check = false;
-        for(Rumah home : kepemilikan.values()){
-            if(home.getLocRumah().getX()==lokasi.getX() && home.getLocRumah().getY()==lokasi.getY()){
+        for (Rumah rumah : listrumah) {
+            if(rumah.getLocRumah().getX()==lokasi.getX() && rumah.getLocRumah().getY()==lokasi.getY()){
                 check = true;
             }
         }
@@ -53,58 +111,49 @@ public class World {
         return check;
     }
 
-    // public void addRumah(Point lokasi, String nama){
-    //     if(!checkLahan(lokasi) && validPos(lokasi)){
-    //         Rumah rumah = new Rumah(lokasi, nama);
-    //         listrumah.add(rumah);
-    //     } else if(checkLahan(lokasi)){
-    //         System.out.println("Lahan sudah ditempati");
-    //     } else if(!validPos(lokasi)){
-    //         System.out.println("Tidak bisa membangun rumah di luar map");
-    //     }
-    // }
-
-    // public List<Sim> getDaftarSim() {
-    //     return listsim;
-    // }
-
-    // public void addSim(Sim sim){
-    //     Sim newsim = new Sim(sim);
-    //     listsim.add(newsim);
-    // }
-
-    public Collection<Rumah> getDaftarRumah() {
-        return kepemilikan.values();
-    }
-    public Collection<Sim> getDaftarSim() {
-        return kepemilikan.keySet();
-    }
-    
-    public boolean checkSim(Sim sim){
+    public boolean checkSim(String namaSim){
         boolean check = false;
-        for(Sim sims : kepemilikan.keySet()){
-            if(sim.getNamaLengkap().equals(sims.getNamaLengkap())){
+        for (Sim sim : listsim) {
+            if (sim.getNamaLengkap().equals(namaSim)) {
                 check = true;
             }
         }
         return check;
     }
 
-    public void addSimAndRumah(Sim sim, Point lokasi, String nama){
-        if(!checkSim(sim)){
-            if(!checkLahan(lokasi) && validPos(lokasi)){
-                Rumah rumah = new Rumah(lokasi, nama);
-                Sim newsim = new Sim(sim);
-                // kepemilikan = new HashMap<Sim, Rumah>();
-                kepemilikan.put(newsim, rumah);
-                // rumahsim.add(kepemilikan);
-            } else if(checkLahan(lokasi)){
-                System.out.println("Lahan sudah ditempati");
-            } else if(!validPos(lokasi)){
-                System.out.println("Tidak bisa membangun rumah di luar map");
+    public boolean checkRumah(String namaRumah){
+        boolean check = false;
+        for (Rumah rumah : listrumah) {
+            if (rumah.getNama().equals(namaRumah)) {
+                check = true;
             }
-        } else{
-            System.out.println("Nama sudah digunakan");
         }
+        return check;
+    }
+
+    public boolean addRumah(Point lokasi, String nama){
+        if(!checkLahan(lokasi) && validPos(lokasi) && !checkRumah(nama)){
+            Rumah rumah = new Rumah(lokasi, nama);
+            listrumah.add(rumah);
+            return true;
+        } else if(checkLahan(lokasi)){
+            System.out.println("Lahan sudah ditempati");
+        } else if(!validPos(lokasi)){
+            System.out.println("Tidak bisa membangun rumah di luar map");
+        }
+        return false;
+    }
+
+    public List<Sim> getDaftarSim() {
+        return listsim;
+    }
+
+    public boolean addSim(String namaSim){
+        if (!checkSim(namaSim)) {
+            Sim newsim = new Sim(namaSim, daftarPekerjaan);
+            listsim.add(newsim);
+            return true;
+        }
+        return false;
     }
 }

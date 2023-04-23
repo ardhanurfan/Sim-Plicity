@@ -18,6 +18,7 @@ public class Sim {
     private String status;
     private LokasiSim currLokasi;
     private Inventory inventory;
+    private Rumah rumah;
 
     // STATE VARIABLE
     // Reset saat ganti kerja
@@ -79,6 +80,14 @@ public class Sim {
         public void setRumah(Rumah rumah) {
             this.rumah = rumah;
         }
+    }
+
+    public Rumah getRumah() {
+        return rumah;
+    }
+
+    public void setRumah(Rumah rumah) {
+        this.rumah = rumah;
     }
 
     public String getNamaLengkap() {

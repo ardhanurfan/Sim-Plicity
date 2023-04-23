@@ -1,6 +1,8 @@
 package com.simplicity;
+import com.simplicity.Objek.ObjekNonMakanan;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Rumah {
     //Atribute
@@ -15,6 +17,27 @@ public class Rumah {
         this.daftarRuangan = new ArrayList<Ruangan>();
         // Inisialisasi ruangan pertama saat rumah pertama kali dibuat
         this.daftarRuangan.add(new Ruangan("Kamar"));
+        inisialisasi();
+    }
+
+    public void inisialisasi(){
+        Point p1= new Point(0,5);
+        Point p2= new Point(5,5);
+        Point p3= new Point(5,1);
+        Point p4= new Point(2,2);
+        Point p5= new Point(1,1);
+  
+        ObjekNonMakanan o1 = ObjekNonMakanan.returnObject("kasur single 4x1");
+        ObjekNonMakanan o2 = ObjekNonMakanan.returnObject("toilet 1x1");
+        ObjekNonMakanan o3 = ObjekNonMakanan.returnObject("kompor gas 2x1");
+        ObjekNonMakanan o4 = ObjekNonMakanan.returnObject("meja kursi 3x3");
+        ObjekNonMakanan o5 = ObjekNonMakanan.returnObject("jam 1x1");
+
+        daftarRuangan.get(0).tambahObjek(o1, p1,"h");
+        daftarRuangan.get(0).tambahObjek(o2, p2,"h");
+        daftarRuangan.get(0).tambahObjek(o3, p3,"v");
+        daftarRuangan.get(0).tambahObjek(o4, p4,"v");
+        daftarRuangan.get(0).tambahObjek(o5, p5,"v");
     }
 
     // Getters and setters
