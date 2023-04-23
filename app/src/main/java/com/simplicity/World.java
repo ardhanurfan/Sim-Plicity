@@ -1,16 +1,16 @@
 package com.simplicity;
 
-import java.util.Collection;
-// import java.util.ArrayList;
-// import java.util.List;
-import java.util.Map;
-// import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.simplicity.Objek.ObjekBahanMakanan;
+import com.simplicity.Objek.ObjekMakanan;
+import com.simplicity.Objek.ObjekNonMakanan;
+import com.simplicity.Objek.ObjekPekerjaan;
 
 public class World { 
-    // private static List<Rumah> listrumah = new ArrayList<Rumah>();;
-    // private static List<Sim> listsim = new ArrayList<Sim>();
-    // private static List<Map<Sim, Rumah>> rumahsim;
-    private static Map<Sim, Rumah> kepemilikan;
+    private static List<Rumah> listrumah = new ArrayList<Rumah>();;
+    private static List<Sim> listsim = new ArrayList<Sim>();
     private static int time;
     private final int panjangMap = 64;
     private final int lebarMap = 64;
