@@ -5,6 +5,8 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
@@ -332,7 +334,32 @@ public class UI {
     }
 
     public void generateHome(Rumah rumah, int bgNum) {
-        
+        List<Point> listPoint = new ArrayList<Point>(); 
+        for (int i = 0; i < rumah.getDaftarRuangan().size(); i++) {
+            Point point = new Point(310, 310);
+            Ruangan currRuangan = rumah.getDaftarRuangan().get(i);
+            if (i!=0) {
+                if (currRuangan.getAtas() != null) {
+                    int index = rumah.getDaftarRuangan().indexOf(currRuangan.getAtas());
+                    point.setX(listPoint.get(index).getX());
+                    point.setY(listPoint.get(index).getY()+90);
+                } else if (currRuangan.getBawah() != null) {
+                    int index = rumah.getDaftarRuangan().indexOf(currRuangan.getBawah());
+                    point.setX(listPoint.get(index).getX());
+                    point.setY(listPoint.get(index).getY()-90);
+                } else if (currRuangan.getKanan() != null) {
+                    int index = rumah.getDaftarRuangan().indexOf(currRuangan.getKanan());
+                    point.setX(listPoint.get(index).getX()-90);
+                    point.setY(listPoint.get(index).getY());
+                } else if (currRuangan.getKiri() != null) {
+                    int index = rumah.getDaftarRuangan().indexOf(currRuangan.getKiri());
+                    point.setX(listPoint.get(index).getX()+90);
+                    point.setY(listPoint.get(index).getY());
+                }
+            }
+            createRoom(bgNum, point.getX(), point.getY(), currRuangan, i);
+            listPoint.add(i, point);
+        }
     }
 
     public void refreshRoom(Ruangan currRuangan){
@@ -344,6 +371,17 @@ public class UI {
         gm.ui.bgPanel[3].add(gm.ui.bgLabel[3]);
         gm.ui.bgPanel[3].revalidate();
         gm.ui.bgPanel[3].repaint();
+    }
+
+    public void refreshHome(Rumah currRumah) {
+        gm.ui.bgPanel[4].removeAll();
+        gm.routing.showScreen(4); 
+        gm.ui.createObjek(4, 650, 600, 40, 40, "upgrade.png", new String[]{"Upgrade House"}, -1);
+        gm.ui.createObjek(4, 650, 650, 40, 40, "back.png", new String[]{"Back to World"}, -1);
+        gm.ui.generateHome(currRumah, 4);
+        gm.ui.bgPanel[4].add(gm.ui.bgLabel[4]);
+        gm.ui.bgPanel[4].revalidate();
+        gm.ui.bgPanel[4].repaint();
     }
     
     public void generateScreen() {

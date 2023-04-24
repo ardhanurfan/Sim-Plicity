@@ -30,6 +30,8 @@ public class World {
         addRumah(new Point(9, 30), "Rumah B");
         addRumah(new Point(2, 60), "Rumah C");
         getDaftarSim().get(0).setRumah(getDaftarRumah().get(0));
+        getDaftarRumah().get(0).upgradeRumah(getDaftarRumah().get(0).getDaftarRuangan().get(0), "atas", "Ruang Keluarga");
+        getDaftarRumah().get(0).upgradeRumah(getDaftarRumah().get(0).getDaftarRuangan().get(0), "kiri", "Ruang Keluarga Kiri");
     }
 
     public void Inisiasi() {

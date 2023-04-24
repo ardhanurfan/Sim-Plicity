@@ -117,12 +117,7 @@ public class ActionHandler implements ActionListener {
                 } else {
                     gm.ui.messagText.setText("Saat ini Anda berkunjung ke " + currRumah.getNama());
                 }
-                gm.ui.bgPanel[4].removeAll();
-                gm.routing.showScreen(4); 
-                gm.ui.createObjek(4, 650, 600, 40, 40, "upgrade.png", new String[]{"Upgrade House"}, -1);
-                gm.ui.createObjek(4, 650, 650, 40, 40, "back.png", new String[]{"Back to World"}, -1);
-                gm.ui.createRoom(4, 325, 325, new Ruangan("Kamar"), -1);
-                gm.ui.bgPanel[4].add(gm.ui.bgLabel[4]);
+                gm.ui.refreshHome(currRumah);
                 break;
 
             case "Edit Room":
