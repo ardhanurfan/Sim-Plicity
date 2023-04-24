@@ -6,43 +6,41 @@ import com.simplicity.Objek.Objek;
 import com.simplicity.Objek.ObjekBahanMakanan;
 import com.simplicity.Objek.ObjekMakanan;
 import com.simplicity.Objek.ObjekNonMakanan;
+import com.simplicity.Objek.ThreeElementArray;
 
 public class Inventory {
     private ArrayList<InventoryItem> data = new ArrayList<InventoryItem>();
 
     public class InventoryItem{
-        private String namaBarang;
-        private String kategori;
-        private int jumlah;
+        
+        private ThreeElementArray<String, String, Integer> item;
 
         public InventoryItem(String namaBarang, String kategori, int jumlah) {
-            this.namaBarang = namaBarang;
-            this.kategori = kategori;
-            this.jumlah = jumlah;
+            this.item = new ThreeElementArray<>(namaBarang, kategori, jumlah);
         }
 
         public String getNamaBarang() {
-            return namaBarang;
-        }
-
-        public String getKategori() {
-            return kategori;
-        }
-
-        public int getJumlah() {
-            return jumlah;
+            return item.getFirst();
         }
 
         public void setNamaBarang(String namaBarang) {
-            this.namaBarang = namaBarang;
+            item.setFirst(namaBarang);
+        }
+
+        public String getKategori() {
+            return item.getSecond();
         }
 
         public void setKategori(String kategori) {
-            this.kategori = kategori;
+            item.setSecond(kategori);
+        }
+
+        public int getJumlah() {
+            return item.getThird();
         }
 
         public void setJumlah(int jumlah) {
-            this.jumlah = jumlah;
+            item.setThird(jumlah);
         }
     }
 
