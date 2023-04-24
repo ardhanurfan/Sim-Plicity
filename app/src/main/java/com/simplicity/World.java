@@ -45,8 +45,13 @@ public class World {
         for (Rumah rumah : listRumah) {
             listRumahJSON.add(rumah.toJson());
         }
+        List<JSONObject> listSimJSON = new ArrayList<JSONObject>();
+        for (Sim sim : listSim) {
+            listSimJSON.add(sim.toJson());
+        }
 
         worldMap.put("listRumah", listRumahJSON);
+        worldMap.put("listSim", listSimJSON);
         worldMap.put("time", time);
 
         JSONObject worldJSON = new JSONObject(worldMap);
@@ -154,7 +159,7 @@ public class World {
 
     public boolean addRumah(Point lokasi, String nama) {
         if (!checkLahan(lokasi) && validPos(lokasi) && !checkRumah(nama)) {
-            Rumah rumah = new Rumah(lokasi, nama);
+            Rumah rumah = new Rumah(lokasi, nama, listRumah.size());
             listRumah.add(rumah);
             return true;
         } else if (checkLahan(lokasi)) {

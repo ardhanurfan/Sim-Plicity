@@ -1,6 +1,10 @@
 package com.simplicity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.simple.JSONObject;
 
 import com.simplicity.Objek.Objek;
 import com.simplicity.Objek.ObjekBahanMakanan;
@@ -11,12 +15,36 @@ import com.simplicity.Objek.ThreeElementArray;
 public class Inventory {
     private ArrayList<InventoryItem> data = new ArrayList<InventoryItem>();
 
-    public class InventoryItem{
-        
+    public JSONObject toJson() {
+        HashMap<String, Object> inventoriDataMap = new HashMap<String, Object>();
+        List<JSONObject> listData = new ArrayList<JSONObject>();
+        for (InventoryItem item : data) {
+            listData.add(item.toJson());
+        }
+
+        inventoriDataMap.put("inventoriData", listData);
+
+        JSONObject dataJSON = new JSONObject(inventoriDataMap);
+        return dataJSON;
+    }
+
+    public class InventoryItem {
+
         private ThreeElementArray<String, String, Integer> item;
 
         public InventoryItem(String namaBarang, String kategori, int jumlah) {
             this.item = new ThreeElementArray<>(namaBarang, kategori, jumlah);
+        }
+
+        public JSONObject toJson() {
+            HashMap<String, Object> inventoryItemMap = new HashMap<String, Object>();
+
+            inventoryItemMap.put("namaBarang", getNamaBarang());
+            inventoryItemMap.put("kategori", getKategori());
+            inventoryItemMap.put("jumlah", getJumlah());
+
+            JSONObject inventoryItemJSON = new JSONObject(inventoryItemMap);
+            return inventoryItemJSON;
         }
 
         public String getNamaBarang() {
@@ -47,7 +75,7 @@ public class Inventory {
     public boolean isContains(Objek objek) {
         boolean isAda = false;
         int i = 0;
-        while (isAda && i<data.size()) {
+        while (isAda && i < data.size()) {
             if (data.get(i).getNamaBarang().equals(objek.getNamaObjek())) {
                 isAda = true;
             }
@@ -80,10 +108,11 @@ public class Inventory {
             }
         }
         if (!isAda) { // kalo barangnya blum ada di inventory
-            data.add(new InventoryItem(objekBahanMakanan.getNamaObjek(), "Bahan Makanan", banyak));;
+            data.add(new InventoryItem(objekBahanMakanan.getNamaObjek(), "Bahan Makanan", banyak));
+            ;
         }
     }
-    
+
     // menambah objek makanan jadi ke inventory
     public void addItemMakanan(ObjekMakanan objekMakanan, int banyak) {
         boolean isAda = false; // cek barang udah ada di inventory ato belum. kalo ada tinggal tambahin jumlah
@@ -94,11 +123,12 @@ public class Inventory {
             }
         }
         if (!isAda) { // kalo barangnya blum ada di inventory
-            data.add(new InventoryItem(objekMakanan.getNamaObjek(), "Makanan", banyak));;
+            data.add(new InventoryItem(objekMakanan.getNamaObjek(), "Makanan", banyak));
+            ;
         }
     }
 
-    // Mengurangi jumlah objek dalam inventory 
+    // Mengurangi jumlah objek dalam inventory
     public void kurangiItem(String namaItem, int banyak) {
         for (InventoryItem item : data) {
             if (item.getNamaBarang().equals(namaItem)) {
@@ -115,26 +145,27 @@ public class Inventory {
     // print inventory
     public void viewInventory() { // melihat semua inventory
         System.out.println("========== Inventory ==========");
-        int  i = 1;
-        if (data.isEmpty())
-        {
+        int i = 1;
+        if (data.isEmpty()) {
             System.out.println(" Inventory Kosong");
-        }
-        else {
+        } else {
             System.out.println("No \tNama Barang \t\tKategori \tJumlah");
         }
         for (InventoryItem item : data) {
             // jika inventory adalah barang peralatan
-            if (item.getKategori().equals("Peralatan") ){
-                System.out.println(i + ". \t" + item.getNamaBarang() + "\t" + item.getKategori() + "\t" + item.getJumlah());
+            if (item.getKategori().equals("Peralatan")) {
+                System.out.println(
+                        i + ". \t" + item.getNamaBarang() + "\t" + item.getKategori() + "\t" + item.getJumlah());
             }
             // jika inventory adalah bahan makanan
             else if (item.getKategori().equals("Bahan Makanan")) {
-                System.out.println(i + ". \t" + item.getNamaBarang() + "\t\t" + item.getKategori() + "\t" + item.getJumlah());
+                System.out.println(
+                        i + ". \t" + item.getNamaBarang() + "\t\t" + item.getKategori() + "\t" + item.getJumlah());
             }
             // jika inventory adalah makanan
             else if (item.getKategori().equals("Makanan")) {
-                System.out.println(i + ". \t" + item.getNamaBarang() + "\t\t" + item.getKategori() + "\t\t" + item.getJumlah());
+                System.out.println(
+                        i + ". \t" + item.getNamaBarang() + "\t\t" + item.getKategori() + "\t\t" + item.getJumlah());
             }
             i++;
         }
@@ -143,17 +174,16 @@ public class Inventory {
     // print inventory khusus peralatan
     public void viewInventoryPeralatan() { // melihat inventory peralatan
         System.out.println("========== Inventory Peralatan ==========");
-        int  i = 1;
-        if (data.isEmpty())
-        {
+        int i = 1;
+        if (data.isEmpty()) {
             System.out.println(" Tidak Ada Peralatan");
-        }
-        else {
+        } else {
             System.out.println("No \tNama Barang \t\tKategori \tJumlah");
         }
         for (InventoryItem item : data) {
             if (item.getKategori().equals("Peralatan")) {
-                System.out.println(i + ". \t" + item.getNamaBarang() + "\t" + item.getKategori() + "\t" + item.getJumlah());
+                System.out.println(
+                        i + ". \t" + item.getNamaBarang() + "\t" + item.getKategori() + "\t" + item.getJumlah());
                 i++;
             }
         }
@@ -162,22 +192,22 @@ public class Inventory {
     // print inventory khusus makanan dan bahan makanan
     public void viewInventoryMakanan() { // melihat inventory makanan
         System.out.println("========== Inventory Makanan ==========");
-        int  i = 1;
-        if (data.isEmpty())
-        {
+        int i = 1;
+        if (data.isEmpty()) {
             System.out.println(" Tidak ada Makanan");
-        }
-        else {
+        } else {
             System.out.println("No \tNama Barang \tKategori \tJumlah");
         }
         for (InventoryItem item : data) {
             if (item.getKategori().equals("Makanan") || item.getKategori().equals("Bahan Makanan")) {
                 if (item.getKategori().equals("Bahan Makanan")) {
-                    System.out.println(i + ". \t" + item.getNamaBarang() + "\t" + item.getKategori() + "\t" + item.getJumlah());
+                    System.out.println(
+                            i + ". \t" + item.getNamaBarang() + "\t" + item.getKategori() + "\t" + item.getJumlah());
                 }
                 // jika inventory adalah makanan
                 else if (item.getKategori().equals("Makanan")) {
-                    System.out.println(i + ". \t" + item.getNamaBarang() + "\t" + item.getKategori() + "\t\t" + item.getJumlah());
+                    System.out.println(
+                            i + ". \t" + item.getNamaBarang() + "\t" + item.getKategori() + "\t\t" + item.getJumlah());
                 }
                 i++;
             }
@@ -194,7 +224,7 @@ public class Inventory {
         ObjekBahanMakanan bayam = new ObjekBahanMakanan("Bayam\t", 3, 2);
         ObjekBahanMakanan kacang = new ObjekBahanMakanan("Kacang\t", 2, 2);
         ObjekBahanMakanan susu = new ObjekBahanMakanan("Susu\t", 2, 1);
-        
+
         ObjekBahanMakanan[] daftar_bahan = new ObjekBahanMakanan[8];
         daftar_bahan[0] = nasi;
         daftar_bahan[1] = kentang;
@@ -204,9 +234,8 @@ public class Inventory {
         daftar_bahan[5] = bayam;
         daftar_bahan[6] = kacang;
         daftar_bahan[7] = susu;
-        //ObjekBahanMakanan.printArray(daftar_bahan);
+        // ObjekBahanMakanan.printArray(daftar_bahan);
 
-        
         // List objek non makanan
         ObjekNonMakanan[] daftar_barang = new ObjekNonMakanan[8];
         // Menambahkan elemen ke dalam array daftar_barang
@@ -222,25 +251,25 @@ public class Inventory {
         // List objek makanan
         ObjekMakanan[] daftar_makanan = new ObjekMakanan[5];
 
-        daftar_makanan[0] = new ObjekMakanan("Nasi Ayam", new ObjekBahanMakanan[]{nasi, ayam}, 16);
-        daftar_makanan[1] = new ObjekMakanan("Nasi Kari", new ObjekBahanMakanan[]{nasi, kentang, wortel, sapi}, 30);
-        daftar_makanan[2] = new ObjekMakanan("Susu Kacang", new ObjekBahanMakanan[]{susu, kacang}, 5);
-        daftar_makanan[3] = new ObjekMakanan("Tumis Sayur", new ObjekBahanMakanan[]{wortel, bayam}, 5);
-        daftar_makanan[4] = new ObjekMakanan("Bistik\t", new ObjekBahanMakanan[]{kentang, sapi}, 22);    
-        
+        daftar_makanan[0] = new ObjekMakanan("Nasi Ayam", new ObjekBahanMakanan[] { nasi, ayam }, 16);
+        daftar_makanan[1] = new ObjekMakanan("Nasi Kari", new ObjekBahanMakanan[] { nasi, kentang, wortel, sapi }, 30);
+        daftar_makanan[2] = new ObjekMakanan("Susu Kacang", new ObjekBahanMakanan[] { susu, kacang }, 5);
+        daftar_makanan[3] = new ObjekMakanan("Tumis Sayur", new ObjekBahanMakanan[] { wortel, bayam }, 5);
+        daftar_makanan[4] = new ObjekMakanan("Bistik\t", new ObjekBahanMakanan[] { kentang, sapi }, 22);
+
         // ArrayList<InventoryItem> Inventory = new ArrayList<InventoryItem>();
 
         // print inventory
-        //Inventory.viewInventory();
+        // Inventory.viewInventory();
 
         Inventory inventory = new Inventory();
         inventory.addItemPeralatan(daftar_barang[0], 2);
         inventory.addItemPeralatan(daftar_barang[1], 1);
         inventory.addItemPeralatan(daftar_barang[2], 1);
         inventory.addItemPeralatan(daftar_barang[3], 1);
-        
-        // print inventory 
-        //inventory.viewInventory();
+
+        // print inventory
+        // inventory.viewInventory();
 
         // add item bahan makanan
         inventory.addItemBahanMakanan(daftar_bahan[0], 2);
@@ -252,9 +281,8 @@ public class Inventory {
         inventory.addItemBahanMakanan(daftar_bahan[6], 1);
         inventory.addItemBahanMakanan(daftar_bahan[7], 1);
 
-         
         // print inventory
-        //inventory.viewInventory();
+        // inventory.viewInventory();
 
         // add item makanan
         inventory.addItemMakanan(daftar_makanan[0], 2);
@@ -262,7 +290,6 @@ public class Inventory {
         inventory.addItemMakanan(daftar_makanan[2], 1);
         inventory.addItemMakanan(daftar_makanan[3], 1);
         inventory.addItemMakanan(daftar_makanan[4], 1);
-
 
         // print inventory
         inventory.viewInventory();
@@ -275,12 +302,11 @@ public class Inventory {
 
         // ============= PRINT BERHASIL ==========
 
-        
-        // testing add item peralatan 
-        
+        // testing add item peralatan
+
         Inventory inventory2 = new Inventory();
         inventory2.addItemPeralatan(daftar_barang[0], 2);
-        
+
         // print inventory
         inventory2.viewInventory();
 
@@ -304,8 +330,8 @@ public class Inventory {
         inventory2.viewInventoryPeralatan();
 
         daftar_bahan[0].printDaftarBahanMakanan(daftar_bahan);
-        //printDaftarMakanan(daftar_makanan);
-        //printDaftarPeralatan(daftar_barang);
+        // printDaftarMakanan(daftar_makanan);
+        // printDaftarPeralatan(daftar_barang);
         daftar_makanan[0].printDaftarMakanan(daftar_makanan);
 
     }

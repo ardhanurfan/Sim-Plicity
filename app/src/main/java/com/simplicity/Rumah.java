@@ -9,12 +9,14 @@ import org.json.simple.JSONObject;
 
 public class Rumah {
     // Atribute
+    private int id;
     private Point loc;
     private List<Ruangan> daftarRuangan;
     private String nama;
 
     // Constructor
-    public Rumah(Point loc, String nama) {
+    public Rumah(Point loc, String nama, int id) {
+        this.id = id;
         this.loc = loc;
         this.nama = nama;
         this.daftarRuangan = new ArrayList<Ruangan>();
@@ -59,6 +61,10 @@ public class Rumah {
     }
 
     // Getters and setters
+    public int getId() {
+        return id;
+    }
+
     public Point getLocRumah() {
         return loc;
     }

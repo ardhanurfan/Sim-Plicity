@@ -25,6 +25,7 @@ public class ObjekNonMakanan extends Objek {
     public JSONObject toJson() {
         HashMap<String, Object> ObjekNonMakananMap = new HashMap<String, Object>();
 
+        ObjekNonMakananMap.put("nama", getNamaObjek());
         ObjekNonMakananMap.put("panjang", panjang);
         ObjekNonMakananMap.put("lebar", lebar);
         ObjekNonMakananMap.put("harga", harga);

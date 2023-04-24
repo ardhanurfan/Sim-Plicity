@@ -7,6 +7,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
+              "nama": "kasur single 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 5 },
               "lebar": 1,
@@ -15,6 +16,7 @@
             },
             {
               "panjang": 1,
+              "nama": "toilet 1x1",
               "harga": 50,
               "titik": { "x": 5, "y": 5 },
               "lebar": 1,
@@ -23,6 +25,7 @@
             },
             {
               "panjang": 2,
+              "nama": "kompor gas 2x1",
               "harga": 100,
               "titik": { "x": 5, "y": 1 },
               "lebar": 1,
@@ -31,6 +34,7 @@
             },
             {
               "panjang": 3,
+              "nama": "meja kursi 3x3",
               "harga": 50,
               "titik": { "x": 2, "y": 2 },
               "lebar": 3,
@@ -39,6 +43,7 @@
             },
             {
               "panjang": 1,
+              "nama": "jam 1x1",
               "harga": 10,
               "titik": { "x": 1, "y": 1 },
               "lebar": 1,
@@ -126,6 +131,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
+              "nama": "kasur single 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 5 },
               "lebar": 1,
@@ -134,6 +140,7 @@
             },
             {
               "panjang": 1,
+              "nama": "toilet 1x1",
               "harga": 50,
               "titik": { "x": 5, "y": 5 },
               "lebar": 1,
@@ -142,6 +149,7 @@
             },
             {
               "panjang": 2,
+              "nama": "kompor gas 2x1",
               "harga": 100,
               "titik": { "x": 5, "y": 1 },
               "lebar": 1,
@@ -150,6 +158,7 @@
             },
             {
               "panjang": 3,
+              "nama": "meja kursi 3x3",
               "harga": 50,
               "titik": { "x": 2, "y": 2 },
               "lebar": 3,
@@ -158,6 +167,7 @@
             },
             {
               "panjang": 1,
+              "nama": "jam 1x1",
               "harga": 10,
               "titik": { "x": 1, "y": 1 },
               "lebar": 1,
@@ -211,6 +221,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
+              "nama": "kasur single 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 5 },
               "lebar": 1,
@@ -219,6 +230,7 @@
             },
             {
               "panjang": 1,
+              "nama": "toilet 1x1",
               "harga": 50,
               "titik": { "x": 5, "y": 5 },
               "lebar": 1,
@@ -227,6 +239,7 @@
             },
             {
               "panjang": 2,
+              "nama": "kompor gas 2x1",
               "harga": 100,
               "titik": { "x": 5, "y": 1 },
               "lebar": 1,
@@ -235,6 +248,7 @@
             },
             {
               "panjang": 3,
+              "nama": "meja kursi 3x3",
               "harga": 50,
               "titik": { "x": 2, "y": 2 },
               "lebar": 3,
@@ -243,6 +257,7 @@
             },
             {
               "panjang": 1,
+              "nama": "jam 1x1",
               "harga": 10,
               "titik": { "x": 1, "y": 1 },
               "lebar": 1,
@@ -288,6 +303,62 @@
         }
       ],
       "nama": "Rumah C"
+    }
+  ],
+  "listSim": [
+    {
+      "waktuTidakTidur": 0,
+      "kesehatan": 80,
+      "totalWaktuTidur": 0,
+      "mood": 80,
+      "inventory": { "inventoriData": [] },
+      "rumah": 0,
+      "waktuTidakBuangAir": 0,
+      "jedaGantiKerja": 0,
+      "uang": 100.0,
+      "pekerjaan": { "nama": "Badut Sulap", "gaji": 15 },
+      "currLokasi": { "rumah": null, "ruangan": null },
+      "kekenyangan": 80,
+      "isTidakBuangAir": false,
+      "totalWaktuKerja": 0,
+      "namaLengkap": "Paijo0",
+      "status": null
+    },
+    {
+      "waktuTidakTidur": 0,
+      "kesehatan": 80,
+      "totalWaktuTidur": 0,
+      "mood": 80,
+      "inventory": { "inventoriData": [] },
+      "rumah": null,
+      "waktuTidakBuangAir": 0,
+      "jedaGantiKerja": 0,
+      "uang": 100.0,
+      "pekerjaan": { "nama": "Polisi", "gaji": 35 },
+      "currLokasi": { "rumah": null, "ruangan": null },
+      "kekenyangan": 80,
+      "isTidakBuangAir": false,
+      "totalWaktuKerja": 0,
+      "namaLengkap": "Paijo1",
+      "status": null
+    },
+    {
+      "waktuTidakTidur": 0,
+      "kesehatan": 80,
+      "totalWaktuTidur": 0,
+      "mood": 80,
+      "inventory": { "inventoriData": [] },
+      "rumah": null,
+      "waktuTidakBuangAir": 0,
+      "jedaGantiKerja": 0,
+      "uang": 100.0,
+      "pekerjaan": { "nama": "Dokter", "gaji": 50 },
+      "currLokasi": { "rumah": null, "ruangan": null },
+      "kekenyangan": 80,
+      "isTidakBuangAir": false,
+      "totalWaktuKerja": 0,
+      "namaLengkap": "Paijo2",
+      "status": null
     }
   ],
   "time": 0
