@@ -125,7 +125,7 @@ public class ActionHandler implements ActionListener {
                 // Tambah Barang
                 if(index ==0){
                     // Opsi inventory
-                    Object selectedInventory = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Inventory", "Edit Room", JOptionPane.PLAIN_MESSAGE, null, inventory.toArray(), inventory.get(0));
+                    Object selectedInventory = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Choose Object you want to add", "Edit Room", JOptionPane.PLAIN_MESSAGE, null, inventory.toArray(), inventory.get(0));
                     if (selectedInventory!=null){
                         int indexInventory = inventory.indexOf(selectedInventory);
     
