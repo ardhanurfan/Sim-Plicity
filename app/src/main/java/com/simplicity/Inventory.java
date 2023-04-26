@@ -39,6 +39,10 @@ public class Inventory {
         return dataJSON;
     }
 
+    public ArrayList<InventoryItem> getData() {
+        return data;
+    }
+
     public class InventoryItem {
 
         private ThreeElementArray<String, String, Integer> item;

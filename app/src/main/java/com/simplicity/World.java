@@ -18,17 +18,14 @@ public class World {
     private final int panjangMap = 64;
     private final int lebarMap = 64;
 
-    ArrayList<ObjekPekerjaan> daftarPekerjaan = new ArrayList<ObjekPekerjaan>();
-    ObjekBahanMakanan[] daftar_bahan = new ObjekBahanMakanan[8];
-    ObjekNonMakanan[] daftar_barang = new ObjekNonMakanan[8];
-    ObjekMakanan[] daftar_makanan = new ObjekMakanan[5];
+    private List<ObjekPekerjaan> daftarPekerjaan = new ArrayList<ObjekPekerjaan>();
+    private List<ObjekBahanMakanan> daftar_bahan = new ArrayList<ObjekBahanMakanan>();
+    private List<ObjekNonMakanan> daftar_barang = new ArrayList<ObjekNonMakanan>();
+    private List<ObjekMakanan> daftar_makanan = new ArrayList<ObjekMakanan>();
 
     public World() {
         Inisiasi();
         time = 0;
-        addSim("Paijo0");
-        addSim("Paijo1");
-        addSim("Paijo2");
     }
 
     public JSONObject toJson() {
@@ -68,35 +65,37 @@ public class World {
         ObjekBahanMakanan susu = new ObjekBahanMakanan("Susu\t", 2, 1);
 
         // Menambahkan daftar bahan makanan
-        daftar_bahan[0] = nasi;
-        daftar_bahan[1] = kentang;
-        daftar_bahan[2] = ayam;
-        daftar_bahan[3] = sapi;
-        daftar_bahan[4] = wortel;
-        daftar_bahan[5] = bayam;
-        daftar_bahan[6] = kacang;
-        daftar_bahan[7] = susu;
+        daftar_bahan.add(nasi);
+        daftar_bahan.add(kentang);
+        daftar_bahan.add(ayam);
+        daftar_bahan.add(sapi);
+        daftar_bahan.add(wortel);
+        daftar_bahan.add(bayam);
+        daftar_bahan.add(kacang);
+        daftar_bahan.add(susu);
 
         // List objek non makanan
-        daftar_barang[0] = new ObjekNonMakanan("Kasur Single\t", 4, 1, 50, "Tidur");
-        daftar_barang[1] = new ObjekNonMakanan("Kasur Queen Size", 4, 2, 100, "Tidur");
-        daftar_barang[2] = new ObjekNonMakanan("Kasur King Size ", 5, 2, 150, "Tidur");
-        daftar_barang[3] = new ObjekNonMakanan("Toilet\t\t", 1, 1, 50, "Buang air");
-        daftar_barang[4] = new ObjekNonMakanan("Kompor Gas\t", 2, 1, 100, "Memasak");
-        daftar_barang[5] = new ObjekNonMakanan("Kompor Listrik\t", 1, 1, 200, "Memasak");
-        daftar_barang[6] = new ObjekNonMakanan("Meja dan Kursi\t", 3, 3, 50, "Makan");
-        daftar_barang[7] = new ObjekNonMakanan("Jam\t\t", 1, 1, 10, "Melihat Waktu");
+        daftar_barang.add(new ObjekNonMakanan("Kasur Single\t", 4, 1, 50, "Tidur"));
+        daftar_barang.add(new ObjekNonMakanan("Kasur Queen Size", 4, 2, 100, "Tidur"));
+        daftar_barang.add(new ObjekNonMakanan("Kasur King Size ", 5, 2, 150, "Tidur"));
+        daftar_barang.add(new ObjekNonMakanan("Toilet\t\t", 1, 1, 50, "Buang air"));
+        daftar_barang.add(new ObjekNonMakanan("Kompor Gas\t", 2, 1, 100, "Memasak"));
+        daftar_barang.add(new ObjekNonMakanan("Kompor Listrik\t", 1, 1, 200, "Memasak"));
+        daftar_barang.add(new ObjekNonMakanan("Meja dan Kursi\t", 3, 3, 50, "Makan"));
+        daftar_barang.add(new ObjekNonMakanan("Jam\t\t", 1, 1, 10, "Melihat Waktu"));
 
         // List objek makanan
-        daftar_makanan[0] = new ObjekMakanan("Nasi Ayam", new ObjekBahanMakanan[] { nasi, ayam }, 16);
-        daftar_makanan[1] = new ObjekMakanan("Nasi Kari", new ObjekBahanMakanan[] { nasi, kentang, wortel, sapi }, 30);
-        daftar_makanan[2] = new ObjekMakanan("Susu Kacang", new ObjekBahanMakanan[] { susu, kacang }, 5);
-        daftar_makanan[3] = new ObjekMakanan("Tumis Sayur", new ObjekBahanMakanan[] { wortel, bayam }, 5);
-        daftar_makanan[4] = new ObjekMakanan("Bistik\t", new ObjekBahanMakanan[] { kentang, sapi }, 22);
+        daftar_makanan.add(new ObjekMakanan("Nasi Ayam", new ObjekBahanMakanan[] { nasi, ayam }, 16));
+        daftar_makanan.add(new ObjekMakanan("Nasi Kari", new ObjekBahanMakanan[] { nasi, kentang, wortel, sapi }, 30));
+        daftar_makanan.add(new ObjekMakanan("Susu Kacang", new ObjekBahanMakanan[] { susu, kacang }, 5));
+        daftar_makanan.add(new ObjekMakanan("Tumis Sayur", new ObjekBahanMakanan[] { wortel, bayam }, 5));
+        daftar_makanan.add(new ObjekMakanan("Bistik\t", new ObjekBahanMakanan[] { kentang, sapi }, 22));
     }
 
-    public int getTime() {
-        return time;
+    public String getTime() {
+        int menit = time / 60;
+        int detik = time % 60;
+        return (menit < 10 ? "0" + menit : menit) + " : " + (detik < 10 ? "0" + detik : detik);
     }
 
     public static void setTime(int aksi) {
@@ -181,5 +180,21 @@ public class World {
             return true;
         }
         return false;
+    }
+
+    public List<ObjekPekerjaan> getDaftarPekerjaan() {
+        return daftarPekerjaan;
+    }
+
+    public List<ObjekBahanMakanan> getDaftar_bahan() {
+        return daftar_bahan;
+    }
+
+    public List<ObjekNonMakanan> getDaftar_barang() {
+        return daftar_barang;
+    }
+
+    public List<ObjekMakanan> getDaftar_makanan() {
+        return daftar_makanan;
     }
 }

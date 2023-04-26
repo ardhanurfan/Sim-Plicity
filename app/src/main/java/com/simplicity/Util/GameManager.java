@@ -25,8 +25,6 @@ public class GameManager {
 
 	public GameManager() {
 		routing.showScreen(0);
-		load();
-		world.getDaftarSim().get(0).setRumah(world.getDaftarRumah().get(0));
 	}
 
 	public Sim getCurrentSim() {

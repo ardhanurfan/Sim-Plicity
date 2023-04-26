@@ -20,12 +20,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 import com.simplicity.Point;
 import com.simplicity.Ruangan;
 import com.simplicity.Rumah;
+import com.simplicity.Inventory.InventoryItem;
 import com.simplicity.Objek.ObjekNonMakanan;
 
 public class UI {
@@ -35,13 +38,16 @@ public class UI {
     public JLabel bgLabel[] = new JLabel[10];
 
     public JPanel attributePanel;
-    JPanel textPanel;
+    public JPanel textPanel;
     public JTextArea messagText;
     public JLabel nameText;
     public JLabel jamText;
 
+    public JFrame popInventory;
+
     public UI(GameManager gm) {
         this.gm = gm;
+        gm.load();
         createMainField();
         generateScreen();
         attributeField();
@@ -130,8 +136,7 @@ public class UI {
         jamIcon.setIcon(jamImage);
         jamIcon.setBackground(null);
         attributePanel.add(jamIcon);
-        jamText = new JLabel(
-                String.format("%d : %d", (720 - gm.world.getTime()) / 60, (720 - gm.world.getTime()) % 60));
+        jamText = new JLabel(gm.world.getTime());
         jamText.setBounds(120, 100, 200, 50);
         jamText.setBackground(null);
         jamText.setForeground(Color.white);
@@ -139,8 +144,10 @@ public class UI {
         attributePanel.add(jamText);
 
         // Save
-        customButton(attributePanel, 50, 590, 200, 50, "Save", 24, "save");
-        customButton(attributePanel, 50, 650, 200, 50, "Exit", 24, "exit");
+        customButton(attributePanel, 50, 500, 200, 40, "Change Sim", 24, "choose-sim");
+        customButton(attributePanel, 50, 550, 200, 40, "Inventory", 24, "inventory");
+        customButton(attributePanel, 50, 600, 200, 40, "Save", 24, "save");
+        customButton(attributePanel, 50, 650, 200, 40, "Exit", 24, "exit");
 
         textPanel.setVisible(false);
         attributePanel.setVisible(false);
@@ -422,6 +429,26 @@ public class UI {
         gm.ui.bgPanel[4].add(gm.ui.bgLabel[4]);
         gm.ui.bgPanel[4].revalidate();
         gm.ui.bgPanel[4].repaint();
+    }
+
+    public void inventoryPopUp() {
+        popInventory = new JFrame("Inventory");
+        popInventory.setSize(400, 250);
+        popInventory.getContentPane().setBackground(Color.white);
+        popInventory.setResizable(false);
+        popInventory.setVisible(false);
+
+        Object[][] data = new Object[gm.getCurrentSim().getInventory().getData().size()][3];
+        int i = 0;
+        for (InventoryItem item : gm.getCurrentSim().getInventory().getData()) {
+            data[i] = new Object[] { item.getNamaBarang(), item.getKategori(), item.getJumlah() };
+            i++;
+        }
+
+        JTable jt = new JTable(data, new String[] { "Nama Barang", "Kategori", "Jumlah" });
+        jt.setEnabled(false);
+        JScrollPane js = new JScrollPane(jt);
+        popInventory.add(js);
     }
 
     public void generateScreen() {

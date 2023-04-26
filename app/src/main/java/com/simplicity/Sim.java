@@ -430,6 +430,10 @@ public class Sim {
         inventory.viewInventory();
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
     public void pasangBarang(ObjekNonMakanan objek, Point point, String posisi) {
         Ruangan currRuangan = currLokasi.getRuangan();
         // tampilkan map ruangan

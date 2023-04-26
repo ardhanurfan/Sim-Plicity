@@ -87,6 +87,7 @@ public class ActionHandler implements ActionListener {
                                     new String[] { "View Home%" + gm.world.getDaftarRumah().get(i).getNama() }, i);
                         }
                     }
+                    gm.ui.bgPanel[2].repaint();
                     gm.routing.showScreen(2);
                     gm.ui.messagText.setText("Hello Welcome Back, " + gm.getCurrentSim().getNamaLengkap());
                     gm.ui.nameText.setText(gm.getCurrentSim().getNamaLengkap());
@@ -282,6 +283,14 @@ public class ActionHandler implements ActionListener {
                     gm.save();
                 }
                 break;
+
+            case "inventory":
+                if (gm.getCurrentSim().getInventory().getData().size() == 0) {
+                    JOptionPane.showMessageDialog(null, "Inventory Kosong");
+                } else {
+                    gm.ui.inventoryPopUp();
+                    gm.ui.popInventory.setVisible(true);
+                }
         }
     }
 
