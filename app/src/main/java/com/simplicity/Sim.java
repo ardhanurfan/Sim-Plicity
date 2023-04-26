@@ -1,7 +1,10 @@
 package com.simplicity;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+
+import org.json.simple.JSONObject;
 
 import com.simplicity.Objek.ObjekBahanMakanan;
 import com.simplicity.Objek.ObjekMakanan;
@@ -24,7 +27,7 @@ public class Sim {
     // Reset saat ganti kerja
     private int totalWaktuKerja = 0;
     private int jedaGantiKerja = 0;
-    
+
     // Reset jika ganti hari
     private int totalWaktuTidur = 0;
     private int waktuTidakTidur = 0;
@@ -34,15 +37,15 @@ public class Sim {
     private boolean isTidakBuangAir = false;
 
     public Sim(Sim sim) {
-       this.namaLengkap = sim.namaLengkap;
-       this.pekerjaan = sim.pekerjaan;
-       this.uang = sim.uang;
-       this.kekenyangan = sim.kekenyangan;
-       this.mood = sim.mood;
-       this.kesehatan = sim.kesehatan;
-       this.status = sim.status;
-       this.currLokasi = sim.currLokasi;
-       this.inventory = sim.inventory;
+        this.namaLengkap = sim.namaLengkap;
+        this.pekerjaan = sim.pekerjaan;
+        this.uang = sim.uang;
+        this.kekenyangan = sim.kekenyangan;
+        this.mood = sim.mood;
+        this.kesehatan = sim.kesehatan;
+        this.status = sim.status;
+        this.currLokasi = sim.currLokasi;
+        this.inventory = sim.inventory;
     }
 
     public Sim(String namaLengkap, List<ObjekPekerjaan> daftarPekerjaan) {
@@ -54,15 +57,79 @@ public class Sim {
         this.mood = 80;
         this.kesehatan = 80;
         this.inventory = new Inventory();
+        this.currLokasi = new LokasiSim();
+    }
+
+    public Sim(JSONObject jsonObject, List<Rumah> listRumah) {
+        namaLengkap = jsonObject.get("namaLengkap").toString();
+        pekerjaan = new ObjekPekerjaan((JSONObject) jsonObject.get("pekerjaan"));
+        uang = Double.parseDouble(jsonObject.get("uang").toString());
+        kekenyangan = Integer.parseInt(jsonObject.get("kekenyangan").toString());
+        mood = Integer.parseInt(jsonObject.get("mood").toString());
+        kesehatan = Integer.parseInt(jsonObject.get("kesehatan").toString());
+        status = jsonObject.get("status") != null ? jsonObject.get("status").toString() : null;
+        rumah = jsonObject.get("rumah") != null ? listRumah.get(Integer.parseInt(jsonObject.get("rumah").toString()))
+                : null;
+        currLokasi = new LokasiSim((JSONObject) jsonObject.get("currLokasi"), listRumah);
+        inventory = new Inventory((JSONObject) jsonObject.get("inventory"));
+
+        totalWaktuKerja = Integer.parseInt(jsonObject.get("totalWaktuKerja").toString());
+        jedaGantiKerja = Integer.parseInt(jsonObject.get("jedaGantiKerja").toString());
+        totalWaktuTidur = Integer.parseInt(jsonObject.get("totalWaktuTidur").toString());
+        waktuTidakTidur = Integer.parseInt(jsonObject.get("waktuTidakTidur").toString());
+        waktuTidakBuangAir = Integer.parseInt(jsonObject.get("waktuTidakBuangAir").toString());
+        isTidakBuangAir = Boolean.parseBoolean(jsonObject.get("isTidakBuangAir").toString());
+    }
+
+    public JSONObject toJson() {
+        HashMap<String, Object> simMap = new HashMap<String, Object>();
+
+        simMap.put("namaLengkap", namaLengkap);
+        simMap.put("pekerjaan", pekerjaan.toJson());
+        simMap.put("uang", uang);
+        simMap.put("kekenyangan", kekenyangan);
+        simMap.put("mood", mood);
+        simMap.put("kesehatan", kesehatan);
+        simMap.put("status", status);
+        simMap.put("currLokasi", currLokasi.toJson());
+        simMap.put("inventory", inventory.toJson());
+        simMap.put("rumah", rumah == null ? null : rumah.getId());
+
+        simMap.put("totalWaktuKerja", totalWaktuKerja);
+        simMap.put("jedaGantiKerja", jedaGantiKerja);
+        simMap.put("totalWaktuTidur", totalWaktuTidur);
+        simMap.put("waktuTidakTidur", waktuTidakTidur);
+        simMap.put("waktuTidakBuangAir", waktuTidakBuangAir);
+        simMap.put("isTidakBuangAir", isTidakBuangAir);
+
+        JSONObject simJSON = new JSONObject(simMap);
+        return simJSON;
     }
 
     public class LokasiSim {
         private Rumah rumah;
         private Ruangan ruangan;
 
-        public LokasiSim(Rumah rumah, Ruangan ruangan) {
-            this.ruangan = ruangan;
-            this.rumah = rumah;
+        public LokasiSim() {
+        }
+
+        public LokasiSim(JSONObject jsonObject, List<Rumah> listRumah) {
+            rumah = jsonObject.get("rumah") != null
+                    ? listRumah.get(Integer.parseInt(jsonObject.get("rumah").toString()))
+                    : null;
+            ruangan = jsonObject.get("ruangan") != null
+                    ? rumah.getDaftarRuangan().get(Integer.parseInt(jsonObject.get("ruangan").toString()))
+                    : null;
+        }
+
+        public JSONObject toJson() {
+            HashMap<String, Object> lokasiMap = new HashMap<String, Object>();
+
+            lokasiMap.put("rumah", rumah == null ? null : rumah.getId());
+            lokasiMap.put("ruangan", ruangan == null ? null : ruangan.getId());
+
+            JSONObject lokasiJSON = new JSONObject(lokasiMap);
+            return lokasiJSON;
         }
 
         public Ruangan getRuangan() {
@@ -105,7 +172,7 @@ public class Sim {
     public void setPekerjaan(ObjekPekerjaan pekerjaan) {
         if (totalWaktuKerja >= 720) {
             this.pekerjaan = pekerjaan;
-            uang -= pekerjaan.getGaji()*0.5;
+            uang -= pekerjaan.getGaji() * 0.5;
             jedaGantiKerja = 0;
             totalWaktuKerja = 0;
         }
@@ -124,7 +191,7 @@ public class Sim {
     }
 
     public void setKekenyangan(int waktuKerja, int ratio, int value) {
-        this.kekenyangan += waktuKerja/ratio*value;
+        this.kekenyangan += waktuKerja / ratio * value;
         if (this.kekenyangan > 100) {
             this.kekenyangan = 100;
         }
@@ -135,7 +202,7 @@ public class Sim {
     }
 
     public void setMood(int waktuKerja, int ratio, int value) {
-        this.mood += waktuKerja/ratio*value;
+        this.mood += waktuKerja / ratio * value;
         if (this.mood > 100) {
             this.mood = 100;
         }
@@ -146,7 +213,7 @@ public class Sim {
     }
 
     public void setKesehatan(int waktuKerja, int ratio, int value) {
-        this.kesehatan += waktuKerja/ratio*value;
+        this.kesehatan += waktuKerja / ratio * value;
         if (this.kesehatan > 100) {
             this.kesehatan = 100;
         }
@@ -209,19 +276,20 @@ public class Sim {
             setKekenyangan(waktuKerja, 30, -10);
             setMood(waktuKerja, 30, -10);
             if (pekerjaan.getNamaObjek().equals("Badut Sulap")) {
-                uang += waktuKerja/240*15;
+                uang += waktuKerja / 240 * 15;
             } else if (pekerjaan.getNamaObjek().equals("Koki")) {
-                uang += waktuKerja/240*30;
+                uang += waktuKerja / 240 * 30;
             } else if (pekerjaan.getNamaObjek().equals("Polisi")) {
-                uang += waktuKerja/240*35;
+                uang += waktuKerja / 240 * 35;
             } else if (pekerjaan.getNamaObjek().equals("Programmer")) {
-                uang += waktuKerja/240*45;
+                uang += waktuKerja / 240 * 45;
             } else if (pekerjaan.getNamaObjek().equals("Dokter")) {
-                uang += waktuKerja/240*50;
+                uang += waktuKerja / 240 * 50;
             }
             totalWaktuKerja += waktuKerja;
 
-            System.out.println("Kerja selesai selama " + (waktuKerja < 60 ? (waktuKerja + " detik") : (waktuKerja/60 + ":" + waktuKerja%60 + " menit")));
+            System.out.println("Kerja selesai selama " + (waktuKerja < 60 ? (waktuKerja + " detik")
+                    : (waktuKerja / 60 + ":" + waktuKerja % 60 + " menit")));
             System.out.println("Kekenyangan Anda sekarang " + kekenyangan);
             System.out.println("Mood Anda sekarang " + mood);
             System.out.println("Uang Anda sekarang " + uang);
@@ -235,12 +303,13 @@ public class Sim {
         setKekenyangan(waktuOlahraga, 20, -5);
         setMood(waktuOlahraga, 20, 10);
 
-        System.out.println("Olahraga selesai selama " + (waktuOlahraga < 60 ? (waktuOlahraga + " detik") : (waktuOlahraga/60 + ":" + waktuOlahraga%60 + " menit")));
+        System.out.println("Olahraga selesai selama " + (waktuOlahraga < 60 ? (waktuOlahraga + " detik")
+                : (waktuOlahraga / 60 + ":" + waktuOlahraga % 60 + " menit")));
         System.out.println("Kesehatan Anda sekarang " + kesehatan);
         System.out.println("Kekenyangan Anda sekarang " + kekenyangan);
         System.out.println("Mood Anda sekarang " + mood);
     }
-    
+
     public void tidur(int waktuTidur) {
         setMood(waktuTidur, 240, 30);
         setKesehatan(waktuTidur, 240, 20);
@@ -256,17 +325,17 @@ public class Sim {
         if (waktuTidakTidur >= 600 && totalWaktuTidur < 180) {
             setKesehatan(1, 1, -5);
             setMood(1, 1, -5);
-        } 
+        }
     }
 
     public double makan(ObjekMakanan makanan) {
         // Cek apakah makanan ada di inventory
-        if (inventory.isContains(makanan)) { 
+        if (inventory.isContains(makanan)) {
             setKekenyangan(1, 1, makanan.getKekenyangan());
-    
+
             // kurangi stok makanan pada inventory
             inventory.kurangiItem(makanan.getNamaObjek(), 1);
-    
+
             // menangani kalo belum 4 menit udah makan lagi, acuan 4 menit yang awal
             if (!isTidakBuangAir) {
                 isTidakBuangAir = true;
@@ -292,18 +361,20 @@ public class Sim {
         }
 
         if (isBahanAda) {
-            ObjekMakanan newmakanan = new ObjekMakanan(makanan.getNamaObjek(), makanan.getBahan(), makanan.getKekenyangan());
+            ObjekMakanan newmakanan = new ObjekMakanan(makanan.getNamaObjek(), makanan.getBahan(),
+                    makanan.getKekenyangan());
             // kurangi bahan di inventory
             for (ObjekBahanMakanan bahan : makanan.getBahan()) {
                 inventory.kurangiItem(bahan.getNamaObjek(), 1);
             }
             // masukan makanan baru ke inventory
             inventory.addItemMakanan(newmakanan, 1);
-            
+
             setMood(1, 1, 10);
-            System.out.println("Srenggg.... " + newmakanan.getNamaObjek() + " berhasil dibuat. Sudah dimasukkan ke inventory");
+            System.out.println(
+                    "Srenggg.... " + newmakanan.getNamaObjek() + " berhasil dibuat. Sudah dimasukkan ke inventory");
             System.out.println("Selamat menikmati ...");
-            return newmakanan.getKekenyangan()*1.5;
+            return newmakanan.getKekenyangan() * 1.5;
         } else {
             return 0;
         }
@@ -312,12 +383,13 @@ public class Sim {
     public double berkunjung(Rumah rumahDiKunjungi) {
         Point currPoint = currLokasi.getRumah().getLocRumah();
         Point toPoin = rumahDiKunjungi.getLocRumah();
-        int selisihX = currPoint.getX()-toPoin.getX();
-        int selisihY = currPoint.getY()-toPoin.getY();
+        int selisihX = currPoint.getX() - toPoin.getX();
+        int selisihY = currPoint.getY() - toPoin.getY();
 
-        double waktu = Math.sqrt( Math.pow(selisihX,2) + Math.pow(selisihY,2) );; // dari perhitungan point jarak pada rumah
-        setMood((int)waktu, 30, 10);
-        setKekenyangan((int)waktu, 30, -10);
+        double waktu = Math.sqrt(Math.pow(selisihX, 2) + Math.pow(selisihY, 2));
+        ; // dari perhitungan point jarak pada rumah
+        setMood((int) waktu, 30, 10);
+        setKekenyangan((int) waktu, 30, -10);
 
         System.out.println("Anda akan berkunjung ke " + rumahDiKunjungi.getNama());
         System.out.println("Dengan lama perjalanan " + waktu + " detik");
@@ -349,7 +421,8 @@ public class Sim {
         System.out.println("Anda akan berpindah ke ruangan " + goingRuangan.getNama());
         System.out.println("========================================");
         currLokasi.setRuangan(goingRuangan);
-        System.out.println("Anda sudah berada di ruangan " + currLokasi.getRuangan().getNama() + " di rumah " + currLokasi.getRumah().getNama());
+        System.out.println("Anda sudah berada di ruangan " + currLokasi.getRuangan().getNama() + " di rumah "
+                + currLokasi.getRumah().getNama());
     }
 
     public void lihatInventory() {

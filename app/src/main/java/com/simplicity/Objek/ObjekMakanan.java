@@ -4,6 +4,8 @@ public class ObjekMakanan extends Objek {
     ObjekBahanMakanan[] bahan;
     int kekenyangan;
 
+    private ThreeElementArray<String, ObjekBahanMakanan[], Integer> item;
+
     public ObjekMakanan(String nama_makanan, ObjekBahanMakanan[] bahan, int kekenyangan){
         super(nama_makanan);
         this.bahan = bahan;
@@ -12,12 +14,11 @@ public class ObjekMakanan extends Objek {
 
     // getter
     public ObjekBahanMakanan[] getBahan(){
-        
-        return bahan;
+        return item.getSecond();
     }
 
     public int getKekenyangan(){
-        return kekenyangan;
+        return item.getThird();
     }
 
     // tidak ada setter karena tidak diperlukan

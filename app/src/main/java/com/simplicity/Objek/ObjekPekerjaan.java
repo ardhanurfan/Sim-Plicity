@@ -1,38 +1,57 @@
 package com.simplicity.Objek;
 
+import java.util.HashMap;
+
+import org.json.simple.JSONObject;
+
 public class ObjekPekerjaan extends Objek {
     int gaji;
 
-    public ObjekPekerjaan(String nama_pekerjaan, int gaji){
+    public ObjekPekerjaan(String nama_pekerjaan, int gaji) {
         super(nama_pekerjaan);
         this.gaji = gaji;
     }
 
-    public int getGaji(){
-        return gaji;   
+    public ObjekPekerjaan(JSONObject jsonObject) {
+        super(jsonObject.get("nama").toString());
+        gaji = Integer.parseInt(jsonObject.get("gaji").toString());
+    }
+
+    public JSONObject toJson() {
+        HashMap<String, Object> objekPekerjaanMap = new HashMap<String, Object>();
+
+        objekPekerjaanMap.put("nama", getNamaObjek());
+        objekPekerjaanMap.put("gaji", gaji);
+
+        JSONObject objekPekerjaanJSON = new JSONObject(objekPekerjaanMap);
+        return objekPekerjaanJSON;
+    }
+
+    public int getGaji() {
+        return gaji;
     }
 
     // tidak perlu setter karena pekerjaan hanya diinisialisasi saat game dimulai
 
-    //print 
-    public void print(){
+    // print
+    public void print() {
         System.out.println("\t" + getNamaObjek() + "\t" + gaji);
 
     }
 
     // print array of daftar_pekerjaan
-    public void printDaftarPekerjaan(ObjekPekerjaan[] daftar_pekerjaan){
+    public void printDaftarPekerjaan(ObjekPekerjaan[] daftar_pekerjaan) {
         System.out.println("Berikut adalah daftar pekerjaan yang tersedia.");
         System.out.println("No \tNama Pekerjaan \tGaji");
-        for (int i = 0; i < daftar_pekerjaan.length; i++){
-            //System.out.println((i+1) , daftar_pekerjaan[i].print());
-            System.out.print(i+1);
+        for (int i = 0; i < daftar_pekerjaan.length; i++) {
+            // System.out.println((i+1) , daftar_pekerjaan[i].print());
+            System.out.print(i + 1);
             daftar_pekerjaan[i].print();
         }
     }
 
-    // testing 
-    public static void main(String[] args){
+    // testing
+    public static void main(String[] args) {
 
         // inisialisasi di bawah ini di letakan di MAIN
 
