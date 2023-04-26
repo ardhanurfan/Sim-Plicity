@@ -1,8 +1,16 @@
 package com.simplicity.Util;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.simplicity.Rumah;
 import com.simplicity.Sim;
 import com.simplicity.World;
 
@@ -15,7 +23,8 @@ public class GameManager {
 
 	public GameManager() {
 		routing.showScreen(0);
-		save();
+		load();
+		world.getDaftarSim().get(0).setRumah(world.getDaftarRumah().get(0));
 	}
 
 	public Sim getCurrentSim() {
@@ -34,4 +43,24 @@ public class GameManager {
 			e.printStackTrace();
 		}
 	}
+
+	public void load() {
+		try {
+			JSONParser jsonParser = new JSONParser();
+			Object obj = jsonParser.parse(new FileReader("save.json"));
+			JSONObject jsonObject = (JSONObject) obj;
+
+			World.setTime(Integer.parseInt(jsonObject.get("time").toString()));
+
+			JSONArray jsonArrayRumah = (JSONArray) jsonObject.get("listRumah");
+			List<Rumah> listRumah = new ArrayList<Rumah>();
+			for (Object object : jsonArrayRumah) {
+				listRumah.add(new Rumah((JSONObject) object));
+			}
+			World.setListRumah(listRumah);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

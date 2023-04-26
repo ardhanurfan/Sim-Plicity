@@ -29,14 +29,6 @@ public class World {
         addSim("Paijo0");
         addSim("Paijo1");
         addSim("Paijo2");
-        addRumah(new Point(3, 50), "Rumah A");
-        addRumah(new Point(9, 30), "Rumah B");
-        addRumah(new Point(2, 60), "Rumah C");
-        getDaftarSim().get(0).setRumah(getDaftarRumah().get(0));
-        getDaftarRumah().get(0).upgradeRumah(getDaftarRumah().get(0).getDaftarRuangan().get(0), "atas",
-                "Ruang Keluarga");
-        getDaftarRumah().get(0).upgradeRumah(getDaftarRumah().get(0).getDaftarRuangan().get(0), "kiri",
-                "Ruang Keluarga Kiri");
     }
 
     public JSONObject toJson() {
@@ -107,7 +99,7 @@ public class World {
         return time;
     }
 
-    public void setTime(int aksi) {
+    public static void setTime(int aksi) {
         if (time + aksi < 720) {
             time += aksi;
         } else {
@@ -117,6 +109,10 @@ public class World {
 
     public List<Rumah> getDaftarRumah() {
         return listRumah;
+    }
+
+    public static void setListRumah(List<Rumah> listRumah) {
+        World.listRumah = listRumah;
     }
 
     public boolean checkLahan(Point lokasi) {
@@ -172,6 +168,10 @@ public class World {
 
     public List<Sim> getDaftarSim() {
         return listSim;
+    }
+
+    public static void setListSim(List<Sim> listSim) {
+        World.listSim = listSim;
     }
 
     public boolean addSim(String namaSim) {

@@ -22,6 +22,16 @@ public class ObjekNonMakanan extends Objek {
         this.aksi = aksi;
     }
 
+    public ObjekNonMakanan(JSONObject jsonObject) {
+        super(jsonObject.get("nama").toString());
+        panjang = Integer.parseInt(jsonObject.get("panjang").toString());
+        lebar = Integer.parseInt(jsonObject.get("lebar").toString());
+        harga = Integer.parseInt(jsonObject.get("harga").toString());
+        aksi = jsonObject.get("aksi").toString();
+        titik = new Point((JSONObject) jsonObject.get("titik"));
+        posisi = jsonObject.get("posisi").toString();
+    }
+
     public JSONObject toJson() {
         HashMap<String, Object> ObjekNonMakananMap = new HashMap<String, Object>();
 

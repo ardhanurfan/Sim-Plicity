@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class Rumah {
@@ -25,6 +26,44 @@ public class Rumah {
         inisialisasi();
     }
 
+    public Rumah(JSONObject jsonObject) {
+        id = Integer.parseInt(jsonObject.get("id").toString());
+        nama = jsonObject.get("nama").toString();
+        loc = new Point((JSONObject) jsonObject.get("loc"));
+
+        JSONArray jsonArrayRumah = (JSONArray) jsonObject.get("daftarRuangan");
+        List<Ruangan> daftarRuangan = new ArrayList<Ruangan>();
+        for (Object object : jsonArrayRumah) {
+            JSONObject obj = (JSONObject) object;
+            Ruangan ruangan = new Ruangan(obj);
+            // Untuk cek acuan ruangan
+            if (ruangan.getId() != 0) {
+                if (obj.get("atas") != null) {
+                    Ruangan ruanganacuan = daftarRuangan.get(Integer.parseInt(obj.get("atas").toString()));
+                    ruangan.setAtas(ruanganacuan);
+                    ruanganacuan.setBawah(ruangan);
+                }
+                if (obj.get("bawah") != null) {
+                    Ruangan ruanganacuan = daftarRuangan.get(Integer.parseInt(obj.get("bawah").toString()));
+                    ruangan.setBawah(ruanganacuan);
+                    ruanganacuan.setAtas(ruangan);
+                }
+                if (obj.get("kiri") != null) {
+                    Ruangan ruanganacuan = daftarRuangan.get(Integer.parseInt(obj.get("kiri").toString()));
+                    ruangan.setKiri(ruanganacuan);
+                    ruanganacuan.setKanan(ruangan);
+                }
+                if (obj.get("kanan") != null) {
+                    Ruangan ruanganacuan = daftarRuangan.get(Integer.parseInt(obj.get("kanan").toString()));
+                    ruangan.setKanan(ruanganacuan);
+                    ruanganacuan.setKiri(ruangan);
+                }
+            }
+            daftarRuangan.add(ruangan);
+        }
+        this.daftarRuangan = daftarRuangan;
+    }
+
     public JSONObject toJson() {
         HashMap<String, Object> rumahMap = new HashMap<String, Object>();
         List<JSONObject> daftarRuanganJSON = new ArrayList<JSONObject>();
@@ -32,6 +71,7 @@ public class Rumah {
             daftarRuanganJSON.add(ruangan.toJson());
         }
 
+        rumahMap.put("id", id);
         rumahMap.put("nama", nama);
         rumahMap.put("loc", loc.toJson());
         rumahMap.put("daftarRuangan", daftarRuanganJSON);

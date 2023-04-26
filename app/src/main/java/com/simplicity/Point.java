@@ -14,6 +14,11 @@ public class Point {
         y = b;
     }
 
+    public Point(JSONObject jsonObject) {
+        x = Integer.parseInt(jsonObject.get("x").toString());
+        y = Integer.parseInt(jsonObject.get("y").toString());
+    }
+
     public JSONObject toJson() {
         HashMap<String, Object> pointMap = new HashMap<String, Object>();
         pointMap.put("x", x);

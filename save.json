@@ -122,6 +122,7 @@
           "bawah": null
         }
       ],
+      "id": 0,
       "nama": "Rumah A"
     },
     {
@@ -212,6 +213,7 @@
           "bawah": null
         }
       ],
+      "id": 1,
       "nama": "Rumah B"
     },
     {
@@ -302,6 +304,7 @@
           "bawah": null
         }
       ],
+      "id": 2,
       "nama": "Rumah C"
     }
   ],
@@ -316,7 +319,7 @@
       "waktuTidakBuangAir": 0,
       "jedaGantiKerja": 0,
       "uang": 100.0,
-      "pekerjaan": { "nama": "Badut Sulap", "gaji": 15 },
+      "pekerjaan": { "nama": "Dokter", "gaji": 50 },
       "currLokasi": { "rumah": null, "ruangan": null },
       "kekenyangan": 80,
       "isTidakBuangAir": false,
@@ -334,7 +337,7 @@
       "waktuTidakBuangAir": 0,
       "jedaGantiKerja": 0,
       "uang": 100.0,
-      "pekerjaan": { "nama": "Polisi", "gaji": 35 },
+      "pekerjaan": { "nama": "Koki", "gaji": 30 },
       "currLokasi": { "rumah": null, "ruangan": null },
       "kekenyangan": 80,
       "isTidakBuangAir": false,
@@ -352,7 +355,7 @@
       "waktuTidakBuangAir": 0,
       "jedaGantiKerja": 0,
       "uang": 100.0,
-      "pekerjaan": { "nama": "Dokter", "gaji": 50 },
+      "pekerjaan": { "nama": "Koki", "gaji": 30 },
       "currLokasi": { "rumah": null, "ruangan": null },
       "kekenyangan": 80,
       "isTidakBuangAir": false,

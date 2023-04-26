@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.simplicity.Objek.ObjekNonMakanan;
@@ -24,6 +25,27 @@ public class Ruangan {
         this.daftarObjek = new ArrayList<ObjekNonMakanan>();
         this.ruang = new String[6][6];
         this.id = id;
+    }
+
+    public Ruangan(JSONObject jsonObject) {
+        id = Integer.parseInt(jsonObject.get("id").toString());
+        nama = jsonObject.get("nama").toString();
+
+        JSONArray jsonArrayObjekNonMakanan = (JSONArray) jsonObject.get("daftarObjek");
+        List<ObjekNonMakanan> daftarObjek = new ArrayList<ObjekNonMakanan>();
+        for (Object object : jsonArrayObjekNonMakanan) {
+            daftarObjek.add(new ObjekNonMakanan((JSONObject) object));
+        }
+        this.daftarObjek = daftarObjek;
+        this.ruang = new String[6][6];
+        JSONArray jsonArrayRuang = (JSONArray) jsonObject.get("ruang");
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if ((((JSONArray) jsonArrayRuang.get(i)).get(j)) != null) {
+                    ruang[i][j] = (((JSONArray) jsonArrayRuang.get(i)).get(j)).toString();
+                }
+            }
+        }
     }
 
     public JSONObject toJson() {
