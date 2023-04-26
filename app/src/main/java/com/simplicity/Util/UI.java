@@ -1,4 +1,5 @@
 package com.simplicity.Util;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -32,7 +33,9 @@ public class UI {
     public JFrame window;
     public JPanel bgPanel[] = new JPanel[10];
     public JLabel bgLabel[] = new JLabel[10];
-    
+
+    public JPanel attributePanel;
+    JPanel textPanel;
     public JTextArea messagText;
     public JLabel nameText;
     public JLabel jamText;
@@ -63,8 +66,9 @@ public class UI {
 
         bgLabel[bgNum] = new JLabel();
         bgLabel[bgNum].setBounds(0, 0, 1000, 800);
-        
-        ImageIcon bgIcon = new ImageIcon( new ImageIcon(getClass().getClassLoader().getResource(bgPath)).getImage().getScaledInstance(1000, 800, Image.SCALE_SMOOTH));
+
+        ImageIcon bgIcon = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(bgPath)).getImage()
+                .getScaledInstance(1000, 800, Image.SCALE_SMOOTH));
         bgLabel[bgNum].setIcon(bgIcon);
         bgPanel[bgNum].add(bgLabel[bgNum]);
         bgPanel[bgNum].setVisible(false);
@@ -76,10 +80,11 @@ public class UI {
         bgPanel[bgNum].setBackground(null);
         bgPanel[bgNum].setLayout(null);
         window.add(bgPanel[bgNum]);
-        
+
         bgLabel[bgNum] = new JLabel();
         bgLabel[bgNum].setBounds(0, 0, 700, 700);
-        ImageIcon bgIcon = new ImageIcon( new ImageIcon(getClass().getClassLoader().getResource(bgPath)).getImage().getScaledInstance(700, 700, Image.SCALE_SMOOTH));
+        ImageIcon bgIcon = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(bgPath)).getImage()
+                .getScaledInstance(700, 700, Image.SCALE_SMOOTH));
         bgLabel[bgNum].setIcon(bgIcon);
         bgLabel[bgNum].addMouseListener(mouse);
         bgPanel[bgNum].add(bgLabel[bgNum]);
@@ -87,7 +92,7 @@ public class UI {
     }
 
     public void attributeField() {
-        JPanel textPanel = new JPanel();
+        textPanel = new JPanel();
         textPanel.setBounds(0, 700, 700, 100);
         textPanel.setBackground(Color.white);
         textPanel.setLayout(null);
@@ -103,12 +108,12 @@ public class UI {
         messagText.setFont(new Font("Book Antique", Font.PLAIN, 24));
         textPanel.add(messagText);
 
-        JPanel attributePanel = new JPanel();
+        attributePanel = new JPanel();
         attributePanel.setBounds(700, 0, 300, 800);
         attributePanel.setBackground(new Color(163, 115, 42, 255));
         attributePanel.setLayout(null);
         window.add(attributePanel);
-        
+
         // add nama
         nameText = new JLabel();
         nameText.setBounds(50, 50, 270, 50);
@@ -118,34 +123,43 @@ public class UI {
         attributePanel.add(nameText);
 
         // add jam
-        ImageIcon jamImage = new ImageIcon( new ImageIcon(getClass().getClassLoader().getResource("jam.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        ImageIcon jamImage = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("jam.png")).getImage()
+                .getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         JLabel jamIcon = new JLabel();
         jamIcon.setBounds(50, 100, 50, 50);
         jamIcon.setIcon(jamImage);
         jamIcon.setBackground(null);
         attributePanel.add(jamIcon);
-        jamText = new JLabel(String.format("%d : %d", (720-gm.world.getTime())/60,  (720-gm.world.getTime())%60));
+        jamText = new JLabel(
+                String.format("%d : %d", (720 - gm.world.getTime()) / 60, (720 - gm.world.getTime()) % 60));
         jamText.setBounds(120, 100, 200, 50);
         jamText.setBackground(null);
         jamText.setForeground(Color.white);
         jamText.setFont(new Font("Book Antique", Font.PLAIN, 24));
         attributePanel.add(jamText);
+
+        // Save
+        customButton(attributePanel, 50, 590, 200, 50, "Save", 24, "save");
+        customButton(attributePanel, 50, 650, 200, 50, "Exit", 24, "exit");
+
+        textPanel.setVisible(false);
+        attributePanel.setVisible(false);
     }
 
-      public ImageIcon rotate(ImageIcon icon, double degrees) {
+    public ImageIcon rotate(ImageIcon icon, double degrees) {
         // Get the buffered image from the ImageIcon
         BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = image.createGraphics();
         icon.paintIcon(null, g2d, 0, 0);
         g2d.dispose();
-    
+
         // Calculate the new size of the image based on the angle of rotation
         double radians = Math.toRadians(degrees);
         double sin = Math.abs(Math.sin(radians));
         double cos = Math.abs(Math.cos(radians));
         int newWidth = (int) Math.round(icon.getIconWidth() * cos + icon.getIconHeight() * sin);
         int newHeight = (int) Math.round(icon.getIconWidth() * sin + icon.getIconHeight() * cos);
-    
+
         // Create a new image
         BufferedImage rotatedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
         g2d = rotatedImage.createGraphics();
@@ -160,12 +174,13 @@ public class UI {
         // Paint the original image
         g2d.drawImage(image, 0, 0, null);
         g2d.dispose();
-    
+
         // Create a new ImageIcon from the rotated image
         return new ImageIcon(rotatedImage);
     }
 
-    public void createObjek(int bgNum, int x, int y, int width, int height, String objPath, String[] actions, String posisi) {
+    public void createObjek(int bgNum, int x, int y, int width, int height, String objPath, String[] actions,
+            String posisi) {
         // POP MENU
         JPopupMenu popMenu = new JPopupMenu();
         JMenuItem menuItem[] = new JMenuItem[actions.length];
@@ -178,9 +193,9 @@ public class UI {
 
         JLabel obj = new JLabel();
         obj.setBounds(x, y, width, height);
-        
+
         ImageIcon objImage = new ImageIcon(getClass().getClassLoader().getResource(objPath));
-        if (posisi.equals("h")){
+        if (posisi.equals("h")) {
             objImage = rotate(objImage, 90);
         }
         obj.setIcon(objImage);
@@ -188,21 +203,30 @@ public class UI {
         obj.addMouseListener(new MouseListener() {
 
             @Override
-            public void mouseClicked(MouseEvent e) {}
+            public void mouseClicked(MouseEvent e) {
+            }
+
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     popMenu.show(obj, e.getX(), e.getY());
                 }
             }
-            public void mouseReleased(MouseEvent e) {}
-            public void mouseEntered(MouseEvent e) {}
-            public void mouseExited(MouseEvent e) {}
+
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            public void mouseExited(MouseEvent e) {
+            }
         });
 
         bgPanel[bgNum].add(obj);
     }
 
-    public void createObjek(int bgNum, int x, int y, int width, int height, String objPath, String[] actions, int index) {
+    public void createObjek(int bgNum, int x, int y, int width, int height, String objPath, String[] actions,
+            int index) {
         // POP MENU
         JPopupMenu popMenu = new JPopupMenu();
         JMenuItem menuItem[] = new JMenuItem[actions.length];
@@ -211,38 +235,46 @@ public class UI {
                 String[] command = actions[i].split("%");
                 menuItem[i] = new JMenuItem("View " + command[1]);
                 menuItem[i].addActionListener(gm.actionHandler);
-                menuItem[i].setActionCommand(index+"%"+command[0]);
+                menuItem[i].setActionCommand(index + "%" + command[0]);
             } else {
                 menuItem[i] = new JMenuItem(actions[i]);
                 menuItem[i].addActionListener(gm.actionHandler);
-                menuItem[i].setActionCommand(index+"%"+actions[i]);
+                menuItem[i].setActionCommand(index + "%" + actions[i]);
             }
             popMenu.add(menuItem[i]);
         }
 
         JLabel obj = new JLabel();
         obj.setBounds(x, y, width, height);
-        ImageIcon objImage = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(objPath)).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
+        ImageIcon objImage = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(objPath)).getImage()
+                .getScaledInstance(width, height, Image.SCALE_SMOOTH));
         obj.setIcon(objImage);
         obj.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {}
+            public void mouseClicked(MouseEvent e) {
+            }
+
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     popMenu.show(obj, e.getX(), e.getY());
                 }
             }
-            public void mouseReleased(MouseEvent e) {}
-            public void mouseEntered(MouseEvent e) {}
-            public void mouseExited(MouseEvent e) {}
+
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            public void mouseExited(MouseEvent e) {
+            }
         });
         bgPanel[bgNum].add(obj, 0);
     }
 
-
     public void startButton(int bgNum, int x, int y, int width, int height, String text) {
         JButton btn = new JButton();
-        
+
         btn.setBounds(x, y, width, height);
         btn.setText(text);
         btn.setBorder(null);
@@ -258,7 +290,7 @@ public class UI {
                 btn.setContentAreaFilled(true);
                 btn.setBackground(new Color(0, 0, 0, 200));
             }
-            
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btn.setContentAreaFilled(false);
             }
@@ -267,7 +299,8 @@ public class UI {
         bgPanel[bgNum].add(btn, 0);
     }
 
-    public void customButton(int bgNum, int x, int y, int width, int height, String text, int fontSize, String command) {
+    public void customButton(JPanel panel, int x, int y, int width, int height, String text, int fontSize,
+            String command) {
         JButton btn = new JButton();
         btn.setBounds(x, y, width, height);
         btn.setText(text);
@@ -276,28 +309,27 @@ public class UI {
         btn.addActionListener(gm.actionHandler);
         btn.setActionCommand(command);
         btn.setFont(new Font("Helvetica", Font.BOLD, fontSize));
-        bgPanel[bgNum].add(btn, 0);
+        panel.add(btn, 0);
     }
 
-    public void generateRoom(Ruangan r, int bgNum){
-        for(int i =1;i<=r.getDaftarObjek().size();i++){
-            ObjekNonMakanan o = r.getObjek(i-1);
-            int x = (int)Math.round(o.getTitik().getX()*116.67);
-            int y = (int)Math.round(o.getTitik().getY()*116.67);
-            int width,height;
-            if("v".equals(o.getPosisi())){
-                height = (int)Math.round(o.getPanjang()*116.67);
-                width = (int)Math.round(o.getLebar()*116.67);
+    public void generateRoom(Ruangan r, int bgNum) {
+        for (int i = 1; i <= r.getDaftarObjek().size(); i++) {
+            ObjekNonMakanan o = r.getObjek(i - 1);
+            int x = (int) Math.round(o.getTitik().getX() * 116.67);
+            int y = (int) Math.round(o.getTitik().getY() * 116.67);
+            int width, height;
+            if ("v".equals(o.getPosisi())) {
+                height = (int) Math.round(o.getPanjang() * 116.67);
+                width = (int) Math.round(o.getLebar() * 116.67);
+            } else {
+                width = (int) Math.round(o.getPanjang() * 116.67);
+                height = (int) Math.round(o.getLebar() * 116.67);
             }
-            else{
-                width = (int)Math.round(o.getPanjang()*116.67);
-                height = (int)Math.round(o.getLebar()*116.67);
-            }
-            String filename = o.getNamaObjek()+".png";
-            String [] action = new String[1]; 
+            String filename = o.getNamaObjek() + ".png";
+            String[] action = new String[1];
             action[0] = o.getAksi();
 
-            createObjek(bgNum,  x,  y,  width,  height, filename, action,o.getPosisi());
+            createObjek(bgNum, x, y, width, height, filename, action, o.getPosisi());
         }
     }
 
@@ -307,53 +339,61 @@ public class UI {
         JMenuItem menuItem[] = new JMenuItem[2];
         menuItem[1] = new JMenuItem("View Room");
         menuItem[1].addActionListener(gm.actionHandler);
-        menuItem[1].setActionCommand(index+"%"+"View Room");
+        menuItem[1].setActionCommand(index + "%" + "View Room");
         popMenu.add(menuItem[1]);
 
         JLabel obj = new JLabel();
-        obj.setBounds(x, y,80, 80);
+        obj.setBounds(x, y, 80, 80);
         obj.setForeground(Color.white);
-        obj.setBackground(new Color(13, 161, 136)); 
+        obj.setBackground(new Color(13, 161, 136));
         obj.setOpaque(true);
         obj.setBorder(BorderFactory.createLineBorder(Color.black));
         obj.setText("<html><div style='text-align: center;'>Ruang " + ruangan.getNama() + "</div></html>");
         obj.setFont(new Font("Helvetica", Font.BOLD, 16));
         obj.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {}
+            public void mouseClicked(MouseEvent e) {
+            }
+
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     popMenu.show(obj, e.getX(), e.getY());
                 }
             }
-            public void mouseReleased(MouseEvent e) {}
-            public void mouseEntered(MouseEvent e) {}
-            public void mouseExited(MouseEvent e) {}
+
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            public void mouseExited(MouseEvent e) {
+            }
         });
         bgPanel[bgNum].add(obj, 0);
     }
 
     public void generateHome(Rumah rumah, int bgNum) {
-        List<Point> listPoint = new ArrayList<Point>(); 
+        List<Point> listPoint = new ArrayList<Point>();
         for (int i = 0; i < rumah.getDaftarRuangan().size(); i++) {
             Point point = new Point(310, 310);
             Ruangan currRuangan = rumah.getDaftarRuangan().get(i);
-            if (i!=0) {
+            if (i != 0) {
                 if (currRuangan.getAtas() != null) {
                     int index = rumah.getDaftarRuangan().indexOf(currRuangan.getAtas());
                     point.setX(listPoint.get(index).getX());
-                    point.setY(listPoint.get(index).getY()+90);
+                    point.setY(listPoint.get(index).getY() + 90);
                 } else if (currRuangan.getBawah() != null) {
                     int index = rumah.getDaftarRuangan().indexOf(currRuangan.getBawah());
                     point.setX(listPoint.get(index).getX());
-                    point.setY(listPoint.get(index).getY()-90);
+                    point.setY(listPoint.get(index).getY() - 90);
                 } else if (currRuangan.getKanan() != null) {
                     int index = rumah.getDaftarRuangan().indexOf(currRuangan.getKanan());
-                    point.setX(listPoint.get(index).getX()-90);
+                    point.setX(listPoint.get(index).getX() - 90);
                     point.setY(listPoint.get(index).getY());
                 } else if (currRuangan.getKiri() != null) {
                     int index = rumah.getDaftarRuangan().indexOf(currRuangan.getKiri());
-                    point.setX(listPoint.get(index).getX()+90);
+                    point.setX(listPoint.get(index).getX() + 90);
                     point.setY(listPoint.get(index).getY());
                 }
             }
@@ -362,12 +402,12 @@ public class UI {
         }
     }
 
-    public void refreshRoom(Ruangan currRuangan){
+    public void refreshRoom(Ruangan currRuangan) {
         gm.ui.bgPanel[3].removeAll();
-        gm.routing.showScreen(3); 
-        gm.ui.createObjek(3, 650, 600, 40, 40, "edit.png", new String[]{"Edit Room"}, -1);
-        gm.ui.createObjek(3, 650, 650, 40, 40, "back.png", new String[]{"Back to Home", "Back to World"}, -1);
-        gm.ui.generateRoom(currRuangan,3);
+        gm.routing.showScreen(3);
+        gm.ui.createObjek(3, 650, 600, 40, 40, "edit.png", new String[] { "Edit Room" }, -1);
+        gm.ui.createObjek(3, 650, 650, 40, 40, "back.png", new String[] { "Back to Home", "Back to World" }, -1);
+        gm.ui.generateRoom(currRuangan, 3);
         gm.ui.bgPanel[3].add(gm.ui.bgLabel[3]);
         gm.ui.bgPanel[3].revalidate();
         gm.ui.bgPanel[3].repaint();
@@ -375,54 +415,57 @@ public class UI {
 
     public void refreshHome(Rumah currRumah) {
         gm.ui.bgPanel[4].removeAll();
-        gm.routing.showScreen(4); 
-        gm.ui.createObjek(4, 650, 600, 40, 40, "upgrade.png", new String[]{"Upgrade House"}, -1);
-        gm.ui.createObjek(4, 650, 650, 40, 40, "back.png", new String[]{"Back to World"}, -1);
+        gm.routing.showScreen(4);
+        gm.ui.createObjek(4, 650, 600, 40, 40, "upgrade.png", new String[] { "Upgrade House" }, -1);
+        gm.ui.createObjek(4, 650, 650, 40, 40, "back.png", new String[] { "Back to World" }, -1);
         gm.ui.generateHome(currRumah, 4);
         gm.ui.bgPanel[4].add(gm.ui.bgLabel[4]);
         gm.ui.bgPanel[4].revalidate();
         gm.ui.bgPanel[4].repaint();
     }
-    
+
     public void generateScreen() {
         // Start
         createBackgroundFull(0, "start.png");
         startButton(0, 150, 500, 700, 40, "Click Here to Start");
-        
+
         // Main Menu
         createBackgroundFull(1, "main_menu.png");
         if (gm.world.getDaftarSim().isEmpty()) {
-            customButton(1, 300, 300, 400, 50, "Create New Sim", 32, "new-sim");
-            customButton(1, 300, 400, 400, 50, "Exit Game", 32, "exit");
+            customButton(bgPanel[1], 300, 300, 400, 50, "Create New Sim", 32, "new-sim");
+            customButton(bgPanel[1], 300, 400, 400, 50, "Exit Game", 32, "exit");
         } else {
-            customButton(1, 300, 250, 400, 50, "Choose Sim", 32, "choose-sim");
-            customButton(1, 300, 350, 400, 50, "Create New Sim", 32, "new-sim");
-            customButton(1, 300, 450, 400, 50, "Exit Game", 32, "exit");
+            customButton(bgPanel[1], 300, 250, 400, 50, "Choose Sim", 32, "choose-sim");
+            customButton(bgPanel[1], 300, 350, 400, 50, "Create New Sim", 32, "new-sim");
+            customButton(bgPanel[1], 300, 450, 400, 50, "Exit Game", 32, "exit");
         }
-        
+
         // World
         createBackground(2, "world.png", new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (e.getX() > 30 && e.getX() < 670 && e.getY() > 30 && e.getY() < 670) {
-                    if (gm.getCurrentSim().getRumah()==null) {
-                        createObjek(2, e.getX(), e.getY(), 20, 20, "rumahku.png", new String[]{""}, -1);
+                    if (gm.getCurrentSim().getRumah() == null) {
+                        createObjek(2, e.getX(), e.getY(), 20, 20, "rumahku.png", new String[] { "" }, -1);
                         bgPanel[2].repaint();
-                        String homeName = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "What is your home name?", "Input Home homeName", JOptionPane.PLAIN_MESSAGE);
-                        if (homeName!=null && homeName.replaceAll(" ", "").length() > 0) {
-                            if (gm.world.addRumah(new Point((e.getX()-30)/10, (e.getY()-30)/10), homeName)) {
-                                gm.getCurrentSim().setRumah(gm.world.getDaftarRumah().get(gm.world.getDaftarRumah().size()-1));
+                        String homeName = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "What is your home name?",
+                                "Input Home homeName", JOptionPane.PLAIN_MESSAGE);
+                        if (homeName != null && homeName.replaceAll(" ", "").length() > 0) {
+                            if (gm.world.addRumah(new Point((e.getX() - 30) / 10, (e.getY() - 30) / 10), homeName)) {
+                                gm.getCurrentSim()
+                                        .setRumah(gm.world.getDaftarRumah().get(gm.world.getDaftarRumah().size() - 1));
                                 bgPanel[2].remove(0);
-                                createObjek(2, e.getX(), e.getY(), 20, 20, "rumahku.png", new String[]{"View Home%" + homeName}, gm.world.getDaftarRumah().size()-1);
+                                createObjek(2, e.getX(), e.getY(), 20, 20, "rumahku.png",
+                                        new String[] { "View Home%" + homeName }, gm.world.getDaftarRumah().size() - 1);
                                 gm.ui.messagText.setText("Rumah berhasil di bangun, Selamat bermain");
                             } else {
-                                JOptionPane.showMessageDialog(null,  "Nama sudah digunakan!");
+                                JOptionPane.showMessageDialog(null, "Nama sudah digunakan!");
                                 bgPanel[2].remove(0);
                             }
                         } else {
                             bgPanel[2].remove(0);
                         }
                         bgPanel[2].repaint();
-                    }    
+                    }
                 }
             }
         });

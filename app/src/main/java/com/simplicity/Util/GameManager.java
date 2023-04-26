@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -40,6 +42,7 @@ public class GameManager {
 			file.write(world.toJson().toJSONString());
 			file.flush();
 		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Save gagal");
 			e.printStackTrace();
 		}
 	}
@@ -58,7 +61,15 @@ public class GameManager {
 				listRumah.add(new Rumah((JSONObject) object));
 			}
 			World.setListRumah(listRumah);
+
+			JSONArray jsonArraySim = (JSONArray) jsonObject.get("listSim");
+			List<Sim> listSim = new ArrayList<Sim>();
+			for (Object object : jsonArraySim) {
+				listSim.add(new Sim((JSONObject) object, world.getDaftarRumah()));
+			}
+			World.setListSim(listSim);
 		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Load gagal");
 			e.printStackTrace();
 		}
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.simplicity.Objek.Objek;
@@ -14,6 +15,16 @@ import com.simplicity.Objek.ThreeElementArray;
 
 public class Inventory {
     private ArrayList<InventoryItem> data = new ArrayList<InventoryItem>();
+
+    public Inventory() {
+    }
+
+    public Inventory(JSONObject jsonObject) {
+        JSONArray jsonArrayData = (JSONArray) jsonObject.get("inventoriData");
+        for (Object object : jsonArrayData) {
+            data.add(new InventoryItem((JSONObject) object));
+        }
+    }
 
     public JSONObject toJson() {
         HashMap<String, Object> inventoriDataMap = new HashMap<String, Object>();
@@ -34,6 +45,13 @@ public class Inventory {
 
         public InventoryItem(String namaBarang, String kategori, int jumlah) {
             this.item = new ThreeElementArray<>(namaBarang, kategori, jumlah);
+        }
+
+        public InventoryItem(JSONObject jsonObject) {
+            String namaBarang = jsonObject.get("namaBarang").toString();
+            String kategori = jsonObject.get("kategori").toString();
+            int jumlah = Integer.parseInt(jsonObject.get("jumlah").toString());
+            this.item = new ThreeElementArray<String, String, Integer>(namaBarang, kategori, jumlah);
         }
 
         public JSONObject toJson() {

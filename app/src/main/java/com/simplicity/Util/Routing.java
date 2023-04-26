@@ -8,9 +8,13 @@ public class Routing {
     }
 
     public void showScreen(int screenIndex) {
-        for (int i=0; i<gm.ui.bgPanel.length; i++) {
+        for (int i = 0; i < gm.ui.bgPanel.length; i++) {
             if (i == screenIndex) {
                 gm.ui.bgPanel[i].setVisible(true);
+                if (screenIndex > 1) {
+                    gm.ui.attributePanel.setVisible(true);
+                    gm.ui.textPanel.setVisible(true);
+                }
             } else {
                 if (gm.ui.bgPanel[i] != null) {
                     gm.ui.bgPanel[i].setVisible(false);

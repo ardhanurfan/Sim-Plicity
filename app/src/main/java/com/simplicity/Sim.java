@@ -57,7 +57,28 @@ public class Sim {
         this.mood = 80;
         this.kesehatan = 80;
         this.inventory = new Inventory();
-        this.currLokasi = new LokasiSim(null, null);
+        this.currLokasi = new LokasiSim();
+    }
+
+    public Sim(JSONObject jsonObject, List<Rumah> listRumah) {
+        namaLengkap = jsonObject.get("namaLengkap").toString();
+        pekerjaan = new ObjekPekerjaan((JSONObject) jsonObject.get("pekerjaan"));
+        uang = Double.parseDouble(jsonObject.get("uang").toString());
+        kekenyangan = Integer.parseInt(jsonObject.get("kekenyangan").toString());
+        mood = Integer.parseInt(jsonObject.get("mood").toString());
+        kesehatan = Integer.parseInt(jsonObject.get("kesehatan").toString());
+        status = jsonObject.get("status") != null ? jsonObject.get("status").toString() : null;
+        rumah = jsonObject.get("rumah") != null ? listRumah.get(Integer.parseInt(jsonObject.get("rumah").toString()))
+                : null;
+        currLokasi = new LokasiSim((JSONObject) jsonObject.get("currLokasi"), listRumah);
+        inventory = new Inventory((JSONObject) jsonObject.get("inventory"));
+
+        totalWaktuKerja = Integer.parseInt(jsonObject.get("totalWaktuKerja").toString());
+        jedaGantiKerja = Integer.parseInt(jsonObject.get("jedaGantiKerja").toString());
+        totalWaktuTidur = Integer.parseInt(jsonObject.get("totalWaktuTidur").toString());
+        waktuTidakTidur = Integer.parseInt(jsonObject.get("waktuTidakTidur").toString());
+        waktuTidakBuangAir = Integer.parseInt(jsonObject.get("waktuTidakBuangAir").toString());
+        isTidakBuangAir = Boolean.parseBoolean(jsonObject.get("isTidakBuangAir").toString());
     }
 
     public JSONObject toJson() {
@@ -89,9 +110,16 @@ public class Sim {
         private Rumah rumah;
         private Ruangan ruangan;
 
-        public LokasiSim(Rumah rumah, Ruangan ruangan) {
-            this.ruangan = ruangan;
-            this.rumah = rumah;
+        public LokasiSim() {
+        }
+
+        public LokasiSim(JSONObject jsonObject, List<Rumah> listRumah) {
+            rumah = jsonObject.get("rumah") != null
+                    ? listRumah.get(Integer.parseInt(jsonObject.get("rumah").toString()))
+                    : null;
+            ruangan = jsonObject.get("ruangan") != null
+                    ? rumah.getDaftarRuangan().get(Integer.parseInt(jsonObject.get("ruangan").toString()))
+                    : null;
         }
 
         public JSONObject toJson() {
