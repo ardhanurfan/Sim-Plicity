@@ -75,21 +75,21 @@ public class World {
         daftar_bahan.add(susu);
 
         // List objek non makanan
-        daftar_barang.add(new ObjekNonMakanan("Kasur Single\t", 4, 1, 50, "Tidur"));
+        daftar_barang.add(new ObjekNonMakanan("Kasur Single", 4, 1, 50, "Tidur"));
         daftar_barang.add(new ObjekNonMakanan("Kasur Queen Size", 4, 2, 100, "Tidur"));
-        daftar_barang.add(new ObjekNonMakanan("Kasur King Size ", 5, 2, 150, "Tidur"));
-        daftar_barang.add(new ObjekNonMakanan("Toilet\t\t", 1, 1, 50, "Buang air"));
-        daftar_barang.add(new ObjekNonMakanan("Kompor Gas\t", 2, 1, 100, "Memasak"));
-        daftar_barang.add(new ObjekNonMakanan("Kompor Listrik\t", 1, 1, 200, "Memasak"));
-        daftar_barang.add(new ObjekNonMakanan("Meja dan Kursi\t", 3, 3, 50, "Makan"));
-        daftar_barang.add(new ObjekNonMakanan("Jam\t\t", 1, 1, 10, "Melihat Waktu"));
+        daftar_barang.add(new ObjekNonMakanan("Kasur King Size", 5, 2, 150, "Tidur"));
+        daftar_barang.add(new ObjekNonMakanan("Toilet", 1, 1, 50, "Buang air"));
+        daftar_barang.add(new ObjekNonMakanan("Kompor Gas", 2, 1, 100, "Memasak"));
+        daftar_barang.add(new ObjekNonMakanan("Kompor Listrik", 1, 1, 200, "Memasak"));
+        daftar_barang.add(new ObjekNonMakanan("Meja dan Kursi", 3, 3, 50, "Makan"));
+        daftar_barang.add(new ObjekNonMakanan("Jam", 1, 1, 10, "Melihat Waktu"));
 
         // List objek makanan
         daftar_makanan.add(new ObjekMakanan("Nasi Ayam", new ObjekBahanMakanan[] { nasi, ayam }, 16));
         daftar_makanan.add(new ObjekMakanan("Nasi Kari", new ObjekBahanMakanan[] { nasi, kentang, wortel, sapi }, 30));
         daftar_makanan.add(new ObjekMakanan("Susu Kacang", new ObjekBahanMakanan[] { susu, kacang }, 5));
         daftar_makanan.add(new ObjekMakanan("Tumis Sayur", new ObjekBahanMakanan[] { wortel, bayam }, 5));
-        daftar_makanan.add(new ObjekMakanan("Bistik\t", new ObjekBahanMakanan[] { kentang, sapi }, 22));
+        daftar_makanan.add(new ObjekMakanan("Bistik", new ObjekBahanMakanan[] { kentang, sapi }, 22));
     }
 
     public String getTime() {

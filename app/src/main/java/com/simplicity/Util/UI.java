@@ -40,8 +40,13 @@ public class UI {
     public JPanel attributePanel;
     public JPanel textPanel;
     public JTextArea messagText;
-    public JLabel nameText;
     public JLabel jamText;
+    public JLabel nameText;
+    public JLabel pekerjaanText;
+    public JLabel uangText;
+    public JLabel moodText;
+    public JLabel kesehatanText;
+    public JLabel kekenyanganText;
 
     public JFrame popInventory;
 
@@ -120,37 +125,62 @@ public class UI {
         attributePanel.setLayout(null);
         window.add(attributePanel);
 
+        // add jam
+        attributeItem(50, 30, "jam.png", gm.world.getTime(), jamText);
+
         // add nama
         nameText = new JLabel();
-        nameText.setBounds(50, 50, 270, 50);
-        nameText.setBackground(Color.blue);
+        nameText.setBounds(50, 100, 270, 50);
+        nameText.setBackground(null);
         nameText.setForeground(Color.white);
         nameText.setFont(new Font("Book Antique", Font.PLAIN, 24));
         attributePanel.add(nameText);
 
-        // add jam
-        ImageIcon jamImage = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("jam.png")).getImage()
-                .getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        JLabel jamIcon = new JLabel();
-        jamIcon.setBounds(50, 100, 50, 50);
-        jamIcon.setIcon(jamImage);
-        jamIcon.setBackground(null);
-        attributePanel.add(jamIcon);
-        jamText = new JLabel(gm.world.getTime());
-        jamText.setBounds(120, 100, 200, 50);
-        jamText.setBackground(null);
-        jamText.setForeground(Color.white);
-        jamText.setFont(new Font("Book Antique", Font.PLAIN, 24));
-        attributePanel.add(jamText);
+        // add pekerjaan
+        attributeItem(50, 160, "kerja.png", "Polisi", pekerjaanText);
+
+        // add uang
+        attributeItem(50, 220, "uang.png", "80", uangText);
+
+        // add mood
+        attributeItem(50, 280, "mood.png", "80", moodText);
+
+        // add kesehatan
+        attributeItem(50, 340, "kesehatan.png", "80", kesehatanText);
+
+        // add kekenyangan
+        attributeItem(50, 400, "kenyang.png", "80", moodText);
+
+        // add inventory
+        createObjek(attributePanel, 85, 475, 50, 50, "inventory.png", new String[] { "View Inventory" }, -1);
+
+        // add shop
+        createObjek(attributePanel, 160, 475, 50, 50, "shop.png", new String[] { "Go to Store" }, -1);
 
         // Save
-        customButton(attributePanel, 50, 500, 200, 40, "Change Sim", 24, "choose-sim");
-        customButton(attributePanel, 50, 550, 200, 40, "Inventory", 24, "inventory");
-        customButton(attributePanel, 50, 600, 200, 40, "Save", 24, "save");
-        customButton(attributePanel, 50, 650, 200, 40, "Exit", 24, "exit");
+        customButton(attributePanel, 50, 560, 200, 40, "Change Sim", 24, "choose-sim");
+        customButton(attributePanel, 50, 610, 200, 40, "Save", 24, "save");
+        customButton(attributePanel, 50, 660, 200, 40, "Main Menu", 24, "start");
 
         textPanel.setVisible(false);
         attributePanel.setVisible(false);
+    }
+
+    public void attributeItem(int x, int y, String path, String currText, JLabel jLabel) {
+        ImageIcon jamImage = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(path)).getImage()
+                .getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        JLabel jamIcon = new JLabel();
+        jamIcon.setBounds(x, y, 50, 50);
+        jamIcon.setIcon(jamImage);
+        jamIcon.setBackground(null);
+        attributePanel.add(jamIcon);
+
+        jLabel = new JLabel(currText);
+        jLabel.setBounds(x + 70, y, 200, 50);
+        jLabel.setBackground(null);
+        jLabel.setForeground(Color.white);
+        jLabel.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        attributePanel.add(jLabel);
     }
 
     public ImageIcon rotate(ImageIcon icon, double degrees) {
@@ -207,32 +237,19 @@ public class UI {
         }
         obj.setIcon(objImage);
 
-        obj.addMouseListener(new MouseListener() {
-
+        obj.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-            }
-
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(java.awt.event.MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     popMenu.show(obj, e.getX(), e.getY());
                 }
-            }
-
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            public void mouseExited(MouseEvent e) {
             }
         });
 
         bgPanel[bgNum].add(obj);
     }
 
-    public void createObjek(int bgNum, int x, int y, int width, int height, String objPath, String[] actions,
+    public void createObjek(JPanel panel, int x, int y, int width, int height, String objPath, String[] actions,
             int index) {
         // POP MENU
         JPopupMenu popMenu = new JPopupMenu();
@@ -256,27 +273,15 @@ public class UI {
         ImageIcon objImage = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(objPath)).getImage()
                 .getScaledInstance(width, height, Image.SCALE_SMOOTH));
         obj.setIcon(objImage);
-        obj.addMouseListener(new MouseListener() {
+        obj.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-            }
-
-            public void mousePressed(MouseEvent e) {
+            public void mousePressed(java.awt.event.MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
                     popMenu.show(obj, e.getX(), e.getY());
                 }
             }
-
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            public void mouseExited(MouseEvent e) {
-            }
         });
-        bgPanel[bgNum].add(obj, 0);
+        panel.add(obj, 0);
     }
 
     public void startButton(int bgNum, int x, int y, int width, int height, String text) {
@@ -412,8 +417,9 @@ public class UI {
     public void refreshRoom(Ruangan currRuangan) {
         gm.ui.bgPanel[3].removeAll();
         gm.routing.showScreen(3);
-        gm.ui.createObjek(3, 650, 600, 40, 40, "edit.png", new String[] { "Edit Room" }, -1);
-        gm.ui.createObjek(3, 650, 650, 40, 40, "back.png", new String[] { "Back to Home", "Back to World" }, -1);
+        gm.ui.createObjek(bgPanel[3], 650, 600, 40, 40, "edit.png", new String[] { "Edit Room" }, -1);
+        gm.ui.createObjek(bgPanel[3], 650, 650, 40, 40, "back.png", new String[] { "Back to Home", "Back to World" },
+                -1);
         gm.ui.generateRoom(currRuangan, 3);
         gm.ui.bgPanel[3].add(gm.ui.bgLabel[3]);
         gm.ui.bgPanel[3].revalidate();
@@ -423,8 +429,8 @@ public class UI {
     public void refreshHome(Rumah currRumah) {
         gm.ui.bgPanel[4].removeAll();
         gm.routing.showScreen(4);
-        gm.ui.createObjek(4, 650, 600, 40, 40, "upgrade.png", new String[] { "Upgrade House" }, -1);
-        gm.ui.createObjek(4, 650, 650, 40, 40, "back.png", new String[] { "Back to World" }, -1);
+        gm.ui.createObjek(bgPanel[4], 650, 600, 40, 40, "upgrade.png", new String[] { "Upgrade House" }, -1);
+        gm.ui.createObjek(bgPanel[4], 650, 650, 40, 40, "back.png", new String[] { "Back to World" }, -1);
         gm.ui.generateHome(currRumah, 4);
         gm.ui.bgPanel[4].add(gm.ui.bgLabel[4]);
         gm.ui.bgPanel[4].revalidate();
@@ -470,9 +476,9 @@ public class UI {
         // World
         createBackground(2, "world.png", new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                if (e.getX() > 30 && e.getX() < 670 && e.getY() > 30 && e.getY() < 670) {
-                    if (gm.getCurrentSim().getRumah() == null) {
-                        createObjek(2, e.getX(), e.getY(), 20, 20, "rumahku.png", new String[] { "" }, -1);
+                if (gm.getCurrentSim().getRumah() == null) {
+                    if (e.getX() > 30 && e.getX() < 670 && e.getY() > 30 && e.getY() < 670) {
+                        createObjek(bgPanel[2], e.getX(), e.getY(), 20, 20, "rumahku.png", new String[] { "" }, -1);
                         bgPanel[2].repaint();
                         String homeName = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "What is your home name?",
                                 "Input Home homeName", JOptionPane.PLAIN_MESSAGE);
@@ -481,7 +487,7 @@ public class UI {
                                 gm.getCurrentSim()
                                         .setRumah(gm.world.getDaftarRumah().get(gm.world.getDaftarRumah().size() - 1));
                                 bgPanel[2].remove(0);
-                                createObjek(2, e.getX(), e.getY(), 20, 20, "rumahku.png",
+                                createObjek(bgPanel[2], e.getX(), e.getY(), 20, 20, "rumahku.png",
                                         new String[] { "View Home%" + homeName }, gm.world.getDaftarRumah().size() - 1);
                                 gm.ui.messagText.setText("Rumah berhasil di bangun, Selamat bermain");
                             } else {

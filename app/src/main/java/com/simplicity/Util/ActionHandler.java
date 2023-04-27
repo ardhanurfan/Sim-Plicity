@@ -47,8 +47,11 @@ public class ActionHandler implements ActionListener {
                     if (gm.world.addSim(name)) {
                         // set current sim terbaru
                         gm.setCurrentSim(gm.world.getDaftarSim().get(gm.world.getDaftarSim().size() - 1));
+                        gm.ui.bgPanel[2].removeAll();
+                        gm.ui.bgPanel[2].add(gm.ui.bgLabel[2]);
                         for (int i = 0; i < gm.world.getDaftarRumah().size(); i++) {
-                            gm.ui.createObjek(2, gm.world.getDaftarRumah().get(i).getLocRumah().getX() * 10 + 30,
+                            gm.ui.createObjek(gm.ui.bgPanel[2],
+                                    gm.world.getDaftarRumah().get(i).getLocRumah().getX() * 10 + 30,
                                     gm.world.getDaftarRumah().get(i).getLocRumah().getY() * 10 + 30, 20, 20,
                                     "rumah.png",
                                     new String[] { "View Home%" + gm.world.getDaftarRumah().get(i).getNama() }, i);
@@ -74,14 +77,18 @@ public class ActionHandler implements ActionListener {
                     int index = options.indexOf(selected);
                     // set current sim by index choosen
                     gm.setCurrentSim(gm.world.getDaftarSim().get(index));
+                    gm.ui.bgPanel[2].removeAll();
+                    gm.ui.bgPanel[2].add(gm.ui.bgLabel[2]);
                     for (int i = 0; i < gm.world.getDaftarRumah().size(); i++) {
                         if (gm.getCurrentSim().getRumah() != null && gm.getCurrentSim().getRumah().getNama()
                                 .equals(gm.world.getDaftarRumah().get(i).getNama())) {
-                            gm.ui.createObjek(2, gm.getCurrentSim().getRumah().getLocRumah().getX() * 10 + 30,
+                            gm.ui.createObjek(gm.ui.bgPanel[2],
+                                    gm.getCurrentSim().getRumah().getLocRumah().getX() * 10 + 30,
                                     gm.getCurrentSim().getRumah().getLocRumah().getY() * 10 + 30, 20, 20, "rumahku.png",
                                     new String[] { "View Home%" + gm.world.getDaftarRumah().get(i).getNama() }, i);
                         } else {
-                            gm.ui.createObjek(2, gm.world.getDaftarRumah().get(i).getLocRumah().getX() * 10 + 30,
+                            gm.ui.createObjek(gm.ui.bgPanel[2],
+                                    gm.world.getDaftarRumah().get(i).getLocRumah().getX() * 10 + 30,
                                     gm.world.getDaftarRumah().get(i).getLocRumah().getY() * 10 + 30, 20, 20,
                                     "rumah.png",
                                     new String[] { "View Home%" + gm.world.getDaftarRumah().get(i).getNama() }, i);
@@ -89,7 +96,12 @@ public class ActionHandler implements ActionListener {
                     }
                     gm.ui.bgPanel[2].repaint();
                     gm.routing.showScreen(2);
-                    gm.ui.messagText.setText("Hello Welcome Back, " + gm.getCurrentSim().getNamaLengkap());
+                    if (gm.getCurrentSim().getRumah() == null) {
+                        gm.ui.messagText.setText("Hello Welcome Back, " + gm.getCurrentSim().getNamaLengkap()
+                                + "! Select your house location!");
+                    } else {
+                        gm.ui.messagText.setText("Hello Welcome Back, " + gm.getCurrentSim().getNamaLengkap());
+                    }
                     gm.ui.nameText.setText(gm.getCurrentSim().getNamaLengkap());
                 }
                 break;
@@ -110,7 +122,12 @@ public class ActionHandler implements ActionListener {
 
             case "Back to World":
                 gm.routing.showScreen(2);
-                gm.ui.messagText.setText("Silakan berkunjung");
+                if (gm.getCurrentSim().getRumah() == null) {
+                    gm.ui.messagText.setText("Hello, " + gm.getCurrentSim().getNamaLengkap()
+                            + "! Select your house location!");
+                } else {
+                    gm.ui.messagText.setText("Silakan berkunjung");
+                }
                 gm.getCurrentSim().getCurrLokasi().setRuangan(null);
                 gm.getCurrentSim().getCurrLokasi().setRumah(null);
                 break;
@@ -135,7 +152,8 @@ public class ActionHandler implements ActionListener {
             case "View Home":
                 Rumah currRumah = gm.world.getDaftarRumah().get(indexObj);
                 gm.getCurrentSim().getCurrLokasi().setRumah(currRumah);
-                if (currRumah.getNama().equals(gm.getCurrentSim().getRumah().getNama())) {
+                if (gm.getCurrentSim().getRumah() != null
+                        && currRumah.getNama().equals(gm.getCurrentSim().getRumah().getNama())) {
                     gm.ui.messagText.setText("Berada di rumah milik Anda, " + currRumah.getNama());
                 } else {
                     gm.ui.messagText.setText("Saat ini Anda berkunjung ke " + currRumah.getNama());
@@ -158,8 +176,10 @@ public class ActionHandler implements ActionListener {
                 // Tambah Barang
                 if (index == 0) {
                     // Opsi inventory
-                    Object selectedInventory = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Choose Object you want to add", "Edit Room", JOptionPane.PLAIN_MESSAGE, null, inventory.toArray(), inventory.get(0));
-                    if (selectedInventory!=null){
+                    Object selectedInventory = JOptionPane.showInputDialog(gm.ui.bgPanel[3],
+                            "Choose Object you want to add", "Edit Room", JOptionPane.PLAIN_MESSAGE, null,
+                            inventory.toArray(), inventory.get(0));
+                    if (selectedInventory != null) {
                         int indexInventory = inventory.indexOf(selectedInventory);
 
                         // Bikin 3 dropdown buat milih titik dan posisi barang
@@ -283,7 +303,7 @@ public class ActionHandler implements ActionListener {
                 }
                 break;
 
-            case "inventory":
+            case "View Inventory":
                 if (gm.getCurrentSim().getInventory().getData().size() == 0) {
                     JOptionPane.showMessageDialog(null, "Inventory Kosong");
                 } else {

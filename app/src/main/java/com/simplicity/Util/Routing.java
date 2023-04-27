@@ -14,6 +14,9 @@ public class Routing {
                 if (screenIndex > 1) {
                     gm.ui.attributePanel.setVisible(true);
                     gm.ui.textPanel.setVisible(true);
+                } else {
+                    gm.ui.attributePanel.setVisible(false);
+                    gm.ui.textPanel.setVisible(false);
                 }
             } else {
                 if (gm.ui.bgPanel[i] != null) {
