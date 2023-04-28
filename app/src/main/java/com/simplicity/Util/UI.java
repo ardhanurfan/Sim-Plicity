@@ -158,9 +158,8 @@ public class UI {
         createObjek(attributePanel, 160, 475, 50, 50, "shop.png", new String[] { "Go to Store" }, -1);
 
         // Save
-        customButton(attributePanel, 50, 560, 200, 40, "Change Sim", 24, "choose-sim");
-        customButton(attributePanel, 50, 610, 200, 40, "Save", 24, "save");
-        customButton(attributePanel, 50, 660, 200, 40, "Main Menu", 24, "start");
+        customButton(attributePanel, 50, 560, 200, 40, "Save", 24, "save");
+        customButton(attributePanel, 50, 610, 200, 40, "Main Menu", 24, "start");
 
         textPanel.setVisible(false);
         attributePanel.setVisible(false);
@@ -478,7 +477,8 @@ public class UI {
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 if (gm.getCurrentSim().getRumah() == null) {
                     if (e.getX() > 30 && e.getX() < 670 && e.getY() > 30 && e.getY() < 670) {
-                        createObjek(bgPanel[2], e.getX(), e.getY(), 20, 20, "rumahku.png", new String[] { "" }, -1);
+                        createObjek(bgPanel[2], e.getX(), e.getY(), 20, 20, "rumahku.png",
+                                new String[] { "" }, -1);
                         bgPanel[2].repaint();
                         String homeName = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "What is your home name?",
                                 "Input Home homeName", JOptionPane.PLAIN_MESSAGE);
