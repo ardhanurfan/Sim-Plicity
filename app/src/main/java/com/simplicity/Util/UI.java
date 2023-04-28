@@ -326,15 +326,15 @@ public class UI {
     public void generateRoom(Ruangan r, int bgNum) {
         for (int i = 1; i <= r.getDaftarObjek().size(); i++) {
             ObjekNonMakanan o = r.getObjek(i - 1);
-            int x = (int) Math.round(o.getTitik().getX() * 116.67);
-            int y = (int) Math.round(o.getTitik().getY() * 116.67);
+            int x = 50+(int) Math.round(o.getTitik().getX() * 100);
+            int y = 50+(int) Math.round(o.getTitik().getY() * 100);
             int width, height;
             if ("v".equals(o.getPosisi())) {
-                height = (int) Math.round(o.getPanjang() * 116.67);
-                width = (int) Math.round(o.getLebar() * 116.67);
+                height = (int) Math.round(o.getPanjang() * 100);
+                width = (int) Math.round(o.getLebar() * 100);
             } else {
-                width = (int) Math.round(o.getPanjang() * 116.67);
-                height = (int) Math.round(o.getLebar() * 116.67);
+                width = (int) Math.round(o.getPanjang() * 100);
+                height = (int) Math.round(o.getLebar() * 100);
             }
             String filename = o.getNamaObjek() + ".png";
             String[] action = new String[1];
