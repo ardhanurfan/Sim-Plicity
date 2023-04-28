@@ -134,13 +134,13 @@ public class ObjekNonMakanan extends Objek {
         } else if (nama.equals("jam 1x1")) {
             o = new ObjekNonMakanan(nama, 1, 1, 10,  new String[] {"Melihat Waktu"});
         } else if (nama.equals("sofa 2x1")){
-            o = new ObjekNonMakanan(nama, 2,1, 30,new String[] {"Duduk"} );
+            o = new ObjekNonMakanan(nama, 2,1, 30,new String[] {"Duduk", "Ngudud"});
         } else if (nama.equals("tv 1x1")){
-            o = new ObjekNonMakanan(nama, 1, 1, 20, new String[] {"Menonton"});
+            o = new ObjekNonMakanan(nama, 1, 1, 20, new String[] {"Menonton", "Main PS"});
         } else if (nama.equals("matras 2x1")){
-            o = new ObjekNonMakanan(nama, 2, 1, 8, new String[] {"Olahraga"});
+            o = new ObjekNonMakanan(nama, 2, 1, 8, new String[] {"Yoga", "Meditasi"});
         } else if (nama.equals("laptop 1x1")){
-            o = new ObjekNonMakanan(nama, 1, 1, 50, new String[] {"Bermain"});
+            o = new ObjekNonMakanan(nama, 1, 1, 50, new String[] {"Main game", "Ngoding"});
         }
         return o;
     }

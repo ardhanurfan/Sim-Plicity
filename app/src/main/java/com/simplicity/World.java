@@ -87,10 +87,10 @@ public class World {
         daftar_barang.add(new ObjekNonMakanan("Kompor Listrik", 1, 1, 200, new String[] {"Memasak"}));
         daftar_barang.add(new ObjekNonMakanan("Meja dan Kursi", 3, 3, 50, new String[] {"Makan"}));
         daftar_barang.add(new ObjekNonMakanan("Jam", 1, 1, 10, new String[] {"Melihat Waktu"}));
-        daftar_barang.add(new ObjekNonMakanan("Laptop", 1, 1, 50, new String[] {"Bermain"}));
-        daftar_barang.add(new ObjekNonMakanan("Tv", 1, 1, 20, new String[] {"Menonton"}));
-        daftar_barang.add(new ObjekNonMakanan("Matras", 2, 1, 8, new String[] {"Olahraga"}));
-        daftar_barang.add(new ObjekNonMakanan("Sofa", 2, 1, 30, new String[] {"Duduk"}));
+        daftar_barang.add(new ObjekNonMakanan("Laptop", 1, 1, 50, new String[] {"Main game", "Ngoding"}));
+        daftar_barang.add(new ObjekNonMakanan("Tv", 1, 1, 20, new String[] {"Menonton", "Main PS"}));
+        daftar_barang.add(new ObjekNonMakanan("Matras", 2, 1, 8, new String[] {"Yoga", "Meditasi"}));
+        daftar_barang.add(new ObjekNonMakanan("Sofa", 2, 1, 30, new String[] {"Duduk", "Ngudud"}));
 
         // List objek makanan
         daftar_makanan.add(new ObjekMakanan("Nasi Ayam", new ObjekBahanMakanan[] { nasi, ayam }, 16));
