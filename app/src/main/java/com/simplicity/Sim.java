@@ -443,18 +443,4 @@ public class Sim {
         // barang diinventory dikurangi stoknya
         inventory.kurangiItem(objek.getNamaObjek(), 1);
     }
-
-    public void bermain(){
-        setMood(30, 30, 20);
-        setKekenyangan(30, 30, -10);
-        System.out.println("Horee... Seru sekali gamenya");
-    }
-
-    public void nontonTv(){
-        setMood(30, 30,15);
-        setKekenyangan(30, 30, -10);
-        System.out.println("Horee... Seru sekali acaranya");
-    }
-
-    
 }
