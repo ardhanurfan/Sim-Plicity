@@ -3,6 +3,7 @@ package com.simplicity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Arrays;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -234,6 +235,59 @@ public class Inventory {
                 i++;
             }
         }
+    }
+
+    public String nameConverter(String nama){
+        String namaConv =null;
+        if ( nama.equals("Kasur Single")){
+            namaConv = "kasur single 4x1";
+        }
+        else if ( nama.equals("Kasur Queen Size")){
+            namaConv = "kasur queen size 4x2";
+        }
+        else if ( nama.equals("Kasur King Size")){
+            namaConv = "kasur king size 5x2";
+        }
+        else if ( nama.equals("Jam")){
+            namaConv = "jam 1x1";
+        }
+        else if ( nama.equals("Meja dan Kursi")){
+            namaConv = "meja kursi 3x3";
+        }
+        else if ( nama.equals("Toilet")){
+            namaConv = "toilet 1x1";
+        }
+        else if ( nama.equals("Kompor Gas")){
+            namaConv = "kompor gas 2x1";
+        }
+        else if ( nama.equals("Kompor Listrik")){
+            namaConv = "kompor listrik 1x1";
+        }
+        else if ( nama.equals("Laptop")){
+            namaConv = "laptop 1x1";
+        }
+        else if ( nama.equals("Tv")){
+            namaConv = "tv 1x1";
+        }else if ( nama.equals("Matras")){
+            namaConv = "matras 2x1";
+        }
+        else if ( nama.equals("Sofa")){
+            namaConv = "sofa 2x1";
+        }
+        return namaConv;
+    }
+
+    public List<String> getIventoryString(){
+        List<String> objekNonMakananList = Arrays.asList("kasur single 4x1", "kasur queen size 4x2",
+                        "kasur king size 5x2", "jam 1x1", "meja kursi 3x3", "toilet 1x1", "kompor gas 2x1",
+                        "kompor listrik 1x1", "laptop 1x1", "tv 1x1","matras 2x1","sofa 2x1");
+        List<String> inventoryString = new ArrayList<String>();
+        for (InventoryItem item : data){
+            if(objekNonMakananList.contains(item.getNamaBarang())){
+                inventoryString.add(item.getNamaBarang());
+            }
+        }
+        return inventoryString;
     }
 
     // testing inventory
