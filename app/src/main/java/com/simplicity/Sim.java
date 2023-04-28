@@ -462,4 +462,31 @@ public class Sim {
         setKesehatan(30, 30, 5);
         System.out.println("Enaknya... Santai sekali");
     }
+
+    public void ngoding(){
+        setMood(30, 30, 5);
+        setKekenyangan(30,30,-5);
+        System.out.println("Ngoding seru euyy..");
+    }
+
+    public void ngudud(){
+        setMood(30, 30, 5);
+        setKekenyangan(30,30,-5);
+        setKesehatan(30,30,-5);
+        System.out.println("Fiuhh.. Dunhill emang mantep cuy..");
+    }
+
+    public void meditasi(){
+        setMood(30, 30, 5);
+        setKekenyangan(30,30,-5);
+        setKesehatan(30,30,5);
+        System.out.println("Meditasi itu membuat lebih tenang..");
+    }
+
+    public void mainPS(){
+        setMood(30, 30, 5);
+        setKekenyangan(30,30,-5);
+        setKesehatan(30,30,-5);
+        System.out.println("Game PS itu seru euyy.. T-tapi mataku kok rasanya agak sakit ya..");
+    }
 }
