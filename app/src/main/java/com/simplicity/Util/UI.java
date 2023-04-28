@@ -368,7 +368,7 @@ public class UI {
             }
             String filename = o.getNamaObjek() + ".png";
             String[] action = new String[1];
-            action[0] = o.getAksi();
+            action = o.getAksi();
 
             createObjek(bgNum, x, y, width, height, filename, action, o.getPosisi());
         }
