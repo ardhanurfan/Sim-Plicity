@@ -86,6 +86,7 @@ public class World {
         daftar_barang.add(new ObjekNonMakanan("Laptop", 1, 1, 50, "Bermain"));
         daftar_barang.add(new ObjekNonMakanan("Tv", 1, 1, 20, "Menonton"));
         daftar_barang.add(new ObjekNonMakanan("Matras", 2, 1, 8, "Olahraga"));
+        daftar_barang.add(new ObjekNonMakanan("Sofa", 2, 1, 30, "Duduk"));
 
         // List objek makanan
         daftar_makanan.add(new ObjekMakanan("Nasi Ayam", new ObjekBahanMakanan[] { nasi, ayam }, 16));
