@@ -116,6 +116,15 @@ public class ObjekNonMakanan extends Objek {
         } else if (nama.equals("jam 1x1")) {
             o = new ObjekNonMakanan(nama, 1, 1, 10, "Melihat Waktu");
         }
+        else if (nama.equals("laptop 1x1")) {
+            o = new ObjekNonMakanan(nama, 1, 1, 50, "Bermain");
+        }
+        else if (nama.equals("tv 1x1")) {
+            o = new ObjekNonMakanan(nama, 1, 1, 20, "Menonton");
+        }
+        else if (nama.equals("matras 2x1")) {
+            o = new ObjekNonMakanan(nama, 2, 1, 8, "Olahraga");
+        }
         return o;
     }
 
