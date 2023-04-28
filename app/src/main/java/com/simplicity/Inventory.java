@@ -43,7 +43,7 @@ public class Inventory {
         return data;
     }
 
-    public class InventoryItem {
+    public class InventoryItem implements InterfaceInventory{
 
         private ThreeElementArray<String, String, Integer> item;
 
