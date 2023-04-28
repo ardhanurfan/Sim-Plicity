@@ -2,7 +2,6 @@ package com.simplicity.Util;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.file.attribute.PosixFilePermission;
 import java.util.List;
 import java.util.Arrays;
 import javax.swing.JComboBox;
@@ -46,6 +45,10 @@ public class ActionHandler implements ActionListener {
                         JOptionPane.PLAIN_MESSAGE);
                 if (name != null && name.replaceAll(" ", "").length() > 0) {
                     if (gm.world.addSim(name)) {
+                        // jalankan waktu dunia
+                        if (!gm.threadTime.isAlive()) {
+                            gm.threadTime.start();
+                        }
                         // set current sim terbaru
                         gm.setCurrentSim(gm.world.getDaftarSim().get(gm.world.getDaftarSim().size() - 1));
                         gm.ui.bgPanel[2].removeAll();
@@ -76,6 +79,10 @@ public class ActionHandler implements ActionListener {
                         JOptionPane.PLAIN_MESSAGE, null, options.toArray(), options.get(0));
                 if (selected != null) {
                     int index = options.indexOf(selected);
+                    // jalankan waktu dunia
+                    if (!gm.threadTime.isAlive()) {
+                        gm.threadTime.start();
+                    }
                     // set current sim by index choosen
                     gm.setCurrentSim(gm.world.getDaftarSim().get(index));
                     gm.ui.bgPanel[2].removeAll();
@@ -161,23 +168,25 @@ public class ActionHandler implements ActionListener {
                 }
                 gm.ui.refreshHome(currRumah);
                 break;
-            
-            //Upgrade Rumah
+
+            // Upgrade Rumah
             case "Upgrade House":
-                //Buat Pilihan Acuan Kamar
+                // Buat Pilihan Acuan Kamar
                 Rumah currHouse = gm.world.getDaftarRumah().get(indexObj);
                 List<Ruangan> listRuangans = currHouse.getDaftarRuangan();
-                Object acuanRuang = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Pilih ruangan acuan", "Upgrade House", 
-                                JOptionPane.PLAIN_MESSAGE, null, listRuangans.toArray(), listRuangans.get(0));
-                Ruangan RuanganAcuan = listRuangans.get(listRuangans.indexOf(acuanRuang)); //cek lagi nnti
-                //Buat pilihan posisi
+                Object acuanRuang = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Pilih ruangan acuan",
+                        "Upgrade House",
+                        JOptionPane.PLAIN_MESSAGE, null, listRuangans.toArray(), listRuangans.get(0));
+                Ruangan RuanganAcuan = listRuangans.get(listRuangans.indexOf(acuanRuang)); // cek lagi nnti
+                // Buat pilihan posisi
                 List<String> acuanposisi = Arrays.asList("Kanan", "Kiri", "Atas", "Bawah");
-                Object posisiacuan = JOptionPane.showInputDialog(gm.ui.bgPanel[3],"Silakan pilih posisi kamar baru dibanding kamar acuan", 
-                                    "Upgrade House", JOptionPane.PLAIN_MESSAGE, null, acuanposisi.toArray(), acuanposisi.get(0));
+                Object posisiacuan = JOptionPane.showInputDialog(gm.ui.bgPanel[3],
+                        "Silakan pilih posisi kamar baru dibanding kamar acuan",
+                        "Upgrade House", JOptionPane.PLAIN_MESSAGE, null, acuanposisi.toArray(), acuanposisi.get(0));
                 String acuan = acuanposisi.get(acuanposisi.indexOf(posisiacuan));
 
-                //Melakukan upgrade rumah
-                currHouse.upgradeRumah(RuanganAcuan, acuan, "Kamar Baru");                    
+                // Melakukan upgrade rumah
+                currHouse.upgradeRumah(RuanganAcuan, acuan, "Kamar Baru");
                 break;
             case "Edit Room":
                 // Opsi tombol edit room

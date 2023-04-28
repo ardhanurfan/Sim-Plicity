@@ -23,8 +23,11 @@ public class GameManager {
 	UI ui = new UI(this);
 	Routing routing = new Routing(this);
 
+	Thread threadTime;
+
 	public GameManager() {
 		routing.showScreen(0);
+		threadTime();
 	}
 
 	public Sim getCurrentSim() {
@@ -51,7 +54,7 @@ public class GameManager {
 			Object obj = jsonParser.parse(new FileReader("save.json"));
 			JSONObject jsonObject = (JSONObject) obj;
 
-			World.setTime(Integer.parseInt(jsonObject.get("time").toString()));
+			world.setTime(Integer.parseInt(jsonObject.get("time").toString()));
 
 			JSONArray jsonArrayRumah = (JSONArray) jsonObject.get("listRumah");
 			List<Rumah> listRumah = new ArrayList<Rumah>();
@@ -70,6 +73,23 @@ public class GameManager {
 			JOptionPane.showMessageDialog(null, "Load gagal");
 			e.printStackTrace();
 		}
+	}
+
+	public void threadTime() {
+		threadTime = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (threadTime.isAlive()) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					world.setTime(1);
+					ui.jamText.setText(world.getTime());
+				}
+			}
+		});
 	}
 
 }
