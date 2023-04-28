@@ -15,6 +15,7 @@ public class World {
     private static List<Rumah> listRumah = new ArrayList<Rumah>();;
     private static List<Sim> listSim = new ArrayList<Sim>();
     private int time;
+    private int hari;
     private final int panjangMap = 64;
     private final int lebarMap = 64;
 
@@ -30,6 +31,7 @@ public class World {
     public World() {
         Inisiasi();
         time = 0;
+        hari = 0;
     }
 
     public JSONObject toJson() {
@@ -106,11 +108,15 @@ public class World {
         return (menit < 10 ? "0" + menit : menit) + " : " + (detik < 10 ? "0" + detik : detik);
     }
 
+    public String getHari(){
+        return String.valueOf(hari);
+    }
     public void setTime(int aksi) {
         if (time + aksi < 720) {
             time += aksi;
         } else {
             time = (time + aksi) % 720;
+            hari++;
         }
     }
 

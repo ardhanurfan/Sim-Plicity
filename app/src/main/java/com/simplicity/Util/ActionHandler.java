@@ -337,6 +337,15 @@ public class ActionHandler implements ActionListener {
                     gm.ui.inventoryPopUp();
                     gm.ui.popInventory.setVisible(true);
                 }
+                break;
+
+            case "Tidur":
+            if (gm.threadAksi==null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(120);
+                    gm.threadAksi.start();
+                    gm.getCurrentSim().tidur(120);
+                    
+                }
         }
     }
 

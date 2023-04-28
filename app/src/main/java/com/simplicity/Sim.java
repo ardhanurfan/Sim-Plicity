@@ -17,7 +17,7 @@ public class Sim {
     private double uang;
     private int kekenyangan;
     private int mood;
-    private int kesehatan;
+    private double kesehatan;
     private String status;
     private LokasiSim currLokasi;
     private Inventory inventory;
@@ -178,16 +178,16 @@ public class Sim {
         }
     }
 
-    public double getUang() {
-        return uang;
+    public String getUang() {
+        return String.valueOf(uang);
     }
 
     public void setUang(int uang) {
         this.uang = uang;
     }
 
-    public int getKekenyangan() {
-        return kekenyangan;
+    public String getKekenyangan() {
+        return String.valueOf(kekenyangan);
     }
 
     public void setKekenyangan(int waktuKerja, int ratio, int value) {
@@ -197,8 +197,8 @@ public class Sim {
         }
     }
 
-    public int getMood() {
-        return mood;
+    public String getMood() {
+        return String.valueOf(mood);
     }
 
     public void setMood(int waktuKerja, int ratio, int value) {
@@ -208,11 +208,11 @@ public class Sim {
         }
     }
 
-    public int getKesehatan() {
-        return kesehatan;
+    public String getKesehatan() {
+        return String.valueOf(kesehatan);
     }
 
-    public void setKesehatan(int waktuKerja, int ratio, int value) {
+    public void setKesehatan(double waktuKerja, double ratio, double value) {
         this.kesehatan += waktuKerja / ratio * value;
         if (this.kesehatan > 100) {
             this.kesehatan = 100;
