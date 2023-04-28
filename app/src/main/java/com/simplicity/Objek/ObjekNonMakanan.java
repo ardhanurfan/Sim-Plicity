@@ -125,6 +125,9 @@ public class ObjekNonMakanan extends Objek {
         else if (nama.equals("matras 2x1")) {
             o = new ObjekNonMakanan(nama, 2, 1, 8, "Olahraga");
         }
+        else if (nama.equals("sofa 2x1")) {
+            o = new ObjekNonMakanan(nama, 2, 1, 30, "Duduk");
+        }
         return o;
     }
 
