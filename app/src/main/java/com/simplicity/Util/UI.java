@@ -41,6 +41,7 @@ public class UI {
     public JPanel textPanel;
     public JTextArea messagText;
     public JLabel jamText;
+    public JLabel hariText;
     public JLabel nameText;
     public JLabel pekerjaanText;
     public JLabel uangText;
@@ -128,11 +129,17 @@ public class UI {
         // add jam
         attributeItem(50, 30, "jam.png");
         jamText = new JLabel("00 : 00");
-        jamText.setBounds(50 + 70, 30, 200, 50);
+        jamText.setBounds(50 + 70, 15, 200, 50);
         jamText.setBackground(null);
         jamText.setForeground(Color.white);
         jamText.setFont(new Font("Book Antique", Font.PLAIN, 24));
         attributePanel.add(jamText);
+        hariText = new JLabel("Hari ke-1");
+        hariText.setBounds(50 + 70, 65, 200, 30);
+        hariText.setBackground(null);
+        hariText.setForeground(Color.white);
+        hariText.setFont(new Font("Book Antique", Font.PLAIN, 16));
+        attributePanel.add(hariText);
 
         // add nama
         nameText = new JLabel();
@@ -356,8 +363,8 @@ public class UI {
     public void generateRoom(Ruangan r, int bgNum) {
         for (int i = 1; i <= r.getDaftarObjek().size(); i++) {
             ObjekNonMakanan o = r.getObjek(i - 1);
-            int x = 50+(int) Math.round(o.getTitik().getX() * 100);
-            int y = 50+(int) Math.round(o.getTitik().getY() * 100);
+            int x = 50 + (int) Math.round(o.getTitik().getX() * 100);
+            int y = 50 + (int) Math.round(o.getTitik().getY() * 100);
             int width, height;
             if ("v".equals(o.getPosisi())) {
                 height = (int) Math.round(o.getPanjang() * 100);

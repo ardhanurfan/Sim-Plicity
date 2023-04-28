@@ -87,6 +87,7 @@ public class GameManager {
 					}
 					world.setTime(1);
 					ui.jamText.setText(world.getTime());
+					ui.hariText.setText("Hari ke-" + world.getHari());
 				}
 			}
 		});
