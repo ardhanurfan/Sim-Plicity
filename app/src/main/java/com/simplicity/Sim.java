@@ -455,4 +455,11 @@ public class Sim {
         setKekenyangan(30, 30, -10);
         System.out.println("Horee... Seru sekali acaranya");
     }
+
+    public void duduk(){
+        setMood(30, 30, 5);
+        setKekenyangan(30, 30, -5);
+        setKesehatan(30, 30, 5);
+        System.out.println("Enaknya... Santai sekali");
+    }
 }

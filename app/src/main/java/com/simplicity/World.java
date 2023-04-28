@@ -14,7 +14,7 @@ import com.simplicity.Objek.ObjekPekerjaan;
 public class World {
     private static List<Rumah> listRumah = new ArrayList<Rumah>();;
     private static List<Sim> listSim = new ArrayList<Sim>();
-    private static int time;
+    private int time;
     private final int panjangMap = 64;
     private final int lebarMap = 64;
 
@@ -22,6 +22,10 @@ public class World {
     private List<ObjekBahanMakanan> daftar_bahan = new ArrayList<ObjekBahanMakanan>();
     private List<ObjekNonMakanan> daftar_barang = new ArrayList<ObjekNonMakanan>();
     private List<ObjekMakanan> daftar_makanan = new ArrayList<ObjekMakanan>();
+
+    Thread threadAksi;
+    Thread threadBeliBarang;
+    Thread threadUpgradeRumah;
 
     public World() {
         Inisiasi();
@@ -86,6 +90,7 @@ public class World {
         daftar_barang.add(new ObjekNonMakanan("Laptop", 1, 1, 50, "Bermain"));
         daftar_barang.add(new ObjekNonMakanan("Tv", 1, 1, 20, "Menonton"));
         daftar_barang.add(new ObjekNonMakanan("Matras", 2, 1, 8, "Olahraga"));
+        daftar_barang.add(new ObjekNonMakanan("Sofa", 2, 1, 30, "Duduk"));
 
         // List objek makanan
         daftar_makanan.add(new ObjekMakanan("Nasi Ayam", new ObjekBahanMakanan[] { nasi, ayam }, 16));
@@ -101,7 +106,7 @@ public class World {
         return (menit < 10 ? "0" + menit : menit) + " : " + (detik < 10 ? "0" + detik : detik);
     }
 
-    public static void setTime(int aksi) {
+    public void setTime(int aksi) {
         if (time + aksi < 720) {
             time += aksi;
         } else {

@@ -126,7 +126,13 @@ public class UI {
         window.add(attributePanel);
 
         // add jam
-        attributeItem(50, 30, "jam.png", gm.world.getTime(), jamText);
+        attributeItem(50, 30, "jam.png");
+        jamText = new JLabel("00 : 00");
+        jamText.setBounds(50 + 70, 30, 200, 50);
+        jamText.setBackground(null);
+        jamText.setForeground(Color.white);
+        jamText.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        attributePanel.add(jamText);
 
         // add nama
         nameText = new JLabel();
@@ -137,19 +143,50 @@ public class UI {
         attributePanel.add(nameText);
 
         // add pekerjaan
-        attributeItem(50, 160, "kerja.png", "Polisi", pekerjaanText);
+        attributeItem(50, 160, "kerja.png");
+        createObjek(attributePanel, 50, 160, 50, 50, "kerja.png", new String[] { "Bekerja", "Ganti Pekerjaan" }, -1);
+        pekerjaanText = new JLabel("Polisi");
+        pekerjaanText.setBounds(50 + 70, 160, 200, 50);
+        pekerjaanText.setBackground(null);
+        pekerjaanText.setForeground(Color.white);
+        pekerjaanText.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        attributePanel.add(pekerjaanText);
 
         // add uang
-        attributeItem(50, 220, "uang.png", "80", uangText);
+        attributeItem(50, 220, "uang.png");
+        uangText = new JLabel("80");
+        uangText.setBounds(50 + 70, 220, 200, 50);
+        uangText.setBackground(null);
+        uangText.setForeground(Color.white);
+        uangText.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        attributePanel.add(uangText);
 
         // add mood
-        attributeItem(50, 280, "mood.png", "80", moodText);
+        attributeItem(50, 280, "mood.png");
+        moodText = new JLabel("80");
+        moodText.setBounds(50 + 70, 280, 200, 50);
+        moodText.setBackground(null);
+        moodText.setForeground(Color.white);
+        moodText.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        attributePanel.add(moodText);
 
         // add kesehatan
-        attributeItem(50, 340, "kesehatan.png", "80", kesehatanText);
+        attributeItem(50, 340, "kesehatan.png");
+        kesehatanText = new JLabel("80");
+        kesehatanText.setBounds(50 + 70, 340, 200, 50);
+        kesehatanText.setBackground(null);
+        kesehatanText.setForeground(Color.white);
+        kesehatanText.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        attributePanel.add(kesehatanText);
 
         // add kekenyangan
-        attributeItem(50, 400, "kenyang.png", "80", moodText);
+        attributeItem(50, 400, "kenyang.png");
+        kekenyanganText = new JLabel("80");
+        kekenyanganText.setBounds(50 + 70, 400, 200, 50);
+        kekenyanganText.setBackground(null);
+        kekenyanganText.setForeground(Color.white);
+        kekenyanganText.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        attributePanel.add(kekenyanganText);
 
         // add inventory
         createObjek(attributePanel, 85, 475, 50, 50, "inventory.png", new String[] { "View Inventory" }, -1);
@@ -165,21 +202,14 @@ public class UI {
         attributePanel.setVisible(false);
     }
 
-    public void attributeItem(int x, int y, String path, String currText, JLabel jLabel) {
-        ImageIcon jamImage = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(path)).getImage()
+    public void attributeItem(int x, int y, String path) {
+        ImageIcon image = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource(path)).getImage()
                 .getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        JLabel jamIcon = new JLabel();
-        jamIcon.setBounds(x, y, 50, 50);
-        jamIcon.setIcon(jamImage);
-        jamIcon.setBackground(null);
-        attributePanel.add(jamIcon);
-
-        jLabel = new JLabel(currText);
-        jLabel.setBounds(x + 70, y, 200, 50);
-        jLabel.setBackground(null);
-        jLabel.setForeground(Color.white);
-        jLabel.setFont(new Font("Book Antique", Font.PLAIN, 24));
-        attributePanel.add(jLabel);
+        JLabel icon = new JLabel();
+        icon.setBounds(x, y, 50, 50);
+        icon.setIcon(image);
+        icon.setBackground(null);
+        attributePanel.add(icon);
     }
 
     public ImageIcon rotate(ImageIcon icon, double degrees) {
