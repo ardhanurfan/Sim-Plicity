@@ -2,6 +2,7 @@ package com.simplicity.Util;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.attribute.PosixFilePermission;
 import java.util.List;
 import java.util.Arrays;
 import javax.swing.JComboBox;
@@ -160,7 +161,24 @@ public class ActionHandler implements ActionListener {
                 }
                 gm.ui.refreshHome(currRumah);
                 break;
+            
+            //Upgrade Rumah
+            case "Upgrade House":
+                //Buat Pilihan Acuan Kamar
+                Rumah currHouse = gm.world.getDaftarRumah().get(indexObj);
+                List<Ruangan> listRuangans = currHouse.getDaftarRuangan();
+                Object acuanRuang = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Pilih ruangan acuan", "Upgrade House", 
+                                JOptionPane.PLAIN_MESSAGE, null, listRuangans.toArray(), listRuangans.get(0));
+                Ruangan RuanganAcuan = listRuangans.get(listRuangans.indexOf(acuanRuang)); //cek lagi nnti
+                //Buat pilihan posisi
+                List<String> acuanposisi = Arrays.asList("Kanan", "Kiri", "Atas", "Bawah");
+                Object posisiacuan = JOptionPane.showInputDialog(gm.ui.bgPanel[3],"Silakan pilih posisi kamar baru dibanding kamar acuan", 
+                                    "Upgrade House", JOptionPane.PLAIN_MESSAGE, null, acuanposisi.toArray(), acuanposisi.get(0));
+                String acuan = acuanposisi.get(acuanposisi.indexOf(posisiacuan));
 
+                //Melakukan upgrade rumah
+                currHouse.upgradeRumah(RuanganAcuan, acuan, "Kamar Baru");                    
+                break;
             case "Edit Room":
                 // Opsi tombol edit room
                 List<String> option = Arrays.asList("Add Object", "Delete Object", "Move Object");
