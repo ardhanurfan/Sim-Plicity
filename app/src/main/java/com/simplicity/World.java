@@ -59,14 +59,14 @@ public class World {
         daftarPekerjaan.add(new ObjekPekerjaan("Programmer", 45));
         daftarPekerjaan.add(new ObjekPekerjaan("Dokter", 50));
 
-        ObjekBahanMakanan nasi = new ObjekBahanMakanan("Nasi\t", 5, 5);
-        ObjekBahanMakanan kentang = new ObjekBahanMakanan("Kentang\t", 3, 4);
-        ObjekBahanMakanan ayam = new ObjekBahanMakanan("Ayam\t", 10, 8);
-        ObjekBahanMakanan sapi = new ObjekBahanMakanan("Sapi\t", 12, 15);
-        ObjekBahanMakanan wortel = new ObjekBahanMakanan("Wortel\t", 3, 2);
-        ObjekBahanMakanan bayam = new ObjekBahanMakanan("Bayam\t", 3, 2);
-        ObjekBahanMakanan kacang = new ObjekBahanMakanan("Kacang\t", 2, 2);
-        ObjekBahanMakanan susu = new ObjekBahanMakanan("Susu\t", 2, 1);
+        ObjekBahanMakanan nasi = new ObjekBahanMakanan("Nasi", 5, 5);
+        ObjekBahanMakanan kentang = new ObjekBahanMakanan("Kentang", 3, 4);
+        ObjekBahanMakanan ayam = new ObjekBahanMakanan("Ayam", 10, 8);
+        ObjekBahanMakanan sapi = new ObjekBahanMakanan("Sapi", 12, 15);
+        ObjekBahanMakanan wortel = new ObjekBahanMakanan("Wortel", 3, 2);
+        ObjekBahanMakanan bayam = new ObjekBahanMakanan("Bayam", 3, 2);
+        ObjekBahanMakanan kacang = new ObjekBahanMakanan("Kacang", 2, 2);
+        ObjekBahanMakanan susu = new ObjekBahanMakanan("Susu", 2, 1);
 
         // Menambahkan daftar bahan makanan
         daftar_bahan.add(nasi);
@@ -87,6 +87,10 @@ public class World {
         daftar_barang.add(new ObjekNonMakanan("Kompor Listrik", 1, 1, 200, "Memasak"));
         daftar_barang.add(new ObjekNonMakanan("Meja dan Kursi", 3, 3, 50, "Makan"));
         daftar_barang.add(new ObjekNonMakanan("Jam", 1, 1, 10, "Melihat Waktu"));
+        daftar_barang.add(new ObjekNonMakanan("Laptop", 1, 1, 50, "Bermain"));
+        daftar_barang.add(new ObjekNonMakanan("Tv", 1, 1, 20, "Menonton"));
+        daftar_barang.add(new ObjekNonMakanan("Matras", 2, 1, 8, "Olahraga"));
+        daftar_barang.add(new ObjekNonMakanan("Sofa", 2, 1, 30, "Duduk"));
 
         // List objek makanan
         daftar_makanan.add(new ObjekMakanan("Nasi Ayam", new ObjekBahanMakanan[] { nasi, ayam }, 16));
