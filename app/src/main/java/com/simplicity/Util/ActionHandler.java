@@ -196,128 +196,146 @@ public class ActionHandler implements ActionListener {
                 int index = option.indexOf(selectedPane);
 
                 // Ceritanya ini Inventory
+
+                //List<String> inventory = gm.getCurrentSim().getInventory().getIventoryString();
                 List<String> inventory = Arrays.asList("kasur single 4x1", "kasur queen size 4x2",
                         "kasur king size 5x2", "jam 1x1", "meja kursi 3x3", "toilet 1x1", "kompor gas 2x1",
-                        "kompor listrik 1x1");
+                        "kompor listrik 1x1", "laptop 1x1", "tv 1x1","matras 2x1","sofa 2x1");
 
                 // Tambah Barang
                 if (index == 0) {
-                    // Opsi inventory
-                    Object selectedInventory = JOptionPane.showInputDialog(gm.ui.bgPanel[3],
-                            "Choose Object you want to add", "Edit Room", JOptionPane.PLAIN_MESSAGE, null,
-                            inventory.toArray(), inventory.get(0));
-                    if (selectedInventory != null) {
-                        int indexInventory = inventory.indexOf(selectedInventory);
-
-                        // Bikin 3 dropdown buat milih titik dan posisi barang
-                        String[] coordOptions = { "0", "1", "2", "3", "4", "5" };
-                        String[] positionOptions = { "v", "h" };
-
-                        JComboBox<String> selectionX = new JComboBox<>(coordOptions);
-                        JComboBox<String> selectionY = new JComboBox<>(coordOptions);
-                        JComboBox<String> selectionPosisi = new JComboBox<>(positionOptions);
-
-                        Object[] message = { "Posisi X:", selectionX, "Posisi Y:", selectionY,
-                                "Horizontal/Vertikal (h/v):", selectionPosisi };
-                        int optionPosisi1 = JOptionPane.showConfirmDialog(null, message, "Posisi Barang",
-                                JOptionPane.OK_CANCEL_OPTION);
-
-                        if (optionPosisi1 == JOptionPane.OK_OPTION) {
-                            String stringX = (String) selectionX.getSelectedItem();
-                            String stringY = (String) selectionY.getSelectedItem();
-                            String posisi = (String) selectionPosisi.getSelectedItem();
-
-                            // Konversi ke integer
-                            int x = Integer.parseInt(stringX);
-                            int y = Integer.parseInt(stringY);
-
-                            // Bikin point dan objek sesuai pilihan
-                            Point point = new Point(x, y);
-                            ObjekNonMakanan o = ObjekNonMakanan.returnObject(inventory.get(indexInventory));
-
-                            // Ngecek nabrak ato ga
-                            if (currRuangan.nabrakGa(o, point, posisi)) {
-                                currRuangan.tambahObjek(o, point, posisi);
-                                gm.ui.refreshRoom(currRuangan);
-                                gm.ui.messagText.setText("Barang berhasil ditambahkan ke ruangan");
-                            } else {
-                                gm.ui.messagText.setText("Barang tidak bisa ditambahkan karena nabrak");
-                            }
-                        } else {
-                            gm.ui.messagText.setText("Dialog ditutup.");
-                        }
+                    // Inventory ObjekNonMakanan kosong
+                    if(inventory.size()==0){
+                        JOptionPane.showMessageDialog(gm.ui.bgPanel[3], "Tidak ada barang");  
                     }
+                    else{
+                        // Opsi inventory
+                        Object selectedInventory = JOptionPane.showInputDialog(gm.ui.bgPanel[3],
+                                "Choose Object you want to add", "Edit Room", JOptionPane.PLAIN_MESSAGE, null,
+                                inventory.toArray(), inventory.get(0));
+                        if (selectedInventory != null) {
+                            int indexInventory = inventory.indexOf(selectedInventory);
+
+                            // Bikin 3 dropdown buat milih titik dan posisi barang
+                            String[] coordOptions = { "0", "1", "2", "3", "4", "5" };
+                            String[] positionOptions = { "v", "h" };
+
+                            JComboBox<String> selectionX = new JComboBox<>(coordOptions);
+                            JComboBox<String> selectionY = new JComboBox<>(coordOptions);
+                            JComboBox<String> selectionPosisi = new JComboBox<>(positionOptions);
+
+                            Object[] message = { "Posisi X:", selectionX, "Posisi Y:", selectionY,
+                                    "Horizontal/Vertikal (h/v):", selectionPosisi };
+                            int optionPosisi1 = JOptionPane.showConfirmDialog(null, message, "Posisi Barang",
+                                    JOptionPane.OK_CANCEL_OPTION);
+
+                            if (optionPosisi1 == JOptionPane.OK_OPTION) {
+                                String stringX = (String) selectionX.getSelectedItem();
+                                String stringY = (String) selectionY.getSelectedItem();
+                                String posisi = (String) selectionPosisi.getSelectedItem();
+
+                                // Konversi ke integer
+                                int x = Integer.parseInt(stringX);
+                                int y = Integer.parseInt(stringY);
+
+                                // Bikin point dan objek sesuai pilihan
+                                Point point = new Point(x, y);
+                                ObjekNonMakanan o = ObjekNonMakanan.returnObject(inventory.get(indexInventory));
+
+                                // Ngecek nabrak ato ga
+                                if (currRuangan.nabrakGa(o, point, posisi)) {
+                                    currRuangan.tambahObjek(o, point, posisi);
+                                    gm.ui.refreshRoom(currRuangan);
+                                    gm.ui.messagText.setText("Barang berhasil ditambahkan ke ruangan");
+                                } else {
+                                    gm.ui.messagText.setText("Barang tidak bisa ditambahkan karena nabrak");
+                                }
+                            } else {
+                                gm.ui.messagText.setText("Dialog ditutup.");
+                            }
+                        }
+                    }    
                 }
                 // Hapus Barang
                 else if (index == 1) {
-                    // Opsi barang yang ada di currRuangan
-                    List<String> optionObjek = currRuangan.getDaftarObjekString();
-                    Object selectedObjek = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
-                            "Choose Object you want to delete", "Delete Object", JOptionPane.PLAIN_MESSAGE, null,
-                            optionObjek.toArray(), optionObjek.get(0));
-                    if (selectedObjek != null) {
-                        // Hapus barang sesuai pilihan
-                        int indexOptionObjek = optionObjek.indexOf(selectedObjek);
-                        ObjekNonMakanan deleteObject = currRuangan.getObjek(indexOptionObjek);
-                        currRuangan.hapusObjek(deleteObject);
+                    // Ga ada barang
+                    if (currRuangan.getDaftarObjekString().size()==0){
+                        JOptionPane.showMessageDialog(gm.ui.bgPanel[3], "Tidak ada barang");  
+                    }
+                    else{
+                        // Opsi barang yang ada di currRuangan
+                        List<String> optionObjek = currRuangan.getDaftarObjekString();
+                        Object selectedObjek = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                                "Choose Object you want to delete", "Delete Object", JOptionPane.PLAIN_MESSAGE, null,
+                                optionObjek.toArray(), optionObjek.get(0));
+                        if (selectedObjek != null) {
+                            // Hapus barang sesuai pilihan
+                            int indexOptionObjek = optionObjek.indexOf(selectedObjek);
+                            ObjekNonMakanan deleteObject = currRuangan.getObjek(indexOptionObjek);
+                            currRuangan.hapusObjek(deleteObject);
 
-                        // Refresh panel
-                        gm.ui.refreshRoom(currRuangan);
-                        gm.ui.messagText.setText("Barang berhasil dihapus dari ruangan");
+                            // Refresh panel
+                            gm.ui.refreshRoom(currRuangan);
+                            gm.ui.messagText.setText("Barang berhasil dihapus dari ruangan");
+                        }
                     }
                 }
                 // Pindah barang
                 else if (index == 2) {
-                    // Opsi barang yang ada di currRuangan
-                    List<String> optionObjek2 = currRuangan.getDaftarObjekString();
-                    Object selectedObjek = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
-                            "Choose Object you want to move", "Move Object", JOptionPane.PLAIN_MESSAGE, null,
-                            optionObjek2.toArray(), optionObjek2.get(0));
-                    if (selectedObjek != null) {
-                        // Hapus objek sesuai pilihan
-                        int indexOptionObjek = optionObjek2.indexOf(selectedObjek);
-                        ObjekNonMakanan moveObject = currRuangan.getObjek(indexOptionObjek);
-                        Point pointAwal = moveObject.getTitik();
-                        String posisiAwal = moveObject.getPosisi();
-                        currRuangan.hapusObjek(moveObject);
-                        // Bikin 3 dropdown buat milih titik dan posisi barang
-                        String[] coord = { "0", "1", "2", "3", "4", "5" };
-                        String[] position = { "v", "h" };
+                    if(currRuangan.getDaftarObjekString().size()==0){
+                        JOptionPane.showMessageDialog(gm.ui.bgPanel[3], "Tidak ada barang");  
+                    }
+                    else{
+                        // Opsi barang yang ada di currRuangan
+                        List<String> optionObjek2 = currRuangan.getDaftarObjekString();
+                        Object selectedObjek = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                                "Choose Object you want to move", "Move Object", JOptionPane.PLAIN_MESSAGE, null,
+                                optionObjek2.toArray(), optionObjek2.get(0));
+                        if (selectedObjek != null) {
+                            // Hapus objek sesuai pilihan
+                            int indexOptionObjek = optionObjek2.indexOf(selectedObjek);
+                            ObjekNonMakanan moveObject = currRuangan.getObjek(indexOptionObjek);
+                            Point pointAwal = moveObject.getTitik();
+                            String posisiAwal = moveObject.getPosisi();
+                            currRuangan.hapusObjek(moveObject);
+                            // Bikin 3 dropdown buat milih titik dan posisi barang
+                            String[] coord = { "0", "1", "2", "3", "4", "5" };
+                            String[] position = { "v", "h" };
 
-                        JComboBox<String> selectionX = new JComboBox<>(coord);
-                        JComboBox<String> selectionY = new JComboBox<>(coord);
-                        JComboBox<String> selectionPosisi = new JComboBox<>(position);
+                            JComboBox<String> selectionX = new JComboBox<>(coord);
+                            JComboBox<String> selectionY = new JComboBox<>(coord);
+                            JComboBox<String> selectionPosisi = new JComboBox<>(position);
 
-                        Object[] message = { "Posisi X:", selectionX, "Posisi Y:", selectionY,
-                                "Horizontal/Vertikal (h/v):", selectionPosisi };
-                        int optionPosisi2 = JOptionPane.showConfirmDialog(null, message, "Posisi Barang",
-                                JOptionPane.OK_CANCEL_OPTION);
+                            Object[] message = { "Posisi X:", selectionX, "Posisi Y:", selectionY,
+                                    "Horizontal/Vertikal (h/v):", selectionPosisi };
+                            int optionPosisi2 = JOptionPane.showConfirmDialog(null, message, "Posisi Barang",
+                                    JOptionPane.OK_CANCEL_OPTION);
 
-                        if (optionPosisi2 == JOptionPane.OK_OPTION) {
-                            String stringX = (String) selectionX.getSelectedItem();
-                            String stringY = (String) selectionY.getSelectedItem();
-                            String posisi = (String) selectionPosisi.getSelectedItem();
+                            if (optionPosisi2 == JOptionPane.OK_OPTION) {
+                                String stringX = (String) selectionX.getSelectedItem();
+                                String stringY = (String) selectionY.getSelectedItem();
+                                String posisi = (String) selectionPosisi.getSelectedItem();
 
-                            // Konversi ke Integer
-                            int x = Integer.parseInt(stringX);
-                            int y = Integer.parseInt(stringY);
+                                // Konversi ke Integer
+                                int x = Integer.parseInt(stringX);
+                                int y = Integer.parseInt(stringY);
 
-                            // Bikin point dan ngecek nabrak ato ga
-                            Point point = new Point(x, y);
-                            if (currRuangan.nabrakGa(moveObject, point, posisi)) {
-                                currRuangan.tambahObjek(moveObject, point, posisi);
-                                gm.ui.messagText.setText("Barang berhasil ditambahkan ke ruangan");
+                                // Bikin point dan ngecek nabrak ato ga
+                                Point point = new Point(x, y);
+                                if (currRuangan.nabrakGa(moveObject, point, posisi)) {
+                                    currRuangan.tambahObjek(moveObject, point, posisi);
+                                    gm.ui.messagText.setText("Barang berhasil ditambahkan ke ruangan");
+                                } else {
+                                    currRuangan.tambahObjek(moveObject, pointAwal, posisiAwal);
+                                    gm.ui.messagText.setText("Barang tidak bisa ditambahkan karena nabrak");
+                                }
+                                // Refresh panel
+                                gm.ui.refreshRoom(currRuangan);
                             } else {
-                                currRuangan.tambahObjek(moveObject, pointAwal, posisiAwal);
-                                gm.ui.messagText.setText("Barang tidak bisa ditambahkan karena nabrak");
+                                gm.ui.messagText.setText("Dialog ditutup");
                             }
-                            // Refresh panel
-                            gm.ui.refreshRoom(currRuangan);
-                        } else {
-                            gm.ui.messagText.setText("Dialog ditutup");
                         }
                     }
-
                 }
                 break;
 
@@ -336,6 +354,15 @@ public class ActionHandler implements ActionListener {
                 } else {
                     gm.ui.inventoryPopUp();
                     gm.ui.popInventory.setVisible(true);
+                }
+                break;
+
+            case "Tidur":
+            if (gm.threadAksi==null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(120);
+                    gm.threadAksi.start();
+                    gm.getCurrentSim().tidur(120);
+                    
                 }
         }
     }

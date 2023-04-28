@@ -17,7 +17,7 @@ public class Sim {
     private double uang;
     private int kekenyangan;
     private int mood;
-    private int kesehatan;
+    private double kesehatan;
     private String status;
     private LokasiSim currLokasi;
     private Inventory inventory;
@@ -66,7 +66,7 @@ public class Sim {
         uang = Double.parseDouble(jsonObject.get("uang").toString());
         kekenyangan = Integer.parseInt(jsonObject.get("kekenyangan").toString());
         mood = Integer.parseInt(jsonObject.get("mood").toString());
-        kesehatan = Integer.parseInt(jsonObject.get("kesehatan").toString());
+        kesehatan = Double.parseDouble(jsonObject.get("kesehatan").toString());
         status = jsonObject.get("status") != null ? jsonObject.get("status").toString() : null;
         rumah = jsonObject.get("rumah") != null ? listRumah.get(Integer.parseInt(jsonObject.get("rumah").toString()))
                 : null;
@@ -178,16 +178,16 @@ public class Sim {
         }
     }
 
-    public double getUang() {
-        return uang;
+    public String getUang() {
+        return String.valueOf(uang);
     }
 
     public void setUang(int uang) {
         this.uang = uang;
     }
 
-    public int getKekenyangan() {
-        return kekenyangan;
+    public String getKekenyangan() {
+        return String.valueOf(kekenyangan);
     }
 
     public void setKekenyangan(int waktuKerja, int ratio, int value) {
@@ -197,8 +197,8 @@ public class Sim {
         }
     }
 
-    public int getMood() {
-        return mood;
+    public String getMood() {
+        return String.valueOf(mood);
     }
 
     public void setMood(int waktuKerja, int ratio, int value) {
@@ -208,11 +208,11 @@ public class Sim {
         }
     }
 
-    public int getKesehatan() {
-        return kesehatan;
+    public String getKesehatan() {
+        return String.valueOf(kesehatan);
     }
 
-    public void setKesehatan(int waktuKerja, int ratio, int value) {
+    public void setKesehatan(double waktuKerja, double ratio, double value) {
         this.kesehatan += waktuKerja / ratio * value;
         if (this.kesehatan > 100) {
             this.kesehatan = 100;
@@ -444,22 +444,49 @@ public class Sim {
         inventory.kurangiItem(objek.getNamaObjek(), 1);
     }
 
-    public void bermain(){
+    public void bermain() {
         setMood(30, 30, 20);
         setKekenyangan(30, 30, -10);
         System.out.println("Horee... Seru sekali gamenya");
     }
 
-    public void nontonTv(){
-        setMood(30, 30,15);
+    public void nontonTv() {
+        setMood(30, 30, 15);
         setKekenyangan(30, 30, -10);
         System.out.println("Horee... Seru sekali acaranya");
     }
 
-    public void duduk(){
+    public void duduk() {
         setMood(30, 30, 5);
         setKekenyangan(30, 30, -5);
         setKesehatan(30, 30, 5);
         System.out.println("Enaknya... Santai sekali");
+    }
+
+    public void ngoding() {
+        setMood(30, 30, 5);
+        setKekenyangan(30, 30, -5);
+        System.out.println("Ngoding seru euyy..");
+    }
+
+    public void ngudud() {
+        setMood(30, 30, 5);
+        setKekenyangan(30, 30, -5);
+        setKesehatan(30, 30, -5);
+        System.out.println("Fiuhh.. Dunhill emang mantep cuy..");
+    }
+
+    public void meditasi() {
+        setMood(30, 30, 5);
+        setKekenyangan(30, 30, -5);
+        setKesehatan(30, 30, 5);
+        System.out.println("Meditasi itu membuat lebih tenang..");
+    }
+
+    public void mainPS() {
+        setMood(30, 30, 5);
+        setKekenyangan(30, 30, -5);
+        setKesehatan(30, 30, -5);
+        System.out.println("Game PS itu seru euyy.. T-tapi mataku kok rasanya agak sakit ya..");
     }
 }

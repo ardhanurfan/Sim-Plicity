@@ -135,7 +135,7 @@ public class UI {
         jamText.setFont(new Font("Book Antique", Font.PLAIN, 24));
         attributePanel.add(jamText);
         hariText = new JLabel("Hari ke-1");
-        hariText.setBounds(50 + 70, 65, 200, 30);
+        hariText.setBounds(50 + 70, 55, 200, 30);
         hariText.setBackground(null);
         hariText.setForeground(Color.white);
         hariText.setFont(new Font("Book Antique", Font.PLAIN, 16));
@@ -375,7 +375,7 @@ public class UI {
             }
             String filename = o.getNamaObjek() + ".png";
             String[] action = new String[1];
-            action[0] = o.getAksi();
+            action = o.getAksi();
 
             createObjek(bgNum, x, y, width, height, filename, action, o.getPosisi());
         }

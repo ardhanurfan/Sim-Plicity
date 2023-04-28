@@ -24,6 +24,7 @@ public class GameManager {
 	Routing routing = new Routing(this);
 
 	Thread threadTime;
+	Thread threadAksi;
 
 	public GameManager() {
 		routing.showScreen(0);
@@ -55,6 +56,7 @@ public class GameManager {
 			JSONObject jsonObject = (JSONObject) obj;
 
 			world.setTime(Integer.parseInt(jsonObject.get("time").toString()));
+			world.setHari(Integer.parseInt(jsonObject.get("hari").toString()));
 
 			JSONArray jsonArrayRumah = (JSONArray) jsonObject.get("listRumah");
 			List<Rumah> listRumah = new ArrayList<Rumah>();
@@ -93,4 +95,22 @@ public class GameManager {
 		});
 	}
 
+	public void threadAksi(int waktuAksi) {
+		threadAksi = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(waktuAksi * 1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				ui.kesehatanText.setText(getCurrentSim().getKesehatan());
+				ui.moodText.setText(getCurrentSim().getMood());
+				ui.kekenyanganText.setText(getCurrentSim().getKekenyangan());
+				ui.uangText.setText(getCurrentSim().getUang());
+				// world.setTime(1);
+				// ui.jamText.setText(world.getTime());
+			}
+		});
+	}
 }
