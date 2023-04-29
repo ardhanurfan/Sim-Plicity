@@ -34,7 +34,7 @@ public class Sim {
     private int waktuTidakTidur = 0;
 
     // Reset jika sudah buang air
-    private int waktuTidakBuangAir = 0;
+    private int waktuTidakBuangAir = -30;
     private boolean isTidakBuangAir = false;
 
     public Sim(Sim sim) {
@@ -295,9 +295,9 @@ public class Sim {
 
         System.out.println("Olahraga selesai selama " + (waktuOlahraga < 60 ? (waktuOlahraga + " detik")
                 : (waktuOlahraga / 60 + ":" + waktuOlahraga % 60 + " menit")));
-        System.out.println("Kesehatan Anda sekarang " + kesehatan);
-        System.out.println("Kekenyangan Anda sekarang " + kekenyangan);
-        System.out.println("Mood Anda sekarang " + mood);
+        // System.out.println("Kesehatan Anda sekarang " + kesehatan);
+        // System.out.println("Kekenyangan Anda sekarang " + kekenyangan);
+        // System.out.println("Mood Anda sekarang " + mood);
     }
 
     public void tidur(int waktuTidur) {
@@ -306,9 +306,9 @@ public class Sim {
 
         totalWaktuTidur += waktuTidur;
 
-        System.out.println("Sim telah tidur selama " + waktuTidur + " detik");
-        System.out.println("Kesehatan Anda sekarang " + kesehatan);
-        System.out.println("Mood Anda sekarang " + mood);
+        // System.out.println("Sim telah tidur selama " + waktuTidur + " detik");
+        // System.out.println("Kesehatan Anda sekarang " + kesehatan);
+        // System.out.println("Mood Anda sekarang " + mood);
     }
 
     public void efekTidakTidur() {
@@ -328,10 +328,10 @@ public class Sim {
         // menangani kalo belum 4 menit udah makan lagi, acuan 4 menit yang awal
         if (!isTidakBuangAir) {
             isTidakBuangAir = true;
-            waktuTidakBuangAir = 0;
+            waktuTidakBuangAir = -30;
         }
 
-        System.out.println("Yammy! " + namaMakanan + " enak sekali...");
+        // System.out.println("Yammy! " + namaMakanan + " enak sekali...");
         return 30;
     }
 
@@ -386,7 +386,7 @@ public class Sim {
     public double buangAir() {
         setKekenyangan(1, 1, -20);
         setMood(1, 1, 10);
-        waktuTidakBuangAir = 0;
+        waktuTidakBuangAir = -30;
         isTidakBuangAir = false;
         System.out.println("Uhhh lega... udah buang air");
         return 10;
@@ -395,7 +395,7 @@ public class Sim {
     public void efekTidakBuangAir() {
         if (waktuTidakBuangAir >= 240 && isTidakBuangAir) {
             isTidakBuangAir = false;
-            waktuTidakBuangAir = 0;
+            waktuTidakBuangAir = -30;
             setKesehatan(1, 1, -5);
             setMood(1, 1, -5);
         }
