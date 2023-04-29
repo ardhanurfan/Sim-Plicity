@@ -14,6 +14,7 @@ import com.simplicity.Rumah;
 import com.simplicity.Sim;
 import com.simplicity.Inventory.InventoryItem;
 import com.simplicity.Ruangan;
+import com.simplicity.Objek.ObjekBahanMakanan;
 import com.simplicity.Objek.ObjekMakanan;
 import com.simplicity.Objek.ObjekNonMakanan;
 import com.simplicity.Point;
@@ -463,7 +464,7 @@ public class ActionHandler implements ActionListener {
                 if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
                     List<String> inventoryMakanan = new ArrayList<String>();
                     for (InventoryItem item : gm.getCurrentSim().getInventory().getData()) {
-                        if (item.getKategori().equals("Makanan")) {
+                        if (item.getKategori().equals("Makanan") || item.getKategori().equals("Bahan Makanan")) {
                             inventoryMakanan.add(item.getNamaBarang());
                         }
                     }
@@ -476,6 +477,11 @@ public class ActionHandler implements ActionListener {
                         for (ObjekMakanan makanan : gm.world.getDaftar_makanan()) {
                             if (namaMakanan.equals(makanan.getNamaObjek())) {
                                 kekenyangan = makanan.getKekenyangan();
+                            }
+                        }
+                        for (ObjekBahanMakanan bahan : gm.world.getDaftar_bahan()) {
+                            if (namaMakanan.equals(bahan.getNamaObjek())) {
+                                kekenyangan = bahan.getKekenyangan();
                             }
                         }
                         gm.threadAksi(30);

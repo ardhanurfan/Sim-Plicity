@@ -436,44 +436,44 @@
           { "kategori": "Makanan", "namaBarang": "Tumis Sayur", "jumlah": 1 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kasur Single\t",
+            "namaBarang": "Kasur Single",
             "jumlah": 1
           },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kompor Gas\t",
+            "namaBarang": "Kompor Gas",
             "jumlah": 1
           },
-          { "kategori": "Peralatan", "namaBarang": "Toilet\t\t", "jumlah": 1 },
-          { "kategori": "Bahan Makanan", "namaBarang": "Sapi\t", "jumlah": 1 },
-          { "kategori": "Bahan Makanan", "namaBarang": "Ayam\t", "jumlah": 1 },
-          { "kategori": "Bahan Makanan", "namaBarang": "Nasi\t", "jumlah": 1 },
+          { "kategori": "Peralatan", "namaBarang": "Toilet", "jumlah": 1 },
+          { "kategori": "Bahan Makanan", "namaBarang": "Sapi", "jumlah": 1 },
+          { "kategori": "Bahan Makanan", "namaBarang": "Ayam", "jumlah": 1 },
+          { "kategori": "Bahan Makanan", "namaBarang": "Nasi", "jumlah": 1 },
           {
             "kategori": "Bahan Makanan",
-            "namaBarang": "Wortel\t",
+            "namaBarang": "Wortel",
             "jumlah": 1
           },
-          { "kategori": "Bahan Makanan", "namaBarang": "Bayam\t", "jumlah": 1 },
+          { "kategori": "Bahan Makanan", "namaBarang": "Bayam", "jumlah": 1 },
           {
             "kategori": "Bahan Makanan",
-            "namaBarang": "Kacang\t",
+            "namaBarang": "Kacang",
             "jumlah": 1
           },
           {
             "kategori": "Bahan Makanan",
-            "namaBarang": "Kentang\t",
+            "namaBarang": "Kentang",
             "jumlah": 1
           },
-          { "kategori": "Bahan Makanan", "namaBarang": "Susu\t", "jumlah": 1 },
+          { "kategori": "Bahan Makanan", "namaBarang": "Susu", "jumlah": 1 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Meja dan Kursi\t",
+            "namaBarang": "Meja dan Kursi",
             "jumlah": 1
           },
-          { "kategori": "Peralatan", "namaBarang": "Jam\t\t", "jumlah": 1 },
+          { "kategori": "Peralatan", "namaBarang": "Jam", "jumlah": 1 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kompor Listrik\t",
+            "namaBarang": "Kompor Listrik",
             "jumlah": 1
           }
         ]
