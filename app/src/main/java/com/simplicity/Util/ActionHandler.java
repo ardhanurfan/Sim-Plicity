@@ -392,6 +392,18 @@ public class ActionHandler implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
                 }
                 break;
+            case "Bekerja":
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    String waktu = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                            "Berapa lama kamu ingin bekerja (dalam detik)?", "Input Waktu Kerja",
+                            JOptionPane.PLAIN_MESSAGE);
+                    int waktukerja = Integer.parseInt(waktu);
+                    gm.threadAksi(waktukerja);
+                    gm.getCurrentSim().kerja(waktukerja);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
         }
     }
 
