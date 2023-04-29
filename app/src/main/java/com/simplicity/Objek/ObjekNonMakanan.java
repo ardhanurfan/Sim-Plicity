@@ -138,7 +138,7 @@ public class ObjekNonMakanan extends Objek {
         } else if (nama.equals("tv 1x1")){
             o = new ObjekNonMakanan(nama, 1, 1, 20, new String[] {"Menonton", "Main PS"});
         } else if (nama.equals("matras 2x1")){
-            o = new ObjekNonMakanan(nama, 2, 1, 8, new String[] {"Yoga", "Meditasi"});
+            o = new ObjekNonMakanan(nama, 2, 1, 8, new String[] {"Olahraga", "Meditasi"});
         } else if (nama.equals("laptop 1x1")){
             o = new ObjekNonMakanan(nama, 1, 1, 50, new String[] {"Main game", "Ngoding"});
         }

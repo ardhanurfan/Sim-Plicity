@@ -287,9 +287,9 @@ public class Sim {
 
         System.out.println("Olahraga selesai selama " + (waktuOlahraga < 60 ? (waktuOlahraga + " detik")
                 : (waktuOlahraga / 60 + ":" + waktuOlahraga % 60 + " menit")));
-        System.out.println("Kesehatan Anda sekarang " + kesehatan);
-        System.out.println("Kekenyangan Anda sekarang " + kekenyangan);
-        System.out.println("Mood Anda sekarang " + mood);
+        // System.out.println("Kesehatan Anda sekarang " + kesehatan);
+        // System.out.println("Kekenyangan Anda sekarang " + kekenyangan);
+        // System.out.println("Mood Anda sekarang " + mood);
     }
 
     public void tidur(int waktuTidur) {

@@ -366,6 +366,89 @@ public class ActionHandler implements ActionListener {
                 }
                 break;
 
+            case "Olahraga" : 
+            if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                String waktu = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                        "Berapa lama kamu ingin berolahraga (dalam detik)?", "Input Waktu Tidur",
+                        JOptionPane.PLAIN_MESSAGE);
+                int waktuOlahraga = Integer.parseInt(waktu);
+                while (waktuOlahraga%20 != 0 ) {
+                    JOptionPane.showMessageDialog(null, "Waktu harus kelipatan 20!");
+                    waktu = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                            "Berapa lama kamu ingin berolahraga (dalam detik)?", "Input Waktu Tidur",
+                            JOptionPane.PLAIN_MESSAGE);
+                    waktuOlahraga = Integer.parseInt(waktu);
+                }
+                gm.threadAksi(waktuOlahraga);
+                gm.getCurrentSim().olahraga(waktuOlahraga);
+            } else {
+                JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+            }
+            break;
+            
+            case "Duduk" : 
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().duduk();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+            
+            case "Ngudud" : 
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().ngudud();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+
+            case "Menonton" :
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().nontonTv();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+            
+            case "Ngoding" :
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().ngoding();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+
+            case "Meditasi" : 
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().meditasi();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+            
+            case "Main PS" : 
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().mainPS();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+
+            case "Main Game" : 
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().bermain();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+
             case "Makan":
                 if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
                     List<String> inventoryMakanan = new ArrayList<String>();
@@ -392,6 +475,7 @@ public class ActionHandler implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
                 }
                 break;
+            
         }
     }
 
