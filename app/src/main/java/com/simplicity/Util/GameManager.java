@@ -119,6 +119,7 @@ public class GameManager {
 	}
 
 	public void updateAttribute() {
+		ui.pekerjaanText.setText(getCurrentSim().getPekerjaan());
 		ui.kesehatanText.setText(getCurrentSim().getKesehatan());
 		ui.moodText.setText(getCurrentSim().getMood());
 		ui.kekenyanganText.setText(getCurrentSim().getKekenyangan());

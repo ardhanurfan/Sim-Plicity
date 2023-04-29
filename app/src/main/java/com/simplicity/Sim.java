@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.json.simple.JSONObject;
 
 import com.simplicity.Objek.ObjekBahanMakanan;
@@ -27,7 +29,7 @@ public class Sim {
     // Reset saat ganti kerja
     private int totalWaktuKerja = 0;
     private int jedaGantiKerja = 0;
-    private boolean sudahGantiKerja = false; //untuk pekerjaan pertama false, begitu sudah ganti selalu true;
+    private boolean sudahGantiKerja = false; // untuk pekerjaan pertama false, begitu sudah ganti selalu true;
 
     // Reset jika ganti hari
     private int totalWaktuTidur = 0;
@@ -172,18 +174,24 @@ public class Sim {
         return pekerjaan.getNamaObjek();
     }
 
-    public boolean getGanti(){
+    public boolean getSudahGantiKerja() {
         return sudahGantiKerja;
     }
 
+    public int getJedaGantiKerja() {
+        return jedaGantiKerja;
+    }
+
+    public int getTotalWaktuKerja() {
+        return totalWaktuKerja;
+    }
+
     public void setPekerjaan(ObjekPekerjaan pekerjaan) {
-        if (totalWaktuKerja >= 720) {
-            this.pekerjaan = pekerjaan;
-            uang -= pekerjaan.getGaji() * 0.5;
-            jedaGantiKerja = 0;
-            totalWaktuKerja = 0;
-            sudahGantiKerja = true;
-        }
+        this.pekerjaan = pekerjaan;
+        uang -= pekerjaan.getGaji() * 0.5;
+        jedaGantiKerja = 0;
+        totalWaktuKerja = 0;
+        sudahGantiKerja = true;
     }
 
     public String getUang() {
@@ -261,31 +269,21 @@ public class Sim {
         waktuTidakTidur = 0;
     }
 
-    public void kerja(int waktuKerja) {
-        if (jedaGantiKerja >= 720 || !sudahGantiKerja) {
-            setKekenyangan(waktuKerja, 30, -10);
-            setMood(waktuKerja, 30, -10);
-            if (pekerjaan.getNamaObjek().equals("Badut Sulap")) {
-                uang += waktuKerja / 240 * 15;
-            } else if (pekerjaan.getNamaObjek().equals("Koki")) {
-                uang += waktuKerja / 240 * 30;
-            } else if (pekerjaan.getNamaObjek().equals("Polisi")) {
-                uang += waktuKerja / 240 * 35;
-            } else if (pekerjaan.getNamaObjek().equals("Programmer")) {
-                uang += waktuKerja / 240 * 45;
-            } else if (pekerjaan.getNamaObjek().equals("Dokter")) {
-                uang += waktuKerja / 240 * 50;
-            }
-            totalWaktuKerja += waktuKerja;
-
-            System.out.println("Kerja selesai selama " + (waktuKerja < 60 ? (waktuKerja + " detik")
-                    : (waktuKerja / 60 + ":" + waktuKerja % 60 + " menit")));
-            System.out.println("Kekenyangan Anda sekarang " + kekenyangan);
-            System.out.println("Mood Anda sekarang " + mood);
-            System.out.println("Uang Anda sekarang " + uang);
-        } else {
-            System.out.println("Anda belum bisa bekerja karena belum sehari setelah ganti pekerjaan");
+    public void kerja(double waktuKerja) {
+        setKekenyangan(waktuKerja, 30, -10);
+        setMood(waktuKerja, 30, -10);
+        if (pekerjaan.getNamaObjek().equals("Badut Sulap")) {
+            uang += waktuKerja / 240 * 15;
+        } else if (pekerjaan.getNamaObjek().equals("Koki")) {
+            uang += waktuKerja / 240 * 30;
+        } else if (pekerjaan.getNamaObjek().equals("Polisi")) {
+            uang += waktuKerja / 240 * 35;
+        } else if (pekerjaan.getNamaObjek().equals("Programmer")) {
+            uang += waktuKerja / 240 * 45;
+        } else if (pekerjaan.getNamaObjek().equals("Dokter")) {
+            uang += waktuKerja / 240 * 50;
         }
+        totalWaktuKerja += waktuKerja;
     }
 
     public void olahraga(int waktuOlahraga) {
@@ -398,6 +396,7 @@ public class Sim {
             waktuTidakBuangAir = -30;
             setKesehatan(1, 1, -5);
             setMood(1, 1, -5);
+            JOptionPane.showMessageDialog(null, "Anda tidak buang air dalam 4 menit setelah makan");
         }
     }
 
@@ -432,46 +431,47 @@ public class Sim {
     public void bermain() {
         setMood(30, 30, 20);
         setKekenyangan(30, 30, -10);
-        System.out.println("Horee... Seru sekali gamenya");
+        // System.out.println("Horee... Seru sekali gamenya");
     }
 
     public void nontonTv() {
         setMood(30, 30, 15);
         setKekenyangan(30, 30, -10);
-        System.out.println("Horee... Seru sekali acaranya");
+        // System.out.println("Horee... Seru sekali acaranya");
     }
 
     public void duduk() {
         setMood(30, 30, 5);
         setKekenyangan(30, 30, -5);
         setKesehatan(30, 30, 5);
-        System.out.println("Enaknya... Santai sekali");
+        // System.out.println("Enaknya... Santai sekali");
     }
 
     public void ngoding() {
         setMood(30, 30, 5);
         setKekenyangan(30, 30, -5);
-        System.out.println("Ngoding seru euyy..");
+        // System.out.println("Ngoding seru euyy..");
     }
 
     public void ngudud() {
         setMood(30, 30, 5);
         setKekenyangan(30, 30, -5);
         setKesehatan(30, 30, -5);
-        System.out.println("Fiuhh.. Dunhill emang mantep cuy..");
+        // System.out.println("Fiuhh.. Dunhill emang mantep cuy..");
     }
 
     public void meditasi() {
         setMood(30, 30, 5);
         setKekenyangan(30, 30, -5);
         setKesehatan(30, 30, 5);
-        System.out.println("Meditasi itu membuat lebih tenang..");
+        // System.out.println("Meditasi itu membuat lebih tenang..");
     }
 
     public void mainPS() {
         setMood(30, 30, 5);
         setKekenyangan(30, 30, -5);
         setKesehatan(30, 30, -5);
-        System.out.println("Game PS itu seru euyy.. T-tapi mataku kok rasanya agak sakit ya..");
+        // System.out.println("Game PS itu seru euyy.. T-tapi mataku kok rasanya agak
+        // sakit ya..");
     }
 }

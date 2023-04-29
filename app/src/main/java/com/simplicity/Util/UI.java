@@ -152,7 +152,7 @@ public class UI {
         // add pekerjaan
         attributeItem(50, 160, "kerja.png");
         createObjek(attributePanel, 50, 160, 50, 50, "kerja.png", new String[] { "Bekerja", "Ganti Pekerjaan" }, -1);
-        pekerjaanText = new JLabel("Polisi");
+        pekerjaanText = new JLabel();
         pekerjaanText.setBounds(50 + 70, 160, 200, 50);
         pekerjaanText.setBackground(null);
         pekerjaanText.setForeground(Color.white);
@@ -453,7 +453,9 @@ public class UI {
     public void refreshRoom(Ruangan currRuangan) {
         gm.ui.bgPanel[3].removeAll();
         gm.routing.showScreen(3);
-        gm.ui.createObjek(bgPanel[3], 650, 600, 40, 40, "edit.png", new String[] { "Edit Room" }, -1);
+        if (gm.getCurrentSim().getRumah().getDaftarRuangan().contains(currRuangan)) {
+            gm.ui.createObjek(bgPanel[3], 650, 600, 40, 40, "edit.png", new String[] { "Edit Room" }, -1);
+        }
         gm.ui.createObjek(bgPanel[3], 650, 650, 40, 40, "back.png", new String[] { "Back to Home", "Back to World" },
                 -1);
         gm.ui.generateRoom(currRuangan, 3);
@@ -465,7 +467,9 @@ public class UI {
     public void refreshHome(Rumah currRumah) {
         gm.ui.bgPanel[4].removeAll();
         gm.routing.showScreen(4);
-        gm.ui.createObjek(bgPanel[4], 650, 600, 40, 40, "upgrade.png", new String[] { "Upgrade House" }, -1);
+        if (currRumah.getNama().equals(gm.getCurrentSim().getRumah().getNama())) {
+            gm.ui.createObjek(bgPanel[4], 650, 600, 40, 40, "upgrade.png", new String[] { "Upgrade House" }, -1);
+        }
         gm.ui.createObjek(bgPanel[4], 650, 650, 40, 40, "back.png", new String[] { "Back to World" }, -1);
         gm.ui.generateHome(currRumah, 4);
         gm.ui.bgPanel[4].add(gm.ui.bgLabel[4]);
