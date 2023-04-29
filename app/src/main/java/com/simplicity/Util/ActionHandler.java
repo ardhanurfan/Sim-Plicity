@@ -170,12 +170,16 @@ public class ActionHandler implements ActionListener {
             // Upgrade Rumah
             case "Upgrade House":
                 // Buat Pilihan Acuan Kamar
-                Rumah currHouse = gm.world.getDaftarRumah().get(indexObj);
-                List<Ruangan> listRuangans = currHouse.getDaftarRuangan();
+                Rumah currHouse = gm.getCurrentSim().getCurrLokasi().getRumah();
+                List<Ruangan> ruangan = currHouse.getDaftarRuangan();
+                List<String> listRuangans = new ArrayList<String>();
+                for (Ruangan ruang : gm.getCurrentSim().getCurrLokasi().getRumah().getDaftarRuangan()) {
+                    listRuangans.add(ruang.getNama());
+                }
                 Object acuanRuang = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Pilih ruangan acuan",
                         "Upgrade House",
                         JOptionPane.PLAIN_MESSAGE, null, listRuangans.toArray(), listRuangans.get(0));
-                Ruangan RuanganAcuan = listRuangans.get(listRuangans.indexOf(acuanRuang)); // cek lagi nnti
+                Ruangan RuanganAcuan = ruangan.get(listRuangans.indexOf(acuanRuang)); // cek lagi nnti
                 // Buat pilihan posisi
                 List<String> acuanposisi = Arrays.asList("Kanan", "Kiri", "Atas", "Bawah");
                 Object posisiacuan = JOptionPane.showInputDialog(gm.ui.bgPanel[3],
@@ -367,6 +371,89 @@ public class ActionHandler implements ActionListener {
                 }
                 break;
 
+            case "Olahraga" : 
+            if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                String waktu = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                        "Berapa lama kamu ingin berolahraga (dalam detik)?", "Input Waktu Tidur",
+                        JOptionPane.PLAIN_MESSAGE);
+                int waktuOlahraga = Integer.parseInt(waktu);
+                while (waktuOlahraga%20 != 0 ) {
+                    JOptionPane.showMessageDialog(null, "Waktu harus kelipatan 20!");
+                    waktu = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                            "Berapa lama kamu ingin berolahraga (dalam detik)?", "Input Waktu Tidur",
+                            JOptionPane.PLAIN_MESSAGE);
+                    waktuOlahraga = Integer.parseInt(waktu);
+                }
+                gm.threadAksi(waktuOlahraga);
+                gm.getCurrentSim().olahraga(waktuOlahraga);
+            } else {
+                JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+            }
+            break;
+            
+            case "Duduk" : 
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().duduk();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+            
+            case "Ngudud" : 
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().ngudud();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+
+            case "Menonton" :
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().nontonTv();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+            
+            case "Ngoding" :
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().ngoding();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+
+            case "Meditasi" : 
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().meditasi();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+            
+            case "Main PS" : 
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().mainPS();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+
+            case "Main Game" : 
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(30);
+                    gm.getCurrentSim().bermain();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+
             case "Makan":
                 if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
                     List<String> inventoryMakanan = new ArrayList<String>();
@@ -398,6 +485,19 @@ public class ActionHandler implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
                 }
                 break;
+            case "Bekerja":
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    String waktu = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                            "Berapa lama kamu ingin bekerja (dalam detik)?", "Input Waktu Kerja",
+                            JOptionPane.PLAIN_MESSAGE);
+                    int waktukerja = Integer.parseInt(waktu);
+                    gm.threadAksi(waktukerja);
+                    gm.getCurrentSim().kerja(waktukerja);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
+            
         }
     }
 

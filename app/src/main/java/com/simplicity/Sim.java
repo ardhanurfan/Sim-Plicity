@@ -27,6 +27,7 @@ public class Sim {
     // Reset saat ganti kerja
     private int totalWaktuKerja = 0;
     private int jedaGantiKerja = 0;
+    private boolean sudahGantiKerja = false; //untuk pekerjaan pertama false, begitu sudah ganti selalu true;
 
     // Reset jika ganti hari
     private int totalWaktuTidur = 0;
@@ -75,6 +76,7 @@ public class Sim {
 
         totalWaktuKerja = Integer.parseInt(jsonObject.get("totalWaktuKerja").toString());
         jedaGantiKerja = Integer.parseInt(jsonObject.get("jedaGantiKerja").toString());
+        sudahGantiKerja = Boolean.parseBoolean(jsonObject.get("sudahGantiKerja").toString());
         totalWaktuTidur = Integer.parseInt(jsonObject.get("totalWaktuTidur").toString());
         waktuTidakTidur = Integer.parseInt(jsonObject.get("waktuTidakTidur").toString());
         waktuTidakBuangAir = Integer.parseInt(jsonObject.get("waktuTidakBuangAir").toString());
@@ -97,6 +99,7 @@ public class Sim {
 
         simMap.put("totalWaktuKerja", totalWaktuKerja);
         simMap.put("jedaGantiKerja", jedaGantiKerja);
+        simMap.put("sudahGantiKerja", sudahGantiKerja);
         simMap.put("totalWaktuTidur", totalWaktuTidur);
         simMap.put("waktuTidakTidur", waktuTidakTidur);
         simMap.put("waktuTidakBuangAir", waktuTidakBuangAir);
@@ -169,12 +172,17 @@ public class Sim {
         return pekerjaan.getNamaObjek();
     }
 
+    public boolean getGanti(){
+        return sudahGantiKerja;
+    }
+
     public void setPekerjaan(ObjekPekerjaan pekerjaan) {
         if (totalWaktuKerja >= 720) {
             this.pekerjaan = pekerjaan;
             uang -= pekerjaan.getGaji() * 0.5;
             jedaGantiKerja = 0;
             totalWaktuKerja = 0;
+            sudahGantiKerja = true;
         }
     }
 
@@ -254,7 +262,7 @@ public class Sim {
     }
 
     public void kerja(int waktuKerja) {
-        if (jedaGantiKerja >= 720) {
+        if (jedaGantiKerja >= 720 || !sudahGantiKerja) {
             setKekenyangan(waktuKerja, 30, -10);
             setMood(waktuKerja, 30, -10);
             if (pekerjaan.getNamaObjek().equals("Badut Sulap")) {
@@ -287,9 +295,9 @@ public class Sim {
 
         System.out.println("Olahraga selesai selama " + (waktuOlahraga < 60 ? (waktuOlahraga + " detik")
                 : (waktuOlahraga / 60 + ":" + waktuOlahraga % 60 + " menit")));
-        System.out.println("Kesehatan Anda sekarang " + kesehatan);
-        System.out.println("Kekenyangan Anda sekarang " + kekenyangan);
-        System.out.println("Mood Anda sekarang " + mood);
+        // System.out.println("Kesehatan Anda sekarang " + kesehatan);
+        // System.out.println("Kekenyangan Anda sekarang " + kekenyangan);
+        // System.out.println("Mood Anda sekarang " + mood);
     }
 
     public void tidur(int waktuTidur) {
