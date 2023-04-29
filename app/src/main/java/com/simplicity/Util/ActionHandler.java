@@ -170,12 +170,14 @@ public class ActionHandler implements ActionListener {
             // Upgrade Rumah
             case "Upgrade House":
                 // Buat Pilihan Acuan Kamar
+                Boolean status;
                 Rumah currHouse = gm.getCurrentSim().getCurrLokasi().getRumah();
                 List<Ruangan> ruangan = currHouse.getDaftarRuangan();
                 List<String> listRuangans = new ArrayList<String>();
                 for (Ruangan ruang : gm.getCurrentSim().getCurrLokasi().getRumah().getDaftarRuangan()) {
                     listRuangans.add(ruang.getNama());
                 }
+                int jumlahKamarAwal = currHouse.getDaftarRuangan().size();
                 Object acuanRuang = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Pilih ruangan acuan",
                         "Upgrade House",
                         JOptionPane.PLAIN_MESSAGE, null, listRuangans.toArray(), listRuangans.get(0));
@@ -194,7 +196,12 @@ public class ActionHandler implements ActionListener {
                             JOptionPane.PLAIN_MESSAGE);
                 currHouse.upgradeRumah(RuanganAcuan, acuan, namaruangan);
                 gm.ui.refreshHome(currHouse);
-                gm.ui.messagText.setText("Berhasil upgrade rumah");
+                if (jumlahKamarAwal==currHouse.getDaftarRuangan().size()){
+                    gm.ui.messagText.setText("Upgrade gagal karena ruangan tidak tersedia");
+                }
+                else{
+                    gm.ui.messagText.setText("Berhasil upgrade rumah");
+                }
                 break;
             case "Edit Room":
                 // Opsi tombol edit room
