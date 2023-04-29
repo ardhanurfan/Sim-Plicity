@@ -28,7 +28,6 @@ public class GameManager {
 
 	public GameManager() {
 		routing.showScreen(0);
-		threadTime();
 	}
 
 	public Sim getCurrentSim() {
@@ -81,11 +80,12 @@ public class GameManager {
 		threadTime = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				while (threadTime.isAlive()) {
+				boolean stop = false;
+				while (threadTime.isAlive() && !stop) {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						stop = true;
 					}
 					world.setTime(1);
 					ui.jamText.setText(world.getTime());
@@ -99,18 +99,24 @@ public class GameManager {
 		threadAksi = new Thread(new Runnable() {
 			@Override
 			public void run() {
+				// jalankan waktu dunia
+				threadTime();
+				threadTime.start();
 				try {
 					Thread.sleep(waktuAksi * 1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				ui.kesehatanText.setText(getCurrentSim().getKesehatan());
-				ui.moodText.setText(getCurrentSim().getMood());
-				ui.kekenyanganText.setText(getCurrentSim().getKekenyangan());
-				ui.uangText.setText(getCurrentSim().getUang());
-				// world.setTime(1);
-				// ui.jamText.setText(world.getTime());
+				threadTime.interrupt();
+				updateAttribute();
 			}
 		});
+	}
+
+	public void updateAttribute() {
+		ui.kesehatanText.setText(getCurrentSim().getKesehatan());
+		ui.moodText.setText(getCurrentSim().getMood());
+		ui.kekenyanganText.setText(getCurrentSim().getKekenyangan());
+		ui.uangText.setText(getCurrentSim().getUang());
 	}
 }

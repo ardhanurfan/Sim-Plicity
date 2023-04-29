@@ -45,12 +45,9 @@ public class ActionHandler implements ActionListener {
                         JOptionPane.PLAIN_MESSAGE);
                 if (name != null && name.replaceAll(" ", "").length() > 0) {
                     if (gm.world.addSim(name)) {
-                        // jalankan waktu dunia
-                        if (!gm.threadTime.isAlive()) {
-                            gm.threadTime.start();
-                        }
                         // set current sim terbaru
                         gm.setCurrentSim(gm.world.getDaftarSim().get(gm.world.getDaftarSim().size() - 1));
+                        gm.updateAttribute();
                         gm.ui.bgPanel[2].removeAll();
                         gm.ui.bgPanel[2].add(gm.ui.bgLabel[2]);
                         for (int i = 0; i < gm.world.getDaftarRumah().size(); i++) {
@@ -79,12 +76,9 @@ public class ActionHandler implements ActionListener {
                         JOptionPane.PLAIN_MESSAGE, null, options.toArray(), options.get(0));
                 if (selected != null) {
                     int index = options.indexOf(selected);
-                    // jalankan waktu dunia
-                    if (!gm.threadTime.isAlive()) {
-                        gm.threadTime.start();
-                    }
                     // set current sim by index choosen
                     gm.setCurrentSim(gm.world.getDaftarSim().get(index));
+                    gm.updateAttribute();
                     gm.ui.bgPanel[2].removeAll();
                     gm.ui.bgPanel[2].add(gm.ui.bgLabel[2]);
                     for (int i = 0; i < gm.world.getDaftarRumah().size(); i++) {
@@ -197,18 +191,18 @@ public class ActionHandler implements ActionListener {
 
                 // Ceritanya ini Inventory
 
-                //List<String> inventory = gm.getCurrentSim().getInventory().getIventoryString();
+                // List<String> inventory =
+                // gm.getCurrentSim().getInventory().getIventoryString();
                 List<String> inventory = Arrays.asList("kasur single 4x1", "kasur queen size 4x2",
                         "kasur king size 5x2", "jam 1x1", "meja kursi 3x3", "toilet 1x1", "kompor gas 2x1",
-                        "kompor listrik 1x1", "laptop 1x1", "tv 1x1","matras 2x1","sofa 2x1");
+                        "kompor listrik 1x1", "laptop 1x1", "tv 1x1", "matras 2x1", "sofa 2x1");
 
                 // Tambah Barang
                 if (index == 0) {
                     // Inventory ObjekNonMakanan kosong
-                    if(inventory.size()==0){
-                        JOptionPane.showMessageDialog(gm.ui.bgPanel[3], "Tidak ada barang");  
-                    }
-                    else{
+                    if (inventory.size() == 0) {
+                        JOptionPane.showMessageDialog(gm.ui.bgPanel[3], "Tidak ada barang");
+                    } else {
                         // Opsi inventory
                         Object selectedInventory = JOptionPane.showInputDialog(gm.ui.bgPanel[3],
                                 "Choose Object you want to add", "Edit Room", JOptionPane.PLAIN_MESSAGE, null,
@@ -254,15 +248,14 @@ public class ActionHandler implements ActionListener {
                                 gm.ui.messagText.setText("Dialog ditutup.");
                             }
                         }
-                    }    
+                    }
                 }
                 // Hapus Barang
                 else if (index == 1) {
                     // Ga ada barang
-                    if (currRuangan.getDaftarObjekString().size()==0){
-                        JOptionPane.showMessageDialog(gm.ui.bgPanel[3], "Tidak ada barang");  
-                    }
-                    else{
+                    if (currRuangan.getDaftarObjekString().size() == 0) {
+                        JOptionPane.showMessageDialog(gm.ui.bgPanel[3], "Tidak ada barang");
+                    } else {
                         // Opsi barang yang ada di currRuangan
                         List<String> optionObjek = currRuangan.getDaftarObjekString();
                         Object selectedObjek = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
@@ -282,10 +275,9 @@ public class ActionHandler implements ActionListener {
                 }
                 // Pindah barang
                 else if (index == 2) {
-                    if(currRuangan.getDaftarObjekString().size()==0){
-                        JOptionPane.showMessageDialog(gm.ui.bgPanel[3], "Tidak ada barang");  
-                    }
-                    else{
+                    if (currRuangan.getDaftarObjekString().size() == 0) {
+                        JOptionPane.showMessageDialog(gm.ui.bgPanel[3], "Tidak ada barang");
+                    } else {
                         // Opsi barang yang ada di currRuangan
                         List<String> optionObjek2 = currRuangan.getDaftarObjekString();
                         Object selectedObjek = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
@@ -358,11 +350,12 @@ public class ActionHandler implements ActionListener {
                 break;
 
             case "Tidur":
-            if (gm.threadAksi==null || !gm.threadAksi.isAlive()) {
-                    gm.threadAksi(120);
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    gm.threadAksi(10);
                     gm.threadAksi.start();
-                    gm.getCurrentSim().tidur(120);
-                    
+                    gm.getCurrentSim().tidur(10);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
                 }
         }
     }

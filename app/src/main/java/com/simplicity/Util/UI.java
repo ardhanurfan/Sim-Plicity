@@ -128,13 +128,13 @@ public class UI {
 
         // add jam
         attributeItem(50, 30, "jam.png");
-        jamText = new JLabel("00 : 00");
+        jamText = new JLabel(gm.world.getTime());
         jamText.setBounds(50 + 70, 15, 200, 50);
         jamText.setBackground(null);
         jamText.setForeground(Color.white);
         jamText.setFont(new Font("Book Antique", Font.PLAIN, 24));
         attributePanel.add(jamText);
-        hariText = new JLabel("Hari ke-1");
+        hariText = new JLabel("Hari ke-" + gm.world.getHari());
         hariText.setBounds(50 + 70, 55, 200, 30);
         hariText.setBackground(null);
         hariText.setForeground(Color.white);

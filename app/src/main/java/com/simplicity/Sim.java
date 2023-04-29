@@ -15,8 +15,8 @@ public class Sim {
     private String namaLengkap;
     private ObjekPekerjaan pekerjaan;
     private double uang;
-    private int kekenyangan;
-    private int mood;
+    private double kekenyangan;
+    private double mood;
     private double kesehatan;
     private String status;
     private LokasiSim currLokasi;
@@ -64,8 +64,8 @@ public class Sim {
         namaLengkap = jsonObject.get("namaLengkap").toString();
         pekerjaan = new ObjekPekerjaan((JSONObject) jsonObject.get("pekerjaan"));
         uang = Double.parseDouble(jsonObject.get("uang").toString());
-        kekenyangan = Integer.parseInt(jsonObject.get("kekenyangan").toString());
-        mood = Integer.parseInt(jsonObject.get("mood").toString());
+        kekenyangan = Double.parseDouble(jsonObject.get("kekenyangan").toString());
+        mood = Double.parseDouble(jsonObject.get("mood").toString());
         kesehatan = Double.parseDouble(jsonObject.get("kesehatan").toString());
         status = jsonObject.get("status") != null ? jsonObject.get("status").toString() : null;
         rumah = jsonObject.get("rumah") != null ? listRumah.get(Integer.parseInt(jsonObject.get("rumah").toString()))
@@ -182,7 +182,7 @@ public class Sim {
         return String.valueOf(uang);
     }
 
-    public void setUang(int uang) {
+    public void setUang(double uang) {
         this.uang = uang;
     }
 
@@ -190,7 +190,7 @@ public class Sim {
         return String.valueOf(kekenyangan);
     }
 
-    public void setKekenyangan(int waktuKerja, int ratio, int value) {
+    public void setKekenyangan(double waktuKerja, double ratio, double value) {
         this.kekenyangan += waktuKerja / ratio * value;
         if (this.kekenyangan > 100) {
             this.kekenyangan = 100;
@@ -201,7 +201,7 @@ public class Sim {
         return String.valueOf(mood);
     }
 
-    public void setMood(int waktuKerja, int ratio, int value) {
+    public void setMood(double waktuKerja, double ratio, double value) {
         this.mood += waktuKerja / ratio * value;
         if (this.mood > 100) {
             this.mood = 100;
