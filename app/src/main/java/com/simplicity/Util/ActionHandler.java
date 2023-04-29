@@ -354,9 +354,13 @@ public class ActionHandler implements ActionListener {
 
             case "Tidur":
                 if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
-                    gm.threadAksi(10);
+                    String waktu = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                            "Berapa lama kamu ingin tidur (dalam detik)?", "Input Waktu Tidur",
+                            JOptionPane.PLAIN_MESSAGE);
+                    int waktutidur = Integer.parseInt(waktu);
+                    gm.threadAksi(waktutidur);
                     gm.threadAksi.start();
-                    gm.getCurrentSim().tidur(10);
+                    gm.getCurrentSim().tidur(waktutidur);
                 } else {
                     JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
                 }
