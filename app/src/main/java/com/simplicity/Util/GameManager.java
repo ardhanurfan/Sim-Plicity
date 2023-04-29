@@ -23,7 +23,7 @@ public class GameManager {
 	UI ui = new UI(this);
 	Routing routing = new Routing(this);
 
-	Thread threadTime;
+	// Thread threadTime;
 	Thread threadAksi;
 
 	public GameManager() {
@@ -76,42 +76,46 @@ public class GameManager {
 		}
 	}
 
-	public void threadTime() {
-		threadTime = new Thread(new Runnable() {
+	// public void threadTime() {
+	// threadTime = new Thread(new Runnable() {
+	// @Override
+	// public void run() {
+	// boolean stop = false;
+	// while (threadTime.isAlive() && !stop) {
+	// try {
+	// Thread.sleep(1000);
+	// world.setTime(1);
+	// currentSim.addOnTimeWorld(1); // untuk aksi yang perlu kondisi
+	// ui.jamText.setText(world.getTime());
+	// ui.hariText.setText("Hari ke-" + world.getHari());
+	// } catch (InterruptedException e) {
+	// stop = true;
+	// }
+	// }
+	// }
+	// });
+	// }
+
+	public void threadAksi(int waktuAksi) {
+		threadAksi = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				boolean stop = false;
-				while (threadTime.isAlive() && !stop) {
+				for (int i = 0; i < waktuAksi; i++) {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						stop = true;
+						e.printStackTrace();
 					}
 					world.setTime(1);
 					currentSim.addOnTimeWorld(1); // untuk aksi yang perlu kondisi
 					ui.jamText.setText(world.getTime());
 					ui.hariText.setText("Hari ke-" + world.getHari());
 				}
-			}
-		});
-	}
-
-	public void threadAksi(int waktuAksi) {
-		threadAksi = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				// jalankan waktu dunia
-				threadTime();
-				threadTime.start();
-				try {
-					Thread.sleep(waktuAksi * 1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				threadTime.interrupt();
 				updateAttribute();
 			}
 		});
+
+		threadAksi.start();
 	}
 
 	public void updateAttribute() {
