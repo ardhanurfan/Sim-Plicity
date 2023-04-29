@@ -178,7 +178,7 @@ public class ActionHandler implements ActionListener {
                 Object acuanRuang = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Pilih ruangan acuan",
                         "Upgrade House",
                         JOptionPane.PLAIN_MESSAGE, null, listRuangans.toArray(), listRuangans.get(0));
-                Ruangan RuanganAcuan = ruangan.get(listRuangans.indexOf(acuanRuang)); // cek lagi nnti
+                Ruangan RuanganAcuan = ruangan.get(listRuangans.indexOf(acuanRuang)); 
                 // Buat pilihan posisi
                 List<String> acuanposisi = Arrays.asList("Kanan", "Kiri", "Atas", "Bawah");
                 Object posisiacuan = JOptionPane.showInputDialog(gm.ui.bgPanel[3],
@@ -187,7 +187,13 @@ public class ActionHandler implements ActionListener {
                 String acuan = acuanposisi.get(acuanposisi.indexOf(posisiacuan));
 
                 // Melakukan upgrade rumah
-                currHouse.upgradeRumah(RuanganAcuan, acuan, "Kamar Baru");
+                // Meminta input namaruangan
+                String namaruangan = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                            "Silakan masukkan nama ruangan yang baru", "Input Nama Ruangan Baru",
+                            JOptionPane.PLAIN_MESSAGE);
+                currHouse.upgradeRumah(RuanganAcuan, acuan, namaruangan);
+                gm.ui.refreshHome(currHouse);
+                gm.ui.messagText.setText("Berhasil upgrade rumah");
                 break;
             case "Edit Room":
                 // Opsi tombol edit room
