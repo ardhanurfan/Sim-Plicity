@@ -169,12 +169,16 @@ public class ActionHandler implements ActionListener {
             // Upgrade Rumah
             case "Upgrade House":
                 // Buat Pilihan Acuan Kamar
-                Rumah currHouse = gm.world.getDaftarRumah().get(indexObj);
-                List<Ruangan> listRuangans = currHouse.getDaftarRuangan();
+                Rumah currHouse = gm.getCurrentSim().getCurrLokasi().getRumah();
+                List<Ruangan> ruangan = currHouse.getDaftarRuangan();
+                List<String> listRuangans = new ArrayList<String>();
+                for (Ruangan ruang : gm.getCurrentSim().getCurrLokasi().getRumah().getDaftarRuangan()) {
+                    listRuangans.add(ruang.getNama());
+                }
                 Object acuanRuang = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Pilih ruangan acuan",
                         "Upgrade House",
                         JOptionPane.PLAIN_MESSAGE, null, listRuangans.toArray(), listRuangans.get(0));
-                Ruangan RuanganAcuan = listRuangans.get(listRuangans.indexOf(acuanRuang)); // cek lagi nnti
+                Ruangan RuanganAcuan = ruangan.get(listRuangans.indexOf(acuanRuang)); // cek lagi nnti
                 // Buat pilihan posisi
                 List<String> acuanposisi = Arrays.asList("Kanan", "Kiri", "Atas", "Bawah");
                 Object posisiacuan = JOptionPane.showInputDialog(gm.ui.bgPanel[3],
