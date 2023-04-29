@@ -352,6 +352,7 @@ public class ActionHandler implements ActionListener {
                 }
                 break;
 
+            // ACTION AKSI
             case "Tidur":
                 if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
                     String waktu = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
@@ -359,7 +360,6 @@ public class ActionHandler implements ActionListener {
                             JOptionPane.PLAIN_MESSAGE);
                     int waktutidur = Integer.parseInt(waktu);
                     gm.threadAksi(waktutidur);
-                    gm.threadAksi.start();
                     gm.getCurrentSim().tidur(waktutidur);
                 } else {
                     JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
@@ -378,18 +378,14 @@ public class ActionHandler implements ActionListener {
                             JOptionPane.PLAIN_MESSAGE, null, inventoryMakanan.toArray(), inventoryMakanan.get(0));
                     if (selectMakanan != null) {
                         String namaMakanan = (String) selectMakanan;
-                        System.out.println(namaMakanan);
                         // cari kekenyangannya
                         int kekenyangan = 0;
                         for (ObjekMakanan makanan : gm.world.getDaftar_makanan()) {
-                            System.out.println(makanan.getNamaObjek());
                             if (namaMakanan.equals(makanan.getNamaObjek())) {
                                 kekenyangan = makanan.getKekenyangan();
                             }
                         }
-                        System.out.println(kekenyangan);
-                        gm.threadAksi(10);
-                        gm.threadAksi.start();
+                        gm.threadAksi(30);
                         gm.getCurrentSim().makan(namaMakanan, kekenyangan);
                     }
                 } else {

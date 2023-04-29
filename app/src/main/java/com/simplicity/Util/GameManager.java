@@ -112,6 +112,8 @@ public class GameManager {
 				updateAttribute();
 			}
 		});
+
+		threadAksi.start();
 	}
 
 	public void updateAttribute() {
