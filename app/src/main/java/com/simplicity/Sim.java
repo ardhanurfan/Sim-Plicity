@@ -179,7 +179,7 @@ public class Sim {
     }
 
     public String getUang() {
-        return String.valueOf(uang);
+        return String.format("%.2f", uang);
     }
 
     public void setUang(double uang) {
@@ -187,7 +187,7 @@ public class Sim {
     }
 
     public String getKekenyangan() {
-        return String.valueOf(kekenyangan);
+        return String.format("%.2f", kekenyangan);
     }
 
     public void setKekenyangan(double waktuKerja, double ratio, double value) {
@@ -198,7 +198,7 @@ public class Sim {
     }
 
     public String getMood() {
-        return String.valueOf(mood);
+        return String.format("%.2f", mood);
     }
 
     public void setMood(double waktuKerja, double ratio, double value) {
@@ -209,7 +209,7 @@ public class Sim {
     }
 
     public String getKesehatan() {
-        return String.valueOf(kesehatan);
+        return String.format("%.2f", kesehatan);
     }
 
     public void setKesehatan(double waktuKerja, double ratio, double value) {
