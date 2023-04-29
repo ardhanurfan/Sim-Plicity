@@ -88,6 +88,7 @@ public class GameManager {
 						stop = true;
 					}
 					world.setTime(1);
+					currentSim.addOnTimeWorld(1); // untuk aksi yang perlu kondisi
 					ui.jamText.setText(world.getTime());
 					ui.hariText.setText("Hari ke-" + world.getHari());
 				}

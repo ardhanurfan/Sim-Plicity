@@ -3,6 +3,7 @@ package com.simplicity.Util;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JComboBox;
 import java.util.stream.Collectors;
@@ -11,7 +12,9 @@ import javax.swing.JOptionPane;
 
 import com.simplicity.Rumah;
 import com.simplicity.Sim;
+import com.simplicity.Inventory.InventoryItem;
 import com.simplicity.Ruangan;
+import com.simplicity.Objek.ObjekMakanan;
 import com.simplicity.Objek.ObjekNonMakanan;
 import com.simplicity.Point;
 
@@ -357,6 +360,38 @@ public class ActionHandler implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
                 }
+                break;
+
+            case "Makan":
+                if (gm.threadAksi == null || !gm.threadAksi.isAlive()) {
+                    List<String> inventoryMakanan = new ArrayList<String>();
+                    for (InventoryItem item : gm.getCurrentSim().getInventory().getData()) {
+                        if (item.getKategori().equals("Makanan")) {
+                            inventoryMakanan.add(item.getNamaBarang());
+                        }
+                    }
+                    Object selectMakanan = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Choose Food", "Eat",
+                            JOptionPane.PLAIN_MESSAGE, null, inventoryMakanan.toArray(), inventoryMakanan.get(0));
+                    if (selectMakanan != null) {
+                        String namaMakanan = (String) selectMakanan;
+                        System.out.println(namaMakanan);
+                        // cari kekenyangannya
+                        int kekenyangan = 0;
+                        for (ObjekMakanan makanan : gm.world.getDaftar_makanan()) {
+                            System.out.println(makanan.getNamaObjek());
+                            if (namaMakanan.equals(makanan.getNamaObjek())) {
+                                kekenyangan = makanan.getKekenyangan();
+                            }
+                        }
+                        System.out.println(kekenyangan);
+                        gm.threadAksi(10);
+                        gm.threadAksi.start();
+                        gm.getCurrentSim().makan(namaMakanan, kekenyangan);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
+                }
+                break;
         }
     }
 

@@ -235,8 +235,8 @@ public class Sim {
         this.currLokasi = currLokasi;
     }
 
-    // Waktu bertambah karena melakukan aksi
-    public void addOnAksi(int waktuAksi) {
+    // Bertambah dan dilakukan cek setiap saat
+    public void addOnTimeWorld(int waktuAksi) {
         this.jedaGantiKerja += waktuAksi;
         this.waktuTidakTidur += waktuAksi;
 
@@ -251,24 +251,6 @@ public class Sim {
     public void resetWaktuKegiatanharian() {
         totalWaktuTidur = 0;
         waktuTidakTidur = 0;
-    }
-
-    // AKSI YANG DAPAT DILAKUKAN
-    public void viewSim() {
-        System.out.println("========== Data SIM ==========");
-        System.out.println(" Nama\t: " + namaLengkap);
-        System.out.println(" Pekerjaan\t: " + pekerjaan);
-        System.out.println(" Kesehatan\t: " + kesehatan);
-        System.out.println(" Kekenyangan\t: " + kekenyangan);
-        System.out.println(" Mood\t: " + mood);
-        System.out.println(" Uang\t: " + uang);
-    }
-
-    public void viewCurrLokasi() {
-        System.out.println("==============================");
-        System.out.println("=========== LOCATION =========");
-        System.out.println("Rumah\t: " + currLokasi.getRumah().getNama());
-        System.out.println("Ruangan\t: " + currLokasi.getRuangan().getNama());
     }
 
     public void kerja(int waktuKerja) {
@@ -328,26 +310,21 @@ public class Sim {
         }
     }
 
-    public double makan(ObjekMakanan makanan) {
+    public double makan(String namaMakanan, int kekenyangan) {
         // Cek apakah makanan ada di inventory
-        if (inventory.isContains(makanan)) {
-            setKekenyangan(1, 1, makanan.getKekenyangan());
+        setKekenyangan(1, 1, kekenyangan);
 
-            // kurangi stok makanan pada inventory
-            inventory.kurangiItem(makanan.getNamaObjek(), 1);
+        // kurangi stok makanan pada inventory
+        inventory.kurangiItem(namaMakanan, 1);
 
-            // menangani kalo belum 4 menit udah makan lagi, acuan 4 menit yang awal
-            if (!isTidakBuangAir) {
-                isTidakBuangAir = true;
-                waktuTidakBuangAir = 0;
-            }
-
-            System.out.println("Yammy! " + makanan.getNamaObjek() + " enak sekali...");
-            return 30;
-        } else {
-            System.out.println("Makanan tidak tersedia pada inventory");
-            return 0;
+        // menangani kalo belum 4 menit udah makan lagi, acuan 4 menit yang awal
+        if (!isTidakBuangAir) {
+            isTidakBuangAir = true;
+            waktuTidakBuangAir = 0;
         }
+
+        System.out.println("Yammy! " + namaMakanan + " enak sekali...");
+        return 30;
     }
 
     public double masak(ObjekMakanan makanan) {
