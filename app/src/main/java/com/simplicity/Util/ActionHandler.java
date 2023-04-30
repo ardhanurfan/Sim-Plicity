@@ -471,26 +471,30 @@ public class ActionHandler implements ActionListener {
                             inventoryMakanan.add(item.getNamaBarang());
                         }
                     }
-                    Object selectMakanan = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Choose Food", "Eat",
-                            JOptionPane.PLAIN_MESSAGE, null, inventoryMakanan.toArray(), inventoryMakanan.get(0));
-                    if (selectMakanan != null) {
-                        String namaMakanan = (String) selectMakanan;
-                        // cari kekenyangannya
-                        int kekenyangan = 0;
-                        for (ObjekMakanan makanan : gm.world.getDaftar_makanan()) {
-                            if (namaMakanan.equals(makanan.getNamaObjek())) {
-                                kekenyangan = makanan.getKekenyangan();
+                    if (!inventoryMakanan.isEmpty()) {
+                        Object selectMakanan = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Choose Food", "Eat",
+                                JOptionPane.PLAIN_MESSAGE, null, inventoryMakanan.toArray(), inventoryMakanan.get(0));
+                        if (selectMakanan != null) {
+                            String namaMakanan = (String) selectMakanan;
+                            // cari kekenyangannya
+                            int kekenyangan = 0;
+                            for (ObjekMakanan makanan : gm.world.getDaftar_makanan()) {
+                                if (namaMakanan.equals(makanan.getNamaObjek())) {
+                                    kekenyangan = makanan.getKekenyangan();
+                                }
                             }
-                        }
-                        for (ObjekBahanMakanan bahan : gm.world.getDaftar_bahan()) {
-                            if (namaMakanan.equals(bahan.getNamaObjek())) {
-                                kekenyangan = bahan.getKekenyangan();
+                            for (ObjekBahanMakanan bahan : gm.world.getDaftar_bahan()) {
+                                if (namaMakanan.equals(bahan.getNamaObjek())) {
+                                    kekenyangan = bahan.getKekenyangan();
+                                }
                             }
+                            gm.threadAksi(30);
+                            gm.getCurrentSim().makan(namaMakanan, kekenyangan);
+                            gm.ui.messagText.setText("Yaammyy... makan " + namaMakanan + " dulu yaa... Enakkk..");
+                            gm.getCurrentSim().setStatus("Sedang makan");
                         }
-                        gm.threadAksi(30);
-                        gm.getCurrentSim().makan(namaMakanan, kekenyangan);
-                        gm.ui.messagText.setText("Yaammyy... makan " + namaMakanan + " dulu yaa... Enakkk..");
-                        gm.getCurrentSim().setStatus("Sedang makan");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Anda tidak memiliki makanan!");
                     }
                     break;
 
