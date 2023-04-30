@@ -453,7 +453,7 @@ public class UI {
     public void refreshRoom(Ruangan currRuangan) {
         gm.ui.bgPanel[3].removeAll();
         gm.routing.showScreen(3);
-        if (gm.getCurrentSim().getRumah().getDaftarRuangan().contains(currRuangan)) {
+        if (gm.getCurrentSim().getRumah() != null && gm.getCurrentSim().getRumah().getDaftarRuangan().contains(currRuangan) ) {
             gm.ui.createObjek(bgPanel[3], 650, 600, 40, 40, "edit.png", new String[] { "Edit Room" }, -1);
         }
         gm.ui.createObjek(bgPanel[3], 650, 650, 40, 40, "back.png", new String[] { "Back to Home", "Back to World" },
@@ -467,7 +467,7 @@ public class UI {
     public void refreshHome(Rumah currRumah) {
         gm.ui.bgPanel[4].removeAll();
         gm.routing.showScreen(4);
-        if (currRumah.getNama().equals(gm.getCurrentSim().getRumah().getNama())) {
+        if (gm.getCurrentSim().getRumah() != null && currRumah.getNama().equals(gm.getCurrentSim().getRumah().getNama())) {
             gm.ui.createObjek(bgPanel[4], 650, 600, 40, 40, "upgrade.png", new String[] { "Upgrade House" }, -1);
         }
         gm.ui.createObjek(bgPanel[4], 650, 650, 40, 40, "back.png", new String[] { "Back to World" }, -1);
