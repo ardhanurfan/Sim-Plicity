@@ -263,6 +263,8 @@ public class ActionHandler implements ActionListener {
                                     // Ngecek nabrak ato ga
                                     if (currRuangan.nabrakGa(o, point, posisi)) {
                                         currRuangan.tambahObjek(o, point, posisi);
+                                        gm.getCurrentSim().getInventory().kurangiItem(o.getNamaObjek(), 1);
+
                                         gm.ui.refreshRoom(currRuangan);
                                         gm.ui.messagText.setText("Barang berhasil ditambahkan ke ruangan");
                                     } else {
@@ -291,6 +293,7 @@ public class ActionHandler implements ActionListener {
                                 int indexOptionObjek = optionObjek.indexOf(selectedObjek);
                                 ObjekNonMakanan deleteObject = currRuangan.getObjek(indexOptionObjek);
                                 currRuangan.hapusObjek(deleteObject);
+                                gm.getCurrentSim().getInventory().addItemPeralatan(deleteObject, 1);
 
                                 // Refresh panel
                                 gm.ui.refreshRoom(currRuangan);
