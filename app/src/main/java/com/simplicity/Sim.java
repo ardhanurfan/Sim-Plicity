@@ -26,6 +26,9 @@ public class Sim {
     private Rumah rumah;
 
     // STATE VARIABLE
+    // Reset jika selesai upgrade rumah
+    private int waktuUpgradeRumah = 0;
+
     // Reset saat ganti kerja
     private int totalWaktuKerja = 0;
     private int jedaGantiKerja = 0;
@@ -83,6 +86,7 @@ public class Sim {
         waktuTidakTidur = Integer.parseInt(jsonObject.get("waktuTidakTidur").toString());
         waktuTidakBuangAir = Integer.parseInt(jsonObject.get("waktuTidakBuangAir").toString());
         isTidakBuangAir = Boolean.parseBoolean(jsonObject.get("isTidakBuangAir").toString());
+        waktuUpgradeRumah = Integer.parseInt(jsonObject.get("waktuUpgradeRumah").toString());
     }
 
     public JSONObject toJson() {
@@ -106,6 +110,7 @@ public class Sim {
         simMap.put("waktuTidakTidur", waktuTidakTidur);
         simMap.put("waktuTidakBuangAir", waktuTidakBuangAir);
         simMap.put("isTidakBuangAir", isTidakBuangAir);
+        simMap.put("waktuUpgradeRumah", waktuUpgradeRumah);
 
         JSONObject simJSON = new JSONObject(simMap);
         return simJSON;
@@ -249,6 +254,14 @@ public class Sim {
 
     public void setCurrLokasi(LokasiSim currLokasi) {
         this.currLokasi = currLokasi;
+    }
+
+    public int getWaktuUpgradeRumah(){
+        return waktuUpgradeRumah;
+    }
+
+    public void setwaktuUpgradeRumah(int waktu){
+        waktuUpgradeRumah += waktu;
     }
 
     // Bertambah dan dilakukan cek setiap saat

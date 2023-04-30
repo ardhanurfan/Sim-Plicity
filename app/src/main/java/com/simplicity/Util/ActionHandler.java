@@ -204,7 +204,8 @@ public class ActionHandler implements ActionListener {
                     if (jumlahKamarAwal == currHouse.getDaftarRuangan().size()) {
                         gm.ui.messagText.setText("Upgrade gagal karena ruangan tidak tersedia");
                     } else {
-                        gm.ui.messagText.setText("Berhasil upgrade rumah");
+                        gm.getCurrentSim().setwaktuUpgradeRumah(1080);
+                        gm.ui.messagText.setText("Sedang upgrade rumah");
                     }
                     break;
                 case "Edit Room":
@@ -544,6 +545,17 @@ public class ActionHandler implements ActionListener {
                     } else {
                         JOptionPane.showMessageDialog(null,
                                 "Belum dapat ganti pekerjaan, waktu bekerja belum 1 hari!");
+                    }
+                    break;
+                case "Melihat Waktu":
+                    if(gm.getCurrentSim().getWaktuUpgradeRumah() > 0){
+                        int time = gm.getCurrentSim().getWaktuUpgradeRumah();
+                        int menit = time / 60;
+                        int detik = time % 60;
+                        String stringmenit = String.valueOf(menit < 10 ? "0" + menit : menit);
+                        String stringdetik = String.valueOf(detik < 10 ? "0" + detik : detik);
+                        JOptionPane.showMessageDialog(null, stringmenit + " : " + stringdetik);
+                        
                     }
 
             }

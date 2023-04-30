@@ -489,7 +489,8 @@
       "isTidakBuangAir": false,
       "totalWaktuKerja": 0,
       "namaLengkap": "Paijo0",
-      "status": null
+      "status": null,
+      "waktuUpgradeRumah": 0
     },
     {
       "waktuTidakTidur": 0,
@@ -508,7 +509,8 @@
       "isTidakBuangAir": false,
       "totalWaktuKerja": 0,
       "namaLengkap": "Paijo1",
-      "status": null
+      "status": null,
+      "waktuUpgradeRumah": 0
     },
     {
       "waktuTidakTidur": 0,
@@ -527,7 +529,8 @@
       "isTidakBuangAir": false,
       "totalWaktuKerja": 0,
       "namaLengkap": "Paijo2",
-      "status": null
+      "status": null,
+      "waktuUpgradeRumah": 0
     },
     {
       "waktuTidakTidur": 0,
@@ -546,7 +549,8 @@
       "isTidakBuangAir": false,
       "totalWaktuKerja": 0,
       "namaLengkap": "superman",
-      "status": null
+      "status": null,
+      "waktuUpgradeRumah": 0
     }
   ],
   "time": 80
