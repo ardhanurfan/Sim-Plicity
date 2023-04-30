@@ -11,6 +11,10 @@ public abstract class Objek {
         return namaObjek;
     }
 
+    public void setNamaBarang(String nama){
+        namaObjek = nama;
+    }
+
     public abstract void print();
 
 }
