@@ -283,8 +283,8 @@ public class Inventory {
                         "kompor listrik 1x1", "laptop 1x1", "tv 1x1","matras 2x1","sofa 2x1");
         List<String> inventoryString = new ArrayList<String>();
         for (InventoryItem item : data){
-            if(objekNonMakananList.contains(item.getNamaBarang())){
-                inventoryString.add(item.getNamaBarang());
+            if(objekNonMakananList.contains(nameConverter(item.getNamaBarang()))){
+                inventoryString.add(nameConverter(item.getNamaBarang()));
             }
         }
         return inventoryString;
