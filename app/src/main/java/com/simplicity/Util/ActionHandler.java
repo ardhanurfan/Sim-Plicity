@@ -200,12 +200,14 @@ public class ActionHandler implements ActionListener {
                             "Silakan masukkan nama ruangan yang baru", "Input Nama Ruangan Baru",
                             JOptionPane.PLAIN_MESSAGE);
                     currHouse.upgradeRumah(RuanganAcuan, acuan, namaruangan);
-                    gm.ui.refreshHome(currHouse);
                     if (jumlahKamarAwal == currHouse.getDaftarRuangan().size()) {
                         gm.ui.messagText.setText("Upgrade gagal karena ruangan tidak tersedia");
                     } else {
                         gm.getCurrentSim().setwaktuUpgradeRumah(1080);
                         gm.ui.messagText.setText("Sedang upgrade rumah");
+                        if (gm.getCurrentSim().getWaktuUpgradeRumah() == 0){
+                            gm.ui.refreshHome(currHouse);
+                        }
                     }
                     break;
                 case "Edit Room":
