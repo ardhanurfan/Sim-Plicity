@@ -429,22 +429,22 @@
           { "kategori": "Makanan", "namaBarang": "Susu Kacang", "jumlah": 2 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kasur Queen Size",
+            "namaBarang": "Kasur Queen Size 4x2",
             "jumlah": 1
           },
           { "kategori": "Makanan", "namaBarang": "Nasi Kari", "jumlah": 1 },
           { "kategori": "Makanan", "namaBarang": "Tumis Sayur", "jumlah": 1 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kasur Single",
+            "namaBarang": "Kasur Single 4x1",
             "jumlah": 1
           },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kompor Gas",
+            "namaBarang": "Kompor Gas 2x1",
             "jumlah": 1
           },
-          { "kategori": "Peralatan", "namaBarang": "Toilet", "jumlah": 1 },
+          { "kategori": "Peralatan", "namaBarang": "Toilet 1x1", "jumlah": 1 },
           { "kategori": "Bahan Makanan", "namaBarang": "Sapi", "jumlah": 1 },
           { "kategori": "Bahan Makanan", "namaBarang": "Ayam", "jumlah": 1 },
           { "kategori": "Bahan Makanan", "namaBarang": "Nasi", "jumlah": 1 },
@@ -467,13 +467,13 @@
           { "kategori": "Bahan Makanan", "namaBarang": "Susu", "jumlah": 1 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Meja dan Kursi",
+            "namaBarang": "Meja dan Kursi 3x3",
             "jumlah": 1
           },
-          { "kategori": "Peralatan", "namaBarang": "Jam", "jumlah": 1 },
+          { "kategori": "Peralatan", "namaBarang": "Jam 1x1", "jumlah": 1 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kompor Listrik",
+            "namaBarang": "Kompor Listrik 1x1",
             "jumlah": 1
           }
         ]

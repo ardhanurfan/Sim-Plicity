@@ -87,11 +87,17 @@ public class Rumah {
         Point p4 = new Point(2, 2);
         Point p5 = new Point(1, 1);
 
-        ObjekNonMakanan o1 = ObjekNonMakanan.returnObject("kasur single 4x1");
-        ObjekNonMakanan o2 = ObjekNonMakanan.returnObject("toilet 1x1");
-        ObjekNonMakanan o3 = ObjekNonMakanan.returnObject("kompor gas 2x1");
-        ObjekNonMakanan o4 = ObjekNonMakanan.returnObject("meja kursi 3x3");
-        ObjekNonMakanan o5 = ObjekNonMakanan.returnObject("jam 1x1");
+        ObjekNonMakanan o1 = new ObjekNonMakanan("Kasur Single 4x1");
+        ObjekNonMakanan o2 = new ObjekNonMakanan("Toilet 1x1");
+        ObjekNonMakanan o3 = new ObjekNonMakanan("Kompor Gas 2x1");
+        ObjekNonMakanan o4 = new ObjekNonMakanan("Meja dan Kursi 3x3");
+        ObjekNonMakanan o5 = new ObjekNonMakanan("Jam 1x1");
+
+        // ObjekNonMakanan o1 = ObjekNonMakanan.returnObject("kasur single 4x1");
+        // ObjekNonMakanan o2 = ObjekNonMakanan.returnObject("toilet 1x1");
+        // ObjekNonMakanan o3 = ObjekNonMakanan.returnObject("kompor gas 2x1");
+        // ObjekNonMakanan o4 = ObjekNonMakanan.returnObject("meja kursi 3x3");
+        // ObjekNonMakanan o5 = ObjekNonMakanan.returnObject("jam 1x1");
 
         daftarRuangan.get(0).tambahObjek(o1, p1, "h");
         daftarRuangan.get(0).tambahObjek(o2, p2, "h");
