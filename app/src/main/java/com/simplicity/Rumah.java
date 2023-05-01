@@ -26,12 +26,12 @@ public class Rumah {
         inisialisasi();
     }
 
-    public Rumah(JSONObject jsonObject) {
-        id = Integer.parseInt(jsonObject.get("id").toString());
-        nama = jsonObject.get("nama").toString();
-        loc = new Point((JSONObject) jsonObject.get("loc"));
+    public Rumah(JSONObject object2) {
+        id = Integer.parseInt(object2.get("id").toString());
+        nama = object2.get("nama").toString();
+        loc = new Point((JSONObject) object2.get("loc"));
 
-        JSONArray jsonArrayRumah = (JSONArray) jsonObject.get("daftarRuangan");
+        JSONArray jsonArrayRumah = (JSONArray) object2.get("daftarRuangan");
         List<Ruangan> daftarRuangan = new ArrayList<Ruangan>();
         for (Object object : jsonArrayRumah) {
             JSONObject obj = (JSONObject) object;
@@ -131,7 +131,7 @@ public class Rumah {
 
     // Methods
     public void upgradeRumah(Ruangan ruanganacuan, String arah, String namaruangan) {
-        if (arah.equals("atas")) {
+        if (arah.equals("Atas")) {
             if (ruanganacuan.getAtas() == null) {
                 Ruangan newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
                 daftarRuangan.add(newRuangan);
@@ -140,7 +140,7 @@ public class Rumah {
             } else {
                 System.out.println("Ruangan tidak tersedia karena sudah terisi.");
             }
-        } else if (arah.equals("bawah")) {
+        } else if (arah.equals("Bawah")) {
             if (ruanganacuan.getBawah() == null) {
                 Ruangan newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
                 daftarRuangan.add(newRuangan);
@@ -149,7 +149,7 @@ public class Rumah {
             } else {
                 System.out.println("Ruangan tidak tersedia karena sudah terisi.");
             }
-        } else if (arah.equals("kanan")) {
+        } else if (arah.equals("Kanan")) {
             if (ruanganacuan.getKanan() == null) {
                 Ruangan newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
                 daftarRuangan.add(newRuangan);
@@ -158,7 +158,7 @@ public class Rumah {
             } else {
                 System.out.println("Ruangan tidak tersedia karena sudah terisi.");
             }
-        } else if (arah.equals("kiri")) {
+        } else if (arah.equals("Kiri")) {
             if (ruanganacuan.getKiri() == null) {
                 Ruangan newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
                 daftarRuangan.add(newRuangan);
