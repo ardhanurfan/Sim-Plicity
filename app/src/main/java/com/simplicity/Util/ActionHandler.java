@@ -261,12 +261,13 @@ public class ActionHandler implements ActionListener {
 
                                     // Bikin point dan objek sesuai pilihan
                                     Point point = new Point(x, y);
-                                    ObjekNonMakanan o = ObjekNonMakanan.returnObject(inventory.get(indexInventory));
+                                    ObjekNonMakanan o = new ObjekNonMakanan(inventory.get(indexInventory));
+                                    // ObjekNonMakanan o = ObjekNonMakanan.returnObject(inventory.get(indexInventory));
 
                                     // Ngecek nabrak ato ga
                                     if (currRuangan.nabrakGa(o, point, posisi)) {
                                         currRuangan.tambahObjek(o, point, posisi);
-                                        gm.getCurrentSim().getInventory().kurangiItem(gm.getCurrentSim().getInventory().nameConverterReverse(o.getNamaObjek()), 1);
+                                        gm.getCurrentSim().getInventory().kurangiItem(o.getNamaObjek(), 1);
 
                                         gm.ui.refreshRoom(currRuangan);
                                         gm.ui.messagText.setText("Barang berhasil ditambahkan ke ruangan");
@@ -296,7 +297,7 @@ public class ActionHandler implements ActionListener {
                                 int indexOptionObjek = optionObjek.indexOf(selectedObjek);
                                 ObjekNonMakanan deleteObject = currRuangan.getObjek(indexOptionObjek);
                                 currRuangan.hapusObjek(deleteObject);
-                                deleteObject.setNamaBarang(gm.getCurrentSim().getInventory().nameConverterReverse(deleteObject.getNamaObjek()));
+                                // deleteObject.setNamaBarang(gm.getCurrentSim().getInventory().nameConverterReverse(deleteObject.getNamaObjek()));
                                 gm.getCurrentSim().getInventory().addItemPeralatan(deleteObject, 1);
 
                                 // Refresh panel
