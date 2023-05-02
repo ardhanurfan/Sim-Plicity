@@ -505,12 +505,14 @@ public class UI {
         // Main Menu
         createBackgroundFull(1, "main_menu.png");
         if (gm.world.getDaftarSim().isEmpty()) {
-            customButton(bgPanel[1], 300, 300, 400, 50, "Create New Sim", 32, "new-sim");
-            customButton(bgPanel[1], 300, 400, 400, 50, "Exit Game", 32, "exit");
-        } else {
-            customButton(bgPanel[1], 300, 250, 400, 50, "Choose Sim", 32, "choose-sim");
-            customButton(bgPanel[1], 300, 350, 400, 50, "Create New Sim", 32, "new-sim");
+            customButton(bgPanel[1], 300, 250, 400, 50, "Create New Sim", 32, "new-sim");
+            customButton(bgPanel[1], 300, 350, 400, 50, "Help", 32, "help");
             customButton(bgPanel[1], 300, 450, 400, 50, "Exit Game", 32, "exit");
+        } else {
+            customButton(bgPanel[1], 300, 200, 400, 50, "Choose Sim", 32, "choose-sim");
+            customButton(bgPanel[1], 300, 300, 400, 50, "Create New Sim", 32, "new-sim");
+            customButton(bgPanel[1], 300, 400, 400, 50, "Help", 32, "help");
+            customButton(bgPanel[1], 300, 500, 400, 50, "Exit Game", 32, "exit");
         }
 
         // World
