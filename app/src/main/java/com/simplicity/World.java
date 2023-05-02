@@ -54,6 +54,12 @@ public class World {
         return worldJSON;
     }
 
+    // public void efekTiapSim(int waktu){
+    // for (Sim sim : listSim) {
+
+    // }
+    // }
+
     public void Inisiasi() {
         // List objek pekerjaan
         daftarPekerjaan.add(new ObjekPekerjaan("Badut Sulap", 15));
@@ -122,6 +128,9 @@ public class World {
             time += aksi;
         } else {
             time = (time + aksi) % 720;
+            for (Sim sim : listSim) {
+                sim.resetWaktuKegiatanharian();
+            }
             hari++;
         }
     }

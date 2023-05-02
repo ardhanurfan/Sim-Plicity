@@ -117,10 +117,11 @@ public class GameManager {
 
 	public void onUpdateThreadAksi() {
 		world.setTime(1);
-		currentSim.setwaktuUpgradeRumah(-1);
-		currentSim.addOnTimeWorld(1); // untuk aksi yang perlu kondisi
 		ui.jamText.setText(world.getTime());
 		ui.hariText.setText("Hari ke-" + world.getHari());
+		currentSim.setwaktuUpgradeRumah(-1);
+		currentSim.addOnTimeWorld(1); // untuk aksi yang perlu kondisi
+
 	}
 
 	public void updateAttribute() {

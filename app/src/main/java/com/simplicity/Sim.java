@@ -38,6 +38,7 @@ public class Sim {
     // Reset jika ganti hari
     private int totalWaktuTidur = 0;
     private int waktuTidakTidur = 0;
+    private boolean isTidakTidur = true;
 
     // Reset jika sudah buang air
     private int waktuTidakBuangAir = -30;
@@ -114,6 +115,7 @@ public class Sim {
         simMap.put("waktuTidakTidur", waktuTidakTidur);
         simMap.put("waktuTidakBuangAir", waktuTidakBuangAir);
         simMap.put("isTidakBuangAir", isTidakBuangAir);
+        simMap.put("isTidakTidur", isTidakTidur);
         simMap.put("waktuUpgradeRumah", waktuUpgradeRumah);
         
 
@@ -289,6 +291,7 @@ public class Sim {
             waktuTidakBuangAir += waktuAksi;
             efekTidakBuangAir();
         }
+
         efekTidakTidur();
     }
 
@@ -342,6 +345,8 @@ public class Sim {
         if (waktuTidakTidur >= 600 && totalWaktuTidur < 180) {
             setKesehatan(1, 1, -5);
             setMood(1, 1, -5);
+            waktuTidakTidur = 0;
+            JOptionPane.showMessageDialog(null, "Waktu tidur Anda hari ini tidak memenuhi!");
         }
     }
 
@@ -415,13 +420,11 @@ public class Sim {
         return waktu;
     }
 
-    public double buangAir() {
+    public void buangAir() {
         setKekenyangan(1, 1, -20);
         setMood(1, 1, 10);
         waktuTidakBuangAir = -30;
         isTidakBuangAir = false;
-        System.out.println("Uhhh lega... udah buang air");
-        return 10;
     }
 
     public void efekTidakBuangAir() {
