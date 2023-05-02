@@ -490,7 +490,8 @@
       "totalWaktuKerja": 0,
       "namaLengkap": "Paijo0",
       "status": null,
-      "waktuUpgradeRumah": 0
+      "waktuUpgradeRumah": 0,
+      "ruangUpgrade": null
     },
     {
       "waktuTidakTidur": 0,
@@ -510,7 +511,8 @@
       "totalWaktuKerja": 0,
       "namaLengkap": "Paijo1",
       "status": null,
-      "waktuUpgradeRumah": 0
+      "waktuUpgradeRumah": 0,
+      "ruangUpgrade": null
     },
     {
       "waktuTidakTidur": 0,
@@ -530,7 +532,8 @@
       "totalWaktuKerja": 0,
       "namaLengkap": "Paijo2",
       "status": null,
-      "waktuUpgradeRumah": 0
+      "waktuUpgradeRumah": 0,
+      "ruangUpgrade": null
     },
     {
       "waktuTidakTidur": 0,
@@ -550,7 +553,8 @@
       "totalWaktuKerja": 0,
       "namaLengkap": "superman",
       "status": null,
-      "waktuUpgradeRumah": 0
+      "waktuUpgradeRumah": 0,
+      "ruangUpgrade": null
     }
   ],
   "time": 80

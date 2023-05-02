@@ -172,6 +172,7 @@ public class ActionHandler implements ActionListener {
                         gm.ui.messagText.setText("Saat ini Anda berkunjung ke " + currHome.getNama());
                     }
                     gm.getCurrentSim().getCurrLokasi().setRuangan(null);
+                    gm.ui.refreshHome(currHome);
                     break;
 
                 case "View Room":
@@ -217,41 +218,41 @@ public class ActionHandler implements ActionListener {
 
                 // Upgrade Rumah
                 case "Upgrade House":
-                    // Buat Pilihan Acuan Kamar
-                    // Boolean status;
-                    Rumah currHouse = gm.getCurrentSim().getCurrLokasi().getRumah();
-                    List<Ruangan> ruangan = currHouse.getDaftarRuangan();
-                    List<String> listRuangans = new ArrayList<String>();
-                    for (Ruangan ruang : gm.getCurrentSim().getCurrLokasi().getRumah().getDaftarRuangan()) {
-                        listRuangans.add(ruang.getNama());
-                    }
-                    int jumlahKamarAwal = currHouse.getDaftarRuangan().size();
-                    Object acuanRuang = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Pilih ruangan acuan",
-                            "Upgrade House",
-                            JOptionPane.PLAIN_MESSAGE, null, listRuangans.toArray(), listRuangans.get(0));
-                    Ruangan RuanganAcuan = ruangan.get(listRuangans.indexOf(acuanRuang));
-                    // Buat pilihan posisi
-                    List<String> acuanposisi = Arrays.asList("Kanan", "Kiri", "Atas", "Bawah");
-                    Object posisiacuan = JOptionPane.showInputDialog(gm.ui.bgPanel[3],
-                            "Silakan pilih posisi kamar baru dibanding kamar acuan",
-                            "Upgrade House", JOptionPane.PLAIN_MESSAGE, null, acuanposisi.toArray(),
-                            acuanposisi.get(0));
-                    String acuan = acuanposisi.get(acuanposisi.indexOf(posisiacuan));
-
-                    // Melakukan upgrade rumah
-                    // Meminta input namaruangan
-                    String namaruangan = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
-                            "Silakan masukkan nama ruangan yang baru", "Input Nama Ruangan Baru",
-                            JOptionPane.PLAIN_MESSAGE);
-                    currHouse.upgradeRumah(RuanganAcuan, acuan, namaruangan);
-                    if (jumlahKamarAwal == currHouse.getDaftarRuangan().size()) {
-                        gm.ui.messagText.setText("Upgrade gagal karena ruangan tidak tersedia");
-                    } else {
+                if(gm.getCurrentSim().getRuangUpgrade() == null){
+                        // Buat Pilihan Acuan Kamar
+                        // Boolean status;
+                        Rumah currHouse = gm.getCurrentSim().getCurrLokasi().getRumah();
+                        List<Ruangan> ruangan = currHouse.getDaftarRuangan();
+                        List<String> listRuangans = new ArrayList<String>();
+                        for (Ruangan ruang : gm.getCurrentSim().getCurrLokasi().getRumah().getDaftarRuangan()) {
+                            listRuangans.add(ruang.getNama());
+                        }
+                        // int jumlahKamarAwal = currHouse.getDaftarRuangan().size();
+                        Object acuanRuang = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Pilih ruangan acuan",
+                                "Upgrade House",
+                                JOptionPane.PLAIN_MESSAGE, null, listRuangans.toArray(), listRuangans.get(0));
+                        Ruangan RuanganAcuan = ruangan.get(listRuangans.indexOf(acuanRuang));
+                        // Buat pilihan posisi
+                        List<String> acuanposisi = Arrays.asList("Kanan", "Kiri", "Atas", "Bawah");
+                        Object posisiacuan = JOptionPane.showInputDialog(gm.ui.bgPanel[3],
+                                "Silakan pilih posisi kamar baru dibanding kamar acuan",
+                                "Upgrade House", JOptionPane.PLAIN_MESSAGE, null, acuanposisi.toArray(),
+                                acuanposisi.get(0));
+                        String acuan = acuanposisi.get(acuanposisi.indexOf(posisiacuan));
+    
+                        // Melakukan upgrade rumah
+                        // Meminta input namaruangan
+                        String namaruangan = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                                "Silakan masukkan nama ruangan yang baru", "Input Nama Ruangan Baru",
+                                JOptionPane.PLAIN_MESSAGE);
+                        
                         gm.getCurrentSim().setwaktuUpgradeRumah(1080);
                         gm.ui.messagText.setText("Sedang upgrade rumah");
-                        if (gm.getCurrentSim().getWaktuUpgradeRumah() == 0) {
-                            gm.ui.refreshHome(currHouse);
-                        }
+                        gm.getCurrentSim().setRuangUpgrade(currHouse.upgradeRumah(RuanganAcuan, acuan, namaruangan));
+                        
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Tidak bisa melakukan dua upgrade sekaligus");
                     }
                     break;
                 case "Edit Room":
@@ -611,10 +612,13 @@ public class ActionHandler implements ActionListener {
                         int detik = time % 60;
                         String stringmenit = String.valueOf(menit < 10 ? "0" + menit : menit);
                         String stringdetik = String.valueOf(detik < 10 ? "0" + detik : detik);
-                        JOptionPane.showMessageDialog(null, stringmenit + " : " + stringdetik);
-
+                        if(time > 0){
+                            JOptionPane.showMessageDialog(null, "Waktu upgrade rumah tersisa " + stringmenit + " : " + stringdetik);
+                        } else{
+                            JOptionPane.showMessageDialog(null, "Rumah sedang tidak di upgrade");
+                        }
                     }
-
+                    break;
             }
         } else {
             JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");

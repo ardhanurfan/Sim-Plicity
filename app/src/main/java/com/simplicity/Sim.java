@@ -24,6 +24,7 @@ public class Sim {
     private LokasiSim currLokasi;
     private Inventory inventory;
     private Rumah rumah;
+    private Ruangan ruangUpgrade;
 
     // STATE VARIABLE
     // Reset jika selesai upgrade rumah
@@ -77,6 +78,8 @@ public class Sim {
         status = jsonObject.get("status") != null ? jsonObject.get("status").toString() : null;
         rumah = jsonObject.get("rumah") != null ? listRumah.get(Integer.parseInt(jsonObject.get("rumah").toString()))
                 : null;
+        ruangUpgrade = jsonObject.get("ruangUpgrade") != null ? new Ruangan((JSONObject) jsonObject.get("ruangUpgrade"))
+        : null;
         currLokasi = new LokasiSim((JSONObject) jsonObject.get("currLokasi"), listRumah);
         inventory = new Inventory((JSONObject) jsonObject.get("inventory"));
 
@@ -103,6 +106,7 @@ public class Sim {
         simMap.put("currLokasi", currLokasi.toJson());
         simMap.put("inventory", inventory.toJson());
         simMap.put("rumah", rumah == null ? null : rumah.getId());
+        simMap.put("ruangUpgrade", ruangUpgrade == null ? null : ruangUpgrade.toJson());
 
         simMap.put("totalWaktuKerja", totalWaktuKerja);
         simMap.put("jedaGantiKerja", jedaGantiKerja);
@@ -113,6 +117,7 @@ public class Sim {
         simMap.put("isTidakBuangAir", isTidakBuangAir);
         simMap.put("isTidakTidur", isTidakTidur);
         simMap.put("waktuUpgradeRumah", waktuUpgradeRumah);
+        
 
         JSONObject simJSON = new JSONObject(simMap);
         return simJSON;
@@ -264,6 +269,17 @@ public class Sim {
 
     public void setwaktuUpgradeRumah(int waktu) {
         waktuUpgradeRumah += waktu;
+        if (waktuUpgradeRumah == 0) {
+            rumah.getDaftarRuangan().add(ruangUpgrade);
+        }
+    }
+
+    public Ruangan getRuangUpgrade(){
+        return ruangUpgrade;
+    }
+
+    public void setRuangUpgrade(Ruangan ruangUpgrade){
+        this.ruangUpgrade = ruangUpgrade;
     }
 
     public int getWaktuTidakTidur() {
