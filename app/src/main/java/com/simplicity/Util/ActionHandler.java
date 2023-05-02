@@ -119,6 +119,20 @@ public class ActionHandler implements ActionListener {
                         gm.ui.nameText.setText(gm.getCurrentSim().getNamaLengkap());
                     }
                     break;
+                case "help" :
+                    // JFrame popHelp = new JFrame("Help");
+                    // popHelp.setSize(500, 500);
+                    // popHelp.getContentPane().setBackground(Color.white);
+                    // popHelp.setResizable(false);
+                    // popHelp.setVisible(false);
+                    JOptionPane.showMessageDialog(gm.ui.bgPanel[1], "Berikut adalah panduan untuk bermain Sim-Plicity : \n" +
+                    "1. Objective Game ini untuk menjaga kesejahteraan SIM agar tidak depresi dan mati.\n" +
+                    "2. Pemain dapat melanjutkan SIM yang telah dimainkan atau membuat SIM baru.\n" +
+                    "3. Pastikan untuk save SIM kalian sebelum meninggalkan permainan.\n" +
+                    "4. Pemain menunggu lama-nya aktivitas sesuai dengan waktu yang telah ditentukan.\n" +
+                    "5. Pemain dapat berimajinasi sesuai dengan keinginannya di Game ini.\n" +
+                    "Selamat Bermain!");
+                    break;                 
                 case "exit":
                     int result = JOptionPane.showConfirmDialog(gm.ui.bgPanel[1],
                             "Do you want to Exit ?", "Exit Confirmation",
