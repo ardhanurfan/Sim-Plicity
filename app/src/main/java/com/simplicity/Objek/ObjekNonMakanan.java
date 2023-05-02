@@ -26,6 +26,71 @@ public class ObjekNonMakanan extends Objek {
         this.aksi = aksi;
     }
 
+    public ObjekNonMakanan(String nama) {
+        super(nama);
+        if (nama.equals("Kasur Single 4x1")) {
+            panjang = 4;
+            lebar = 1;
+            harga = 50;
+            aksi = new String[] { "Tidur" };
+        } else if (nama.equals("Kasur Queen Size 4x2")) {
+            panjang = 4;
+            lebar = 2;
+            harga = 100;
+            aksi = new String[] { "Tidur" };
+        } else if (nama.equals("Kasur King Size 5x2")) {
+            panjang = 5;
+            lebar = 2;
+            harga = 150;
+            aksi = new String[] { "Tidur" };
+        } else if (nama.equals("Toilet 1x1")) {
+            panjang = 1;
+            lebar = 1;
+            harga = 50;
+            aksi = new String[] { "Buang Air" };
+        } else if (nama.equals("Kompor Gas 2x1")) {
+            panjang = 2;
+            lebar = 1;
+            harga = 100;
+            aksi = new String[] { "Memasak" };
+        } else if (nama.equals("Kompor Listrik 1x1")) {
+            panjang = 1;
+            lebar = 1;
+            harga = 200;
+            aksi = new String[] { "Memasak" };
+        } else if (nama.equals("Meja dan Kursi 3x3")) {
+            panjang = 3;
+            lebar = 3;
+            harga = 50;
+            aksi = new String[] { "Makan" };
+        } else if (nama.equals("Jam 1x1")) {
+            panjang = 1;
+            lebar = 1;
+            harga = 10;
+            aksi = new String[] { "Melihat Waktu" };
+        } else if (nama.equals("Sofa 2x1")) {
+            panjang = 2;
+            lebar = 1;
+            harga = 30;
+            aksi = new String[] { "Duduk", "Ngudud" };
+        } else if (nama.equals("Tv 1x1")) {
+            panjang = 1;
+            lebar = 1;
+            harga = 20;
+            aksi = new String[] { "Menonton", "Main PS" };
+        } else if (nama.equals("Matras 2x1")) {
+            panjang = 2;
+            lebar = 1;
+            harga = 8;
+            aksi = new String[] { "Olahraga", "Meditasi" };
+        } else if (nama.equals("Laptop 1x1")) {
+            panjang = 1;
+            lebar = 1;
+            harga = 50;
+            aksi = new String[] { "Main game", "Ngoding" };
+        }
+    }
+
     public ObjekNonMakanan(JSONObject jsonObject) {
         super(jsonObject.get("nama").toString());
         panjang = Integer.parseInt(jsonObject.get("panjang").toString());
@@ -115,35 +180,38 @@ public class ObjekNonMakanan extends Objek {
         }
     }
 
-    public static ObjekNonMakanan returnObject(String nama) {
-        ObjekNonMakanan o = null;
-        if (nama.equals("kasur single 4x1")) {
-            o = new ObjekNonMakanan(nama, 4, 1, 50, new String[] { "Tidur" });
-        } else if (nama.equals("kasur queen size 4x2")) {
-            o = new ObjekNonMakanan(nama, 4, 2, 100, new String[] { "Tidur" });
-        } else if (nama.equals("kasur king size 5x2")) {
-            o = new ObjekNonMakanan(nama, 5, 2, 150, new String[] { "Tidur" });
-        } else if (nama.equals("toilet 1x1")) {
-            o = new ObjekNonMakanan(nama, 1, 1, 50, new String[] { "Buang Air" });
-        } else if (nama.equals("kompor gas 2x1")) {
-            o = new ObjekNonMakanan(nama, 2, 1, 100, new String[] { "Memasak" });
-        } else if (nama.equals("kompor listrik 1x1")) {
-            o = new ObjekNonMakanan(nama, 1, 1, 200, new String[] { "Memasak" });
-        } else if (nama.equals("meja kursi 3x3")) {
-            o = new ObjekNonMakanan(nama, 3, 3, 50, new String[] { "Makan" });
-        } else if (nama.equals("jam 1x1")) {
-            o = new ObjekNonMakanan(nama, 1, 1, 10, new String[] { "Melihat Waktu" });
-        } else if (nama.equals("sofa 2x1")) {
-            o = new ObjekNonMakanan(nama, 2, 1, 30, new String[] { "Duduk", "Ngudud" });
-        } else if (nama.equals("tv 1x1")) {
-            o = new ObjekNonMakanan(nama, 1, 1, 20, new String[] { "Menonton", "Main PS" });
-        } else if (nama.equals("matras 2x1")) {
-            o = new ObjekNonMakanan(nama, 2, 1, 8, new String[] { "Olahraga", "Meditasi" });
-        } else if (nama.equals("laptop 1x1")) {
-            o = new ObjekNonMakanan(nama, 1, 1, 50, new String[] { "Main game", "Ngoding" });
-        }
-        return o;
-    }
+    // public static ObjekNonMakanan returnObject(String nama) {
+    // ObjekNonMakanan o = null;
+    // if (nama.equals("kasur single 4x1")) {
+    // o = new ObjekNonMakanan(nama, 4, 1, 50, new String[] {"Tidur"});
+    // } else if (nama.equals("kasur queen size 4x2")) {
+    // o = new ObjekNonMakanan(nama, 4, 2, 100, new String[] {"Tidur"});
+    // } else if (nama.equals("kasur king size 5x2")) {
+    // o = new ObjekNonMakanan(nama, 5, 2, 150, new String[] {"Tidur"});
+    // } else if (nama.equals("toilet 1x1")) {
+    // o = new ObjekNonMakanan(nama, 1, 1, 50, new String[]{"Buang Air"});
+    // } else if (nama.equals("kompor gas 2x1")) {
+    // o = new ObjekNonMakanan(nama, 2, 1, 100, new String[]{"Memasak"});
+    // } else if (nama.equals("kompor listrik 1x1")) {
+    // o = new ObjekNonMakanan(nama, 1, 1, 200, new String[]{"Memasak"});
+    // } else if (nama.equals("meja kursi 3x3")) {
+    // o = new ObjekNonMakanan(nama, 3, 3, 50, new String[]{"Makan"});
+    // } else if (nama.equals("jam 1x1")) {
+    // o = new ObjekNonMakanan(nama, 1, 1, 10, new String[] {"Melihat Waktu"});
+    // } else if (nama.equals("sofa 2x1")){
+    // o = new ObjekNonMakanan(nama, 2,1, 30,new String[] {"Duduk", "Ngudud"});
+    // } else if (nama.equals("tv 1x1")){
+    // o = new ObjekNonMakanan(nama, 1, 1, 20, new String[] {"Menonton", "Main
+    // PS"});
+    // } else if (nama.equals("matras 2x1")){
+    // o = new ObjekNonMakanan(nama, 2, 1, 8, new String[] {"Olahraga",
+    // "Meditasi"});
+    // } else if (nama.equals("laptop 1x1")){
+    // o = new ObjekNonMakanan(nama, 1, 1, 50, new String[] {"Main game",
+    // "Ngoding"});
+    // }
+    // return o;
+    // }
 
     // testing
     public static void main(String[] args) {

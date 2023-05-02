@@ -200,11 +200,14 @@ public class ActionHandler implements ActionListener {
                             "Silakan masukkan nama ruangan yang baru", "Input Nama Ruangan Baru",
                             JOptionPane.PLAIN_MESSAGE);
                     currHouse.upgradeRumah(RuanganAcuan, acuan, namaruangan);
-                    gm.ui.refreshHome(currHouse);
                     if (jumlahKamarAwal == currHouse.getDaftarRuangan().size()) {
                         gm.ui.messagText.setText("Upgrade gagal karena ruangan tidak tersedia");
                     } else {
-                        gm.ui.messagText.setText("Berhasil upgrade rumah");
+                        gm.getCurrentSim().setwaktuUpgradeRumah(1080);
+                        gm.ui.messagText.setText("Sedang upgrade rumah");
+                        if (gm.getCurrentSim().getWaktuUpgradeRumah() == 0){
+                            gm.ui.refreshHome(currHouse);
+                        }
                     }
                     break;
                 case "Edit Room":
@@ -216,11 +219,10 @@ public class ActionHandler implements ActionListener {
 
                     // Ceritanya ini Inventory
 
-                    // List<String> inventory =
-                    // gm.getCurrentSim().getInventory().getIventoryString();
-                    List<String> inventory = Arrays.asList("kasur single 4x1", "kasur queen size 4x2",
-                            "kasur king size 5x2", "jam 1x1", "meja kursi 3x3", "toilet 1x1", "kompor gas 2x1",
-                            "kompor listrik 1x1", "laptop 1x1", "tv 1x1", "matras 2x1", "sofa 2x1");
+                    List<String> inventory =gm.getCurrentSim().getInventory().getIventoryString();
+                    // List<String> inventory = Arrays.asList("kasur single 4x1", "kasur queen size 4x2",
+                    //         "kasur king size 5x2", "jam 1x1", "meja kursi 3x3", "toilet 1x1", "kompor gas 2x1",
+                    //         "kompor listrik 1x1", "laptop 1x1", "tv 1x1", "matras 2x1", "sofa 2x1");
 
                     // Tambah Barang
                     if (index == 0) {
@@ -259,11 +261,14 @@ public class ActionHandler implements ActionListener {
 
                                     // Bikin point dan objek sesuai pilihan
                                     Point point = new Point(x, y);
-                                    ObjekNonMakanan o = ObjekNonMakanan.returnObject(inventory.get(indexInventory));
+                                    ObjekNonMakanan o = new ObjekNonMakanan(inventory.get(indexInventory));
+                                    // ObjekNonMakanan o = ObjekNonMakanan.returnObject(inventory.get(indexInventory));
 
                                     // Ngecek nabrak ato ga
                                     if (currRuangan.nabrakGa(o, point, posisi)) {
                                         currRuangan.tambahObjek(o, point, posisi);
+                                        gm.getCurrentSim().getInventory().kurangiItem(o.getNamaObjek(), 1);
+
                                         gm.ui.refreshRoom(currRuangan);
                                         gm.ui.messagText.setText("Barang berhasil ditambahkan ke ruangan");
                                     } else {
@@ -292,6 +297,8 @@ public class ActionHandler implements ActionListener {
                                 int indexOptionObjek = optionObjek.indexOf(selectedObjek);
                                 ObjekNonMakanan deleteObject = currRuangan.getObjek(indexOptionObjek);
                                 currRuangan.hapusObjek(deleteObject);
+                                // deleteObject.setNamaBarang(gm.getCurrentSim().getInventory().nameConverterReverse(deleteObject.getNamaObjek()));
+                                gm.getCurrentSim().getInventory().addItemPeralatan(deleteObject, 1);
 
                                 // Refresh panel
                                 gm.ui.refreshRoom(currRuangan);
@@ -541,6 +548,17 @@ public class ActionHandler implements ActionListener {
                     } else {
                         JOptionPane.showMessageDialog(null,
                                 "Belum dapat ganti pekerjaan, waktu bekerja belum 1 hari!");
+                    }
+                    break;
+                case "Melihat Waktu":
+                    if(gm.getCurrentSim().getWaktuUpgradeRumah() > 0){
+                        int time = gm.getCurrentSim().getWaktuUpgradeRumah();
+                        int menit = time / 60;
+                        int detik = time % 60;
+                        String stringmenit = String.valueOf(menit < 10 ? "0" + menit : menit);
+                        String stringdetik = String.valueOf(detik < 10 ? "0" + detik : detik);
+                        JOptionPane.showMessageDialog(null, stringmenit + " : " + stringdetik);
+                        
                     }
 
             }

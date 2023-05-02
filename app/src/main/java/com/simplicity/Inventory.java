@@ -267,12 +267,45 @@ public class Inventory {
         return namaConv;
     }
 
+    public String nameConverterReverse(String nama) {
+        String namaConv = null;
+        if (nama.equals("kasur single 4x1")) {
+            namaConv = "Kasur Single";
+        } else if (nama.equals("kasur queen size 4x2")) {
+            namaConv = "Kasur Queen Size";
+        } else if (nama.equals("kasur king size 5x2")) {
+            namaConv = "Kasur King Size";
+        } else if (nama.equals("jam 1x1")) {
+            namaConv = "Jam";
+        } else if (nama.equals("meja kursi 3x3")) {
+            namaConv = "Meja dan Kursi";
+        } else if (nama.equals("toilet 1x1")) {
+            namaConv = "Toilet";
+        } else if (nama.equals("kompor gas 2x1")) {
+            namaConv = "Kompor Gas";
+        } else if (nama.equals("kompor listrik 1x1")) {
+            namaConv = "Kompor Listrik";
+        } else if (nama.equals("laptop 1x1")) {
+            namaConv = "Laptop";
+        } else if (nama.equals("tv 1x1")) {
+            namaConv = "Tv";
+        } else if (nama.equals("matras 2x1")) {
+            namaConv = "Matras";
+        } else if (nama.equals("sofa 2x1")) {
+            namaConv = "Sofa";
+        }
+        return namaConv;
+    }
+
     public List<String> getIventoryString() {
-        List<String> objekNonMakananList = Arrays.asList("kasur single 4x1", "kasur queen size 4x2",
-                "kasur king size 5x2", "jam 1x1", "meja kursi 3x3", "toilet 1x1", "kompor gas 2x1",
-                "kompor listrik 1x1", "laptop 1x1", "tv 1x1", "matras 2x1", "sofa 2x1");
+        List<String> objekNonMakananList = Arrays.asList("Kasur Single 4x1", "Kasur Queen Size 4x2",
+                "Kasur King Size 5x2", "Jam 1x1", "Meja dan Kursi 3x3", "Toilet 1x1", "Kompor Gas 2x1",
+                "Kompor Listrik 1x1", "Laptop 1x1", "Tv 1x1", "Matras 2x1", "Sofa 2x1");
         List<String> inventoryString = new ArrayList<String>();
         for (InventoryItem item : data) {
+            // if(objekNonMakananList.contains(nameConverter(item.getNamaBarang()))){
+            // inventoryString.add(nameConverter(item.getNamaBarang()));
+            // }
             if (objekNonMakananList.contains(item.getNamaBarang())) {
                 inventoryString.add(item.getNamaBarang());
             }

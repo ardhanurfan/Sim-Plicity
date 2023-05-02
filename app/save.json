@@ -7,7 +7,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
-              "nama": "kasur single 4x1",
+              "nama": "Kasur Single 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 5 },
               "lebar": 1,
@@ -16,7 +16,7 @@
             },
             {
               "panjang": 1,
-              "nama": "toilet 1x1",
+              "nama": "Toilet 1x1",
               "harga": 50,
               "titik": { "x": 5, "y": 5 },
               "lebar": 1,
@@ -25,7 +25,7 @@
             },
             {
               "panjang": 2,
-              "nama": "kompor gas 2x1",
+              "nama": "Kompor Gas 2x1",
               "harga": 100,
               "titik": { "x": 5, "y": 1 },
               "lebar": 1,
@@ -34,7 +34,7 @@
             },
             {
               "panjang": 3,
-              "nama": "meja kursi 3x3",
+              "nama": "Meja dan Kursi 3x3",
               "harga": 50,
               "titik": { "x": 2, "y": 2 },
               "lebar": 3,
@@ -43,7 +43,7 @@
             },
             {
               "panjang": 1,
-              "nama": "jam 1x1",
+              "nama": "Jam 1x1",
               "harga": 10,
               "titik": { "x": 1, "y": 1 },
               "lebar": 1,
@@ -56,33 +56,33 @@
           "kiri": 2,
           "atas": 1,
           "ruang": [
-            [null, null, null, null, null, "kasur single 4x1"],
-            [null, "jam 1x1", null, null, null, "kasur single 4x1"],
+            [null, null, null, null, null, "Kasur Single 4x1"],
+            [null, "Jam 1x1", null, null, null, "Kasur Single 4x1"],
             [
               null,
               null,
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "kasur single 4x1"
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Kasur Single 4x1"
             ],
             [
               null,
               null,
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "kasur single 4x1"
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Kasur Single 4x1"
             ],
             [
               null,
               null,
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "meja kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
               null
             ],
-            [null, "kompor gas 2x1", "kompor gas 2x1", null, null, "toilet 1x1"]
+            [null, "Kompor Gas 2x1", "Kompor Gas 2x1", null, null, "Toilet 1x1"]
           ],
           "id": 0,
           "bawah": null
@@ -108,7 +108,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
-              "nama": "kasur single 4x1",
+              "nama": "Kasur Single 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 0 },
               "lebar": 1,
@@ -122,10 +122,10 @@
           "atas": null,
           "ruang": [
             [
-              "kasur single 4x1",
-              "kasur single 4x1",
-              "kasur single 4x1",
-              "kasur single 4x1",
+              "Kasur Single 4x1",
+              "Kasur Single 4x1",
+              "Kasur Single 4x1",
+              "Kasur Single 4x1",
               null,
               null
             ],
@@ -149,7 +149,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
-              "nama": "kasur single 4x1",
+              "nama": "Kasur Single 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 5 },
               "lebar": 1,
@@ -158,7 +158,7 @@
             },
             {
               "panjang": 1,
-              "nama": "toilet 1x1",
+              "nama": "Toilet 1x1",
               "harga": 50,
               "titik": { "x": 5, "y": 5 },
               "lebar": 1,
@@ -167,7 +167,7 @@
             },
             {
               "panjang": 2,
-              "nama": "kompor gas 2x1",
+              "nama": "Kompor Gas 2x1",
               "harga": 100,
               "titik": { "x": 5, "y": 1 },
               "lebar": 1,
@@ -176,7 +176,7 @@
             },
             {
               "panjang": 3,
-              "nama": "meja kursi 3x3",
+              "nama": "Meja dan Kursi 3x3",
               "harga": 50,
               "titik": { "x": 2, "y": 2 },
               "lebar": 3,
@@ -185,7 +185,7 @@
             },
             {
               "panjang": 1,
-              "nama": "jam 1x1",
+              "nama": "Jam 1x1",
               "harga": 10,
               "titik": { "x": 1, "y": 1 },
               "lebar": 1,
@@ -198,33 +198,33 @@
           "kiri": null,
           "atas": null,
           "ruang": [
-            [null, null, null, null, null, "kasur single 4x1"],
-            [null, "jam 1x1", null, null, null, "kasur single 4x1"],
+            [null, null, null, null, null, "Kasur Single 4x1"],
+            [null, "jam 1x1", null, null, null, "Kasur Single 4x1"],
             [
               null,
               null,
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "kasur single 4x1"
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Kasur Single 4x1"
             ],
             [
               null,
               null,
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "kasur single 4x1"
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Kasur Single 4x1"
             ],
             [
               null,
               null,
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "meja kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
               null
             ],
-            [null, "kompor gas 2x1", "kompor gas 2x1", null, null, "toilet 1x1"]
+            [null, "Kompor Gas 2x1", "Kompor Gas 2x1", null, null, "Toilet 1x1"]
           ],
           "id": 0,
           "bawah": null
@@ -240,7 +240,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
-              "nama": "kasur single 4x1",
+              "nama": "Kasur Single 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 5 },
               "lebar": 1,
@@ -249,7 +249,7 @@
             },
             {
               "panjang": 1,
-              "nama": "toilet 1x1",
+              "nama": "Toilet 1x1",
               "harga": 50,
               "titik": { "x": 5, "y": 5 },
               "lebar": 1,
@@ -258,7 +258,7 @@
             },
             {
               "panjang": 2,
-              "nama": "kompor gas 2x1",
+              "nama": "Kompor Gas 2x1",
               "harga": 100,
               "titik": { "x": 5, "y": 1 },
               "lebar": 1,
@@ -267,7 +267,7 @@
             },
             {
               "panjang": 3,
-              "nama": "meja kursi 3x3",
+              "nama": "Meja dan Kursi 3x3",
               "harga": 50,
               "titik": { "x": 2, "y": 2 },
               "lebar": 3,
@@ -276,7 +276,7 @@
             },
             {
               "panjang": 1,
-              "nama": "jam 1x1",
+              "nama": "Jam 1x1",
               "harga": 10,
               "titik": { "x": 1, "y": 1 },
               "lebar": 1,
@@ -289,33 +289,33 @@
           "kiri": null,
           "atas": null,
           "ruang": [
-            [null, null, null, null, null, "kasur single 4x1"],
-            [null, "jam 1x1", null, null, null, "kasur single 4x1"],
+            [null, null, null, null, null, "Kasur Single 4x1"],
+            [null, "Jam 1x1", null, null, null, "Kasur Single 4x1"],
             [
               null,
               null,
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "kasur single 4x1"
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Kasur Single 4x1"
             ],
             [
               null,
               null,
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "kasur single 4x1"
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Kasur Single 4x1"
             ],
             [
               null,
               null,
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "meja kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
               null
             ],
-            [null, "kompor gas 2x1", "kompor gas 2x1", null, null, "toilet 1x1"]
+            [null, "Kompor Gas 2x1", "Kompor Gas 2x1", null, null, "Toilet 1x1"]
           ],
           "id": 0,
           "bawah": null
@@ -331,7 +331,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
-              "nama": "kasur single 4x1",
+              "nama": "Kasur Single 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 5 },
               "lebar": 1,
@@ -340,7 +340,7 @@
             },
             {
               "panjang": 1,
-              "nama": "toilet 1x1",
+              "nama": "Toilet 1x1",
               "harga": 50,
               "titik": { "x": 5, "y": 5 },
               "lebar": 1,
@@ -349,7 +349,7 @@
             },
             {
               "panjang": 2,
-              "nama": "kompor gas 2x1",
+              "nama": "Kompor Gas 2x1",
               "harga": 100,
               "titik": { "x": 5, "y": 1 },
               "lebar": 1,
@@ -358,7 +358,7 @@
             },
             {
               "panjang": 3,
-              "nama": "meja kursi 3x3",
+              "nama": "Meja dan Kursi 3x3",
               "harga": 50,
               "titik": { "x": 2, "y": 2 },
               "lebar": 3,
@@ -367,7 +367,7 @@
             },
             {
               "panjang": 1,
-              "nama": "jam 1x1",
+              "nama": "Jam 1x1",
               "harga": 10,
               "titik": { "x": 1, "y": 1 },
               "lebar": 1,
@@ -380,33 +380,33 @@
           "kiri": null,
           "atas": null,
           "ruang": [
-            [null, null, null, null, null, "kasur single 4x1"],
-            [null, "jam 1x1", null, null, null, "kasur single 4x1"],
+            [null, null, null, null, null, "Kasur Single 4x1"],
+            [null, "Jam 1x1", null, null, null, "Kasur Single 4x1"],
             [
               null,
               null,
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "kasur single 4x1"
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Kasur Single 4x1"
             ],
             [
               null,
               null,
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "kasur single 4x1"
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Kasur Single 4x1"
             ],
             [
               null,
               null,
-              "meja kursi 3x3",
-              "meja kursi 3x3",
-              "meja kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
+              "Meja dan Kursi 3x3",
               null
             ],
-            [null, "kompor gas 2x1", "kompor gas 2x1", null, null, "toilet 1x1"]
+            [null, "Kompor Gas 2x1", "Kompor Gas 2x1", null, null, "Toilet 1x1"]
           ],
           "id": 0,
           "bawah": null
@@ -429,22 +429,22 @@
           { "kategori": "Makanan", "namaBarang": "Susu Kacang", "jumlah": 2 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kasur Queen Size",
+            "namaBarang": "Kasur Queen Size 4x2",
             "jumlah": 1
           },
           { "kategori": "Makanan", "namaBarang": "Nasi Kari", "jumlah": 1 },
           { "kategori": "Makanan", "namaBarang": "Tumis Sayur", "jumlah": 1 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kasur Single",
+            "namaBarang": "Kasur Single 4x1",
             "jumlah": 1
           },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kompor Gas",
+            "namaBarang": "Kompor Gas 2x1",
             "jumlah": 1
           },
-          { "kategori": "Peralatan", "namaBarang": "Toilet", "jumlah": 1 },
+          { "kategori": "Peralatan", "namaBarang": "Toilet 1x1", "jumlah": 1 },
           { "kategori": "Bahan Makanan", "namaBarang": "Sapi", "jumlah": 1 },
           { "kategori": "Bahan Makanan", "namaBarang": "Ayam", "jumlah": 1 },
           { "kategori": "Bahan Makanan", "namaBarang": "Nasi", "jumlah": 1 },
@@ -467,13 +467,13 @@
           { "kategori": "Bahan Makanan", "namaBarang": "Susu", "jumlah": 1 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Meja dan Kursi",
+            "namaBarang": "Meja dan Kursi 3x3",
             "jumlah": 1
           },
-          { "kategori": "Peralatan", "namaBarang": "Jam", "jumlah": 1 },
+          { "kategori": "Peralatan", "namaBarang": "Jam 1x1", "jumlah": 1 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kompor Listrik",
+            "namaBarang": "Kompor Listrik 1x1",
             "jumlah": 1
           }
         ]
@@ -489,7 +489,8 @@
       "isTidakBuangAir": false,
       "totalWaktuKerja": 0,
       "namaLengkap": "Paijo0",
-      "status": null
+      "status": null,
+      "waktuUpgradeRumah": 0
     },
     {
       "waktuTidakTidur": 0,
@@ -508,7 +509,8 @@
       "isTidakBuangAir": false,
       "totalWaktuKerja": 0,
       "namaLengkap": "Paijo1",
-      "status": null
+      "status": null,
+      "waktuUpgradeRumah": 0
     },
     {
       "waktuTidakTidur": 0,
@@ -527,7 +529,8 @@
       "isTidakBuangAir": false,
       "totalWaktuKerja": 0,
       "namaLengkap": "Paijo2",
-      "status": null
+      "status": null,
+      "waktuUpgradeRumah": 0
     },
     {
       "waktuTidakTidur": 0,
@@ -546,7 +549,8 @@
       "isTidakBuangAir": false,
       "totalWaktuKerja": 0,
       "namaLengkap": "superman",
-      "status": null
+      "status": null,
+      "waktuUpgradeRumah": 0
     }
   ],
   "time": 80
