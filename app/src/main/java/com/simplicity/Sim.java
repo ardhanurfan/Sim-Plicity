@@ -1,5 +1,6 @@
 package com.simplicity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import org.json.simple.JSONObject;
 
+import com.simplicity.Inventory.InventoryItem;
 import com.simplicity.Objek.ObjekBahanMakanan;
 import com.simplicity.Objek.ObjekMakanan;
 import com.simplicity.Objek.ObjekNonMakanan;
@@ -79,7 +81,7 @@ public class Sim {
         rumah = jsonObject.get("rumah") != null ? listRumah.get(Integer.parseInt(jsonObject.get("rumah").toString()))
                 : null;
         ruangUpgrade = jsonObject.get("ruangUpgrade") != null ? new Ruangan((JSONObject) jsonObject.get("ruangUpgrade"))
-        : null;
+                : null;
         currLokasi = new LokasiSim((JSONObject) jsonObject.get("currLokasi"), listRumah);
         inventory = new Inventory((JSONObject) jsonObject.get("inventory"));
 
@@ -117,7 +119,6 @@ public class Sim {
         simMap.put("isTidakBuangAir", isTidakBuangAir);
         simMap.put("isTidakTidur", isTidakTidur);
         simMap.put("waktuUpgradeRumah", waktuUpgradeRumah);
-        
 
         JSONObject simJSON = new JSONObject(simMap);
         return simJSON;
@@ -274,11 +275,11 @@ public class Sim {
         }
     }
 
-    public Ruangan getRuangUpgrade(){
+    public Ruangan getRuangUpgrade() {
         return ruangUpgrade;
     }
 
-    public void setRuangUpgrade(Ruangan ruangUpgrade){
+    public void setRuangUpgrade(Ruangan ruangUpgrade) {
         this.ruangUpgrade = ruangUpgrade;
     }
 
@@ -362,7 +363,7 @@ public class Sim {
         }
     }
 
-    public double makan(String namaMakanan, int kekenyangan) {
+    public void makan(String namaMakanan, int kekenyangan) {
         // Cek apakah makanan ada di inventory
         setKekenyangan(1, 1, kekenyangan);
 
@@ -376,16 +377,22 @@ public class Sim {
         }
 
         // System.out.println("Yammy! " + namaMakanan + " enak sekali...");
-        return 30;
     }
 
-    public double masak(ObjekMakanan makanan) {
+    public int masak(ObjekMakanan makanan) {
         // validasi bahan-bahan dari inventory
+        List<String> inventoryMakanan = new ArrayList<String>();
+        for (InventoryItem item : inventory.getData()) {
+            if (item.getKategori().equals("Makanan") || item.getKategori().equals("Bahan Makanan")) {
+                inventoryMakanan.add(item.getNamaBarang());
+            }
+        }
         boolean isBahanAda = true;
         for (ObjekBahanMakanan bahan : makanan.getBahan()) {
-            if (!inventory.isContains(bahan)) {
+            boolean cek = inventoryMakanan.contains(bahan.getNamaObjek());
+            if (!cek) {
                 isBahanAda = false;
-                System.out.println("Bahan " + bahan.getNamaObjek() + " tidak tersedia!");
+                JOptionPane.showMessageDialog(null, "Bahan " + bahan.getNamaObjek() + " tidak tersedia!");
             }
         }
 
@@ -400,10 +407,11 @@ public class Sim {
             inventory.addItemMakanan(newmakanan, 1);
 
             setMood(1, 1, 10);
-            System.out.println(
-                    "Srenggg.... " + newmakanan.getNamaObjek() + " berhasil dibuat. Sudah dimasukkan ke inventory");
-            System.out.println("Selamat menikmati ...");
-            return newmakanan.getKekenyangan() * 1.5;
+            // System.out.println(
+            // "Srenggg.... " + newmakanan.getNamaObjek() + " berhasil dibuat. Sudah
+            // dimasukkan ke inventory");
+            // System.out.println("Selamat menikmati ...");
+            return (int) Math.round(newmakanan.getKekenyangan() * 1.5);
         } else {
             return 0;
         }
@@ -420,7 +428,7 @@ public class Sim {
         int selisihX = currPoint.getX() - toPoin.getX();
         int selisihY = currPoint.getY() - toPoin.getY();
 
-        int waktu = (int) Math.sqrt(Math.pow(selisihX, 2) + Math.pow(selisihY, 2));
+        int waktu = (int) Math.round(Math.sqrt(Math.pow(selisihX, 2) + Math.pow(selisihY, 2)));
         // dari perhitungan point jarak pada rumah
         setMood(waktu, 30, 10);
         setKekenyangan(waktu, 30, -10);

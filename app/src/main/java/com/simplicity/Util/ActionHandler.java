@@ -218,7 +218,7 @@ public class ActionHandler implements ActionListener {
 
                 // Upgrade Rumah
                 case "Upgrade House":
-                if(gm.getCurrentSim().getRuangUpgrade() == null){
+                    if (gm.getCurrentSim().getRuangUpgrade() == null) {
                         // Buat Pilihan Acuan Kamar
                         // Boolean status;
                         Rumah currHouse = gm.getCurrentSim().getCurrLokasi().getRumah();
@@ -239,19 +239,18 @@ public class ActionHandler implements ActionListener {
                                 "Upgrade House", JOptionPane.PLAIN_MESSAGE, null, acuanposisi.toArray(),
                                 acuanposisi.get(0));
                         String acuan = acuanposisi.get(acuanposisi.indexOf(posisiacuan));
-    
+
                         // Melakukan upgrade rumah
                         // Meminta input namaruangan
                         String namaruangan = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
                                 "Silakan masukkan nama ruangan yang baru", "Input Nama Ruangan Baru",
                                 JOptionPane.PLAIN_MESSAGE);
-                        
+
                         gm.getCurrentSim().setwaktuUpgradeRumah(1080);
                         gm.ui.messagText.setText("Sedang upgrade rumah");
                         gm.getCurrentSim().setRuangUpgrade(currHouse.upgradeRumah(RuanganAcuan, acuan, namaruangan));
-                        
-                    }
-                    else{
+
+                    } else {
                         JOptionPane.showMessageDialog(null, "Tidak bisa melakukan dua upgrade sekaligus");
                     }
                     break;
@@ -612,10 +611,39 @@ public class ActionHandler implements ActionListener {
                         int detik = time % 60;
                         String stringmenit = String.valueOf(menit < 10 ? "0" + menit : menit);
                         String stringdetik = String.valueOf(detik < 10 ? "0" + detik : detik);
-                        if(time > 0){
-                            JOptionPane.showMessageDialog(null, "Waktu upgrade rumah tersisa " + stringmenit + " : " + stringdetik);
-                        } else{
+                        if (time > 0) {
+                            JOptionPane.showMessageDialog(null,
+                                    "Waktu upgrade rumah tersisa " + stringmenit + " : " + stringdetik);
+                        } else {
                             JOptionPane.showMessageDialog(null, "Rumah sedang tidak di upgrade");
+                        }
+                    }
+                    break;
+
+                case "Memasak":
+                    gm.ui.memasakPopUp();
+                    gm.ui.popMemasak.setVisible(true);
+                    break;
+
+                case "masak":
+                    // Dapatkan Objek Makanan dari Pilihan
+                    String namaMasakan = (String) gm.ui.selectMasakan.getSelectedItem();
+                    ObjekMakanan objekMasakan = null;
+                    for (ObjekMakanan makanan : gm.world.getDaftar_makanan()) {
+                        if (makanan.getNamaObjek().equals(namaMasakan)) {
+                            objekMasakan = makanan;
+                        }
+                    }
+
+                    if (objekMasakan != null) {
+                        int waktuMasak = gm.getCurrentSim().masak(objekMasakan);
+                        if (waktuMasak != 0) {
+                            gm.threadAksi(waktuMasak);
+                            gm.ui.messagText
+                                    .setText("Srengggg... sedang masak " + namaMasakan + ", " + waktuMasak + " detik");
+                            gm.getCurrentSim().setStatus("Sedang memasak");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Bahan makanan tidak lengkap pilih menu lain!");
                         }
                     }
                     break;

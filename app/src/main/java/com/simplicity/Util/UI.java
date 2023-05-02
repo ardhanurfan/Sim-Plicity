@@ -8,12 +8,14 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -29,6 +31,7 @@ import com.simplicity.Point;
 import com.simplicity.Ruangan;
 import com.simplicity.Rumah;
 import com.simplicity.Inventory.InventoryItem;
+import com.simplicity.Objek.ObjekMakanan;
 import com.simplicity.Objek.ObjekNonMakanan;
 
 public class UI {
@@ -50,6 +53,8 @@ public class UI {
     public JLabel kekenyanganText;
 
     public JFrame popInventory;
+    public JFrame popMemasak;
+    JComboBox<String> selectMasakan;
 
     public UI(GameManager gm) {
         this.gm = gm;
@@ -453,7 +458,8 @@ public class UI {
     public void refreshRoom(Ruangan currRuangan) {
         gm.ui.bgPanel[3].removeAll();
         gm.routing.showScreen(3);
-        if (gm.getCurrentSim().getRumah() != null && gm.getCurrentSim().getRumah().getDaftarRuangan().contains(currRuangan) ) {
+        if (gm.getCurrentSim().getRumah() != null
+                && gm.getCurrentSim().getRumah().getDaftarRuangan().contains(currRuangan)) {
             gm.ui.createObjek(bgPanel[3], 650, 600, 40, 40, "edit.png", new String[] { "Edit Room" }, -1);
         }
         gm.ui.createObjek(bgPanel[3], 650, 650, 40, 40, "back.png", new String[] { "Back to Home", "Back to World" },
@@ -467,7 +473,8 @@ public class UI {
     public void refreshHome(Rumah currRumah) {
         gm.ui.bgPanel[4].removeAll();
         gm.routing.showScreen(4);
-        if (gm.getCurrentSim().getRumah() != null && currRumah.getNama().equals(gm.getCurrentSim().getRumah().getNama())) {
+        if (gm.getCurrentSim().getRumah() != null
+                && currRumah.getNama().equals(gm.getCurrentSim().getRumah().getNama())) {
             gm.ui.createObjek(bgPanel[4], 650, 600, 40, 40, "upgrade.png", new String[] { "Upgrade House" }, -1);
         }
         gm.ui.createObjek(bgPanel[4], 650, 650, 40, 40, "back.png", new String[] { "Back to World" }, -1);
@@ -495,6 +502,55 @@ public class UI {
         jt.setEnabled(false);
         JScrollPane js = new JScrollPane(jt);
         popInventory.add(js);
+    }
+
+    public void memasakPopUp() {
+        popMemasak = new JFrame("Memasak");
+        popMemasak.setSize(400, 300);
+        popMemasak.getContentPane().setBackground(Color.white);
+        popMemasak.setResizable(false);
+        popMemasak.setVisible(false);
+        popMemasak.setLayout(null);
+
+        JLabel text = new JLabel("Resep Masakan");
+        text.setBounds(115, 0, 380, 35);
+        text.setBackground(null);
+        text.setForeground(Color.black);
+        text.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        popMemasak.add(text);
+
+        Object[][] data = new Object[5][3];
+        data[0] = new Object[] { "Nasi Ayam", "Nasi+Ayam", "16" };
+        data[1] = new Object[] { "Nasi Kari", "Nasi+Kentang+Wortel+Sapi", "30" };
+        data[2] = new Object[] { "Susu Kacang", "Susu+Kacang", "5" };
+        data[3] = new Object[] { "Tumis Sayur", "Wortel+Bayam", "5" };
+        data[4] = new Object[] { "Bistik", "Kentang+Sapi", "22" };
+
+        JTable jt = new JTable(data, new String[] { "Nama Masakan", "Bahan", "Kekenyangan" });
+        jt.setEnabled(false);
+        JScrollPane js = new JScrollPane(jt);
+        js.setBounds(10, 35, 365, 105);
+        popMemasak.add(js);
+
+        JLabel textPilih = new JLabel("Pilih Menu Masakan");
+        textPilih.setBounds(10, 150, 380, 20);
+        textPilih.setBackground(null);
+        textPilih.setForeground(Color.black);
+        textPilih.setFont(new Font("Book Antique", Font.PLAIN, 12));
+        popMemasak.add(textPilih);
+
+        List<String> options = gm.world.getDaftar_makanan().stream()
+                .map(ObjekMakanan::getNamaObjek)
+                .collect(Collectors.toList());
+        selectMasakan = new JComboBox<>(options.toArray(new String[options.size()]));
+        selectMasakan.setBounds(10, 170, 365, 25);
+        popMemasak.add(selectMasakan);
+
+        JPanel tombol = new JPanel();
+        tombol.setBounds(0, 210, 380, 35);
+        tombol.setBackground(null);
+        customButton(tombol, 200, 210, 120, 35, "Masak", 16, "masak");
+        popMemasak.add(tombol);
     }
 
     public void generateScreen() {
