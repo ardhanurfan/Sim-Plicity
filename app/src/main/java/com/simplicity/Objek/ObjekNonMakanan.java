@@ -118,29 +118,29 @@ public class ObjekNonMakanan extends Objek {
     public static ObjekNonMakanan returnObject(String nama) {
         ObjekNonMakanan o = null;
         if (nama.equals("kasur single 4x1")) {
-            o = new ObjekNonMakanan(nama, 4, 1, 50, new String[] {"Tidur"});
+            o = new ObjekNonMakanan(nama, 4, 1, 50, new String[] { "Tidur" });
         } else if (nama.equals("kasur queen size 4x2")) {
-            o = new ObjekNonMakanan(nama, 4, 2, 100,  new String[] {"Tidur"});
+            o = new ObjekNonMakanan(nama, 4, 2, 100, new String[] { "Tidur" });
         } else if (nama.equals("kasur king size 5x2")) {
-            o = new ObjekNonMakanan(nama, 5, 2, 150,  new String[] {"Tidur"});
+            o = new ObjekNonMakanan(nama, 5, 2, 150, new String[] { "Tidur" });
         } else if (nama.equals("toilet 1x1")) {
-            o = new ObjekNonMakanan(nama, 1, 1, 50,  new String[]{"Buang Air"});
+            o = new ObjekNonMakanan(nama, 1, 1, 50, new String[] { "Buang Air" });
         } else if (nama.equals("kompor gas 2x1")) {
-            o = new ObjekNonMakanan(nama, 2, 1, 100,  new String[]{"Memasak"});
+            o = new ObjekNonMakanan(nama, 2, 1, 100, new String[] { "Memasak" });
         } else if (nama.equals("kompor listrik 1x1")) {
-            o = new ObjekNonMakanan(nama, 1, 1, 200,  new String[]{"Memasak"});
+            o = new ObjekNonMakanan(nama, 1, 1, 200, new String[] { "Memasak" });
         } else if (nama.equals("meja kursi 3x3")) {
-            o = new ObjekNonMakanan(nama, 3, 3, 50,  new String[]{"Makan"});
+            o = new ObjekNonMakanan(nama, 3, 3, 50, new String[] { "Makan" });
         } else if (nama.equals("jam 1x1")) {
-            o = new ObjekNonMakanan(nama, 1, 1, 10,  new String[] {"Melihat Waktu"});
-        } else if (nama.equals("sofa 2x1")){
-            o = new ObjekNonMakanan(nama, 2,1, 30,new String[] {"Duduk", "Ngudud"});
-        } else if (nama.equals("tv 1x1")){
-            o = new ObjekNonMakanan(nama, 1, 1, 20, new String[] {"Menonton", "Main PS"});
-        } else if (nama.equals("matras 2x1")){
-            o = new ObjekNonMakanan(nama, 2, 1, 8, new String[] {"Olahraga", "Meditasi"});
-        } else if (nama.equals("laptop 1x1")){
-            o = new ObjekNonMakanan(nama, 1, 1, 50, new String[] {"Main game", "Ngoding"});
+            o = new ObjekNonMakanan(nama, 1, 1, 10, new String[] { "Melihat Waktu" });
+        } else if (nama.equals("sofa 2x1")) {
+            o = new ObjekNonMakanan(nama, 2, 1, 30, new String[] { "Duduk", "Ngudud" });
+        } else if (nama.equals("tv 1x1")) {
+            o = new ObjekNonMakanan(nama, 1, 1, 20, new String[] { "Menonton", "Main PS" });
+        } else if (nama.equals("matras 2x1")) {
+            o = new ObjekNonMakanan(nama, 2, 1, 8, new String[] { "Olahraga", "Meditasi" });
+        } else if (nama.equals("laptop 1x1")) {
+            o = new ObjekNonMakanan(nama, 1, 1, 50, new String[] { "Main game", "Ngoding" });
         }
         return o;
     }
@@ -154,12 +154,16 @@ public class ObjekNonMakanan extends Objek {
 
         // Menambahkan elemen ke dalam array daftar_barang
         // daftar_barang[0] = new ObjekNonMakanan("Kasur Single\t", 4, 1, 50, "Tidur");
-        // daftar_barang[1] = new ObjekNonMakanan("Kasur Queen Size", 4, 2, 100, "Tidur");
-        // daftar_barang[2] = new ObjekNonMakanan("Kasur King Size ", 5, 2, 150, "Tidur");
+        // daftar_barang[1] = new ObjekNonMakanan("Kasur Queen Size", 4, 2, 100,
+        // "Tidur");
+        // daftar_barang[2] = new ObjekNonMakanan("Kasur King Size ", 5, 2, 150,
+        // "Tidur");
         // daftar_barang[3] = new ObjekNonMakanan("Toilet\t\t", 1, 1, 50, "Buang air");
         // daftar_barang[4] = new ObjekNonMakanan("Kompor Gas\t", 2, 1, 100, "Memasak");
-        // daftar_barang[5] = new ObjekNonMakanan("Kompor Listrik\t", 1, 1, 200, "Memasak");
-        // daftar_barang[6] = new ObjekNonMakanan("Meja dan Kursi\t", 3, 3, 50, "Makan");
+        // daftar_barang[5] = new ObjekNonMakanan("Kompor Listrik\t", 1, 1, 200,
+        // "Memasak");
+        // daftar_barang[6] = new ObjekNonMakanan("Meja dan Kursi\t", 3, 3, 50,
+        // "Makan");
         // daftar_barang[7] = new ObjekNonMakanan("Jam\t\t", 1, 1, 10, "Melihat Waktu");
 
         // print array of daftar barang
