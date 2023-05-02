@@ -107,6 +107,12 @@ public class GameManager {
 						e.printStackTrace();
 					}
 					onUpdateThreadAksi();
+					// if ((currentSim.getWaktuTidakTidur() >= 30 && currentSim.getTotalWaktuTidur()
+					// <= 18)
+					// || currentSim.getWaktuTidakBuangAir() >= 240) {
+					// ui.kesehatanText.setText(getCurrentSim().getKesehatan());
+					// ui.moodText.setText(getCurrentSim().getMood());
+					// }
 				}
 				updateAttribute();
 			}
@@ -119,8 +125,18 @@ public class GameManager {
 		world.setTime(1);
 		ui.jamText.setText(world.getTime());
 		ui.hariText.setText("Hari ke-" + world.getHari());
-		currentSim.setwaktuUpgradeRumah(-1);
-		currentSim.addOnTimeWorld(1); // untuk aksi yang perlu kondisi
+		// if ((getCurrentSim().getWaktuTidakTidur() >= 30 &&
+		// getCurrentSim().getTotalWaktuTidur() <= 18)) {
+		// ui.kesehatanText.setText(getCurrentSim().getKesehatan());
+		// ui.moodText.setText(getCurrentSim().getMood());
+		// }
+		// if (currentSim.getWaktuTidakBuangAir() >= 240) {
+		// ui.kesehatanText.setText(getCurrentSim().getKesehatan());
+		// ui.moodText.setText(getCurrentSim().getMood());
+		// }
+		world.efekTiapSim(1);
+		// currentSim.setwaktuUpgradeRumah(-1);
+		// currentSim.addOnTimeWorld(1); // untuk aksi yang perlu kondisi
 
 	}
 

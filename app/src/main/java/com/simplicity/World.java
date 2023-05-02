@@ -54,11 +54,12 @@ public class World {
         return worldJSON;
     }
 
-    // public void efekTiapSim(int waktu){
-    // for (Sim sim : listSim) {
-
-    // }
-    // }
+    public void efekTiapSim(int waktu) {
+        for (Sim sim : listSim) {
+            sim.addOnTimeWorld(waktu);
+            sim.setwaktuUpgradeRumah(-waktu);
+        }
+    }
 
     public void Inisiasi() {
         // List objek pekerjaan

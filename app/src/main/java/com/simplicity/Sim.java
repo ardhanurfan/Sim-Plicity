@@ -266,6 +266,18 @@ public class Sim {
         waktuUpgradeRumah += waktu;
     }
 
+    public int getWaktuTidakTidur() {
+        return waktuTidakTidur;
+    }
+
+    public int getWaktuTidakBuangAir() {
+        return waktuTidakBuangAir;
+    }
+
+    public int getTotalWaktuTidur() {
+        return totalWaktuTidur;
+    }
+
     // Bertambah dan dilakukan cek setiap saat
     public void addOnTimeWorld(int waktuAksi) {
         this.jedaGantiKerja += waktuAksi;
@@ -330,7 +342,7 @@ public class Sim {
             setKesehatan(1, 1, -5);
             setMood(1, 1, -5);
             waktuTidakTidur = 0;
-            JOptionPane.showMessageDialog(null, "Waktu tidur Anda hari ini tidak memenuhi!");
+            JOptionPane.showMessageDialog(null, "Waktu tidur " + namaLengkap + " hari ini tidak memenuhi!");
         }
     }
 
