@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -136,44 +138,50 @@ public class Rumah {
     }
 
     // Methods
-    public void upgradeRumah(Ruangan ruanganacuan, String arah, String namaruangan) {
+    public Ruangan upgradeRumah(Ruangan ruanganacuan, String arah, String namaruangan) {
+        Ruangan newRuangan = null;
         if (arah.equals("Atas")) {
             if (ruanganacuan.getAtas() == null) {
-                Ruangan newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
-                daftarRuangan.add(newRuangan);
+                newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
+                // daftarRuangan.add(newRuangan);
                 ruanganacuan.setAtas(newRuangan);
                 newRuangan.setBawah(ruanganacuan);
             } else {
                 System.out.println("Ruangan tidak tersedia karena sudah terisi.");
+                JOptionPane.showMessageDialog(null, "Ruangan tidak tersedia karena sudah terisi.");
             }
         } else if (arah.equals("Bawah")) {
             if (ruanganacuan.getBawah() == null) {
-                Ruangan newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
-                daftarRuangan.add(newRuangan);
+                newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
+                // daftarRuangan.add(newRuangan);
                 ruanganacuan.setBawah(newRuangan);
                 newRuangan.setAtas(ruanganacuan);
             } else {
                 System.out.println("Ruangan tidak tersedia karena sudah terisi.");
+                JOptionPane.showMessageDialog(null, "Ruangan tidak tersedia karena sudah terisi.");
             }
         } else if (arah.equals("Kanan")) {
             if (ruanganacuan.getKanan() == null) {
-                Ruangan newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
-                daftarRuangan.add(newRuangan);
+                newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
+                // daftarRuangan.add(newRuangan);
                 ruanganacuan.setKanan(newRuangan);
                 newRuangan.setKiri(ruanganacuan);
             } else {
                 System.out.println("Ruangan tidak tersedia karena sudah terisi.");
+                JOptionPane.showMessageDialog(null, "Ruangan tidak tersedia karena sudah terisi.");
             }
         } else if (arah.equals("Kiri")) {
             if (ruanganacuan.getKiri() == null) {
-                Ruangan newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
-                daftarRuangan.add(newRuangan);
+                newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
+                // daftarRuangan.add(newRuangan);
                 ruanganacuan.setKiri(newRuangan);
                 newRuangan.setKanan(ruanganacuan);
             } else {
                 System.out.println("Ruangan tidak tersedia karena sudah terisi.");
+                JOptionPane.showMessageDialog(null, "Ruangan tidak tersedia karena sudah terisi.");
             }
         }
+        return newRuangan;
     }
 
 }

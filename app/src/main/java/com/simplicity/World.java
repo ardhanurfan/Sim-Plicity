@@ -188,7 +188,7 @@ public class World {
     public List<Sim> getDaftarSim() {
         return listSim;
     }
-
+    
     public static void setListSim(List<Sim> listSim) {
         World.listSim = listSim;
     }
