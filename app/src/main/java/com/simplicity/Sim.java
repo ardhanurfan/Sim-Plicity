@@ -256,11 +256,11 @@ public class Sim {
         this.currLokasi = currLokasi;
     }
 
-    public int getWaktuUpgradeRumah(){
+    public int getWaktuUpgradeRumah() {
         return waktuUpgradeRumah;
     }
 
-    public void setwaktuUpgradeRumah(int waktu){
+    public void setwaktuUpgradeRumah(int waktu) {
         waktuUpgradeRumah += waktu;
     }
 
@@ -376,19 +376,24 @@ public class Sim {
         }
     }
 
-    public double berkunjung(Rumah rumahDiKunjungi) {
-        Point currPoint = currLokasi.getRumah().getLocRumah();
+    public int berkunjung(Rumah rumahDiKunjungi) {
+        Point currPoint;
+        if (currLokasi.getRumah() == null) {
+            currPoint = new Point(0, 0);
+        } else {
+            currPoint = currLokasi.getRumah().getLocRumah();
+        }
         Point toPoin = rumahDiKunjungi.getLocRumah();
         int selisihX = currPoint.getX() - toPoin.getX();
         int selisihY = currPoint.getY() - toPoin.getY();
 
-        double waktu = Math.sqrt(Math.pow(selisihX, 2) + Math.pow(selisihY, 2));
-        ; // dari perhitungan point jarak pada rumah
-        setMood((int) waktu, 30, 10);
-        setKekenyangan((int) waktu, 30, -10);
+        int waktu = (int) Math.sqrt(Math.pow(selisihX, 2) + Math.pow(selisihY, 2));
+        // dari perhitungan point jarak pada rumah
+        setMood(waktu, 30, 10);
+        setKekenyangan(waktu, 30, -10);
 
         System.out.println("Anda akan berkunjung ke " + rumahDiKunjungi.getNama());
-        System.out.println("Dengan lama perjalanan " + waktu + " detik");
+        System.out.println("Dengan lama perjalanan sekitar " + waktu + " detik");
         System.out.println("========================================");
         System.out.println("Anda sudah sampai di " + rumahDiKunjungi.getNama());
         return waktu;

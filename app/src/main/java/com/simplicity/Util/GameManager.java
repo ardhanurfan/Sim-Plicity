@@ -106,17 +106,21 @@ public class GameManager {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					world.setTime(1);
-					currentSim.setwaktuUpgradeRumah(-1);
-					currentSim.addOnTimeWorld(1); // untuk aksi yang perlu kondisi
-					ui.jamText.setText(world.getTime());
-					ui.hariText.setText("Hari ke-" + world.getHari());
+					onUpdateThreadAksi();
 				}
 				updateAttribute();
 			}
 		});
 
 		threadAksi.start();
+	}
+
+	public void onUpdateThreadAksi() {
+		world.setTime(1);
+		currentSim.setwaktuUpgradeRumah(-1);
+		currentSim.addOnTimeWorld(1); // untuk aksi yang perlu kondisi
+		ui.jamText.setText(world.getTime());
+		ui.hariText.setText("Hari ke-" + world.getHari());
 	}
 
 	public void updateAttribute() {
