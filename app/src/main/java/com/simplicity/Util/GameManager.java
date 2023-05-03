@@ -107,12 +107,6 @@ public class GameManager {
 						e.printStackTrace();
 					}
 					onUpdateThreadAksi();
-					// if ((currentSim.getWaktuTidakTidur() >= 30 && currentSim.getTotalWaktuTidur()
-					// <= 18)
-					// || currentSim.getWaktuTidakBuangAir() >= 240) {
-					// ui.kesehatanText.setText(getCurrentSim().getKesehatan());
-					// ui.moodText.setText(getCurrentSim().getMood());
-					// }
 				}
 				updateAttribute();
 			}
@@ -131,10 +125,6 @@ public class GameManager {
 		ui.kesehatanText.setText(getCurrentSim().getKesehatan());
 		ui.moodText.setText(getCurrentSim().getMood());
 		}
-
-		// currentSim.setwaktuUpgradeRumah(-1);
-		// currentSim.addOnTimeWorld(1); // untuk aksi yang perlu kondisi
-
 	}
 
 	public void updateAttribute() {

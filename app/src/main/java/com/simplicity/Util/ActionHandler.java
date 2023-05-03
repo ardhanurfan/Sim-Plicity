@@ -586,7 +586,7 @@ public class ActionHandler implements ActionListener {
                                     gm.getCurrentSim().kerja(waktukerja);
                                 }
                             };
-                            timer.schedule(task, (waktukerja+5)*1000);                            
+                            timer.schedule(task, (waktukerja+3)*1000);                            
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Anda dapat mulai bekerja 1 hari setelah ganti kerja!");
