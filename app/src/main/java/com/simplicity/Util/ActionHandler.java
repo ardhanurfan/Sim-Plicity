@@ -631,9 +631,9 @@ public class ActionHandler implements ActionListener {
                         if (time > 0) {
                             JOptionPane.showMessageDialog(null,
                                     "Waktu upgrade rumah tersisa " + stringmenit + " : " + stringdetik);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Rumah sedang tidak di upgrade");
-                        }
+                        } 
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Rumah sedang tidak di upgrade");
                     }
                     break;
 
