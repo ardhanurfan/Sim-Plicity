@@ -621,20 +621,69 @@ public class ActionHandler implements ActionListener {
                                 "Belum dapat ganti pekerjaan, waktu bekerja belum 1 hari!");
                     }
                     break;
+
                 case "Melihat Waktu":
-                    if (gm.getCurrentSim().getWaktuUpgradeRumah() > 0) {
-                        int time = gm.getCurrentSim().getWaktuUpgradeRumah();
-                        int menit = time / 60;
-                        int detik = time % 60;
-                        String stringmenit = String.valueOf(menit < 10 ? "0" + menit : menit);
-                        String stringdetik = String.valueOf(detik < 10 ? "0" + detik : detik);
-                        if (time > 0) {
-                            JOptionPane.showMessageDialog(null,
-                                    "Waktu upgrade rumah tersisa " + stringmenit + " : " + stringdetik);
-                        } 
+                    List<String> opsiLihat = Arrays.asList("Beli Barang", "Upgrade Rumah");
+                    Object selectLihat = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Ingin memantau apa?", "Melihat Waktu",
+                            JOptionPane.PLAIN_MESSAGE, null, opsiLihat.toArray(), opsiLihat.get(0));
+                    int idx = opsiLihat.indexOf(selectLihat);
+                    if(idx == 0){
+                        if(gm.getCurrentSim().getPembelian().size() == 0){
+                            JOptionPane.showMessageDialog(null, "Belum ada barang yang dibeli");
+                        } else {
+                            gm.ui.beliBarangPopUp();
+                            gm.ui.popBeliBarang.setVisible(true);
+                        }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Rumah sedang tidak di upgrade");
+                        if (gm.getCurrentSim().getWaktuUpgradeRumah() > 0) {
+                            int time = gm.getCurrentSim().getWaktuUpgradeRumah();
+                            int menit = time / 60;
+                            int detik = time % 60;
+                            String stringmenit = String.valueOf(menit < 10 ? "0" + menit : menit);
+                            String stringdetik = String.valueOf(detik < 10 ? "0" + detik : detik);
+                                JOptionPane.showMessageDialog(null,
+                                        "Waktu upgrade rumah tersisa " + stringmenit + " : " + stringdetik);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Rumah sedang tidak di upgrade");
+                        }
                     }
+                    break;
+                
+                case "Go to Store":
+                    List<String> opsi = Arrays.asList("Furnitur", "Bahan Makanan");
+                    Object selectBeli = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Ingin membeli barang apa?", "Buy Item",
+                            JOptionPane.PLAIN_MESSAGE, null, opsi.toArray(), opsi.get(0));
+                    int indeks = opsi.indexOf(selectBeli);
+                    if(indeks == 0){
+                        gm.ui.peralatanPopUp();
+                        gm.ui.popPeralatan.setVisible(true);
+                        // List<String> peralatanList = gm.world.getDaftar_barang().stream()
+                        //     .map(ObjekNonMakanan::getNamaObjek)
+                        //     .collect(Collectors.toList());
+                        // Object selectPeralatan = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Pilih Furnitur", "Furnitur",
+                        // JOptionPane.PLAIN_MESSAGE, null, peralatanList.toArray(), peralatanList.get(0));
+                    } else {
+                        gm.ui.bahanPopUp();
+                        gm.ui.popBahan.setVisible(true);
+                        // List<String> bahanMakananList = gm.world.getDaftar_bahan().stream()
+                        //     .map(ObjekBahanMakanan::getNamaObjek)
+                        //     .collect(Collectors.toList());
+                        // Object selectBahan = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Pilih Furnitur", "Furnitur",
+                        // JOptionPane.PLAIN_MESSAGE, null, bahanMakananList.toArray(), bahanMakananList.get(0));
+                    }
+                    break;
+                case"Beli Barang":
+                    // Dapatkan Objek Barang dari Pilihan
+                    String namaBarang = (String) gm.ui.selectBarang.getSelectedItem();
+                    gm.getCurrentSim().addPembelian(namaBarang);
+                    gm.getCurrentSim().addDeliveryTime((int) (Math.random() * 5 * 1) * 30);
+                    break;
+
+                case"Beli Bahan":
+                    // Dapatkan Objek Bahan dari Pilihan
+                    String namaBahan = (String) gm.ui.selectBahan.getSelectedItem();
+                    gm.getCurrentSim().addPembelian(namaBahan);
+                    gm.getCurrentSim().addDeliveryTime((int) (Math.random() * 5 * 1) * 30);
                     break;
 
                 case "Memasak":

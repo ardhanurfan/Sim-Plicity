@@ -31,6 +31,7 @@ import com.simplicity.Point;
 import com.simplicity.Ruangan;
 import com.simplicity.Rumah;
 import com.simplicity.Inventory.InventoryItem;
+import com.simplicity.Objek.ObjekBahanMakanan;
 import com.simplicity.Objek.ObjekMakanan;
 import com.simplicity.Objek.ObjekNonMakanan;
 
@@ -54,7 +55,12 @@ public class UI {
 
     public JFrame popInventory;
     public JFrame popMemasak;
+    public JFrame popPeralatan;
+    public JFrame popBahan;
+    public JFrame popBeliBarang;
     JComboBox<String> selectMasakan;
+    JComboBox<String> selectBarang;
+    JComboBox<String> selectBahan;
 
     public UI(GameManager gm) {
         this.gm = gm;
@@ -502,6 +508,130 @@ public class UI {
         jt.setEnabled(false);
         JScrollPane js = new JScrollPane(jt);
         popInventory.add(js);
+    }
+
+    public void beliBarangPopUp(){
+        popBeliBarang = new JFrame("Beli Barang");
+        popBeliBarang.setSize(400, 250);
+        popBeliBarang.getContentPane().setBackground(Color.white);
+        popBeliBarang.setResizable(false);
+        popBeliBarang.setVisible(false);
+
+        Object[][] data = new Object[gm.getCurrentSim().getPembelian().size()][3];
+        for (int i=0; i<gm.getCurrentSim().getPembelian().size(); i++) {
+            for(ObjekBahanMakanan obj : gm.world.getDaftar_bahan()){
+                if(gm.getCurrentSim().getPembelian().get(i).equals(obj.getNamaObjek())){
+                    data[i] = new Object[] { gm.getCurrentSim().getPembelian().get(i), "Bahan Makanan", gm.getCurrentSim().getDeliveryTime().get(i) };
+            // i++;
+                }
+                else {
+                    data[i] = new Object[] { gm.getCurrentSim().getPembelian().get(i), "Furnitur", gm.getCurrentSim().getDeliveryTime().get(i) };
+                }
+            }
+        }
+
+        JTable jt = new JTable(data, new String[] { "Nama Barang", "Kategori", "Waktu mengantar" });
+        jt.setEnabled(false);
+        JScrollPane js = new JScrollPane(jt);
+        popBeliBarang.add(js);
+    }
+
+    public void peralatanPopUp(){
+        popPeralatan = new JFrame("Harga Furnitur");
+        popPeralatan.setSize(400, 300);
+        popPeralatan.getContentPane().setBackground(Color.white);
+        popPeralatan.setResizable(false);
+        popPeralatan.setVisible(false);
+        popPeralatan.setLayout(null);
+
+        JLabel text = new JLabel("Furnitur");
+        text.setBounds(115, 0, 380, 35);
+        text.setBackground(null);
+        text.setForeground(Color.black);
+        text.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        popPeralatan.add(text);
+
+        Object[][] data = new Object[gm.world.getDaftar_barang().size()][3];
+        int i = 0;
+        for (ObjekNonMakanan item : gm.world.getDaftar_barang()) {
+            data[i] = new Object[] { item.getNamaObjek(), item.getLebar() + "x" + item.getPanjang(), item.getHarga() };
+            i++;
+        }
+
+        JTable jt = new JTable(data, new String[] { "Nama", "Dimensi", "Harga" });
+        jt.setEnabled(false);
+        JScrollPane js = new JScrollPane(jt);
+        js.setBounds(10, 35, 365, 105);
+        popPeralatan.add(js);
+
+        JLabel textPilih = new JLabel("Pilih Barang yang ingin dibeli");
+        textPilih.setBounds(10, 150, 380, 20);
+        textPilih.setBackground(null);
+        textPilih.setForeground(Color.black);
+        textPilih.setFont(new Font("Book Antique", Font.PLAIN, 12));
+        popPeralatan.add(textPilih);
+
+        List<String> options = gm.world.getDaftar_barang().stream()
+                .map(ObjekNonMakanan::getNamaObjek)
+                .collect(Collectors.toList());
+        selectBarang = new JComboBox<>(options.toArray(new String[options.size()]));
+        selectBarang.setBounds(10, 170, 365, 25);
+        popPeralatan.add(selectBarang);
+
+        JPanel tombol = new JPanel();
+        tombol.setBounds(0, 210, 380, 35);
+        tombol.setBackground(null);
+        customButton(tombol, 200, 210, 120, 35, "Beli Barang", 16, "Beli Barang");
+        popPeralatan.add(tombol);
+    }
+
+    public void bahanPopUp(){
+        popBahan = new JFrame("Harga Bahan Makanan");
+        popBahan.setSize(400, 300);
+        popBahan.getContentPane().setBackground(Color.white);
+        popBahan.setResizable(false);
+        popBahan.setVisible(false);
+        popBahan.setLayout(null);
+
+        JLabel text = new JLabel("Bahan Makanan");
+        text.setBounds(115, 0, 380, 35);
+        text.setBackground(null);
+        text.setForeground(Color.black);
+        text.setFont(new Font("Book Antique", Font.PLAIN, 24));
+        popBahan.add(text);
+
+        Object[][] data = new Object[gm.world.getDaftar_bahan().size()][3];
+        int i = 0;
+        for (ObjekBahanMakanan item : gm.world.getDaftar_bahan()) {
+            data[i] = new Object[] { item.getNamaObjek(), item.getHarga() };
+            i++;
+        }
+
+        JTable jt = new JTable(data, new String[] { "Nama", "Harga" });
+        jt.setEnabled(false);
+        JScrollPane js = new JScrollPane(jt);
+        js.setBounds(10, 35, 365, 105);
+        popBahan.add(js);
+
+        JLabel textPilih = new JLabel("Pilih Bahan yang ingin dibeli");
+        textPilih.setBounds(10, 150, 380, 20);
+        textPilih.setBackground(null);
+        textPilih.setForeground(Color.black);
+        textPilih.setFont(new Font("Book Antique", Font.PLAIN, 12));
+        popBahan.add(textPilih);
+
+        List<String> options = gm.world.getDaftar_bahan().stream()
+                .map(ObjekBahanMakanan::getNamaObjek)
+                .collect(Collectors.toList());
+        selectBahan = new JComboBox<>(options.toArray(new String[options.size()]));
+        selectBahan.setBounds(10, 170, 365, 25);
+        popBahan.add(selectBahan);
+
+        JPanel tombol = new JPanel();
+        tombol.setBounds(0, 210, 380, 35);
+        tombol.setBackground(null);
+        customButton(tombol, 200, 210, 120, 35, "Beli Bahan", 16, "Beli Bahan");
+        popBahan.add(tombol);
     }
 
     public void memasakPopUp() {

@@ -491,7 +491,9 @@
       "namaLengkap": "Paijo0",
       "status": null,
       "waktuUpgradeRumah": 0,
-      "ruangUpgrade": null
+      "ruangUpgrade": null,
+      "pembelian": [],
+      "deliveryTime": []
     },
     {
       "waktuTidakTidur": 0,
@@ -512,7 +514,9 @@
       "namaLengkap": "Paijo1",
       "status": null,
       "waktuUpgradeRumah": 0,
-      "ruangUpgrade": null
+      "ruangUpgrade": null,
+      "pembelian": [],
+      "deliveryTime": []
     },
     {
       "waktuTidakTidur": 0,
@@ -533,7 +537,9 @@
       "namaLengkap": "Paijo2",
       "status": null,
       "waktuUpgradeRumah": 0,
-      "ruangUpgrade": null
+      "ruangUpgrade": null,
+      "pembelian": [],
+      "deliveryTime": []
     },
     {
       "waktuTidakTidur": 0,
@@ -554,7 +560,9 @@
       "namaLengkap": "superman",
       "status": null,
       "waktuUpgradeRumah": 0,
-      "ruangUpgrade": null
+      "ruangUpgrade": null,
+      "pembelian": [],
+      "deliveryTime": []
     }
   ],
   "time": 80

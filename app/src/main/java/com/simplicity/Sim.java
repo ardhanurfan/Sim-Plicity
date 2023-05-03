@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.simplicity.Inventory.InventoryItem;
@@ -27,6 +28,8 @@ public class Sim {
     private Inventory inventory;
     private Rumah rumah;
     private Ruangan ruangUpgrade;
+    private List<Integer> deliveryTime = new ArrayList<Integer>();
+    private List<String> pembelian = new ArrayList<String>();
 
     // STATE VARIABLE
     // Reset jika selesai upgrade rumah
@@ -93,6 +96,16 @@ public class Sim {
         waktuTidakBuangAir = Integer.parseInt(jsonObject.get("waktuTidakBuangAir").toString());
         isTidakBuangAir = Boolean.parseBoolean(jsonObject.get("isTidakBuangAir").toString());
         waktuUpgradeRumah = Integer.parseInt(jsonObject.get("waktuUpgradeRumah").toString());
+
+        JSONArray jsonArrayPembelian = (JSONArray) jsonObject.get("pembelian");
+        for (Object object : jsonArrayPembelian) {
+            pembelian.add(object.toString());
+        }
+
+        JSONArray jsonArraydeliveryTime = (JSONArray) jsonObject.get("deliveryTime");
+        for (Object object : jsonArraydeliveryTime) {
+            deliveryTime.add(Integer.parseInt(object.toString()));
+        }
     }
 
     public JSONObject toJson() {
@@ -119,6 +132,9 @@ public class Sim {
         simMap.put("isTidakBuangAir", isTidakBuangAir);
         simMap.put("isTidakTidur", isTidakTidur);
         simMap.put("waktuUpgradeRumah", waktuUpgradeRumah);
+        simMap.put("pembelian", pembelian);
+        simMap.put("deliveryTime", deliveryTime);
+
 
         JSONObject simJSON = new JSONObject(simMap);
         return simJSON;
@@ -281,6 +297,22 @@ public class Sim {
 
     public void setRuangUpgrade(Ruangan ruangUpgrade) {
         this.ruangUpgrade = ruangUpgrade;
+    }
+
+    public List<String> getPembelian(){
+        return pembelian;
+    }
+
+    public List<Integer> getDeliveryTime(){
+        return deliveryTime;
+    }
+
+    public void addPembelian(String barang){
+        pembelian.add(barang);
+    }
+
+    public void addDeliveryTime(int time){
+        deliveryTime.add(time);
     }
 
     public int getWaktuTidakTidur() {
