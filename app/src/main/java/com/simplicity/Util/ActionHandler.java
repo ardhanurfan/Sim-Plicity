@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JComboBox;
 import java.util.stream.Collectors;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JOptionPane;
 
@@ -445,8 +443,8 @@ public class ActionHandler implements ActionListener {
                             JOptionPane.PLAIN_MESSAGE);
                     if (waktuTidurString != null) {
                         int waktutidur = Integer.parseInt(waktuTidurString);
-                        gm.threadAksi(waktutidur);
-                        gm.getCurrentSim().tidur(waktutidur);
+                        gm.threadAksi(waktutidur, "Tidur", null, null, null);
+                        //gm.getCurrentSim().tidur(waktutidur);
                         gm.ui.messagText.setText("Tidur dulu " + waktutidur + " detik ah, biar ga capek");
                         gm.getCurrentSim().setStatus("Sedang tidur");
                     }
@@ -470,8 +468,8 @@ public class ActionHandler implements ActionListener {
                             }
                         }
                         if (waktuOlahragaString != null) {
-                            gm.threadAksi(waktuOlahraga);
-                            gm.getCurrentSim().olahraga(waktuOlahraga);
+                            gm.threadAksi(waktuOlahraga, "Olahraga", null, null, null );
+                            //gm.getCurrentSim().olahraga(waktuOlahraga);
                             gm.ui.messagText.setText("Olahraga dulu cuy biar sehat...");
                             gm.getCurrentSim().setStatus("Sedang olahraga");
                         }
@@ -479,57 +477,57 @@ public class ActionHandler implements ActionListener {
                     break;
 
                 case "Duduk":
-                    gm.threadAksi(30);
-                    gm.getCurrentSim().duduk();
+                    gm.threadAksi(30, "Duduk", null, null, null);
+                    //gm.getCurrentSim().duduk();
                     gm.ui.messagText.setText("Enaknya... Santai sekali");
                     gm.getCurrentSim().setStatus("Sedang duduk");
                     break;
 
                 case "Ngudud":
-                    gm.threadAksi(30);
-                    gm.getCurrentSim().ngudud();
+                    gm.threadAksi(30, "Ngudud", null, null, null);
+                    //gm.getCurrentSim().ngudud();
                     gm.ui.messagText.setText("Fiuhh.. Dunhill emang mantep cuy..");
                     gm.getCurrentSim().setStatus("Sedang ngudud");
                     break;
 
                 case "Menonton":
-                    gm.threadAksi(30);
-                    gm.getCurrentSim().nontonTv();
+                    gm.threadAksi(30, "Menonton", null, null, null);
+                    //gm.getCurrentSim().nontonTv();
                     gm.ui.messagText.setText("Horee... Seru sekali acaranya");
                     gm.getCurrentSim().setStatus("Sedang nonton tv");
                     break;
 
                 case "Ngoding":
-                    gm.threadAksi(30);
-                    gm.getCurrentSim().ngoding();
+                    gm.threadAksi(30, "Ngoding", null, null, null);
+                    //gm.getCurrentSim().ngoding();
                     gm.ui.messagText.setText("Ngoding dulu biar jago...");
                     gm.getCurrentSim().setStatus("Sedang ngoding");
                     break;
 
                 case "Meditasi":
-                    gm.threadAksi(30);
-                    gm.getCurrentSim().meditasi();
+                    gm.threadAksi(30, "Meditasi", null, null, null);
+                    //gm.getCurrentSim().meditasi();
                     gm.ui.messagText.setText("Meditasi itu membuat lebih tenang..");
                     gm.getCurrentSim().setStatus("Sedang meditasi");
                     break;
 
                 case "Main PS":
-                    gm.threadAksi(30);
-                    gm.getCurrentSim().mainPS();
+                    gm.threadAksi(30, "Main PS", null, null, null);
+                    //gm.getCurrentSim().mainPS();
                     gm.ui.messagText.setText("Game PS itu seru euyy.. T-tapi mataku kok rasanya agak sakit ya..");
                     gm.getCurrentSim().setStatus("Sedang main ps");
                     break;
 
                 case "Main Game":
-                    gm.threadAksi(30);
-                    gm.getCurrentSim().bermain();
+                    gm.threadAksi(30, "Main Game", null, null, null);
+                    //gm.getCurrentSim().bermain();
                     gm.ui.messagText.setText("Horee... Seru sekali gamenya");
                     gm.getCurrentSim().setStatus("Sedang main game");
                     break;
 
                 case "Buang Air":
-                    gm.threadAksi(10);
-                    gm.getCurrentSim().buangAir();
+                    gm.threadAksi(10, "Buang Air", null, null, null);
+                    //gm.getCurrentSim().buangAir();
                     gm.ui.messagText.setText("Uhhh lega... udah buang air");
                     gm.getCurrentSim().setStatus("Sedang main buang air");
                     break;
@@ -558,8 +556,8 @@ public class ActionHandler implements ActionListener {
                                     kekenyangan = bahan.getKekenyangan();
                                 }
                             }
-                            gm.threadAksi(30);
-                            gm.getCurrentSim().makan(namaMakanan, kekenyangan);
+                            gm.threadAksi(30, "Makan", namaMakanan, kekenyangan, null);
+                            //gm.getCurrentSim().makan(namaMakanan, kekenyangan);
                             gm.ui.messagText.setText("Yaammyy... makan " + namaMakanan + " dulu yaa... Enakkk..");
                             gm.getCurrentSim().setStatus("Sedang makan");
                         }
@@ -575,18 +573,10 @@ public class ActionHandler implements ActionListener {
                                 JOptionPane.PLAIN_MESSAGE);
                         if (waktuBekerjaString != null) {
                             int waktukerja = Integer.parseInt(waktuBekerjaString);
-                            gm.threadAksi(waktukerja);
+                            gm.threadAksi(waktukerja, "Bekerja", null, null, null);
                             gm.ui.messagText.setText("Kerja dulu boss, selama " + waktukerja + " detik");
-                            gm.getCurrentSim().setStatus("Sedang bekerja");
-                            Timer timer = new Timer();
-                            TimerTask task = new TimerTask() {
-                                @Override
-                                public void run() {
-                                    // Kode yang ingin dieksekusi setelah beberapa detik
-                                    gm.getCurrentSim().kerja(waktukerja);
-                                }
-                            };
-                            timer.schedule(task, (waktukerja+3)*1000);                            
+                            gm.getCurrentSim().setStatus("Sedang bekerja");                           
+                            //gm.getCurrentSim().kerja(waktukerja);
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Anda dapat mulai bekerja 1 hari setelah ganti kerja!");
@@ -653,9 +643,10 @@ public class ActionHandler implements ActionListener {
                     }
 
                     if (objekMasakan != null) {
-                        int waktuMasak = gm.getCurrentSim().masak(objekMasakan);
+                        //int waktuMasak = gm.getCurrentSim().masak(objekMasakan);
+                        int waktuMasak = (int) Math.round(objekMasakan.getKekenyangan() * 1.5);
                         if (waktuMasak != 0) {
-                            gm.threadAksi(waktuMasak);
+                            gm.threadAksi(waktuMasak, "masak", null, null, objekMasakan);
                             gm.ui.messagText
                                     .setText("Srengggg... sedang masak " + namaMasakan + ", " + waktuMasak + " detik");
                             gm.getCurrentSim().setStatus("Sedang memasak");
