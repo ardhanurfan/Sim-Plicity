@@ -355,7 +355,7 @@ public class Sim {
     }
 
     public void efekTidakTidur() {
-        if (waktuTidakTidur >= 10 && totalWaktuTidur < 3) {
+        if (waktuTidakTidur >= 600 && totalWaktuTidur < 180) {
             setKesehatan(1, 1, -5);
             setMood(1, 1, -5);
             waktuTidakTidur = 0;
