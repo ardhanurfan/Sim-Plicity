@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.swing.JOptionPane;
 
@@ -72,4 +73,111 @@ public class GameManager {
 		}
 	}
 
+<<<<<<< Updated upstream
+=======
+	// public void threadTime() {
+	// threadTime = new Thread(new Runnable() {
+	// @Override
+	// public void run() {
+	// boolean stop = false;
+	// while (threadTime.isAlive() && !stop) {
+	// try {
+	// Thread.sleep(1000);
+	// world.setTime(1);
+	// currentSim.addOnTimeWorld(1); // untuk aksi yang perlu kondisi
+	// ui.jamText.setText(world.getTime());
+	// ui.hariText.setText("Hari ke-" + world.getHari());
+	// } catch (InterruptedException e) {
+	// stop = true;
+	// }
+	// }
+	// }
+	// });
+	// }
+
+	public void threadAksi(int waktuAksi, String cmd) {
+		threadAksi = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				for (int i = 0; i < waktuAksi; i++) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					onUpdateThreadAksi();
+				}
+				method(waktuAksi, cmd);
+				updateAttribute();
+				//fungsi();
+			}
+		});
+
+		threadAksi.start();
+	}
+
+	public void onUpdateThreadAksi() {
+		world.setTime(1);
+		ui.jamText.setText(world.getTime());
+		ui.hariText.setText("Hari ke-" + world.getHari());
+		world.efekTiapSim(1);
+
+		if (getCurrentSim().getWaktuTidakTidur() == 0 || currentSim.getWaktuTidakBuangAir() == 0 ) {
+		ui.kesehatanText.setText(getCurrentSim().getKesehatan());
+		ui.moodText.setText(getCurrentSim().getMood());
+		}
+	}
+
+	public void updateAttribute() {
+		ui.pekerjaanText.setText(getCurrentSim().getPekerjaan());
+		ui.kesehatanText.setText(getCurrentSim().getKesehatan());
+		ui.moodText.setText(getCurrentSim().getMood());
+		ui.kekenyanganText.setText(getCurrentSim().getKekenyangan());
+		ui.uangText.setText(getCurrentSim().getUang());
+	}
+
+	public void method(int waktuAksi, String cmd) {
+		switch (cmd) {
+			case "Bekerja":
+				getCurrentSim().kerja(waktuAksi);
+				break;
+			case "Tidur":
+				getCurrentSim().tidur(waktuAksi);
+				break;
+			case "Olahraga" :
+				getCurrentSim().olahraga(waktuAksi);
+				break;
+			case "Duduk":
+				getCurrentSim().duduk();
+				break;
+			case "Buang Air":
+				getCurrentSim().buangAir();
+				break;
+			case "Ngudud":
+				getCurrentSim().ngudud();	
+				break;
+			case "Menonton" :
+				getCurrentSim().nontonTv();
+				break;
+			case "Ngoding":
+				getCurrentSim().ngoding();
+				break;
+			case "Meditasi" :
+				getCurrentSim().meditasi();
+				break;
+			case "Main PS" :
+				getCurrentSim().mainPS();
+				break;
+			case "Main Game" :
+				getCurrentSim().bermain();
+				break;
+			case ""
+
+		
+		
+			default:
+				break;
+		}
+	}
+>>>>>>> Stashed changes
 }
