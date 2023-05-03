@@ -34,16 +34,23 @@ public class ActionHandler implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if ((gm.threadAksi == null || !gm.threadAksi.isAlive()) && (threadBerkunjung == null
-                || !threadBerkunjung.isAlive())) {
-            String command = e.getActionCommand();
-            int indexObj = -1;
+        String command = e.getActionCommand();
+        int indexObj = -1;
 
-            if (command.contains("%")) {
-                String[] listCmd = command.split("%");
-                command = listCmd[1];
-                indexObj = Integer.parseInt(listCmd[0]);
-            }
+        if (command.contains("%")) {
+            String[] listCmd = command.split("%");
+            command = listCmd[1];
+            indexObj = Integer.parseInt(listCmd[0]);
+        }
+
+        boolean cekSimHarusPunyaRumah = (gm.getCurrentSim() == null || gm.getCurrentSim().getRumah() != null
+                || command.equals("start")
+                || command.equals("exit") || command.equals("choose-sim") || command.equals("help") || command
+                        .equals("new-sim"));
+
+        if ((gm.threadAksi == null || !gm.threadAksi.isAlive()) && (threadBerkunjung == null
+                || !threadBerkunjung.isAlive())
+                && (cekSimHarusPunyaRumah)) {
 
             switch (command) {
                 // Main menu
@@ -648,6 +655,8 @@ public class ActionHandler implements ActionListener {
                     }
                     break;
             }
+        } else if (!cekSimHarusPunyaRumah) {
+            JOptionPane.showMessageDialog(null, "Silakan bangun rumah sebelum melakukan aksi!");
         } else {
             JOptionPane.showMessageDialog(null, "Aksi lain belum selesai!");
         }

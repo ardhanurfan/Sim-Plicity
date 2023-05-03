@@ -583,12 +583,16 @@ public class UI {
                                 "Input Home homeName", JOptionPane.PLAIN_MESSAGE);
                         if (homeName != null && homeName.replaceAll(" ", "").length() > 0) {
                             if (gm.world.addRumah(new Point((e.getX() - 30) / 10, (e.getY() - 30) / 10), homeName)) {
+                                Rumah newRumah = gm.world.getDaftarRumah().get(gm.world.getDaftarRumah().size() - 1);
                                 gm.getCurrentSim()
-                                        .setRumah(gm.world.getDaftarRumah().get(gm.world.getDaftarRumah().size() - 1));
+                                        .setRumah(newRumah);
                                 bgPanel[2].remove(0);
                                 createObjek(bgPanel[2], e.getX(), e.getY(), 20, 20, "rumahku.png",
                                         new String[] { "View Home%" + homeName }, gm.world.getDaftarRumah().size() - 1);
                                 gm.ui.messagText.setText("Rumah berhasil di bangun, Selamat bermain");
+                                gm.getCurrentSim().getCurrLokasi().setRuangan(null);
+                                ;
+                                gm.getCurrentSim().getCurrLokasi().setRumah(newRumah);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Nama sudah digunakan!");
                                 bgPanel[2].remove(0);
