@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JComboBox;
 import java.util.stream.Collectors;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JOptionPane;
 
@@ -574,9 +576,17 @@ public class ActionHandler implements ActionListener {
                         if (waktuBekerjaString != null) {
                             int waktukerja = Integer.parseInt(waktuBekerjaString);
                             gm.threadAksi(waktukerja);
-                            gm.getCurrentSim().kerja(waktukerja);
                             gm.ui.messagText.setText("Kerja dulu boss, selama " + waktukerja + " detik");
                             gm.getCurrentSim().setStatus("Sedang bekerja");
+                            Timer timer = new Timer();
+                            TimerTask task = new TimerTask() {
+                                @Override
+                                public void run() {
+                                    // Kode yang ingin dieksekusi setelah beberapa detik
+                                    gm.getCurrentSim().kerja(waktukerja);
+                                }
+                            };
+                            timer.schedule(task, (waktukerja+5)*1000);                            
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Anda dapat mulai bekerja 1 hari setelah ganti kerja!");
