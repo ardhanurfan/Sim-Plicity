@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import javax.swing.JOptionPane;
 
@@ -23,6 +22,9 @@ public class GameManager {
 	ActionHandler actionHandler = new ActionHandler(this);
 	UI ui = new UI(this);
 	Routing routing = new Routing(this);
+
+	// Thread threadTime;
+	Thread threadAksi;
 
 	public GameManager() {
 		routing.showScreen(0);
@@ -52,7 +54,8 @@ public class GameManager {
 			Object obj = jsonParser.parse(new FileReader("save.json"));
 			JSONObject jsonObject = (JSONObject) obj;
 
-			World.setTime(Integer.parseInt(jsonObject.get("time").toString()));
+			world.setTime(Integer.parseInt(jsonObject.get("time").toString()));
+			world.setHari(Integer.parseInt(jsonObject.get("hari").toString()));
 
 			JSONArray jsonArrayRumah = (JSONArray) jsonObject.get("listRumah");
 			List<Rumah> listRumah = new ArrayList<Rumah>();
@@ -73,8 +76,6 @@ public class GameManager {
 		}
 	}
 
-<<<<<<< Updated upstream
-=======
 	// public void threadTime() {
 	// threadTime = new Thread(new Runnable() {
 	// @Override
@@ -95,7 +96,7 @@ public class GameManager {
 	// });
 	// }
 
-	public void threadAksi(int waktuAksi, String cmd) {
+	public void threadAksi(int waktuAksi) {
 		threadAksi = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -107,9 +108,7 @@ public class GameManager {
 					}
 					onUpdateThreadAksi();
 				}
-				method(waktuAksi, cmd);
 				updateAttribute();
-				//fungsi();
 			}
 		});
 
@@ -135,49 +134,4 @@ public class GameManager {
 		ui.kekenyanganText.setText(getCurrentSim().getKekenyangan());
 		ui.uangText.setText(getCurrentSim().getUang());
 	}
-
-	public void method(int waktuAksi, String cmd) {
-		switch (cmd) {
-			case "Bekerja":
-				getCurrentSim().kerja(waktuAksi);
-				break;
-			case "Tidur":
-				getCurrentSim().tidur(waktuAksi);
-				break;
-			case "Olahraga" :
-				getCurrentSim().olahraga(waktuAksi);
-				break;
-			case "Duduk":
-				getCurrentSim().duduk();
-				break;
-			case "Buang Air":
-				getCurrentSim().buangAir();
-				break;
-			case "Ngudud":
-				getCurrentSim().ngudud();	
-				break;
-			case "Menonton" :
-				getCurrentSim().nontonTv();
-				break;
-			case "Ngoding":
-				getCurrentSim().ngoding();
-				break;
-			case "Meditasi" :
-				getCurrentSim().meditasi();
-				break;
-			case "Main PS" :
-				getCurrentSim().mainPS();
-				break;
-			case "Main Game" :
-				getCurrentSim().bermain();
-				break;
-			case ""
-
-		
-		
-			default:
-				break;
-		}
-	}
->>>>>>> Stashed changes
 }

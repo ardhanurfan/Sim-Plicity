@@ -14,7 +14,8 @@ import com.simplicity.Objek.ObjekPekerjaan;
 public class World {
     private static List<Rumah> listRumah = new ArrayList<Rumah>();;
     private static List<Sim> listSim = new ArrayList<Sim>();
-    private static int time;
+    private int time;
+    private int hari;
     private final int panjangMap = 64;
     private final int lebarMap = 64;
 
@@ -23,9 +24,14 @@ public class World {
     private List<ObjekNonMakanan> daftar_barang = new ArrayList<ObjekNonMakanan>();
     private List<ObjekMakanan> daftar_makanan = new ArrayList<ObjekMakanan>();
 
+    Thread threadAksi;
+    Thread threadBeliBarang;
+    Thread threadUpgradeRumah;
+
     public World() {
         Inisiasi();
         time = 0;
+        hari = 1;
     }
 
     public JSONObject toJson() {
@@ -42,9 +48,17 @@ public class World {
         worldMap.put("listRumah", listRumahJSON);
         worldMap.put("listSim", listSimJSON);
         worldMap.put("time", time);
+        worldMap.put("hari", hari);
 
         JSONObject worldJSON = new JSONObject(worldMap);
         return worldJSON;
+    }
+
+    public void efekTiapSim(int waktu) {
+        for (Sim sim : listSim) {
+            sim.addOnTimeWorld(waktu);
+            sim.setwaktuUpgradeRumah(-waktu);
+        }
     }
 
     public void Inisiasi() {
@@ -55,14 +69,14 @@ public class World {
         daftarPekerjaan.add(new ObjekPekerjaan("Programmer", 45));
         daftarPekerjaan.add(new ObjekPekerjaan("Dokter", 50));
 
-        ObjekBahanMakanan nasi = new ObjekBahanMakanan("Nasi\t", 5, 5);
-        ObjekBahanMakanan kentang = new ObjekBahanMakanan("Kentang\t", 3, 4);
-        ObjekBahanMakanan ayam = new ObjekBahanMakanan("Ayam\t", 10, 8);
-        ObjekBahanMakanan sapi = new ObjekBahanMakanan("Sapi\t", 12, 15);
-        ObjekBahanMakanan wortel = new ObjekBahanMakanan("Wortel\t", 3, 2);
-        ObjekBahanMakanan bayam = new ObjekBahanMakanan("Bayam\t", 3, 2);
-        ObjekBahanMakanan kacang = new ObjekBahanMakanan("Kacang\t", 2, 2);
-        ObjekBahanMakanan susu = new ObjekBahanMakanan("Susu\t", 2, 1);
+        ObjekBahanMakanan nasi = new ObjekBahanMakanan("Nasi", 5, 5);
+        ObjekBahanMakanan kentang = new ObjekBahanMakanan("Kentang", 3, 4);
+        ObjekBahanMakanan ayam = new ObjekBahanMakanan("Ayam", 10, 8);
+        ObjekBahanMakanan sapi = new ObjekBahanMakanan("Sapi", 12, 15);
+        ObjekBahanMakanan wortel = new ObjekBahanMakanan("Wortel", 3, 2);
+        ObjekBahanMakanan bayam = new ObjekBahanMakanan("Bayam", 3, 2);
+        ObjekBahanMakanan kacang = new ObjekBahanMakanan("Kacang", 2, 2);
+        ObjekBahanMakanan susu = new ObjekBahanMakanan("Susu", 2, 1);
 
         // Menambahkan daftar bahan makanan
         daftar_bahan.add(nasi);
@@ -75,21 +89,25 @@ public class World {
         daftar_bahan.add(susu);
 
         // List objek non makanan
-        daftar_barang.add(new ObjekNonMakanan("Kasur Single\t", 4, 1, 50, "Tidur"));
-        daftar_barang.add(new ObjekNonMakanan("Kasur Queen Size", 4, 2, 100, "Tidur"));
-        daftar_barang.add(new ObjekNonMakanan("Kasur King Size ", 5, 2, 150, "Tidur"));
-        daftar_barang.add(new ObjekNonMakanan("Toilet\t\t", 1, 1, 50, "Buang air"));
-        daftar_barang.add(new ObjekNonMakanan("Kompor Gas\t", 2, 1, 100, "Memasak"));
-        daftar_barang.add(new ObjekNonMakanan("Kompor Listrik\t", 1, 1, 200, "Memasak"));
-        daftar_barang.add(new ObjekNonMakanan("Meja dan Kursi\t", 3, 3, 50, "Makan"));
-        daftar_barang.add(new ObjekNonMakanan("Jam\t\t", 1, 1, 10, "Melihat Waktu"));
+        daftar_barang.add(new ObjekNonMakanan("Kasur Single", 4, 1, 50, new String[] { "Tidur" }));
+        daftar_barang.add(new ObjekNonMakanan("Kasur Queen Size", 4, 2, 100, new String[] { "Tidur" }));
+        daftar_barang.add(new ObjekNonMakanan("Kasur King Size", 5, 2, 150, new String[] { "Tidur" }));
+        daftar_barang.add(new ObjekNonMakanan("Toilet", 1, 1, 50, new String[] { "Buang air" }));
+        daftar_barang.add(new ObjekNonMakanan("Kompor Gas", 2, 1, 100, new String[] { "Memasak" }));
+        daftar_barang.add(new ObjekNonMakanan("Kompor Listrik", 1, 1, 200, new String[] { "Memasak" }));
+        daftar_barang.add(new ObjekNonMakanan("Meja dan Kursi", 3, 3, 50, new String[] { "Makan" }));
+        daftar_barang.add(new ObjekNonMakanan("Jam", 1, 1, 10, new String[] { "Melihat Waktu" }));
+        daftar_barang.add(new ObjekNonMakanan("Laptop", 1, 1, 50, new String[] { "Main game", "Ngoding" }));
+        daftar_barang.add(new ObjekNonMakanan("Tv", 1, 1, 20, new String[] { "Menonton", "Main PS" }));
+        daftar_barang.add(new ObjekNonMakanan("Matras", 2, 1, 8, new String[] { "Yoga", "Meditasi" }));
+        daftar_barang.add(new ObjekNonMakanan("Sofa", 2, 1, 30, new String[] { "Duduk", "Ngudud" }));
 
         // List objek makanan
         daftar_makanan.add(new ObjekMakanan("Nasi Ayam", new ObjekBahanMakanan[] { nasi, ayam }, 16));
         daftar_makanan.add(new ObjekMakanan("Nasi Kari", new ObjekBahanMakanan[] { nasi, kentang, wortel, sapi }, 30));
         daftar_makanan.add(new ObjekMakanan("Susu Kacang", new ObjekBahanMakanan[] { susu, kacang }, 5));
         daftar_makanan.add(new ObjekMakanan("Tumis Sayur", new ObjekBahanMakanan[] { wortel, bayam }, 5));
-        daftar_makanan.add(new ObjekMakanan("Bistik\t", new ObjekBahanMakanan[] { kentang, sapi }, 22));
+        daftar_makanan.add(new ObjekMakanan("Bistik", new ObjekBahanMakanan[] { kentang, sapi }, 22));
     }
 
     public String getTime() {
@@ -98,11 +116,23 @@ public class World {
         return (menit < 10 ? "0" + menit : menit) + " : " + (detik < 10 ? "0" + detik : detik);
     }
 
-    public static void setTime(int aksi) {
+    public String getHari() {
+        return String.valueOf(hari);
+    }
+
+    public void setHari(int hari) {
+        this.hari = hari;
+    }
+
+    public void setTime(int aksi) {
         if (time + aksi < 720) {
             time += aksi;
         } else {
             time = (time + aksi) % 720;
+            for (Sim sim : listSim) {
+                sim.resetWaktuKegiatanharian();
+            }
+            hari++;
         }
     }
 
@@ -168,7 +198,7 @@ public class World {
     public List<Sim> getDaftarSim() {
         return listSim;
     }
-
+    
     public static void setListSim(List<Sim> listSim) {
         World.listSim = listSim;
     }

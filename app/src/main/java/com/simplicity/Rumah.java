@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -26,12 +28,12 @@ public class Rumah {
         inisialisasi();
     }
 
-    public Rumah(JSONObject jsonObject) {
-        id = Integer.parseInt(jsonObject.get("id").toString());
-        nama = jsonObject.get("nama").toString();
-        loc = new Point((JSONObject) jsonObject.get("loc"));
+    public Rumah(JSONObject object2) {
+        id = Integer.parseInt(object2.get("id").toString());
+        nama = object2.get("nama").toString();
+        loc = new Point((JSONObject) object2.get("loc"));
 
-        JSONArray jsonArrayRumah = (JSONArray) jsonObject.get("daftarRuangan");
+        JSONArray jsonArrayRumah = (JSONArray) object2.get("daftarRuangan");
         List<Ruangan> daftarRuangan = new ArrayList<Ruangan>();
         for (Object object : jsonArrayRumah) {
             JSONObject obj = (JSONObject) object;
@@ -87,11 +89,17 @@ public class Rumah {
         Point p4 = new Point(2, 2);
         Point p5 = new Point(1, 1);
 
-        ObjekNonMakanan o1 = ObjekNonMakanan.returnObject("kasur single 4x1");
-        ObjekNonMakanan o2 = ObjekNonMakanan.returnObject("toilet 1x1");
-        ObjekNonMakanan o3 = ObjekNonMakanan.returnObject("kompor gas 2x1");
-        ObjekNonMakanan o4 = ObjekNonMakanan.returnObject("meja kursi 3x3");
-        ObjekNonMakanan o5 = ObjekNonMakanan.returnObject("jam 1x1");
+        ObjekNonMakanan o1 = new ObjekNonMakanan("Kasur Single 4x1");
+        ObjekNonMakanan o2 = new ObjekNonMakanan("Toilet 1x1");
+        ObjekNonMakanan o3 = new ObjekNonMakanan("Kompor Gas 2x1");
+        ObjekNonMakanan o4 = new ObjekNonMakanan("Meja dan Kursi 3x3");
+        ObjekNonMakanan o5 = new ObjekNonMakanan("Jam 1x1");
+
+        // ObjekNonMakanan o1 = ObjekNonMakanan.returnObject("kasur single 4x1");
+        // ObjekNonMakanan o2 = ObjekNonMakanan.returnObject("toilet 1x1");
+        // ObjekNonMakanan o3 = ObjekNonMakanan.returnObject("kompor gas 2x1");
+        // ObjekNonMakanan o4 = ObjekNonMakanan.returnObject("meja kursi 3x3");
+        // ObjekNonMakanan o5 = ObjekNonMakanan.returnObject("jam 1x1");
 
         daftarRuangan.get(0).tambahObjek(o1, p1, "h");
         daftarRuangan.get(0).tambahObjek(o2, p2, "h");
@@ -130,44 +138,50 @@ public class Rumah {
     }
 
     // Methods
-    public void upgradeRumah(Ruangan ruanganacuan, String arah, String namaruangan) {
-        if (arah.equals("atas")) {
+    public Ruangan upgradeRumah(Ruangan ruanganacuan, String arah, String namaruangan) {
+        Ruangan newRuangan = null;
+        if (arah.equals("Atas")) {
             if (ruanganacuan.getAtas() == null) {
-                Ruangan newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
-                daftarRuangan.add(newRuangan);
+                newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
+                // daftarRuangan.add(newRuangan);
                 ruanganacuan.setAtas(newRuangan);
                 newRuangan.setBawah(ruanganacuan);
             } else {
                 System.out.println("Ruangan tidak tersedia karena sudah terisi.");
+                JOptionPane.showMessageDialog(null, "Ruangan tidak tersedia karena sudah terisi.");
             }
-        } else if (arah.equals("bawah")) {
+        } else if (arah.equals("Bawah")) {
             if (ruanganacuan.getBawah() == null) {
-                Ruangan newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
-                daftarRuangan.add(newRuangan);
+                newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
+                // daftarRuangan.add(newRuangan);
                 ruanganacuan.setBawah(newRuangan);
                 newRuangan.setAtas(ruanganacuan);
             } else {
                 System.out.println("Ruangan tidak tersedia karena sudah terisi.");
+                JOptionPane.showMessageDialog(null, "Ruangan tidak tersedia karena sudah terisi.");
             }
-        } else if (arah.equals("kanan")) {
+        } else if (arah.equals("Kanan")) {
             if (ruanganacuan.getKanan() == null) {
-                Ruangan newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
-                daftarRuangan.add(newRuangan);
+                newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
+                // daftarRuangan.add(newRuangan);
                 ruanganacuan.setKanan(newRuangan);
                 newRuangan.setKiri(ruanganacuan);
             } else {
                 System.out.println("Ruangan tidak tersedia karena sudah terisi.");
+                JOptionPane.showMessageDialog(null, "Ruangan tidak tersedia karena sudah terisi.");
             }
-        } else if (arah.equals("kiri")) {
+        } else if (arah.equals("Kiri")) {
             if (ruanganacuan.getKiri() == null) {
-                Ruangan newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
-                daftarRuangan.add(newRuangan);
+                newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
+                // daftarRuangan.add(newRuangan);
                 ruanganacuan.setKiri(newRuangan);
                 newRuangan.setKanan(ruanganacuan);
             } else {
                 System.out.println("Ruangan tidak tersedia karena sudah terisi.");
+                JOptionPane.showMessageDialog(null, "Ruangan tidak tersedia karena sudah terisi.");
             }
         }
+        return newRuangan;
     }
 
 }

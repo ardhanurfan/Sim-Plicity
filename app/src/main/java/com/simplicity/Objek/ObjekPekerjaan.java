@@ -5,9 +5,9 @@ import java.util.HashMap;
 import org.json.simple.JSONObject;
 
 public class ObjekPekerjaan extends Objek {
-    int gaji;
+    double gaji;
 
-    public ObjekPekerjaan(String nama_pekerjaan, int gaji) {
+    public ObjekPekerjaan(String nama_pekerjaan, double gaji) {
         super(nama_pekerjaan);
         this.gaji = gaji;
     }
@@ -27,7 +27,7 @@ public class ObjekPekerjaan extends Objek {
         return objekPekerjaanJSON;
     }
 
-    public int getGaji() {
+    public double getGaji() {
         return gaji;
     }
 
