@@ -15,6 +15,7 @@ import org.json.simple.parser.JSONParser;
 import com.simplicity.Rumah;
 import com.simplicity.Sim;
 import com.simplicity.World;
+import com.simplicity.Objek.ObjekMakanan;
 
 public class GameManager {
 	World world = new World();
@@ -76,27 +77,9 @@ public class GameManager {
 		}
 	}
 
-	// public void threadTime() {
-	// threadTime = new Thread(new Runnable() {
-	// @Override
-	// public void run() {
-	// boolean stop = false;
-	// while (threadTime.isAlive() && !stop) {
-	// try {
-	// Thread.sleep(1000);
-	// world.setTime(1);
-	// currentSim.addOnTimeWorld(1); // untuk aksi yang perlu kondisi
-	// ui.jamText.setText(world.getTime());
-	// ui.hariText.setText("Hari ke-" + world.getHari());
-	// } catch (InterruptedException e) {
-	// stop = true;
-	// }
-	// }
-	// }
-	// });
-	// }
 
-	public void threadAksi(int waktuAksi) {
+
+	public void threadAksi(Integer waktuAksi, String cmd, String nama, Integer jumlah, ObjekMakanan makanan) {
 		threadAksi = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -108,6 +91,7 @@ public class GameManager {
 					}
 					onUpdateThreadAksi();
 				}
+				method(waktuAksi, cmd, nama, jumlah, makanan);
 				updateAttribute();
 			}
 		});
@@ -133,5 +117,50 @@ public class GameManager {
 		ui.moodText.setText(getCurrentSim().getMood());
 		ui.kekenyanganText.setText(getCurrentSim().getKekenyangan());
 		ui.uangText.setText(getCurrentSim().getUang());
+	}
+
+	public void method(Integer waktuAksi, String cmd, String nama, Integer jumlah, ObjekMakanan makanan) {
+		switch (cmd) {
+			case "Bekerja":
+				getCurrentSim().kerja(waktuAksi);
+				break;
+			case "Tidur":
+				getCurrentSim().tidur(waktuAksi);
+				break;
+			case "Olahraga" :
+				getCurrentSim().olahraga(waktuAksi);
+				break;
+			case "Duduk":
+				getCurrentSim().duduk();
+				break;
+			case "Buang Air":
+				getCurrentSim().buangAir();
+				break;
+			case "Ngudud":
+				getCurrentSim().ngudud();	
+				break;
+			case "Menonton" :
+				getCurrentSim().nontonTv();
+				break;
+			case "Ngoding":
+				getCurrentSim().ngoding();
+				break;
+			case "Meditasi" :
+				getCurrentSim().meditasi();
+				break;
+			case "Main PS" :
+				getCurrentSim().mainPS();
+				break;
+			case "Main Game" :
+				getCurrentSim().bermain();
+				break;
+			case "Makan" :
+				getCurrentSim().makan(nama, jumlah);
+				break;
+			case "masak":
+				getCurrentSim().masak(makanan);
+				break;	
+
+		}
 	}
 }
