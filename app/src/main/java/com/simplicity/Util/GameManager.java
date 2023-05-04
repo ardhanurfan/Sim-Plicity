@@ -57,6 +57,7 @@ public class GameManager {
 
 			world.setTime(Integer.parseInt(jsonObject.get("time").toString()));
 			world.setHari(Integer.parseInt(jsonObject.get("hari").toString()));
+			world.setIsSudahBikinSim(Boolean.parseBoolean(jsonObject.get("isSudahBikinSim").toString()));
 
 			JSONArray jsonArrayRumah = (JSONArray) jsonObject.get("listRumah");
 			List<Rumah> listRumah = new ArrayList<Rumah>();

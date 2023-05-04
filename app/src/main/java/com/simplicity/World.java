@@ -20,6 +20,7 @@ public class World {
     private int hari;
     private final int panjangMap = 64;
     private final int lebarMap = 64;
+    private boolean isSudahBikinSim = false;
 
     private List<ObjekPekerjaan> daftarPekerjaan = new ArrayList<ObjekPekerjaan>();
     private List<ObjekBahanMakanan> daftar_bahan = new ArrayList<ObjekBahanMakanan>();
@@ -51,6 +52,7 @@ public class World {
         worldMap.put("listSim", listSimJSON);
         worldMap.put("time", time);
         worldMap.put("hari", hari);
+        worldMap.put("isSudahBikinSim", isSudahBikinSim);
 
         JSONObject worldJSON = new JSONObject(worldMap);
         return worldJSON;
@@ -68,7 +70,7 @@ public class World {
             sim.setwaktuUpgradeRumah(-waktu);
             sim.setDeliveryTime(waktu);
             // ObjekBahanMakanan masukInv = null;
-            for (int i=0; i<sim.getPembelian().size(); i++) {
+            for (int i = 0; i < sim.getPembelian().size(); i++) {
                 if (sim.getDeliveryTime().get(i) == 0) {
                     String namaNewBeli = sim.getPembelian().get(i);
                     ObjekBahanMakanan newBahan = null;
@@ -91,7 +93,7 @@ public class World {
                     JOptionPane.showMessageDialog(null, sim.getNamaLengkap() + " telah menerima " + namaNewBeli);
                     sim.getPembelian().remove(i);
                     sim.getDeliveryTime().remove(i);
-                    
+
                 }
             }
         }
@@ -160,10 +162,19 @@ public class World {
         this.hari = hari;
     }
 
+    public boolean getIsSudahBikinSim() {
+        return isSudahBikinSim;
+    }
+
+    public void setIsSudahBikinSim(boolean set) {
+        isSudahBikinSim = set;
+    }
+
     public void setTime(int aksi) {
         if (time + aksi < 720) {
             time += aksi;
         } else {
+            isSudahBikinSim = false;
             time = (time + aksi) % 720;
             for (Sim sim : listSim) {
                 sim.resetWaktuKegiatanharian();
