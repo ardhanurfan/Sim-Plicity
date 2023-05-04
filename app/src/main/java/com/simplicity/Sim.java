@@ -135,7 +135,6 @@ public class Sim {
         simMap.put("pembelian", pembelian);
         simMap.put("deliveryTime", deliveryTime);
 
-
         JSONObject simJSON = new JSONObject(simMap);
         return simJSON;
     }
@@ -227,7 +226,7 @@ public class Sim {
         return String.format("%.2f", uang);
     }
 
-    public double getUangReal(){
+    public double getUangReal() {
         return uang;
     }
 
@@ -237,6 +236,10 @@ public class Sim {
 
     public String getKekenyangan() {
         return String.format("%.2f", kekenyangan);
+    }
+
+    public double getKekenyanganReal() {
+        return kekenyangan;
     }
 
     public void setKekenyangan(double waktuKerja, double ratio, double value) {
@@ -250,6 +253,10 @@ public class Sim {
         return String.format("%.2f", mood);
     }
 
+    public double getMoodReal() {
+        return mood;
+    }
+
     public void setMood(double waktuKerja, double ratio, double value) {
         this.mood += waktuKerja / ratio * value;
         if (this.mood > 100) {
@@ -259,6 +266,10 @@ public class Sim {
 
     public String getKesehatan() {
         return String.format("%.2f", kesehatan);
+    }
+
+    public double getKesehatanReal() {
+        return kesehatan;
     }
 
     public void setKesehatan(double waktuKerja, double ratio, double value) {
@@ -303,25 +314,25 @@ public class Sim {
         this.ruangUpgrade = ruangUpgrade;
     }
 
-    public List<String> getPembelian(){
+    public List<String> getPembelian() {
         return pembelian;
     }
 
-    public List<Integer> getDeliveryTime(){
+    public List<Integer> getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(int waktu){
-        for(int i = 0; i<deliveryTime.size(); i++){
-            deliveryTime.set(i, deliveryTime.get(i)-waktu);
+    public void setDeliveryTime(int waktu) {
+        for (int i = 0; i < deliveryTime.size(); i++) {
+            deliveryTime.set(i, deliveryTime.get(i) - waktu);
         }
     }
 
-    public void addPembelian(String barang){
+    public void addPembelian(String barang) {
         pembelian.add(barang);
     }
 
-    public void addDeliveryTime(int time){
+    public void addDeliveryTime(int time) {
         deliveryTime.add(time);
     }
 

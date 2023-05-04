@@ -56,6 +56,12 @@ public class World {
         return worldJSON;
     }
 
+    public void hapusSim(Sim sim) {
+        listSim.remove(sim);
+        // print pesan
+        JOptionPane.showMessageDialog(null, sim.getNamaLengkap() + " mati karena kurang perhatian anda :(");
+    }
+
     public void efekTiapSim(int waktu) {
         for (Sim sim : listSim) {
             sim.addOnTimeWorld(waktu);
@@ -225,10 +231,14 @@ public class World {
         return false;
     }
 
+    public void hapusRumah(Rumah rumah) {
+        listRumah.remove(rumah);
+    }
+
     public List<Sim> getDaftarSim() {
         return listSim;
     }
-    
+
     public static void setListSim(List<Sim> listSim) {
         World.listSim = listSim;
     }
@@ -257,4 +267,15 @@ public class World {
     public List<ObjekMakanan> getDaftar_makanan() {
         return daftar_makanan;
     }
+
+    // public void removeSim(String simName) {
+    // Sim simToRemove = this.getSimByName(simName);
+    // if (simToRemove != null) {
+    // simList.remove(simToRemove);
+    // daftarUpgradeRumah.remove(simToRemove);
+    // waktuTidakTidur.remove(simToRemove);
+    // waktuTidakBuangAir.remove(simToRemove);
+    // }
+    // }
+
 }
