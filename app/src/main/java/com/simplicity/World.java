@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.json.simple.JSONObject;
 
 import com.simplicity.Objek.ObjekBahanMakanan;
@@ -52,6 +54,12 @@ public class World {
 
         JSONObject worldJSON = new JSONObject(worldMap);
         return worldJSON;
+    }
+
+    public void hapusSim(Sim sim) {
+        listSim.remove(sim);
+        // print pesan
+        JOptionPane.showMessageDialog(null, sim.getNamaLengkap() + " mati karena kurang perhatian anda :(");
     }
 
     public void efekTiapSim(int waktu) {
@@ -195,10 +203,14 @@ public class World {
         return false;
     }
 
+    public void hapusRumah(Rumah rumah) {
+        listRumah.remove(rumah);
+    }
+
     public List<Sim> getDaftarSim() {
         return listSim;
     }
-    
+
     public static void setListSim(List<Sim> listSim) {
         World.listSim = listSim;
     }
@@ -227,4 +239,15 @@ public class World {
     public List<ObjekMakanan> getDaftar_makanan() {
         return daftar_makanan;
     }
+
+    // public void removeSim(String simName) {
+    // Sim simToRemove = this.getSimByName(simName);
+    // if (simToRemove != null) {
+    // simList.remove(simToRemove);
+    // daftarUpgradeRumah.remove(simToRemove);
+    // waktuTidakTidur.remove(simToRemove);
+    // waktuTidakBuangAir.remove(simToRemove);
+    // }
+    // }
+
 }

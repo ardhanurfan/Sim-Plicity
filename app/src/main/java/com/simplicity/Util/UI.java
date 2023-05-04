@@ -510,7 +510,7 @@ public class UI {
         popInventory.add(js);
     }
 
-    public void beliBarangPopUp(){
+    public void beliBarangPopUp() {
         popBeliBarang = new JFrame("Beli Barang");
         popBeliBarang.setSize(400, 250);
         popBeliBarang.getContentPane().setBackground(Color.white);
@@ -518,14 +518,15 @@ public class UI {
         popBeliBarang.setVisible(false);
 
         Object[][] data = new Object[gm.getCurrentSim().getPembelian().size()][3];
-        for (int i=0; i<gm.getCurrentSim().getPembelian().size(); i++) {
-            for(ObjekBahanMakanan obj : gm.world.getDaftar_bahan()){
-                if(gm.getCurrentSim().getPembelian().get(i).equals(obj.getNamaObjek())){
-                    data[i] = new Object[] { gm.getCurrentSim().getPembelian().get(i), "Bahan Makanan", gm.getCurrentSim().getDeliveryTime().get(i) };
-            // i++;
-                }
-                else {
-                    data[i] = new Object[] { gm.getCurrentSim().getPembelian().get(i), "Furnitur", gm.getCurrentSim().getDeliveryTime().get(i) };
+        for (int i = 0; i < gm.getCurrentSim().getPembelian().size(); i++) {
+            for (ObjekBahanMakanan obj : gm.world.getDaftar_bahan()) {
+                if (gm.getCurrentSim().getPembelian().get(i).equals(obj.getNamaObjek())) {
+                    data[i] = new Object[] { gm.getCurrentSim().getPembelian().get(i), "Bahan Makanan",
+                            gm.getCurrentSim().getDeliveryTime().get(i) };
+                    // i++;
+                } else {
+                    data[i] = new Object[] { gm.getCurrentSim().getPembelian().get(i), "Furnitur",
+                            gm.getCurrentSim().getDeliveryTime().get(i) };
                 }
             }
         }
@@ -536,7 +537,7 @@ public class UI {
         popBeliBarang.add(js);
     }
 
-    public void peralatanPopUp(){
+    public void peralatanPopUp() {
         popPeralatan = new JFrame("Harga Furnitur");
         popPeralatan.setSize(400, 300);
         popPeralatan.getContentPane().setBackground(Color.white);
@@ -585,7 +586,7 @@ public class UI {
         popPeralatan.add(tombol);
     }
 
-    public void bahanPopUp(){
+    public void bahanPopUp() {
         popBahan = new JFrame("Harga Bahan Makanan");
         popBahan.setSize(400, 300);
         popBahan.getContentPane().setBackground(Color.white);
@@ -683,13 +684,8 @@ public class UI {
         popMemasak.add(tombol);
     }
 
-    public void generateScreen() {
-        // Start
-        createBackgroundFull(0, "start.png");
-        startButton(0, 150, 500, 700, 40, "Click Here to Start");
-
-        // Main Menu
-        createBackgroundFull(1, "main_menu.png");
+    public void refreshMainMenu() {
+        gm.ui.bgPanel[1].removeAll();
         if (gm.world.getDaftarSim().isEmpty()) {
             customButton(bgPanel[1], 300, 250, 400, 50, "Create New Sim", 32, "new-sim");
             customButton(bgPanel[1], 300, 350, 400, 50, "Help", 32, "help");
@@ -700,6 +696,18 @@ public class UI {
             customButton(bgPanel[1], 300, 400, 400, 50, "Help", 32, "help");
             customButton(bgPanel[1], 300, 500, 400, 50, "Exit Game", 32, "exit");
         }
+        gm.ui.bgPanel[1].add(gm.ui.bgLabel[1]);
+        gm.ui.bgPanel[1].revalidate();
+        gm.ui.bgPanel[1].repaint();
+    }
+
+    public void generateScreen() {
+        // Start
+        createBackgroundFull(0, "start.png");
+        startButton(0, 150, 500, 700, 40, "Click Here to Start");
+
+        // Main Menu
+        createBackgroundFull(1, "main_menu.png");
 
         // World
         createBackground(2, "world.png", new java.awt.event.MouseAdapter() {

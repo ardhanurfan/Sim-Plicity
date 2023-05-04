@@ -23,6 +23,9 @@ public class Routing {
                     gm.ui.bgPanel[i].setVisible(false);
                 }
             }
+            if (screenIndex == 1) {
+                gm.ui.refreshMainMenu();
+            }
         }
 
     }

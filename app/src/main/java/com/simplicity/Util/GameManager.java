@@ -77,22 +77,23 @@ public class GameManager {
 		}
 	}
 
-
-
 	public void threadAksi(Integer waktuAksi, String cmd, String nama, Integer jumlah, ObjekMakanan makanan) {
 		threadAksi = new Thread(new Runnable() {
 			@Override
 			public void run() {
-				for (int i = 0; i < waktuAksi; i++) {
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+				try {
+					for (int i = 0; i < waktuAksi; i++) {
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						onUpdateThreadAksi();
 					}
-					onUpdateThreadAksi();
+					method(waktuAksi, cmd, nama, jumlah, makanan);
+					updateAttribute();
+				} catch (Exception e) {
 				}
-				method(waktuAksi, cmd, nama, jumlah, makanan);
-				updateAttribute();
 			}
 		});
 
@@ -105,9 +106,40 @@ public class GameManager {
 		ui.hariText.setText("Hari ke-" + world.getHari());
 		world.efekTiapSim(1);
 
-		if (getCurrentSim().getWaktuTidakTidur() == 0 || currentSim.getWaktuTidakBuangAir() == 0 ) {
-		ui.kesehatanText.setText(getCurrentSim().getKesehatan());
-		ui.moodText.setText(getCurrentSim().getMood());
+		if (getCurrentSim().getWaktuTidakTidur() == 0 || getCurrentSim().getWaktuTidakBuangAir() == 0) {
+			ui.kesehatanText.setText(getCurrentSim().getKesehatan());
+			ui.moodText.setText(getCurrentSim().getMood());
+		}
+
+		efekMati();
+	}
+
+	public void efekMati() {
+		Integer indeks = world.getDaftarSim().size();
+		for (int i = 0; i < indeks; i++) {
+			Sim sim = world.getDaftarSim().get(i);
+			if (sim.getKekenyanganReal() <= 0 || sim.getKesehatanReal() <= 0 || sim.getMoodReal() <= 0) {
+				if (getCurrentSim() != null && sim.getNamaLengkap().equals(getCurrentSim().getNamaLengkap())) {
+					world.hapusRumah(sim.getRumah());
+					world.hapusSim(sim);
+					i--;
+					indeks--;
+					threadAksi.interrupt();
+					currentSim = null;
+				} else {
+					world.hapusRumah(sim.getRumah());
+					world.hapusSim(sim);
+					i--;
+					indeks--;
+				}
+
+				// kalo mati, balikin ke main menu kalo yg mati itu sim yg dimainin
+			}
+		}
+		if (getCurrentSim() == null) {
+			JOptionPane.showMessageDialog(null,
+					"Anda akan dikembalikan ke main menu karena sim yang anda mainkan mati");
+			routing.showScreen(1);
 		}
 	}
 
@@ -127,7 +159,7 @@ public class GameManager {
 			case "Tidur":
 				getCurrentSim().tidur(waktuAksi);
 				break;
-			case "Olahraga" :
+			case "Olahraga":
 				getCurrentSim().olahraga(waktuAksi);
 				break;
 			case "Duduk":
@@ -137,29 +169,29 @@ public class GameManager {
 				getCurrentSim().buangAir();
 				break;
 			case "Ngudud":
-				getCurrentSim().ngudud();	
+				getCurrentSim().ngudud();
 				break;
-			case "Menonton" :
+			case "Menonton":
 				getCurrentSim().nontonTv();
 				break;
 			case "Ngoding":
 				getCurrentSim().ngoding();
 				break;
-			case "Meditasi" :
+			case "Meditasi":
 				getCurrentSim().meditasi();
 				break;
-			case "Main PS" :
+			case "Main PS":
 				getCurrentSim().mainPS();
 				break;
-			case "Main Game" :
+			case "Main Game":
 				getCurrentSim().bermain();
 				break;
-			case "Makan" :
+			case "Makan":
 				getCurrentSim().makan(nama, jumlah);
 				break;
 			case "masak":
 				getCurrentSim().masak(makanan);
-				break;	
+				break;
 
 		}
 	}
