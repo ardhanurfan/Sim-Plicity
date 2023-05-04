@@ -66,6 +66,34 @@ public class World {
         for (Sim sim : listSim) {
             sim.addOnTimeWorld(waktu);
             sim.setwaktuUpgradeRumah(-waktu);
+            sim.setDeliveryTime(waktu);
+            // ObjekBahanMakanan masukInv = null;
+            for (int i=0; i<sim.getPembelian().size(); i++) {
+                if (sim.getDeliveryTime().get(i) == 0) {
+                    String namaNewBeli = sim.getPembelian().get(i);
+                    ObjekBahanMakanan newBahan = null;
+                    for (ObjekBahanMakanan bahan : daftar_bahan) {
+                        if (bahan.getNamaObjek().equals(namaNewBeli)) {
+                            newBahan = bahan;
+                        }
+                    }
+                    if (newBahan == null) {
+                        ObjekNonMakanan newBarang = null;
+                        for (ObjekNonMakanan barang : daftar_barang) {
+                            if (barang.getNamaObjek().equals(namaNewBeli)) {
+                                newBarang = barang;
+                            }
+                        }
+                        sim.getInventory().addItemPeralatan(newBarang, 1);
+                    } else {
+                        sim.getInventory().addItemBahanMakanan(newBahan, 1);
+                    }
+                    JOptionPane.showMessageDialog(null, sim.getNamaLengkap() + " telah menerima " + namaNewBeli);
+                    sim.getPembelian().remove(i);
+                    sim.getDeliveryTime().remove(i);
+                    
+                }
+            }
         }
     }
 

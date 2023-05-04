@@ -518,16 +518,17 @@ public class UI {
         popBeliBarang.setVisible(false);
 
         Object[][] data = new Object[gm.getCurrentSim().getPembelian().size()][3];
+        List<String> options = gm.world.getDaftar_bahan().stream()
+                .map(ObjekBahanMakanan::getNamaObjek)
+                .collect(Collectors.toList());
         for (int i = 0; i < gm.getCurrentSim().getPembelian().size(); i++) {
-            for (ObjekBahanMakanan obj : gm.world.getDaftar_bahan()) {
-                if (gm.getCurrentSim().getPembelian().get(i).equals(obj.getNamaObjek())) {
-                    data[i] = new Object[] { gm.getCurrentSim().getPembelian().get(i), "Bahan Makanan",
-                            gm.getCurrentSim().getDeliveryTime().get(i) };
-                    // i++;
-                } else {
-                    data[i] = new Object[] { gm.getCurrentSim().getPembelian().get(i), "Furnitur",
-                            gm.getCurrentSim().getDeliveryTime().get(i) };
-                }
+            if (options.contains(gm.getCurrentSim().getPembelian().get(i))) {
+                data[i] = new Object[] { gm.getCurrentSim().getPembelian().get(i), "Bahan Makanan",
+                        gm.getCurrentSim().getDeliveryTime().get(i) };
+                // i++;
+            } else {
+                data[i] = new Object[] { gm.getCurrentSim().getPembelian().get(i), "Furnitur",
+                        gm.getCurrentSim().getDeliveryTime().get(i) };
             }
         }
 
