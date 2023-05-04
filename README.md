@@ -1,5 +1,5 @@
 <h1 align="center">
-   Sim-Plicity
+   Sim-Plicity 🌎
 </h1>
 
 <hr>
