@@ -93,6 +93,7 @@ public class GameManager {
 					}
 					method(waktuAksi, cmd, nama, jumlah, makanan);
 					updateAttribute();
+					efekMati();
 				} catch (Exception e) {
 				}
 			}
@@ -110,9 +111,7 @@ public class GameManager {
 		if (getCurrentSim().getWaktuTidakTidur() == 0 || getCurrentSim().getWaktuTidakBuangAir() == 0) {
 			ui.kesehatanText.setText(getCurrentSim().getKesehatan());
 			ui.moodText.setText(getCurrentSim().getMood());
-		}
-
-		efekMati();
+		}		
 	}
 
 	public void efekMati() {
