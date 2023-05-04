@@ -313,8 +313,6 @@ public class Inventory {
         return inventoryString;
     }
 
-    // testing inventory
-
     // public static void main(String[] args) {
     // ObjekBahanMakanan nasi = new ObjekBahanMakanan("Nasi\t", 5, 5);
     // ObjekBahanMakanan kentang = new ObjekBahanMakanan("Kentang\t", 3, 4);
