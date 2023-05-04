@@ -109,6 +109,12 @@ You can explore more about gradle [here](https://guides.gradle.org/creating-new-
   <nl> -->
 </p>
 
+<a name="structure"></a>
+
+## Structure
+```bash
+```
+
 <a name="project-status">
 
 ## Project Status
