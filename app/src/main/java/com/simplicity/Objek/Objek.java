@@ -15,6 +15,4 @@ public abstract class Objek {
         namaObjek = nama;
     }
 
-    public abstract void print();
-
 }

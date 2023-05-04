@@ -391,9 +391,6 @@ public class Sim {
 
         System.out.println("Olahraga selesai selama " + (waktuOlahraga < 60 ? (waktuOlahraga + " detik")
                 : (waktuOlahraga / 60 + ":" + waktuOlahraga % 60 + " menit")));
-        // System.out.println("Kesehatan Anda sekarang " + kesehatan);
-        // System.out.println("Kekenyangan Anda sekarang " + kekenyangan);
-        // System.out.println("Mood Anda sekarang " + mood);
     }
 
     public void tidur(int waktuTidur) {
@@ -401,10 +398,6 @@ public class Sim {
         setKesehatan(waktuTidur, 240, 20);
 
         totalWaktuTidur += waktuTidur;
-
-        // System.out.println("Sim telah tidur selama " + waktuTidur + " detik");
-        // System.out.println("Kesehatan Anda sekarang " + kesehatan);
-        // System.out.println("Mood Anda sekarang " + mood);
     }
 
     public void efekTidakTidur() {
@@ -428,8 +421,6 @@ public class Sim {
             isTidakBuangAir = true;
             waktuTidakBuangAir = -30;
         }
-
-        // System.out.println("Yammy! " + namaMakanan + " enak sekali...");
     }
 
     public int masak(ObjekMakanan makanan) {
@@ -460,10 +451,6 @@ public class Sim {
             inventory.addItemMakanan(newmakanan, 1);
 
             setMood(1, 1, 10);
-            // System.out.println(
-            // "Srenggg.... " + newmakanan.getNamaObjek() + " berhasil dibuat. Sudah
-            // dimasukkan ke inventory");
-            // System.out.println("Selamat menikmati ...");
             return (int) Math.round(newmakanan.getKekenyangan() * 1.5);
         } else {
             return 0;
@@ -519,11 +506,6 @@ public class Sim {
                 + currLokasi.getRumah().getNama());
     }
 
-    public void lihatInventory() {
-        // Print inventory
-        inventory.viewInventory();
-    }
-
     public Inventory getInventory() {
         return inventory;
     }
@@ -541,40 +523,34 @@ public class Sim {
     public void bermain() {
         setMood(30, 30, 20);
         setKekenyangan(30, 30, -10);
-        // System.out.println("Horee... Seru sekali gamenya");
     }
 
     public void nontonTv() {
         setMood(30, 30, 15);
         setKekenyangan(30, 30, -10);
-        // System.out.println("Horee... Seru sekali acaranya");
     }
 
     public void duduk() {
         setMood(30, 30, 5);
         setKekenyangan(30, 30, -5);
         setKesehatan(30, 30, 5);
-        // System.out.println("Enaknya... Santai sekali");
     }
 
     public void ngoding() {
         setMood(30, 30, 5);
         setKekenyangan(30, 30, -5);
-        // System.out.println("Ngoding seru euyy..");
     }
 
     public void ngudud() {
         setMood(30, 30, 5);
         setKekenyangan(30, 30, -5);
         setKesehatan(30, 30, -5);
-        // System.out.println("Fiuhh.. Dunhill emang mantep cuy..");
     }
 
     public void meditasi() {
         setMood(30, 30, 5);
         setKekenyangan(30, 30, -5);
         setKesehatan(30, 30, 5);
-        // System.out.println("Meditasi itu membuat lebih tenang..");
     }
 
     public void mainPS() {

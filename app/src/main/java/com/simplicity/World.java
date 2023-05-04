@@ -93,7 +93,7 @@ public class World {
                     JOptionPane.showMessageDialog(null, sim.getNamaLengkap() + " telah menerima " + namaNewBeli);
                     sim.getPembelian().remove(i);
                     sim.getDeliveryTime().remove(i);
-
+                    i--;
                 }
             }
         }
@@ -278,15 +278,4 @@ public class World {
     public List<ObjekMakanan> getDaftar_makanan() {
         return daftar_makanan;
     }
-
-    // public void removeSim(String simName) {
-    // Sim simToRemove = this.getSimByName(simName);
-    // if (simToRemove != null) {
-    // simList.remove(simToRemove);
-    // daftarUpgradeRumah.remove(simToRemove);
-    // waktuTidakTidur.remove(simToRemove);
-    // waktuTidakBuangAir.remove(simToRemove);
-    // }
-    // }
-
 }
