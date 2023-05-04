@@ -227,6 +227,10 @@ public class Sim {
         return String.format("%.2f", uang);
     }
 
+    public double getUangReal(){
+        return uang;
+    }
+
     public void setUang(double uang) {
         this.uang = uang;
     }
@@ -305,6 +309,12 @@ public class Sim {
 
     public List<Integer> getDeliveryTime(){
         return deliveryTime;
+    }
+
+    public void setDeliveryTime(int waktu){
+        for(int i = 0; i<deliveryTime.size(); i++){
+            deliveryTime.set(i, deliveryTime.get(i)-waktu);
+        }
     }
 
     public void addPembelian(String barang){

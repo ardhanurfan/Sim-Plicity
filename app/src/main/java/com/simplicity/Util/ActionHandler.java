@@ -684,15 +684,43 @@ public class ActionHandler implements ActionListener {
                 case "Beli Barang":
                     // Dapatkan Objek Barang dari Pilihan
                     String namaBarang = (String) gm.ui.selectBarang.getSelectedItem();
-                    gm.getCurrentSim().addPembelian(namaBarang);
-                    gm.getCurrentSim().addDeliveryTime((int) (Math.random() * 5 * 1) * 30);
+                    ObjekNonMakanan objekBarang = null;
+                    for (ObjekNonMakanan barang : gm.world.getDaftar_barang()) {
+                        if (barang.getNamaObjek().equals(namaBarang)) {
+                            objekBarang = barang;
+                        }
+                    }
+                    if(objekBarang != null){
+                        if(gm.getCurrentSim().getUangReal()>=objekBarang.getHarga()){
+                            gm.getCurrentSim().setUang(gm.getCurrentSim().getUangReal()-objekBarang.getHarga());
+                            gm.getCurrentSim().addPembelian(namaBarang);
+                            gm.getCurrentSim().addDeliveryTime(((int) (Math.random() * 5 * 1) +1) * 30) ;
+                            gm.ui.uangText.setText(gm.getCurrentSim().getUang());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Uang tidak cukup untuk membeli pilihan anda");
+                        }
+                    }
                     break;
 
                 case "Beli Bahan":
                     // Dapatkan Objek Bahan dari Pilihan
                     String namaBahan = (String) gm.ui.selectBahan.getSelectedItem();
-                    gm.getCurrentSim().addPembelian(namaBahan);
-                    gm.getCurrentSim().addDeliveryTime((int) (Math.random() * 5 * 1) * 30);
+                    ObjekBahanMakanan objekBahan = null;
+                    for (ObjekBahanMakanan bahan : gm.world.getDaftar_bahan()) {
+                        if (bahan.getNamaObjek().equals(namaBahan)) {
+                            objekBahan = bahan;
+                        }
+                    }
+                    if(objekBahan != null){
+                        if(gm.getCurrentSim().getUangReal()>=objekBahan.getHarga()){
+                            gm.getCurrentSim().setUang(gm.getCurrentSim().getUangReal()-objekBahan.getHarga());
+                            gm.getCurrentSim().addPembelian(namaBahan);
+                            gm.getCurrentSim().addDeliveryTime(((int) (Math.random() * 5 * 1) +1) * 30);
+                            gm.ui.uangText.setText(gm.getCurrentSim().getUang());
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Uang tidak cukup untuk membeli pilihan anda");
+                        }
+                    }
                     break;
 
                 case "Memasak":

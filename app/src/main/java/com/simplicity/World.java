@@ -58,6 +58,7 @@ public class World {
         for (Sim sim : listSim) {
             sim.addOnTimeWorld(waktu);
             sim.setwaktuUpgradeRumah(-waktu);
+            sim.setDeliveryTime(waktu);
         }
     }
 
