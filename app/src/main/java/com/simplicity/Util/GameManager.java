@@ -3,6 +3,7 @@ package com.simplicity.Util;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +25,20 @@ public class GameManager {
 	UI ui = new UI(this);
 	Routing routing = new Routing(this);
 
+	// Sound
+	public URL clickMusic = getClass().getClassLoader().getResource("audio/click.wav");
+	public URL gameMusic = getClass().getClassLoader().getResource("audio/game-music.wav");
+	public URL menuMusic = getClass().getClassLoader().getResource("audio/menu-music.wav");
+
+	Music music = new Music();
+	SoundEffect soundEffect = new SoundEffect();
+
 	// Thread threadTime;
 	Thread threadAksi;
 
 	public GameManager() {
 		routing.showScreen(0);
+		playMusic(menuMusic);
 	}
 
 	public Sim getCurrentSim() {
@@ -111,7 +121,7 @@ public class GameManager {
 		if (getCurrentSim().getWaktuTidakTidur() == 0 || getCurrentSim().getWaktuTidakBuangAir() == 0) {
 			ui.kesehatanText.setText(getCurrentSim().getKesehatan());
 			ui.moodText.setText(getCurrentSim().getMood());
-		}		
+		}
 	}
 
 	public void efekMati() {
@@ -194,5 +204,20 @@ public class GameManager {
 				break;
 
 		}
+	}
+
+	public void playSE(URL url) {
+		soundEffect.setFile(url);
+		soundEffect.play(url);
+	}
+
+	public void playMusic(URL url) {
+		music.setFile(url);
+		music.play(url);
+		music.loop(url);
+	}
+
+	public void stopMusic(URL url) {
+		music.stop(url);
 	}
 }

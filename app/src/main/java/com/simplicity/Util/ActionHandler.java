@@ -43,6 +43,9 @@ public class ActionHandler implements ActionListener {
             indexObj = Integer.parseInt(listCmd[0]);
         }
 
+        // click sound
+        gm.playSE(gm.clickMusic);
+
         boolean cekSimHarusPunyaRumah = (gm.getCurrentSim() == null || gm.getCurrentSim().getRumah() != null
                 || command.equals("start")
                 || command.equals("exit") || command.equals("choose-sim") || command.equals("help") || command
@@ -51,11 +54,12 @@ public class ActionHandler implements ActionListener {
         if ((gm.threadAksi == null || !gm.threadAksi.isAlive()) && (threadBerkunjung == null
                 || !threadBerkunjung.isAlive())
                 && (cekSimHarusPunyaRumah)) {
-
             switch (command) {
                 // Main menu
                 case "start":
                     gm.routing.showScreen(1);
+                    gm.stopMusic(gm.gameMusic);
+                    gm.playMusic(gm.menuMusic);
                     break;
                 case "new-sim":
                     if (!gm.world.getIsSudahBikinSim()) {
@@ -83,6 +87,8 @@ public class ActionHandler implements ActionListener {
                                 gm.ui.messagText.setText("Hello Welcome, " + gm.getCurrentSim().getNamaLengkap()
                                         + "! Select your house location!");
                                 gm.ui.nameText.setText(gm.getCurrentSim().getNamaLengkap());
+                                gm.stopMusic(gm.menuMusic);
+                                gm.playMusic(gm.gameMusic);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Nama sudah digunakan!");
                             }
@@ -131,6 +137,8 @@ public class ActionHandler implements ActionListener {
                             gm.ui.messagText.setText("Hello Welcome Back, " + gm.getCurrentSim().getNamaLengkap());
                         }
                         gm.ui.nameText.setText(gm.getCurrentSim().getNamaLengkap());
+                        gm.stopMusic(gm.menuMusic);
+                        gm.playMusic(gm.gameMusic);
                     }
                     break;
                 case "help":
