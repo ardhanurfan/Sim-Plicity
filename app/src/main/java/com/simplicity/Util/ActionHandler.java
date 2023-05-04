@@ -444,7 +444,7 @@ public class ActionHandler implements ActionListener {
                     if (waktuTidurString != null) {
                         int waktutidur = Integer.parseInt(waktuTidurString);
                         gm.threadAksi(waktutidur, "Tidur", null, null, null);
-                        //gm.getCurrentSim().tidur(waktutidur);
+                        // gm.getCurrentSim().tidur(waktutidur);
                         gm.ui.messagText.setText("Tidur dulu " + waktutidur + " detik ah, biar ga capek");
                         gm.getCurrentSim().setStatus("Sedang tidur");
                     }
@@ -452,14 +452,14 @@ public class ActionHandler implements ActionListener {
 
                 case "Olahraga":
                     String waktuOlahragaString = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
-                            "Berapa lama kamu ingin berolahraga (dalam detik)?", "Input Waktu Tidur",
+                            "Berapa lama kamu ingin berolahraga (dalam detik)?", "Input Waktu Olahraga",
                             JOptionPane.PLAIN_MESSAGE);
                     if (waktuOlahragaString != null) {
                         int waktuOlahraga = Integer.parseInt(waktuOlahragaString);
                         while (waktuOlahraga % 20 != 0) {
                             JOptionPane.showMessageDialog(null, "Waktu harus kelipatan 20!");
                             waktuOlahragaString = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
-                                    "Berapa lama kamu ingin berolahraga (dalam detik)?", "Input Waktu Tidur",
+                                    "Berapa lama kamu ingin berolahraga (dalam detik)?", "Input Waktu Olahraga",
                                     JOptionPane.PLAIN_MESSAGE);
                             if (waktuOlahragaString == null) {
                                 break;
@@ -468,8 +468,8 @@ public class ActionHandler implements ActionListener {
                             }
                         }
                         if (waktuOlahragaString != null) {
-                            gm.threadAksi(waktuOlahraga, "Olahraga", null, null, null );
-                            //gm.getCurrentSim().olahraga(waktuOlahraga);
+                            gm.threadAksi(waktuOlahraga, "Olahraga", null, null, null);
+                            // gm.getCurrentSim().olahraga(waktuOlahraga);
                             gm.ui.messagText.setText("Olahraga dulu cuy biar sehat...");
                             gm.getCurrentSim().setStatus("Sedang olahraga");
                         }
@@ -478,56 +478,56 @@ public class ActionHandler implements ActionListener {
 
                 case "Duduk":
                     gm.threadAksi(30, "Duduk", null, null, null);
-                    //gm.getCurrentSim().duduk();
+                    // gm.getCurrentSim().duduk();
                     gm.ui.messagText.setText("Enaknya... Santai sekali");
                     gm.getCurrentSim().setStatus("Sedang duduk");
                     break;
 
                 case "Ngudud":
                     gm.threadAksi(30, "Ngudud", null, null, null);
-                    //gm.getCurrentSim().ngudud();
+                    // gm.getCurrentSim().ngudud();
                     gm.ui.messagText.setText("Fiuhh.. Dunhill emang mantep cuy..");
                     gm.getCurrentSim().setStatus("Sedang ngudud");
                     break;
 
                 case "Menonton":
                     gm.threadAksi(30, "Menonton", null, null, null);
-                    //gm.getCurrentSim().nontonTv();
+                    // gm.getCurrentSim().nontonTv();
                     gm.ui.messagText.setText("Horee... Seru sekali acaranya");
                     gm.getCurrentSim().setStatus("Sedang nonton tv");
                     break;
 
                 case "Ngoding":
                     gm.threadAksi(30, "Ngoding", null, null, null);
-                    //gm.getCurrentSim().ngoding();
+                    // gm.getCurrentSim().ngoding();
                     gm.ui.messagText.setText("Ngoding dulu biar jago...");
                     gm.getCurrentSim().setStatus("Sedang ngoding");
                     break;
 
                 case "Meditasi":
                     gm.threadAksi(30, "Meditasi", null, null, null);
-                    //gm.getCurrentSim().meditasi();
+                    // gm.getCurrentSim().meditasi();
                     gm.ui.messagText.setText("Meditasi itu membuat lebih tenang..");
                     gm.getCurrentSim().setStatus("Sedang meditasi");
                     break;
 
                 case "Main PS":
                     gm.threadAksi(30, "Main PS", null, null, null);
-                    //gm.getCurrentSim().mainPS();
+                    // gm.getCurrentSim().mainPS();
                     gm.ui.messagText.setText("Game PS itu seru euyy.. T-tapi mataku kok rasanya agak sakit ya..");
                     gm.getCurrentSim().setStatus("Sedang main ps");
                     break;
 
                 case "Main Game":
                     gm.threadAksi(30, "Main Game", null, null, null);
-                    //gm.getCurrentSim().bermain();
+                    // gm.getCurrentSim().bermain();
                     gm.ui.messagText.setText("Horee... Seru sekali gamenya");
                     gm.getCurrentSim().setStatus("Sedang main game");
                     break;
 
                 case "Buang Air":
                     gm.threadAksi(10, "Buang Air", null, null, null);
-                    //gm.getCurrentSim().buangAir();
+                    // gm.getCurrentSim().buangAir();
                     gm.ui.messagText.setText("Uhhh lega... udah buang air");
                     gm.getCurrentSim().setStatus("Sedang main buang air");
                     break;
@@ -557,7 +557,7 @@ public class ActionHandler implements ActionListener {
                                 }
                             }
                             gm.threadAksi(30, "Makan", namaMakanan, kekenyangan, null);
-                            //gm.getCurrentSim().makan(namaMakanan, kekenyangan);
+                            // gm.getCurrentSim().makan(namaMakanan, kekenyangan);
                             gm.ui.messagText.setText("Yaammyy... makan " + namaMakanan + " dulu yaa... Enakkk..");
                             gm.getCurrentSim().setStatus("Sedang makan");
                         }
@@ -568,15 +568,28 @@ public class ActionHandler implements ActionListener {
 
                 case "Bekerja":
                     if (gm.getCurrentSim().getJedaGantiKerja() >= 720 || !gm.getCurrentSim().getSudahGantiKerja()) {
-                        String waktuBekerjaString = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                        String waktuBekerjaString = JOptionPane.showInputDialog(null,
                                 "Berapa lama kamu ingin bekerja (dalam detik)?", "Input Waktu Kerja",
                                 JOptionPane.PLAIN_MESSAGE);
                         if (waktuBekerjaString != null) {
                             int waktukerja = Integer.parseInt(waktuBekerjaString);
-                            gm.threadAksi(waktukerja, "Bekerja", null, null, null);
-                            gm.ui.messagText.setText("Kerja dulu boss, selama " + waktukerja + " detik");
-                            gm.getCurrentSim().setStatus("Sedang bekerja");                           
-                            //gm.getCurrentSim().kerja(waktukerja);
+                            while (waktukerja % 120 != 0) {
+                                JOptionPane.showMessageDialog(null, "Waktu harus kelipatan 120!");
+                                waktuBekerjaString = JOptionPane.showInputDialog(null,
+                                        "Berapa lama kamu ingin bekerja (dalam detik)?", "Input Waktu Kerja",
+                                        JOptionPane.PLAIN_MESSAGE);
+                                if (waktuBekerjaString == null) {
+                                    break;
+                                } else {
+                                    waktukerja = Integer.parseInt(waktuBekerjaString);
+                                }
+                            }
+                            if (waktuBekerjaString != null) {
+                                gm.threadAksi(waktukerja, "Bekerja", null, null, null);
+                                gm.ui.messagText.setText("Kerja dulu boss, selama " + waktukerja + " detik");
+                                gm.getCurrentSim().setStatus("Sedang bekerja");
+                                // gm.getCurrentSim().kerja(waktukerja);
+                            }
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Anda dapat mulai bekerja 1 hari setelah ganti kerja!");
@@ -614,11 +627,12 @@ public class ActionHandler implements ActionListener {
 
                 case "Melihat Waktu":
                     List<String> opsiLihat = Arrays.asList("Beli Barang", "Upgrade Rumah");
-                    Object selectLihat = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Ingin memantau apa?", "Melihat Waktu",
+                    Object selectLihat = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Ingin memantau apa?",
+                            "Melihat Waktu",
                             JOptionPane.PLAIN_MESSAGE, null, opsiLihat.toArray(), opsiLihat.get(0));
                     int idx = opsiLihat.indexOf(selectLihat);
-                    if(idx == 0){
-                        if(gm.getCurrentSim().getPembelian().size() == 0){
+                    if (idx == 0) {
+                        if (gm.getCurrentSim().getPembelian().size() == 0) {
                             JOptionPane.showMessageDialog(null, "Belum ada barang yang dibeli");
                         } else {
                             gm.ui.beliBarangPopUp();
@@ -631,45 +645,50 @@ public class ActionHandler implements ActionListener {
                             int detik = time % 60;
                             String stringmenit = String.valueOf(menit < 10 ? "0" + menit : menit);
                             String stringdetik = String.valueOf(detik < 10 ? "0" + detik : detik);
-                                JOptionPane.showMessageDialog(null,
-                                        "Waktu upgrade rumah tersisa " + stringmenit + " : " + stringdetik);
+                            JOptionPane.showMessageDialog(null,
+                                    "Waktu upgrade rumah tersisa " + stringmenit + " : " + stringdetik);
                         } else {
                             JOptionPane.showMessageDialog(null, "Rumah sedang tidak di upgrade");
                         }
                     }
                     break;
-                
+
                 case "Go to Store":
                     List<String> opsi = Arrays.asList("Furnitur", "Bahan Makanan");
-                    Object selectBeli = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Ingin membeli barang apa?", "Buy Item",
+                    Object selectBeli = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Ingin membeli barang apa?",
+                            "Buy Item",
                             JOptionPane.PLAIN_MESSAGE, null, opsi.toArray(), opsi.get(0));
                     int indeks = opsi.indexOf(selectBeli);
-                    if(indeks == 0){
+                    if (indeks == 0) {
                         gm.ui.peralatanPopUp();
                         gm.ui.popPeralatan.setVisible(true);
                         // List<String> peralatanList = gm.world.getDaftar_barang().stream()
-                        //     .map(ObjekNonMakanan::getNamaObjek)
-                        //     .collect(Collectors.toList());
-                        // Object selectPeralatan = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Pilih Furnitur", "Furnitur",
-                        // JOptionPane.PLAIN_MESSAGE, null, peralatanList.toArray(), peralatanList.get(0));
+                        // .map(ObjekNonMakanan::getNamaObjek)
+                        // .collect(Collectors.toList());
+                        // Object selectPeralatan = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Pilih
+                        // Furnitur", "Furnitur",
+                        // JOptionPane.PLAIN_MESSAGE, null, peralatanList.toArray(),
+                        // peralatanList.get(0));
                     } else {
                         gm.ui.bahanPopUp();
                         gm.ui.popBahan.setVisible(true);
                         // List<String> bahanMakananList = gm.world.getDaftar_bahan().stream()
-                        //     .map(ObjekBahanMakanan::getNamaObjek)
-                        //     .collect(Collectors.toList());
-                        // Object selectBahan = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Pilih Furnitur", "Furnitur",
-                        // JOptionPane.PLAIN_MESSAGE, null, bahanMakananList.toArray(), bahanMakananList.get(0));
+                        // .map(ObjekBahanMakanan::getNamaObjek)
+                        // .collect(Collectors.toList());
+                        // Object selectBahan = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "Pilih
+                        // Furnitur", "Furnitur",
+                        // JOptionPane.PLAIN_MESSAGE, null, bahanMakananList.toArray(),
+                        // bahanMakananList.get(0));
                     }
                     break;
-                case"Beli Barang":
+                case "Beli Barang":
                     // Dapatkan Objek Barang dari Pilihan
                     String namaBarang = (String) gm.ui.selectBarang.getSelectedItem();
                     gm.getCurrentSim().addPembelian(namaBarang);
                     gm.getCurrentSim().addDeliveryTime((int) (Math.random() * 5 * 1) * 30);
                     break;
 
-                case"Beli Bahan":
+                case "Beli Bahan":
                     // Dapatkan Objek Bahan dari Pilihan
                     String namaBahan = (String) gm.ui.selectBahan.getSelectedItem();
                     gm.getCurrentSim().addPembelian(namaBahan);
@@ -692,7 +711,7 @@ public class ActionHandler implements ActionListener {
                     }
 
                     if (objekMasakan != null) {
-                        //int waktuMasak = gm.getCurrentSim().masak(objekMasakan);
+                        // int waktuMasak = gm.getCurrentSim().masak(objekMasakan);
                         int waktuMasak = (int) Math.round(objekMasakan.getKekenyangan() * 1.5);
                         if (waktuMasak != 0) {
                             gm.threadAksi(waktuMasak, "masak", null, null, objekMasakan);
