@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.json.simple.JSONObject;
 
 import com.simplicity.Objek.ObjekBahanMakanan;
@@ -59,6 +61,33 @@ public class World {
             sim.addOnTimeWorld(waktu);
             sim.setwaktuUpgradeRumah(-waktu);
             sim.setDeliveryTime(waktu);
+            // ObjekBahanMakanan masukInv = null;
+            for (int i=0; i<sim.getPembelian().size(); i++) {
+                if (sim.getDeliveryTime().get(i) == 0) {
+                    String namaNewBeli = sim.getPembelian().get(i);
+                    ObjekBahanMakanan newBahan = null;
+                    for (ObjekBahanMakanan bahan : daftar_bahan) {
+                        if (bahan.getNamaObjek().equals(namaNewBeli)) {
+                            newBahan = bahan;
+                        }
+                    }
+                    if (newBahan == null) {
+                        ObjekNonMakanan newBarang = null;
+                        for (ObjekNonMakanan barang : daftar_barang) {
+                            if (barang.getNamaObjek().equals(namaNewBeli)) {
+                                newBarang = barang;
+                            }
+                        }
+                        sim.getInventory().addItemPeralatan(newBarang, 1);
+                    } else {
+                        sim.getInventory().addItemBahanMakanan(newBahan, 1);
+                    }
+                    JOptionPane.showMessageDialog(null, sim.getNamaLengkap() + " telah menerima " + namaNewBeli);
+                    sim.getPembelian().remove(i);
+                    sim.getDeliveryTime().remove(i);
+                    
+                }
+            }
         }
     }
 

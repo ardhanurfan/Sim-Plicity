@@ -14,7 +14,7 @@ public class ObjekPekerjaan extends Objek {
 
     public ObjekPekerjaan(JSONObject jsonObject) {
         super(jsonObject.get("nama").toString());
-        gaji = Integer.parseInt(jsonObject.get("gaji").toString());
+        gaji = Double.parseDouble(jsonObject.get("gaji").toString());
     }
 
     public JSONObject toJson() {
