@@ -530,7 +530,6 @@ public class UI {
                 data[i] = new Object[] { gm.getCurrentSim().getPembelian().get(i), "Furnitur",
                         gm.getCurrentSim().getDeliveryTime().get(i) };
             }
-
         }
 
         JTable jt = new JTable(data, new String[] { "Nama Barang", "Kategori", "Waktu mengantar" });
