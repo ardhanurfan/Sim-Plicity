@@ -58,32 +58,39 @@ public class ActionHandler implements ActionListener {
                     gm.routing.showScreen(1);
                     break;
                 case "new-sim":
-                    String name = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "What is your sim name?",
-                            "Input Full Name",
-                            JOptionPane.PLAIN_MESSAGE);
-                    if (name != null && name.replaceAll(" ", "").length() > 0) {
-                        if (gm.world.addSim(name)) {
-                            // set current sim terbaru
-                            gm.setCurrentSim(gm.world.getDaftarSim().get(gm.world.getDaftarSim().size() - 1));
-                            gm.updateAttribute();
-                            gm.ui.bgPanel[2].removeAll();
-                            gm.ui.bgPanel[2].add(gm.ui.bgLabel[2]);
-                            for (int i = 0; i < gm.world.getDaftarRumah().size(); i++) {
-                                gm.ui.createObjek(gm.ui.bgPanel[2],
-                                        gm.world.getDaftarRumah().get(i).getLocRumah().getX() * 10 + 30,
-                                        gm.world.getDaftarRumah().get(i).getLocRumah().getY() * 10 + 30, 20, 20,
-                                        "rumah.png",
-                                        new String[] { "View Home%" + gm.world.getDaftarRumah().get(i).getNama() }, i);
+                    if (!gm.world.getIsSudahBikinSim()) {
+                        String name = JOptionPane.showInputDialog(gm.ui.bgPanel[1], "What is your sim name?",
+                                "Input Full Name",
+                                JOptionPane.PLAIN_MESSAGE);
+                        if (name != null && name.replaceAll(" ", "").length() > 0) {
+                            if (gm.world.addSim(name)) {
+                                // set sudah bikin sim hari ini
+                                gm.world.setIsSudahBikinSim(true);
+                                // set current sim terbaru
+                                gm.setCurrentSim(gm.world.getDaftarSim().get(gm.world.getDaftarSim().size() - 1));
+                                gm.updateAttribute();
+                                gm.ui.bgPanel[2].removeAll();
+                                gm.ui.bgPanel[2].add(gm.ui.bgLabel[2]);
+                                for (int i = 0; i < gm.world.getDaftarRumah().size(); i++) {
+                                    gm.ui.createObjek(gm.ui.bgPanel[2],
+                                            gm.world.getDaftarRumah().get(i).getLocRumah().getX() * 10 + 30,
+                                            gm.world.getDaftarRumah().get(i).getLocRumah().getY() * 10 + 30, 20, 20,
+                                            "rumah.png",
+                                            new String[] { "View Home%" + gm.world.getDaftarRumah().get(i).getNama() },
+                                            i);
+                                }
+                                gm.routing.showScreen(2);
+                                gm.ui.messagText.setText("Hello Welcome, " + gm.getCurrentSim().getNamaLengkap()
+                                        + "! Select your house location!");
+                                gm.ui.nameText.setText(gm.getCurrentSim().getNamaLengkap());
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Nama sudah digunakan!");
                             }
-                            gm.routing.showScreen(2);
-                            gm.ui.messagText.setText("Hello Welcome, " + gm.getCurrentSim().getNamaLengkap()
-                                    + "! Select your house location!");
-                            gm.ui.nameText.setText(gm.getCurrentSim().getNamaLengkap());
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Nama sudah digunakan!");
+                        } else if (name != null) {
+                            JOptionPane.showMessageDialog(null, "Nama tidak boleh kosong");
                         }
-                    } else if (name != null) {
-                        JOptionPane.showMessageDialog(null, "Nama tidak boleh kosong");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Anda hari ini sudah bikin sim!");
                     }
                     break;
                 case "choose-sim":
@@ -690,11 +697,11 @@ public class ActionHandler implements ActionListener {
                             objekBarang = barang;
                         }
                     }
-                    if(objekBarang != null){
-                        if(gm.getCurrentSim().getUangReal()>=objekBarang.getHarga()){
-                            gm.getCurrentSim().setUang(gm.getCurrentSim().getUangReal()-objekBarang.getHarga());
+                    if (objekBarang != null) {
+                        if (gm.getCurrentSim().getUangReal() >= objekBarang.getHarga()) {
+                            gm.getCurrentSim().setUang(gm.getCurrentSim().getUangReal() - objekBarang.getHarga());
                             gm.getCurrentSim().addPembelian(namaBarang);
-                            gm.getCurrentSim().addDeliveryTime(((int) (Math.random() * 5 * 1) +1) * 30) ;
+                            gm.getCurrentSim().addDeliveryTime(((int) (Math.random() * 5 * 1) + 1) * 30);
                             gm.ui.uangText.setText(gm.getCurrentSim().getUang());
                         } else {
                             JOptionPane.showMessageDialog(null, "Uang tidak cukup untuk membeli pilihan anda");
@@ -711,11 +718,11 @@ public class ActionHandler implements ActionListener {
                             objekBahan = bahan;
                         }
                     }
-                    if(objekBahan != null){
-                        if(gm.getCurrentSim().getUangReal()>=objekBahan.getHarga()){
-                            gm.getCurrentSim().setUang(gm.getCurrentSim().getUangReal()-objekBahan.getHarga());
+                    if (objekBahan != null) {
+                        if (gm.getCurrentSim().getUangReal() >= objekBahan.getHarga()) {
+                            gm.getCurrentSim().setUang(gm.getCurrentSim().getUangReal() - objekBahan.getHarga());
                             gm.getCurrentSim().addPembelian(namaBahan);
-                            gm.getCurrentSim().addDeliveryTime(((int) (Math.random() * 5 * 1) +1) * 30);
+                            gm.getCurrentSim().addDeliveryTime(((int) (Math.random() * 5 * 1) + 1) * 30);
                             gm.ui.uangText.setText(gm.getCurrentSim().getUang());
                         } else {
                             JOptionPane.showMessageDialog(null, "Uang tidak cukup untuk membeli pilihan anda");
