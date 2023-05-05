@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.simplicity.Inventory.InventoryItem;
 import com.simplicity.Objek.ObjekBahanMakanan;
 import com.simplicity.Objek.ObjekMakanan;
 import com.simplicity.Objek.ObjekNonMakanan;
@@ -370,27 +369,30 @@ public class Sim {
     public void kerja(double waktuKerja) {
         setKekenyangan(waktuKerja, 30, -10);
         setMood(waktuKerja, 30, -10);
-        if (pekerjaan.getNamaObjek().equals("Badut Sulap")) {
-            uang += waktuKerja / 240 * 15;
-        } else if (pekerjaan.getNamaObjek().equals("Koki")) {
-            uang += waktuKerja / 240 * 30;
-        } else if (pekerjaan.getNamaObjek().equals("Polisi")) {
-            uang += waktuKerja / 240 * 35;
-        } else if (pekerjaan.getNamaObjek().equals("Programmer")) {
-            uang += waktuKerja / 240 * 45;
-        } else if (pekerjaan.getNamaObjek().equals("Dokter")) {
-            uang += waktuKerja / 240 * 50;
+        
+    }
+
+    public void kerjaUang() {
+        totalWaktuKerja ++;
+        if(totalWaktuKerja % 240 == 0){ 
+            if (pekerjaan.getNamaObjek().equals("Badut Sulap")) {
+                uang += 15;
+            } else if (pekerjaan.getNamaObjek().equals("Koki")) {
+                uang += 30;
+            } else if (pekerjaan.getNamaObjek().equals("Polisi")) {
+                uang += 35;
+            } else if (pekerjaan.getNamaObjek().equals("Programmer")) {
+                uang += 45;
+            } else if (pekerjaan.getNamaObjek().equals("Dokter")) {
+                uang += 50;
+            }
         }
-        totalWaktuKerja += waktuKerja;
     }
 
     public void olahraga(int waktuOlahraga) {
         setKesehatan(waktuOlahraga, 20, 5);
         setKekenyangan(waktuOlahraga, 20, -5);
         setMood(waktuOlahraga, 20, 10);
-
-        System.out.println("Olahraga selesai selama " + (waktuOlahraga < 60 ? (waktuOlahraga + " detik")
-                : (waktuOlahraga / 60 + ":" + waktuOlahraga % 60 + " menit")));
     }
 
     public void tidur(int waktuTidur) {
@@ -406,7 +408,7 @@ public class Sim {
             setMood(1, 1, -5);
             waktuTidakTidur = 0;
 
-            if (status != null) {
+            if (status != null && status.equals("Sedang tidur")) {
                 setKesehatan(1, 1, 5);
                 setMood(1, 1, 5);
             } else {
@@ -430,23 +432,6 @@ public class Sim {
     }
 
     public int masak(ObjekMakanan makanan) {
-        // validasi bahan-bahan dari inventory
-        List<String> inventoryMakanan = new ArrayList<String>();
-        for (InventoryItem item : inventory.getData()) {
-            if (item.getKategori().equals("Makanan") || item.getKategori().equals("Bahan Makanan")) {
-                inventoryMakanan.add(item.getNamaBarang());
-            }
-        }
-        boolean isBahanAda = true;
-        for (ObjekBahanMakanan bahan : makanan.getBahan()) {
-            boolean cek = inventoryMakanan.contains(bahan.getNamaObjek());
-            if (!cek) {
-                isBahanAda = false;
-                JOptionPane.showMessageDialog(null, "Bahan " + bahan.getNamaObjek() + " tidak tersedia!");
-            }
-        }
-
-        if (isBahanAda) {
             ObjekMakanan newmakanan = new ObjekMakanan(makanan.getNamaObjek(), makanan.getBahan(),
                     makanan.getKekenyangan());
             // kurangi bahan di inventory
@@ -458,9 +443,6 @@ public class Sim {
 
             setMood(1, 1, 10);
             return (int) Math.round(newmakanan.getKekenyangan() * 1.5);
-        } else {
-            return 0;
-        }
     }
 
     public int berkunjung(Rumah rumahDiKunjungi) {
@@ -493,18 +475,14 @@ public class Sim {
         if (isTidakBuangAir && waktuTidakBuangAir % 240 == 0) {
             setKesehatan(1, 1, -5);
             setMood(1, 1, -5);
-            JOptionPane.showMessageDialog(null, "Anda tidak buang air dalam 4 menit setelah makan");
+            if (status != null && status.equals("Sedang buang air")) {
+                setKesehatan(1, 1, 5);
+                setMood(1, 1, 5);
+            } else {
+                JOptionPane.showMessageDialog(null, namaLengkap + " tidak buang air dalam 4 menit setelah makan");
+            }
         }
 
-    }
-
-    public void pindahRuangan(Ruangan goingRuangan) {
-        System.out.println("Anda sekarang berada di ruangan " + currLokasi.getRuangan().getNama());
-        System.out.println("Anda akan berpindah ke ruangan " + goingRuangan.getNama());
-        System.out.println("========================================");
-        currLokasi.setRuangan(goingRuangan);
-        System.out.println("Anda sudah berada di ruangan " + currLokasi.getRuangan().getNama() + " di rumah "
-                + currLokasi.getRumah().getNama());
     }
 
     public Inventory getInventory() {
@@ -558,7 +536,5 @@ public class Sim {
         setMood(30, 30, 5);
         setKekenyangan(30, 30, -5);
         setKesehatan(30, 30, -5);
-        // System.out.println("Game PS itu seru euyy.. T-tapi mataku kok rasanya agak
-        // sakit ya..");
     }
 }

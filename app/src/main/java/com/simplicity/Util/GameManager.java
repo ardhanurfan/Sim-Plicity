@@ -97,7 +97,6 @@ public class GameManager {
 						try {
 							Thread.sleep(1000);
 						} catch (InterruptedException e) {
-							e.printStackTrace();
 						}
 						onUpdateThreadAksi();
 					}
@@ -121,6 +120,14 @@ public class GameManager {
 		if (getCurrentSim().getWaktuTidakTidur() == 0 || getCurrentSim().getWaktuTidakBuangAir() % 240 == 0) {
 			ui.kesehatanText.setText(getCurrentSim().getKesehatan());
 			ui.moodText.setText(getCurrentSim().getMood());
+		}
+
+		if (currentSim.getStatus().equals("Sedang bekerja")) {
+			currentSim.kerjaUang();
+			if (currentSim.getTotalWaktuKerja() % 240 ==0) {
+				ui.uangText.setText(getCurrentSim().getUang());
+				JOptionPane.showMessageDialog(null, "Anda sudah bekerja selama 4 menit, gaji turun!");
+			}
 		}
 	}
 
@@ -159,6 +166,7 @@ public class GameManager {
 		ui.moodText.setText(getCurrentSim().getMood());
 		ui.kekenyanganText.setText(getCurrentSim().getKekenyangan());
 		ui.uangText.setText(getCurrentSim().getUang());
+		currentSim.setStatus(null);
 	}
 
 	public void method(Integer waktuAksi, String cmd, String nama, Integer jumlah, ObjekMakanan makanan) {

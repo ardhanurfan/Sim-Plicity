@@ -457,10 +457,10 @@ public class ActionHandler implements ActionListener {
                             JOptionPane.PLAIN_MESSAGE);
                     if (waktuTidurString != null) {
                         int waktutidur = Integer.parseInt(waktuTidurString);
+                        gm.getCurrentSim().setStatus("Sedang tidur");
                         gm.threadAksi(waktutidur, "Tidur", null, null, null);
                         // gm.getCurrentSim().tidur(waktutidur);
                         gm.ui.messagText.setText("Tidur dulu " + waktutidur + " detik ah, biar ga capek");
-                        gm.getCurrentSim().setStatus("Sedang tidur");
                     }
                     break;
 
@@ -540,10 +540,10 @@ public class ActionHandler implements ActionListener {
                     break;
 
                 case "Buang Air":
+                    gm.getCurrentSim().setStatus("Sedang buang air");
                     gm.threadAksi(10, "Buang Air", null, null, null);
                     // gm.getCurrentSim().buangAir();
                     gm.ui.messagText.setText("Uhhh lega... udah buang air");
-                    gm.getCurrentSim().setStatus("Sedang main buang air");
                     break;
 
                 case "Makan":
@@ -599,9 +599,9 @@ public class ActionHandler implements ActionListener {
                                 }
                             }
                             if (waktuBekerjaString != null) {
+                                gm.getCurrentSim().setStatus("Sedang bekerja");
                                 gm.threadAksi(waktukerja, "Bekerja", null, null, null);
                                 gm.ui.messagText.setText("Kerja dulu boss, selama " + waktukerja + " detik");
-                                gm.getCurrentSim().setStatus("Sedang bekerja");
                                 // gm.getCurrentSim().kerja(waktukerja);
                             }
                         }
@@ -755,7 +755,22 @@ public class ActionHandler implements ActionListener {
                     if (objekMasakan != null) {
                         // int waktuMasak = gm.getCurrentSim().masak(objekMasakan);
                         int waktuMasak = (int) Math.round(objekMasakan.getKekenyangan() * 1.5);
-                        if (waktuMasak != 0) {
+                        // validasi bahan-bahan dari inventory
+                        List<String> inventoryBahan = new ArrayList<String>();
+                        for (InventoryItem item : gm.getCurrentSim().getInventory().getData()) {
+                            if (item.getKategori().equals("Bahan Makanan")) {
+                                inventoryBahan.add(item.getNamaBarang());
+                            }
+                        }
+                        boolean isBahanAda = true;
+                        for (ObjekBahanMakanan bahan : objekMasakan.getBahan()) {
+                            boolean cek = inventoryBahan.contains(bahan.getNamaObjek());
+                            if (!cek) {
+                                isBahanAda = false;
+                                JOptionPane.showMessageDialog(null, "Bahan " + bahan.getNamaObjek() + " tidak tersedia!");
+                            }
+                        }
+                        if (isBahanAda) {
                             gm.threadAksi(waktuMasak, "masak", null, null, objekMasakan);
                             gm.ui.messagText
                                     .setText("Srengggg... sedang masak " + namaMasakan + ", " + waktuMasak + " detik");
