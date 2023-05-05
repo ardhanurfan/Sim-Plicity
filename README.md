@@ -1,5 +1,5 @@
 <h1 align="center">
-   Sim-Plicity
+   Sim-Plicity 🌎
 </h1>
 
 <hr>
@@ -113,6 +113,78 @@ You can explore more about gradle [here](https://guides.gradle.org/creating-new-
 
 ## Structure
 ```bash
+📦src
+ ┣ 📂main
+ ┃ ┣ 📂java
+ ┃ ┃ ┣ 📂com
+ ┃ ┃ ┃ ┗ 📂simplicity
+ ┃ ┃ ┃ ┃ ┣ 📂Objek
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜Objek.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ObjekBahanMakanan.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ObjekMakanan.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ObjekNonMakanan.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ObjekPekerjaan.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜ThreeElementArray.java
+ ┃ ┃ ┃ ┃ ┣ 📂Util
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ActionHandler.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜GameManager.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜Music.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜Routing.java
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜SoundEffect.java
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜UI.java
+ ┃ ┃ ┃ ┃ ┣ 📜App.java
+ ┃ ┃ ┃ ┃ ┣ 📜InterfaceInventory.java
+ ┃ ┃ ┃ ┃ ┣ 📜Inventory.java
+ ┃ ┃ ┃ ┃ ┣ 📜Point.java
+ ┃ ┃ ┃ ┃ ┣ 📜Ruangan.java
+ ┃ ┃ ┃ ┃ ┣ 📜Rumah.java
+ ┃ ┃ ┃ ┃ ┣ 📜Sim.java
+ ┃ ┃ ┃ ┃ ┗ 📜World.java
+ ┃ ┃ ┗ 📂Main
+ ┃ ┗ 📂resources
+ ┃ ┃ ┣ 📂audio
+ ┃ ┃ ┃ ┣ 📜click.wav
+ ┃ ┃ ┃ ┣ 📜game-music.wav
+ ┃ ┃ ┃ ┗ 📜menu-music.wav
+ ┃ ┃ ┣ 📜back.png
+ ┃ ┃ ┣ 📜edit.png
+ ┃ ┃ ┣ 📜home.jpg
+ ┃ ┃ ┣ 📜inventory.png
+ ┃ ┃ ┣ 📜jam 1x1.png
+ ┃ ┃ ┣ 📜jam.png
+ ┃ ┃ ┣ 📜kasur king size 5x2.png
+ ┃ ┃ ┣ 📜kasur queen size 4x2.png
+ ┃ ┃ ┣ 📜kasur single 4x1.png
+ ┃ ┃ ┣ 📜kenyang.png
+ ┃ ┃ ┣ 📜kerja.png
+ ┃ ┃ ┣ 📜kesehatan.png
+ ┃ ┃ ┣ 📜kompor gas 2x1.png
+ ┃ ┃ ┣ 📜kompor listrik 1x1.png
+ ┃ ┃ ┣ 📜laptop 1x1.png
+ ┃ ┃ ┣ 📜main_menu.png
+ ┃ ┃ ┣ 📜matras 2x1.jpg
+ ┃ ┃ ┣ 📜matras 2x1.png
+ ┃ ┃ ┣ 📜meja dan kursi 3x3.png
+ ┃ ┃ ┣ 📜meja kursi.png
+ ┃ ┃ ┣ 📜mood.png
+ ┃ ┃ ┣ 📜ruangan fix.png
+ ┃ ┃ ┣ 📜rumah.png
+ ┃ ┃ ┣ 📜rumahku.png
+ ┃ ┃ ┣ 📜shop.png
+ ┃ ┃ ┣ 📜sofa 2x1.png
+ ┃ ┃ ┣ 📜start.png
+ ┃ ┃ ┣ 📜toilet 1x1.png
+ ┃ ┃ ┣ 📜toilet fix.png
+ ┃ ┃ ┣ 📜tv 1x1.png
+ ┃ ┃ ┣ 📜uang.png
+ ┃ ┃ ┣ 📜upgrade.png
+ ┃ ┃ ┗ 📜world.png
+ ┗ 📂test
+ ┃ ┣ 📂java
+ ┃ ┃ ┗ 📂com
+ ┃ ┃ ┃ ┗ 📂simplicity
+ ┃ ┃ ┃ ┃ ┗ 📜AppTest.java
+ ┃ ┗ 📂resources
 ```
 
 <a name="project-status">
