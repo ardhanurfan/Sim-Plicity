@@ -237,9 +237,6 @@ public class Inventory {
             // }
             if (objekNonMakananList.contains(nameConverter(item.getNamaBarang()))) {
                 inventoryString.add(nameConverter(item.getNamaBarang()));
-            } else {
-                System.out.println(item.getNamaBarang());
-
             }
         }
         return inventoryString;

@@ -370,7 +370,6 @@ public class ActionHandler implements ActionListener {
                                 currRuangan.hapusObjek(deleteObject);
                                 // deleteObject.setNamaBarang(gm.getCurrentSim().getInventory().nameConverterReverse(deleteObject.getNamaObjek()));
 
-                                System.out.println(deleteObject.getNamaObjek());
                                 deleteObject.setNamaObjek(gm.getCurrentSim().getInventory()
                                         .nameConverterReverse(deleteObject.getNamaObjek()));
                                 gm.getCurrentSim().getInventory().addItemPeralatan(deleteObject, 1);
