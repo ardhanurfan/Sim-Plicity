@@ -46,7 +46,7 @@ public class Sim {
     private boolean isTidakTidur = true;
 
     // Reset jika sudah buang air
-    private int waktuTidakBuangAir = -30;
+    private int waktuTidakBuangAir = 0;
     private boolean isTidakBuangAir = false;
 
     public Sim(Sim sim) {
@@ -419,7 +419,7 @@ public class Sim {
         // menangani kalo belum 4 menit udah makan lagi, acuan 4 menit yang awal
         if (!isTidakBuangAir) {
             isTidakBuangAir = true;
-            waktuTidakBuangAir = -30;
+            waktuTidakBuangAir = 0;
         }
     }
 
@@ -473,28 +473,23 @@ public class Sim {
         setMood(waktu, 30, 10);
         setKekenyangan(waktu, 30, -10);
 
-        System.out.println("Anda akan berkunjung ke " + rumahDiKunjungi.getNama());
-        System.out.println("Dengan lama perjalanan sekitar " + waktu + " detik");
-        System.out.println("========================================");
-        System.out.println("Anda sudah sampai di " + rumahDiKunjungi.getNama());
         return waktu;
     }
 
     public void buangAir() {
         setKekenyangan(1, 1, -20);
         setMood(1, 1, 10);
-        waktuTidakBuangAir = -30;
+        waktuTidakBuangAir = 0;
         isTidakBuangAir = false;
     }
 
     public void efekTidakBuangAir() {
-        if (waktuTidakBuangAir >= 240 && isTidakBuangAir) {
-            isTidakBuangAir = false;
-            waktuTidakBuangAir = -30;
+        if (isTidakBuangAir && waktuTidakBuangAir % 240 == 0) {
             setKesehatan(1, 1, -5);
             setMood(1, 1, -5);
             JOptionPane.showMessageDialog(null, "Anda tidak buang air dalam 4 menit setelah makan");
         }
+
     }
 
     public void pindahRuangan(Ruangan goingRuangan) {

@@ -118,7 +118,7 @@ public class GameManager {
 		ui.hariText.setText("Hari ke-" + world.getHari());
 		world.efekTiapSim(1);
 
-		if (getCurrentSim().getWaktuTidakTidur() == 0 || getCurrentSim().getWaktuTidakBuangAir() == 0) {
+		if (getCurrentSim().getWaktuTidakTidur() == 0 || getCurrentSim().getWaktuTidakBuangAir() % 240 == 0) {
 			ui.kesehatanText.setText(getCurrentSim().getKesehatan());
 			ui.moodText.setText(getCurrentSim().getMood());
 		}
