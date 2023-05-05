@@ -1,5 +1,6 @@
 package com.simplicity;
 
+import java.io.ObjectInputFilter.Status;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -358,6 +359,11 @@ public class Sim {
             efekTidakBuangAir();
         }
 
+        // if (!this.getStatus().equals("Sedang tidur")){
+        //     efekTidakTidur();
+        //     System.out.println("OKeee");
+        // }
+
         efekTidakTidur();
     }
 
@@ -405,7 +411,15 @@ public class Sim {
             setKesehatan(1, 1, -5);
             setMood(1, 1, -5);
             waktuTidakTidur = 0;
-            JOptionPane.showMessageDialog(null, "Waktu tidur " + namaLengkap + " hari ini tidak memenuhi!");
+            
+            //JOptionPane.showMessageDialog(null, "Waktu tidur " + namaLengkap + " hari ini tidak memenuhi!");
+            if (status != null){
+                setKesehatan(1,1,5);
+                setMood(1,1,5);
+            } 
+            else {
+                JOptionPane.showMessageDialog(null, "Waktu tidur " + namaLengkap + " hari ini tidak memenuhi!");
+            }
         }
     }
 
