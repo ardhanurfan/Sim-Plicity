@@ -1,9 +1,9 @@
 package com.simplicity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Arrays;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -167,78 +167,82 @@ public class Inventory {
 
     public String nameConverter(String nama) {
         String namaConv = null;
-        if (nama.equals("Kasur Single")) {
-            namaConv = "kasur single 4x1";
+        if (nama.equals("Kasur Single Size")) {
+            namaConv = "Kasur Single Size 4x1";
         } else if (nama.equals("Kasur Queen Size")) {
-            namaConv = "kasur queen size 4x2";
+            namaConv = "Kasur Queen Size 4x2";
         } else if (nama.equals("Kasur King Size")) {
-            namaConv = "kasur king size 5x2";
+            namaConv = "Kasur King Size 5x2";
         } else if (nama.equals("Jam")) {
-            namaConv = "jam 1x1";
+            namaConv = "Jam 1x1";
         } else if (nama.equals("Meja dan Kursi")) {
-            namaConv = "meja kursi 3x3";
+            namaConv = "Meja dan Kursi 3x3";
         } else if (nama.equals("Toilet")) {
-            namaConv = "toilet 1x1";
+            namaConv = "Toilet 1x1";
         } else if (nama.equals("Kompor Gas")) {
-            namaConv = "kompor gas 2x1";
+            namaConv = "Kompor Gas 2x1";
         } else if (nama.equals("Kompor Listrik")) {
-            namaConv = "kompor listrik 1x1";
+            namaConv = "Kompor Listrik 1x1";
         } else if (nama.equals("Laptop")) {
-            namaConv = "laptop 1x1";
+            namaConv = "Laptop 1x1";
         } else if (nama.equals("Tv")) {
-            namaConv = "tv 1x1";
+            namaConv = "Tv 1x1";
         } else if (nama.equals("Matras")) {
-            namaConv = "matras 2x1";
+            namaConv = "Matras 2x1";
         } else if (nama.equals("Sofa")) {
-            namaConv = "sofa 2x1";
+            namaConv = "Sofa 2x1";
         }
         return namaConv;
     }
 
     public String nameConverterReverse(String nama) {
         String namaConv = null;
-        if (nama.equals("kasur single 4x1")) {
-            namaConv = "Kasur Single";
-        } else if (nama.equals("kasur queen size 4x2")) {
+        if (nama.equals("Kasur Single Size 4x1")) {
+            namaConv = "Kasur Single Size";
+        } else if (nama.equals("Kasur Queen Size 4x2")) {
             namaConv = "Kasur Queen Size";
-        } else if (nama.equals("kasur king size 5x2")) {
+        } else if (nama.equals("Kasur King Size 5x2")) {
             namaConv = "Kasur King Size";
-        } else if (nama.equals("jam 1x1")) {
+        } else if (nama.equals("Jam 1x1")) {
             namaConv = "Jam";
-        } else if (nama.equals("meja kursi 3x3")) {
+        } else if (nama.equals("Meja dan Kursi 3x3")) {
             namaConv = "Meja dan Kursi";
-        } else if (nama.equals("toilet 1x1")) {
+        } else if (nama.equals("Toilet 1x1")) {
             namaConv = "Toilet";
-        } else if (nama.equals("kompor gas 2x1")) {
+        } else if (nama.equals("Kompor Gas 2x1")) {
             namaConv = "Kompor Gas";
-        } else if (nama.equals("kompor listrik 1x1")) {
+        } else if (nama.equals("Kompor Listrik 1x1")) {
             namaConv = "Kompor Listrik";
-        } else if (nama.equals("laptop 1x1")) {
+        } else if (nama.equals("Laptop 1x1")) {
             namaConv = "Laptop";
-        } else if (nama.equals("tv 1x1")) {
+        } else if (nama.equals("Tv 1x1")) {
             namaConv = "Tv";
-        } else if (nama.equals("matras 2x1")) {
+        } else if (nama.equals("Matras 2x1")) {
             namaConv = "Matras";
-        } else if (nama.equals("sofa 2x1")) {
+        } else if (nama.equals("Sofa 2x1")) {
             namaConv = "Sofa";
         }
         return namaConv;
     }
 
     public List<String> getIventoryString() {
-        List<String> objekNonMakananList = Arrays.asList("Kasur Single 4x1", "Kasur Queen Size 4x2",
+        List<String> objekNonMakananList = Arrays.asList("Kasur Single Size 4x1",
+                "Kasur Queen Size 4x2",
                 "Kasur King Size 5x2", "Jam 1x1", "Meja dan Kursi 3x3", "Toilet 1x1", "Kompor Gas 2x1",
                 "Kompor Listrik 1x1", "Laptop 1x1", "Tv 1x1", "Matras 2x1", "Sofa 2x1");
         List<String> inventoryString = new ArrayList<String>();
         for (InventoryItem item : data) {
-            // if(objekNonMakananList.contains(nameConverter(item.getNamaBarang()))){
+            // if (item.getKategori().equals("Peralatan")) {
             // inventoryString.add(nameConverter(item.getNamaBarang()));
             // }
-            if (objekNonMakananList.contains(item.getNamaBarang())) {
-                inventoryString.add(item.getNamaBarang());
+            if (objekNonMakananList.contains(nameConverter(item.getNamaBarang()))) {
+                inventoryString.add(nameConverter(item.getNamaBarang()));
+            } else {
+                System.out.println(item.getNamaBarang());
+
             }
         }
         return inventoryString;
     }
-    
+
 }

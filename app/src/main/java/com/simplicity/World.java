@@ -127,7 +127,7 @@ public class World {
         daftar_bahan.add(susu);
 
         // List objek non makanan
-        daftar_barang.add(new ObjekNonMakanan("Kasur Single", 4, 1, 50, new String[] { "Tidur" }));
+        daftar_barang.add(new ObjekNonMakanan("Kasur Single Size", 4, 1, 50, new String[] { "Tidur" }));
         daftar_barang.add(new ObjekNonMakanan("Kasur Queen Size", 4, 2, 100, new String[] { "Tidur" }));
         daftar_barang.add(new ObjekNonMakanan("Kasur King Size", 5, 2, 150, new String[] { "Tidur" }));
         daftar_barang.add(new ObjekNonMakanan("Toilet", 1, 1, 50, new String[] { "Buang air" }));

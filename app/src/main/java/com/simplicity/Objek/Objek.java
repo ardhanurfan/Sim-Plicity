@@ -7,11 +7,15 @@ public abstract class Objek {
         this.namaObjek = namaObjek;
     }
 
-    public String getNamaObjek(){
+    public String getNamaObjek() {
         return namaObjek;
     }
 
-    public void setNamaBarang(String nama){
+    public void setNamaObjek(String namaObjek) {
+        this.namaObjek = namaObjek;
+    }
+
+    public void setNamaBarang(String nama) {
         namaObjek = nama;
     }
 

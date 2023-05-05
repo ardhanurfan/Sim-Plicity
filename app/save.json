@@ -7,7 +7,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
-              "nama": "Kasur Single 4x1",
+              "nama": "Kasur Single Size 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 5 },
               "lebar": 1,
@@ -56,15 +56,15 @@
           "kiri": 2,
           "atas": 1,
           "ruang": [
-            [null, null, null, null, null, "Kasur Single 4x1"],
-            [null, "Jam 1x1", null, null, null, "Kasur Single 4x1"],
+            [null, null, null, null, null, "Kasur Single Size 4x1"],
+            [null, "Jam 1x1", null, null, null, "Kasur Single Size 4x1"],
             [
               null,
               null,
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
-              "Kasur Single 4x1"
+              "Kasur Single Size 4x1"
             ],
             [
               null,
@@ -72,7 +72,7 @@
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
-              "Kasur Single 4x1"
+              "Kasur Single Size 4x1"
             ],
             [
               null,
@@ -108,7 +108,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
-              "nama": "Kasur Single 4x1",
+              "nama": "Kasur Single Size 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 0 },
               "lebar": 1,
@@ -122,10 +122,10 @@
           "atas": null,
           "ruang": [
             [
-              "Kasur Single 4x1",
-              "Kasur Single 4x1",
-              "Kasur Single 4x1",
-              "Kasur Single 4x1",
+              "Kasur Single Size 4x1",
+              "Kasur Single Size 4x1",
+              "Kasur Single Size 4x1",
+              "Kasur Single Size 4x1",
               null,
               null
             ],
@@ -149,7 +149,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
-              "nama": "Kasur Single 4x1",
+              "nama": "Kasur Single Size 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 5 },
               "lebar": 1,
@@ -198,15 +198,15 @@
           "kiri": null,
           "atas": null,
           "ruang": [
-            [null, null, null, null, null, "Kasur Single 4x1"],
-            [null, "jam 1x1", null, null, null, "Kasur Single 4x1"],
+            [null, null, null, null, null, "Kasur Single Size 4x1"],
+            [null, "jam 1x1", null, null, null, "Kasur Single Size 4x1"],
             [
               null,
               null,
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
-              "Kasur Single 4x1"
+              "Kasur Single Size 4x1"
             ],
             [
               null,
@@ -214,7 +214,7 @@
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
-              "Kasur Single 4x1"
+              "Kasur Single Size 4x1"
             ],
             [
               null,
@@ -240,7 +240,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
-              "nama": "Kasur Single 4x1",
+              "nama": "Kasur Single Size 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 5 },
               "lebar": 1,
@@ -289,15 +289,15 @@
           "kiri": null,
           "atas": null,
           "ruang": [
-            [null, null, null, null, null, "Kasur Single 4x1"],
-            [null, "Jam 1x1", null, null, null, "Kasur Single 4x1"],
+            [null, null, null, null, null, "Kasur Single Size 4x1"],
+            [null, "Jam 1x1", null, null, null, "Kasur Single Size 4x1"],
             [
               null,
               null,
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
-              "Kasur Single 4x1"
+              "Kasur Single Size 4x1"
             ],
             [
               null,
@@ -305,7 +305,7 @@
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
-              "Kasur Single 4x1"
+              "Kasur Single Size 4x1"
             ],
             [
               null,
@@ -331,7 +331,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
-              "nama": "Kasur Single 4x1",
+              "nama": "Kasur Single Size 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 5 },
               "lebar": 1,
@@ -380,15 +380,15 @@
           "kiri": null,
           "atas": null,
           "ruang": [
-            [null, null, null, null, null, "Kasur Single 4x1"],
-            [null, "Jam 1x1", null, null, null, "Kasur Single 4x1"],
+            [null, null, null, null, null, "Kasur Single Size 4x1"],
+            [null, "Jam 1x1", null, null, null, "Kasur Single Size 4x1"],
             [
               null,
               null,
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
-              "Kasur Single 4x1"
+              "Kasur Single Size 4x1"
             ],
             [
               null,
@@ -396,7 +396,7 @@
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
-              "Kasur Single 4x1"
+              "Kasur Single Size 4x1"
             ],
             [
               null,
@@ -422,7 +422,7 @@
           "daftarObjek": [
             {
               "panjang": 4,
-              "nama": "Kasur Single 4x1",
+              "nama": "Kasur Single Size 4x1",
               "harga": 50,
               "titik": { "x": 0, "y": 5 },
               "lebar": 1,
@@ -471,15 +471,15 @@
           "kiri": null,
           "atas": null,
           "ruang": [
-            [null, null, null, null, null, "Kasur Single 4x1"],
-            [null, "Jam 1x1", null, null, null, "Kasur Single 4x1"],
+            [null, null, null, null, null, "Kasur Single Size 4x1"],
+            [null, "Jam 1x1", null, null, null, "Kasur Single Size 4x1"],
             [
               null,
               null,
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
               "Meja dan Kursi 3x3",
-              "Kasur Single 4x1"
+              "Kasur Single Size 4x1"
             ],
             [
               null,
@@ -524,22 +524,22 @@
           { "kategori": "Makanan", "namaBarang": "Susu Kacang", "jumlah": 2 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kasur Queen Size 4x2",
+            "namaBarang": "Kasur Queen Size",
             "jumlah": 1
           },
           { "kategori": "Makanan", "namaBarang": "Nasi Kari", "jumlah": 1 },
           { "kategori": "Makanan", "namaBarang": "Tumis Sayur", "jumlah": 1 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kasur Single 4x1",
+            "namaBarang": "Kasur Single Size",
             "jumlah": 1
           },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kompor Gas 2x1",
+            "namaBarang": "Kompor Gas",
             "jumlah": 1
           },
-          { "kategori": "Peralatan", "namaBarang": "Toilet 1x1", "jumlah": 1 },
+          { "kategori": "Peralatan", "namaBarang": "Toilet", "jumlah": 1 },
           { "kategori": "Bahan Makanan", "namaBarang": "Sapi", "jumlah": 1 },
           { "kategori": "Bahan Makanan", "namaBarang": "Ayam", "jumlah": 1 },
           { "kategori": "Bahan Makanan", "namaBarang": "Nasi", "jumlah": 1 },
@@ -550,13 +550,13 @@
           { "kategori": "Bahan Makanan", "namaBarang": "Susu", "jumlah": 1 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Meja dan Kursi 3x3",
+            "namaBarang": "Meja dan Kursi",
             "jumlah": 1
           },
-          { "kategori": "Peralatan", "namaBarang": "Jam 1x1", "jumlah": 1 },
+          { "kategori": "Peralatan", "namaBarang": "Jam", "jumlah": 1 },
           {
             "kategori": "Peralatan",
-            "namaBarang": "Kompor Listrik 1x1",
+            "namaBarang": "Kompor Listrik",
             "jumlah": 1
           }
         ]
