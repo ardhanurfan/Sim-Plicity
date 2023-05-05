@@ -235,15 +235,4 @@ public class Ruangan {
             System.out.println("|");
         }
     }
-
-    public void tampilkanDaftarObjek() {
-        System.out.println("Berikut adalah daftar objek dalam ruangan");
-        System.out.println("No \tNama Barang \t");
-        int i = 1;
-        for (ObjekNonMakanan objek : daftarObjek) {
-            System.out.print(i + "\t");
-            System.out.println(objek.getNamaObjek());
-            i++;
-        }
-    }
 }
