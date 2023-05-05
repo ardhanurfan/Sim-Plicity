@@ -1,7 +1,6 @@
 package com.simplicity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -226,16 +225,9 @@ public class Inventory {
     }
 
     public List<String> getIventoryString() {
-        List<String> objekNonMakananList = Arrays.asList("Kasur Single Size 4x1",
-                "Kasur Queen Size 4x2",
-                "Kasur King Size 5x2", "Jam 1x1", "Meja dan Kursi 3x3", "Toilet 1x1", "Kompor Gas 2x1",
-                "Kompor Listrik 1x1", "Laptop 1x1", "Tv 1x1", "Matras 2x1", "Sofa 2x1");
         List<String> inventoryString = new ArrayList<String>();
         for (InventoryItem item : data) {
-            // if (item.getKategori().equals("Peralatan")) {
-            // inventoryString.add(nameConverter(item.getNamaBarang()));
-            // }
-            if (objekNonMakananList.contains(nameConverter(item.getNamaBarang()))) {
+            if (item.getKategori().equals("Peralatan")) {
                 inventoryString.add(nameConverter(item.getNamaBarang()));
             }
         }

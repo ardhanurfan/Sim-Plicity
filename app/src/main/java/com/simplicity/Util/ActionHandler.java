@@ -329,9 +329,9 @@ public class ActionHandler implements ActionListener {
 
                                     // Bikin point dan objek sesuai pilihan
                                     Point point = new Point(x, y);
+
+                                    // Object to add
                                     ObjekNonMakanan o = new ObjekNonMakanan(inventory.get(indexInventory));
-                                    // ObjekNonMakanan o =
-                                    // ObjekNonMakanan.returnObject(inventory.get(indexInventory));
 
                                     // Ngecek nabrak ato ga
                                     if (currRuangan.nabrakGa(o, point, posisi)) {
@@ -423,10 +423,10 @@ public class ActionHandler implements ActionListener {
                                     Point point = new Point(x, y);
                                     if (currRuangan.nabrakGa(moveObject, point, posisi)) {
                                         currRuangan.tambahObjek(moveObject, point, posisi);
-                                        gm.ui.messagText.setText("Barang berhasil ditambahkan ke ruangan");
+                                        gm.ui.messagText.setText("Barang berhasil dipindah");
                                     } else {
                                         currRuangan.tambahObjek(moveObject, pointAwal, posisiAwal);
-                                        gm.ui.messagText.setText("Barang tidak bisa ditambahkan karena nabrak");
+                                        gm.ui.messagText.setText("Barang tidak bisa dipindah karena nabrak");
                                     }
                                     // Refresh panel
                                     gm.ui.refreshRoom(currRuangan);

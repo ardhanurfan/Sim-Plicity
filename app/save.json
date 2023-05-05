@@ -558,6 +558,26 @@
             "kategori": "Peralatan",
             "namaBarang": "Kompor Listrik",
             "jumlah": 1
+          },
+          {
+            "kategori": "Peralatan",
+            "namaBarang": "Matras",
+            "jumlah": 1
+          },
+          {
+            "kategori": "Peralatan",
+            "namaBarang": "Sofa",
+            "jumlah": 1
+          },
+          {
+            "kategori": "Peralatan",
+            "namaBarang": "Tv",
+            "jumlah": 1
+          },
+          {
+            "kategori": "Peralatan",
+            "namaBarang": "Laptop",
+            "jumlah": 1
           }
         ]
       },

@@ -28,7 +28,7 @@ public class ObjekNonMakanan extends Objek {
 
     public ObjekNonMakanan(String nama) {
         super(nama);
-        if (nama.equals("Kasur Single 4x1")) {
+        if (nama.equals("Kasur Single Size 4x1")) {
             panjang = 4;
             lebar = 1;
             harga = 50;

@@ -89,7 +89,7 @@ public class Rumah {
         Point p4 = new Point(2, 2);
         Point p5 = new Point(1, 1);
 
-        ObjekNonMakanan o1 = new ObjekNonMakanan("Kasur Single 4x1");
+        ObjekNonMakanan o1 = new ObjekNonMakanan("Kasur Single Size 4x1");
         ObjekNonMakanan o2 = new ObjekNonMakanan("Toilet 1x1");
         ObjekNonMakanan o3 = new ObjekNonMakanan("Kompor Gas 2x1");
         ObjekNonMakanan o4 = new ObjekNonMakanan("Meja dan Kursi 3x3");
