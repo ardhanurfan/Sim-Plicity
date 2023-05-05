@@ -69,6 +69,7 @@ public class World {
             sim.addOnTimeWorld(waktu);
             sim.setwaktuUpgradeRumah(-waktu);
             sim.setDeliveryTime(waktu);
+            
             // ObjekBahanMakanan masukInv = null;
             for (int i = 0; i < sim.getPembelian().size(); i++) {
                 if (sim.getDeliveryTime().get(i) == 0) {

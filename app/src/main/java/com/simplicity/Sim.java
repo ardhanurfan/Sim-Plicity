@@ -358,7 +358,9 @@ public class Sim {
             efekTidakBuangAir();
         }
 
-        efekTidakTidur();
+        if (!status.equals("Sedang tidur")){
+            efekTidakTidur();
+        }
     }
 
     // reset tiap berganti hari
@@ -401,7 +403,7 @@ public class Sim {
     }
 
     public void efekTidakTidur() {
-        if (waktuTidakTidur >= 600 && totalWaktuTidur < 180) {
+        if (waktuTidakTidur >= 15 && totalWaktuTidur < 5) {
             setKesehatan(1, 1, -5);
             setMood(1, 1, -5);
             waktuTidakTidur = 0;
