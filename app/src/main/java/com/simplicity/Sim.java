@@ -369,12 +369,12 @@ public class Sim {
     public void kerja(double waktuKerja) {
         setKekenyangan(waktuKerja, 30, -10);
         setMood(waktuKerja, 30, -10);
-        
+
     }
 
     public void kerjaUang() {
-        totalWaktuKerja ++;
-        if(totalWaktuKerja % 240 == 0){ 
+        totalWaktuKerja++;
+        if (totalWaktuKerja % 240 == 0) {
             if (pekerjaan.getNamaObjek().equals("Badut Sulap")) {
                 uang += 15;
             } else if (pekerjaan.getNamaObjek().equals("Koki")) {
@@ -432,17 +432,17 @@ public class Sim {
     }
 
     public int masak(ObjekMakanan makanan) {
-            ObjekMakanan newmakanan = new ObjekMakanan(makanan.getNamaObjek(), makanan.getBahan(),
-                    makanan.getKekenyangan());
-            // kurangi bahan di inventory
-            for (ObjekBahanMakanan bahan : makanan.getBahan()) {
-                inventory.kurangiItem(bahan.getNamaObjek(), 1);
-            }
-            // masukan makanan baru ke inventory
-            inventory.addItemMakanan(newmakanan, 1);
+        ObjekMakanan newmakanan = new ObjekMakanan(makanan.getNamaObjek(), makanan.getBahan(),
+                makanan.getKekenyangan());
+        // kurangi bahan di inventory
+        for (ObjekBahanMakanan bahan : makanan.getBahan()) {
+            inventory.kurangiItem(bahan.getNamaObjek(), 1);
+        }
+        // masukan makanan baru ke inventory
+        inventory.addItemMakanan(newmakanan, 1);
 
-            setMood(1, 1, 10);
-            return (int) Math.round(newmakanan.getKekenyangan() * 1.5);
+        setMood(1, 1, 10);
+        return (int) Math.round(newmakanan.getKekenyangan() * 1.5);
     }
 
     public int berkunjung(Rumah rumahDiKunjungi) {

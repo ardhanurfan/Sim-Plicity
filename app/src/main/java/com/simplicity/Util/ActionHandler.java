@@ -142,11 +142,6 @@ public class ActionHandler implements ActionListener {
                     }
                     break;
                 case "help":
-                    // JFrame popHelp = new JFrame("Help");
-                    // popHelp.setSize(500, 500);
-                    // popHelp.getContentPane().setBackground(Color.white);
-                    // popHelp.setResizable(false);
-                    // popHelp.setVisible(false);
                     JOptionPane.showMessageDialog(gm.ui.bgPanel[1],
                             "Berikut adalah panduan untuk bermain Sim-Plicity : \n" +
                                     "1. Objective Game ini untuk menjaga kesejahteraan SIM agar tidak depresi dan mati.\n"
@@ -214,6 +209,7 @@ public class ActionHandler implements ActionListener {
                         textBerkunjung = "Otw dari " + gm.getCurrentSim().getCurrLokasi().getRumah().getNama()
                                 + " ke " + otwRumah.getNama() + " selama " + waktuOtw + " detik";
                     }
+                    gm.getCurrentSim().setStatus("Sedang berkunjung");
                     threadBerkunjung = new Thread(() -> {
                         for (int i = 0; i < waktuOtw; i++) {
                             gm.ui.messagText
@@ -494,8 +490,10 @@ public class ActionHandler implements ActionListener {
                         } else {
                             try {
                                 waktuOlahraga = Integer.parseInt(waktuOlahragaString);
-                                if (waktuOlahraga % 20 != 0) {
+                                if (waktuOlahraga % 20 != 0 || waktuOlahraga <= 0) {
                                     JOptionPane.showMessageDialog(null, "Waktu harus kelipatan 20!");
+                                } else if (waktuOlahraga <= 0) {
+                                    JOptionPane.showMessageDialog(null, "Waktu harus lebih dari 0!");
                                 } else {
                                     cek = true;
                                 }
@@ -609,6 +607,8 @@ public class ActionHandler implements ActionListener {
                                     waktukerja = Integer.parseInt(waktuBekerjaString);
                                     if (waktukerja % 120 != 0) {
                                         JOptionPane.showMessageDialog(null, "Waktu harus kelipatan 120!");
+                                    } else if (waktukerja <= 0) {
+                                        JOptionPane.showMessageDialog(null, "Waktu harus lebih dari 0!");
                                     } else {
                                         cek = true;
                                     }
@@ -775,6 +775,7 @@ public class ActionHandler implements ActionListener {
                             }
                         }
                         if (isBahanAda) {
+                            gm.getCurrentSim().setStatus("Sedang memasak");
                             gm.threadAksi(waktuMasak, "masak", null, null, objekMasakan);
                             gm.ui.messagText
                                     .setText("Srengggg... sedang masak " + namaMasakan + ", " + waktuMasak + " detik");
