@@ -299,9 +299,13 @@ public class Sim {
     }
 
     public void setwaktuUpgradeRumah(int waktu) {
-        waktuUpgradeRumah += waktu;
-        if (waktuUpgradeRumah == 0) {
-            rumah.getDaftarRuangan().add(ruangUpgrade);
+        if(ruangUpgrade != null){
+            waktuUpgradeRumah += waktu;
+            if (waktuUpgradeRumah == 0) {
+                rumah.getDaftarRuangan().add(ruangUpgrade);
+                JOptionPane.showMessageDialog(null, "Upgrade rumah milik " + namaLengkap +" sudah selesai.");
+                ruangUpgrade = null;
+            }
         }
     }
 

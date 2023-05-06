@@ -511,7 +511,7 @@
   "listSim": [
     {
       "isTidakTidur": true,
-      "waktuUpgradeRumah": -34,
+      "waktuUpgradeRumah": 0,
       "waktuTidakTidur": 34,
       "kesehatan": 80.0,
       "ruangUpgrade": null,
@@ -597,7 +597,7 @@
     },
     {
       "isTidakTidur": true,
-      "waktuUpgradeRumah": -34,
+      "waktuUpgradeRumah": 0,
       "waktuTidakTidur": 34,
       "kesehatan": 80.0,
       "ruangUpgrade": null,
@@ -621,7 +621,7 @@
     },
     {
       "isTidakTidur": true,
-      "waktuUpgradeRumah": -34,
+      "waktuUpgradeRumah": 0,
       "waktuTidakTidur": 34,
       "kesehatan": 80.0,
       "ruangUpgrade": null,
@@ -645,7 +645,7 @@
     },
     {
       "isTidakTidur": true,
-      "waktuUpgradeRumah": -34,
+      "waktuUpgradeRumah": 0,
       "waktuTidakTidur": 34,
       "kesehatan": 80.0,
       "ruangUpgrade": null,
@@ -681,7 +681,7 @@
       "waktuTidakBuangAir": -30,
       "pembelian": [],
       "jedaGantiKerja": 0,
-      "uang": 100.0,
+      "uang": 100000.0,
       "pekerjaan": { "nama": "Koki", "gaji": 30.0 },
       "currLokasi": { "rumah": 4, "ruangan": null },
       "kekenyangan": 80.0,

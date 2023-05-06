@@ -239,34 +239,44 @@ public class ActionHandler implements ActionListener {
                     if (gm.getCurrentSim().getRuangUpgrade() == null) {
                         // Buat Pilihan Acuan Kamar
                         // Boolean status;
-                        Rumah currHouse = gm.getCurrentSim().getCurrLokasi().getRumah();
-                        List<Ruangan> ruangan = currHouse.getDaftarRuangan();
-                        List<String> listRuangans = new ArrayList<String>();
-                        for (Ruangan ruang : gm.getCurrentSim().getCurrLokasi().getRumah().getDaftarRuangan()) {
-                            listRuangans.add(ruang.getNama());
+                        if (gm.getCurrentSim().getUangReal() >= 1800){
+                            Rumah currHouse = gm.getCurrentSim().getCurrLokasi().getRumah();
+                            List<Ruangan> ruangan = currHouse.getDaftarRuangan();
+                            List<String> listRuangans = new ArrayList<String>();
+                            for (Ruangan ruang : gm.getCurrentSim().getCurrLokasi().getRumah().getDaftarRuangan()) {
+                                listRuangans.add(ruang.getNama());
+                            }
+                            // int jumlahKamarAwal = currHouse.getDaftarRuangan().size();
+                            Object acuanRuang = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Pilih ruangan acuan",
+                                    "Upgrade House",
+                                    JOptionPane.PLAIN_MESSAGE, null, listRuangans.toArray(), listRuangans.get(0));
+                            Ruangan RuanganAcuan = ruangan.get(listRuangans.indexOf(acuanRuang));
+                            // Buat pilihan posisi
+                            List<String> acuanposisi = Arrays.asList("Kanan", "Kiri", "Atas", "Bawah");
+                            Object posisiacuan = JOptionPane.showInputDialog(gm.ui.bgPanel[3],
+                                    "Silakan pilih posisi kamar baru dibanding kamar acuan",
+                                    "Upgrade House", JOptionPane.PLAIN_MESSAGE, null, acuanposisi.toArray(),
+                                    acuanposisi.get(0));
+                            String acuan = acuanposisi.get(acuanposisi.indexOf(posisiacuan));
+    
+                            // Melakukan upgrade rumah
+                            // Meminta input namaruangan
+                            String namaruangan = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
+                                    "Silakan masukkan nama ruangan yang baru", "Input Nama Ruangan Baru",
+                                    JOptionPane.PLAIN_MESSAGE);
+    
+                            gm.getCurrentSim().setRuangUpgrade(currHouse.upgradeRumah(RuanganAcuan, acuan, namaruangan));
+                            if(gm.getCurrentSim().getRuangUpgrade() != null){
+                                gm.getCurrentSim().setwaktuUpgradeRumah(1080);
+                                gm.getCurrentSim().setUang(gm.getCurrentSim().getUangReal()-1500);
+                                gm.ui.uangText.setText(gm.getCurrentSim().getUang());
+                                gm.ui.messagText.setText("Sedang upgrade rumah");
+                            } else {
+                                gm.ui.messagText.setText("Upgrade rumah dibatalkan");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "uang Anda tidak cukup untuk melakukan upgrade rumah, diperlukan 1500!");
                         }
-                        // int jumlahKamarAwal = currHouse.getDaftarRuangan().size();
-                        Object acuanRuang = JOptionPane.showInputDialog(gm.ui.bgPanel[3], "Pilih ruangan acuan",
-                                "Upgrade House",
-                                JOptionPane.PLAIN_MESSAGE, null, listRuangans.toArray(), listRuangans.get(0));
-                        Ruangan RuanganAcuan = ruangan.get(listRuangans.indexOf(acuanRuang));
-                        // Buat pilihan posisi
-                        List<String> acuanposisi = Arrays.asList("Kanan", "Kiri", "Atas", "Bawah");
-                        Object posisiacuan = JOptionPane.showInputDialog(gm.ui.bgPanel[3],
-                                "Silakan pilih posisi kamar baru dibanding kamar acuan",
-                                "Upgrade House", JOptionPane.PLAIN_MESSAGE, null, acuanposisi.toArray(),
-                                acuanposisi.get(0));
-                        String acuan = acuanposisi.get(acuanposisi.indexOf(posisiacuan));
-
-                        // Melakukan upgrade rumah
-                        // Meminta input namaruangan
-                        String namaruangan = JOptionPane.showInputDialog(gm.ui.bgPanel[1],
-                                "Silakan masukkan nama ruangan yang baru", "Input Nama Ruangan Baru",
-                                JOptionPane.PLAIN_MESSAGE);
-
-                        gm.getCurrentSim().setwaktuUpgradeRumah(1080);
-                        gm.ui.messagText.setText("Sedang upgrade rumah");
-                        gm.getCurrentSim().setRuangUpgrade(currHouse.upgradeRumah(RuanganAcuan, acuan, namaruangan));
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Tidak bisa melakukan dua upgrade sekaligus");
