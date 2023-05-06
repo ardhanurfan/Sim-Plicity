@@ -4,7 +4,7 @@
 
 <hr>
 
-> To see the booklet [_here_]()
+> To see the booklet [_here_](https://drive.google.com/file/d/1G8Zs-Qg8Oi3wJ4I89FmsCr4fsNOCYxT5/view?usp=drivesdk)
 
 > To see the game spesification [_here_](https://docs.google.com/document/d/1NOLD-QEy8csPCbS-QpMsCVSS3dt6499Q/edit)
 
@@ -190,7 +190,7 @@ You can explore more about gradle [here](https://guides.gradle.org/creating-new-
 <a name="project-status">
 
 ## Project Status
-Status Proyek: _on progress_
+Status Proyek: _on finished_
 
 <a name="acknowledgements">
 
