@@ -286,11 +286,6 @@ public class ActionHandler implements ActionListener {
                     // Ceritanya ini Inventory
 
                     List<String> inventory = gm.getCurrentSim().getInventory().getIventoryString();
-                    // List<String> inventory = Arrays.asList("kasur single 4x1", "kasur queen size
-                    // 4x2",
-                    // "kasur king size 5x2", "jam 1x1", "meja kursi 3x3", "toilet 1x1", "kompor gas
-                    // 2x1",
-                    // "kompor listrik 1x1", "laptop 1x1", "tv 1x1", "matras 2x1", "sofa 2x1");
 
                     // Tambah Barang
                     if (index == 0) {
@@ -368,7 +363,6 @@ public class ActionHandler implements ActionListener {
                                 int indexOptionObjek = optionObjek.indexOf(selectedObjek);
                                 ObjekNonMakanan deleteObject = currRuangan.getObjek(indexOptionObjek);
                                 currRuangan.hapusObjek(deleteObject);
-                                // deleteObject.setNamaBarang(gm.getCurrentSim().getInventory().nameConverterReverse(deleteObject.getNamaObjek()));
 
                                 deleteObject.setNamaObjek(gm.getCurrentSim().getInventory()
                                         .nameConverterReverse(deleteObject.getNamaObjek()));
@@ -764,8 +758,23 @@ public class ActionHandler implements ActionListener {
                     if (objekMasakan != null) {
                         // int waktuMasak = gm.getCurrentSim().masak(objekMasakan);
                         int waktuMasak = (int) Math.round(objekMasakan.getKekenyangan() * 1.5);
-                        if (waktuMasak != 0) {
-                            gm.getCurrentSim().setStatus("Sedang memasak");
+                        // validasi bahan-bahan dari inventory
+                        List<String> inventoryBahan = new ArrayList<String>();
+                        for (InventoryItem item : gm.getCurrentSim().getInventory().getData()) {
+                            if (item.getKategori().equals("Bahan Makanan")) {
+                                inventoryBahan.add(item.getNamaBarang());
+                            }
+                        }
+                        boolean isBahanAda = true;
+                        for (ObjekBahanMakanan bahan : objekMasakan.getBahan()) {
+                            boolean cekAdaBahan = inventoryBahan.contains(bahan.getNamaObjek());
+                            if (!cekAdaBahan) {
+                                isBahanAda = false;
+                                JOptionPane.showMessageDialog(null,
+                                        "Bahan " + bahan.getNamaObjek() + " tidak tersedia!");
+                            }
+                        }
+                        if (isBahanAda) {
                             gm.threadAksi(waktuMasak, "masak", null, null, objekMasakan);
                             gm.ui.messagText
                                     .setText("Srengggg... sedang masak " + namaMasakan + ", " + waktuMasak + " detik");

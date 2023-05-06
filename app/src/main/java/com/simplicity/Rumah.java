@@ -102,7 +102,7 @@ public class Rumah {
         daftarRuangan.get(0).tambahObjek(o5, p5, "v");
     }
 
-    // Getters and setters
+    // Getters
     public int getId() {
         return id;
     }
@@ -111,24 +111,12 @@ public class Rumah {
         return loc;
     }
 
-    public void setLocRumah(Point loc) {
-        this.loc = loc;
-    }
-
     public String getNama() {
         return nama;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-
     public List<Ruangan> getDaftarRuangan() {
         return daftarRuangan;
-    }
-
-    public void setDaftarRuangan(List<Ruangan> daftarRuangan) {
-        this.daftarRuangan = daftarRuangan;
     }
 
     // Methods
@@ -137,7 +125,6 @@ public class Rumah {
         if (arah.equals("Atas")) {
             if (ruanganacuan.getAtas() == null) {
                 newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
-                // daftarRuangan.add(newRuangan);
                 ruanganacuan.setAtas(newRuangan);
                 newRuangan.setBawah(ruanganacuan);
             } else {
@@ -146,7 +133,6 @@ public class Rumah {
         } else if (arah.equals("Bawah")) {
             if (ruanganacuan.getBawah() == null) {
                 newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
-                // daftarRuangan.add(newRuangan);
                 ruanganacuan.setBawah(newRuangan);
                 newRuangan.setAtas(ruanganacuan);
             } else {
@@ -155,7 +141,6 @@ public class Rumah {
         } else if (arah.equals("Kanan")) {
             if (ruanganacuan.getKanan() == null) {
                 newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
-                // daftarRuangan.add(newRuangan);
                 ruanganacuan.setKanan(newRuangan);
                 newRuangan.setKiri(ruanganacuan);
             } else {
@@ -164,7 +149,6 @@ public class Rumah {
         } else if (arah.equals("Kiri")) {
             if (ruanganacuan.getKiri() == null) {
                 newRuangan = new Ruangan(namaruangan, daftarRuangan.size());
-                // daftarRuangan.add(newRuangan);
                 ruanganacuan.setKiri(newRuangan);
                 newRuangan.setKanan(ruanganacuan);
             } else {
